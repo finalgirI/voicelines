@@ -23,9 +23,9 @@ local Data = {
 	ChannelAncestorsBonnie = {
 		Sound = "104749000603361",
 		Icon = "18630281775",
-        Volume = 3,
-        DelayTime = 4,
-        FadeOut = true,
+		Volume = 3,
+		DelayTime = 4,
+		FadeOut = true,
 	},
 
 	ExpressionSpell = {
@@ -69,7 +69,7 @@ local Data = {
 	PsychicRestraint = {
 		Sound = "117198514953604",
 		Icon = "18630089765",
-        Volume = 3,
+		Volume = 3,
 	},
 
 	LifeLinking = {
@@ -113,7 +113,7 @@ local Data = {
 	Harae = {
 		Sound = "70767045237007",
 		Icon = "18630087278",
-        Volume = 0.8,
+		Volume = 0.8,
 		FadeOut = true,
 	},
 
@@ -149,7 +149,7 @@ local Data = {
 		Sound = "101203984671407",
 		Icon = "116482478049852",
 		Volume = 0.8,
-        FadeOut = true,
+		FadeOut = true,
 	},
 
 	Stellabunde = {
@@ -165,7 +165,7 @@ local Data = {
 	IgnisTempestas = {
 		Sound = "95468563095334",
 		Icon = "18630089900",
-        Volume = 1,
+		Volume = 1,
 		DelayTime = 0.4,
 	},
 
@@ -182,7 +182,7 @@ local Data = {
 	},
 
 	QetTurnToStone = {
-		Sound = "16449297928",
+		Sound = "16838696298",
 		Icon = "18630282217",
 	},
 
@@ -240,7 +240,7 @@ local Data = {
 	BloodChoke = {
 		Sound = "97911663035904",
 		Icon = "100807331974657",
-        Volume = 2,
+		Volume = 2,
 	},
 
 	BloodBoil = {
@@ -282,7 +282,7 @@ local Data = {
 	Somnus = {
 		Sound = "95823566800088",
 		Icon = "109870855790839",
-        Volume = 9,
+		Volume = 9,
 	},
 
 	BoneBreakCombo = {
@@ -588,9 +588,8 @@ local Data = {
 	OrganLiquify = {
 		Icon = "18630090630",
 		Sound = "85818992177233",
-        FadeOut = true,
 	},
-	
+
 	Incendia = {
 		Icon = "18630085138",
 		["Lizzie Saltzman"] = "98540976660149",
@@ -615,7 +614,7 @@ local Data = {
 	VisSeraPortus = {
 		Icon = "18630084722",
 		["Bonnie Bennett"] = "73245313373983",
-        Volume = 3.5,
+		Volume = 3.5,
 	},
 
 	Imobiluse = {
@@ -653,8 +652,8 @@ local Data = {
 		["Malcolm"] = "100864025080028",
 		["Dark Josie"] = "139164497000480",
 		["Josie Saltzman"] = "139164497000480",
-        Volume = 1.4,
-        FadeOut = true,
+		Volume = 1.4,
+		FadeOut = true,
 	},
 
 	Ictus = {
@@ -1348,6 +1347,420 @@ local NotificationSounds = {
 local NotificationPatternSounds = {
 	{ Pattern = "is tracking you%.%.", Sound = "128623140442224", Volume = 3, CharacterRequired = "Davina Claire" },
 }
+
+-- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
+-- Replaces sounds played by other players/the server with your own custom sounds.
+-- Only YOU hear the replacement. Everyone else still hears the original.
+-- Formats:
+--   Simple (all characters):  ["original ID"] = "replacement ID"
+--   Character-specific only: ["original ID"] = { Replacement = "replacement ID", CharacterRequired = "Nora Hildegard" }
+--   Per-character different:  ["original ID"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" }
+
+local SoundReplacements = {
+	-- Simple format (applies to all characters):
+	["105594719818558"] = "130316188399085", -- Psychic Blast
+	["104782720464668"] = "91016794551142", -- Phasmatos Incendia
+	["122372982294729"] = "15174394937", -- Phasmatos Immortale
+	["80430541489576"] = "14556366203", -- Turn To Stone
+	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
+	["116235007511881"] = "13203446447", -- Autem
+	-- Character-specific format (only replaces when Nora Hildegard plays it):
+	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
+
+	-- Per-character different replacements:
+	-- ["original_sound_id"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" },
+}
+
+local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
+
+-- Helper: find which character a sound belongs to by walking up the parent hierarchy
+-- Returns the CharacterName attribute value, or nil if not found
+local function getSoundCharacterName(sound)
+	local current = sound.Parent
+	while current do
+		-- Check if this is a Player instance
+		if current:IsA("Player") then
+			return current:GetAttribute("CharacterName")
+		end
+		-- Check if this instance has a CharacterName attribute directly
+		local charName = current:GetAttribute("CharacterName")
+		if charName then
+			return charName
+		end
+		current = current.Parent
+	end
+	-- Fallback: try to match character model to a player
+	current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					return player:GetAttribute("CharacterName")
+				end
+			end
+		end
+		current = current.Parent
+	end
+	return nil
+end
+
+local function isLocalPlayerSound(sound)
+	local localCharacter = Players.LocalPlayer.Character
+	if not localCharacter then return false end
+	local current = sound.Parent
+	while current do
+		if current == localCharacter then
+			return true
+		end
+		current = current.Parent
+	end
+	return false
+end
+
+local function tryReplaceSound(sound)
+	if not sound:IsA("Sound") then return end
+	if ReplacedSounds[sound] then return end
+
+	-- Skip replacements for sounds from the local player's character
+	-- (the ability transparency system already handles voicelines for the local player)
+	if isLocalPlayerSound(sound) then return end -- Already handled this sound
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	local entry = SoundReplacements[id]
+
+	if not entry then return end
+
+	-- Determine the replacement sound ID based on format
+	local replacementId
+	if type(entry) == "string" then
+		-- Simple format: ["id"] = "replacement_id" (applies to all characters)
+		replacementId = entry
+	else
+		-- Table format: check CharacterRequired first
+		if entry.CharacterRequired then
+			local charName = getSoundCharacterName(sound)
+			if charName ~= entry.CharacterRequired then return end
+		end
+
+		-- Check character-specific keys (like Data table pattern)
+		local charName = getSoundCharacterName(sound)
+		if charName and entry[charName] then
+			replacementId = entry[charName]
+		elseif entry.Replacement then
+			replacementId = entry.Replacement
+		else
+			return -- No matching replacement found
+		end
+	end
+
+	ReplacedSounds[sound] = true
+
+	-- Mute the original sound so you don't hear it
+	sound.Volume = 0
+
+	-- Also mute it if it was already playing at some volume
+	-- (in case the server sets volume after we intercept)
+	sound:GetPropertyChangedSignal("Volume"):Connect(function()
+		if ReplacedSounds[sound] then
+			sound.Volume = 0
+		end
+	end)
+
+	-- Play your replacement from the same location as the original
+	-- so it respects 3D distance (fades with distance from camera)
+	local newSound = Instance.new("Sound")
+	newSound.SoundId = "rbxassetid://" .. replacementId
+	newSound.Volume = 2.5
+	newSound.Parent = sound.Parent or SoundService
+	newSound:Play()
+
+	newSound.Ended:Connect(function()
+		newSound:Destroy()
+	end)
+
+	-- If the original sound gets destroyed, clean up our reference
+	sound.Destroying:Connect(function()
+		ReplacedSounds[sound] = nil
+	end)
+end
+
+-- [[ CLIENT-SIDE SOUND OVERLAY SYSTEM ]]
+-- Plays an additional sound ON TOP of the original (does NOT mute the original).
+-- When the original sound stops/ends, the overlay fades out too.
+-- Supports DelayTime so the overlay can start after a delay.
+-- Supports CharacterRequired to only overlay when a specific character plays the sound.
+-- Formats:
+--   All characters:  ["original ID"] = { Sound = "overlay ID", Volume = 2.5, DelayTime = 0, FadeOutDuration = 0.8 }
+--   Character-specific: ["original ID"] = { Sound = "overlay ID", Volume = 2.5, CharacterRequired = "Nora Hildegard" }
+
+local SoundOverlays = {
+	-- Bonnie Bennett:
+	["18246473564"] = { Sound = "18246464798", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
+	["120250468841070"] = {
+		Overlays = {
+			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
+			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
+		},
+	},
+	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
+	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
+	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
+	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Psychic Restraint
+	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
+	-- Freya Mikaelson :
+	["132899449516141"] = {
+		["Qetsiyah"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+		["Freya Mikaelson"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+	},
+	["122977939028875"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 4.2, CharacterRequired = "Freya Mikaelson" }, -- Astral Projection
+	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
+	["83787551804971"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
+	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
+	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
+	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
+	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Aneurysm
+	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
+	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
+	-- Qetsiyah :
+	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
+	["98210016679472"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Avita Exari
+	["104782720464668"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Venom Blast
+	["16449303310"] = { Sound = "16449297928", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
+	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
+	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
+	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
+	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
+	["16554244260"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 7 }, -- Qet Res
+	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
+	-- Davina Claire :
+	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
+	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
+	["17253625700"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0, CharacterRequired = "Davina Claire" }, -- Blood Choke
+	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
+	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
+	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
+	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
+	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
+	["14606429535"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, CharacterRequired = "Davina Claire", KeepPlayingSound = true }, -- Bone Break Combo
+	["13154602444"] = {
+		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
+		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit Change
+	},
+	-- Hope Mikaelson :
+	["12181508903"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Sol 
+	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
+	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
+	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Glace Solidatur
+	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
+	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
+	["14813650927"] = { Sound = "127841579933142", Volume = 4, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Aquamalia 
+	-- Esther Mikaelson :
+	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 1 }, -- Vamp Reversal
+	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 5 }, -- Pentagram
+	["75802267645216"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
+	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
+	["18699314575"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
+	["135718833680425"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
+	["91745299864148"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 0 }, -- Ultimate Weapon
+	["18902201212"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 0 }, -- Orgiinal Serum
+	-- Dark Josie :
+	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0 }, -- Harae Tamae
+	["14400859135"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, CharacterRequired = "Dark Josie" }, -- Dark Magic Blast
+	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
+	["115788596173476"] = { Sound = "101203984671407", Volume = 2.5, DelayTime = 0 }, -- I said hey
+	-- Cleo Sowande :
+	["91395570209508"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
+	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
+	["124779869136393"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
+	["89539286902417"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0, CharacterRequired = "Cleo Sowande" }, -- Mass Silence
+	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
+	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
+	-- Silas :
+	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
+	-- Heretics :
+	["13008144854"] = {
+		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+	},
+	["14043844852"] = {
+		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
+		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
+		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
+	},
+	["13577599585"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0, CharacterRequired = "Mary Louise" }, -- Vido
+}
+
+local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
+
+local function fadeOutOverlaySound(overlaySound, duration)
+	if not overlaySound or not overlaySound.Parent then return end
+	if FadingSounds[overlaySound] then return end
+
+	FadingSounds[overlaySound] = true
+
+	local tween = TweenService:Create(
+		overlaySound,
+		TweenInfo.new(duration or 0.8),
+		{ Volume = 0 }
+	)
+
+	tween:Play()
+
+	tween.Completed:Once(function()
+		if overlaySound then
+			overlaySound:Stop()
+			overlaySound:Destroy()
+		end
+		FadingSounds[overlaySound] = nil
+	end)
+end
+
+local OverlayKnownKeys = {
+	Sound = true,
+	Volume = true,
+	DelayTime = true,
+	FadeOutDuration = true,
+	CharacterRequired = true,
+	Overlays = true,
+	KeepPlayingSound = true,
+}
+
+local function hasOverlayCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not OverlayKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playSingleOverlay(sound, overlayInfo, charName)
+	if overlayInfo.CharacterRequired then
+		if not charName then charName = getSoundCharacterName(sound) end
+		if charName ~= overlayInfo.CharacterRequired then return end
+	end
+
+	local function doPlay()
+		-- Always parent to the original sound's parent (the character) for 3D positional audio.
+		-- When KeepPlayingSound is true, reparent to SoundService if that parent is destroyed
+		-- so the overlay survives and keeps playing to completion.
+		local parent = (sound and sound.Parent) or SoundService
+
+		local ov = Instance.new("Sound")
+		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
+		ov.Volume = overlayInfo.Volume or 2.5
+		ov.Parent = parent
+		ov:Play()
+
+		-- Self-cleanup when the overlay finishes
+		ov.Ended:Connect(function()
+			if ov and ov.Parent then ov:Destroy() end
+		end)
+
+		if overlayInfo.KeepPlayingSound then
+			-- Reparent to SoundService if the original parent is destroyed so the overlay keeps playing
+			if parent and parent ~= SoundService then
+				parent.Destroying:Connect(function()
+					if ov and ov.IsPlaying then
+						ov.Parent = SoundService
+					end
+				end)
+			end
+		else
+			-- Without KeepPlayingSound: fade out the overlay when the original sound ends/stops/is destroyed
+			local fadeDur = overlayInfo.FadeOutDuration
+			if sound then
+				sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Destroying:Connect(function()
+					fadeOutOverlaySound(ov, fadeDur)
+					OverlayTracked[sound] = nil
+				end)
+			end
+		end
+	end
+
+	-- Clean up OverlayTracked when the original sound is destroyed (for KeepPlayingSound overlays)
+	if sound and overlayInfo.KeepPlayingSound then
+		sound.Destroying:Connect(function()
+			OverlayTracked[sound] = nil
+		end)
+	end
+
+	if overlayInfo.DelayTime and overlayInfo.DelayTime > 0 then
+		task.delay(overlayInfo.DelayTime, doPlay)
+	elseif sound and sound.IsPlaying then
+		doPlay()
+	elseif sound then
+		-- Sound not playing yet — listen for it to start, with a timeout fallback
+		local played = false
+		local conn
+		conn = sound.Played:Connect(function()
+			played = true
+			if conn then conn:Disconnect() end
+			doPlay()
+		end)
+		-- Fallback: if the sound starts playing before our listener was set up,
+		-- or if Played never fires, check again shortly
+		task.delay(0.1, function()
+			if conn then conn:Disconnect() end
+			if not played and sound and sound.Parent and sound.IsPlaying then
+				doPlay()
+			end
+		end)
+	end
+end
+
+local function tryOverlaySound(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	-- Skip overlays for sounds from the local player's character
+	-- (the ability transparency system already handles voicelines for the local player)
+	if isLocalPlayerSound(sound) then return end
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	local entry = SoundOverlays[id]
+	if not entry then return end
+
+	OverlayTracked[sound] = true
+	local charName = getSoundCharacterName(sound)
+
+	-- Multiple overlays that all play (Overlays array)
+	if entry.Overlays then
+		for _, overlayInfo in ipairs(entry.Overlays) do
+			playSingleOverlay(sound, overlayInfo, charName)
+		end
+		return
+	end
+
+	-- Per-character overlays (character name keys)
+	if hasOverlayCharOverrides(entry) then
+		if charName and entry[charName] then
+			playSingleOverlay(sound, entry[charName], charName)
+		elseif entry.Sound then
+			playSingleOverlay(sound, entry, charName)
+		end
+		return
+	end
+
+	-- Simple overlay (Sound key, optional CharacterRequired)
+	if entry.Sound then
+		playSingleOverlay(sound, entry, charName)
+	end
+end
+
+-- Catch existing sounds already in the game
+for _, desc in game:GetDescendants() do
+	tryReplaceSound(desc)
+	tryOverlaySound(desc)
+end
+
+-- Catch new sounds added during gameplay (from server or other players)
+game.DescendantAdded:Connect(function(desc)
+	tryReplaceSound(desc)
+	tryOverlaySound(desc)
+end)
 
 do
 	local FusionStatesFolder = ReplicatedStorage:FindFirstChild("Bindables")
