@@ -891,7 +891,16 @@ local function playAbilitySound(info, abilityName)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
-	sound.Parent = SoundService
+
+	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
+	-- Only use SoundService when KeepPlayingSound is true so the sound survives if the character is destroyed.
+	local character = Players.LocalPlayer.Character
+	local head = character and character:FindFirstChild("Head")
+	if info.KeepPlayingSound or not head then
+		sound.Parent = SoundService
+	else
+		sound.Parent = head
+	end
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
@@ -913,7 +922,15 @@ local function playAbilitySound(info, abilityName)
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
-		simSound.Parent = SoundService
+
+		-- Parent to the character for 3D positional audio (same logic as main sound)
+		local character = Players.LocalPlayer.Character
+		local head = character and character:FindFirstChild("Head")
+		if info.KeepPlayingSound or not head then
+			simSound.Parent = SoundService
+		else
+			simSound.Parent = head
+		end
 
 		if info.DelayTime then
 			task.delay(info.DelayTime, function()
@@ -1486,7 +1503,7 @@ local SoundOverlays = {
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0 }, -- Aneurysm
+	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Aneurysm
 	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	-- Qetsiyah :
@@ -1509,7 +1526,7 @@ local SoundOverlays = {
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
-	["14606429535"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, CharacterRequired = "Davina Claire" }, -- Bone Break Combo
+	["14606429535"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, CharacterRequired = "Davina Claire", KeepPlayingSound = true }, -- Bone Break Combo
 	["13154602444"] = {
 		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit Change
