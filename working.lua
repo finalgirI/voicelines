@@ -1366,9 +1366,26 @@ local function getSoundCharacterName(sound)
 	return nil
 end
 
+local function isLocalPlayerSound(sound)
+	local localCharacter = Players.LocalPlayer.Character
+	if not localCharacter then return false end
+	local current = sound.Parent
+	while current do
+		if current == localCharacter then
+			return true
+		end
+		current = current.Parent
+	end
+	return false
+end
+
 local function tryReplaceSound(sound)
 	if not sound:IsA("Sound") then return end
-	if ReplacedSounds[sound] then return end -- Already handled this sound
+	if ReplacedSounds[sound] then return end
+
+	-- Skip replacements for sounds from the local player's character
+	-- (the ability transparency system already handles voicelines for the local player)
+	if isLocalPlayerSound(sound) then return end -- Already handled this sound
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
@@ -1633,6 +1650,10 @@ end
 local function tryOverlaySound(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
+
+	-- Skip overlays for sounds from the local player's character
+	-- (the ability transparency system already handles voicelines for the local player)
+	if isLocalPlayerSound(sound) then return end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
