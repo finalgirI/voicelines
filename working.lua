@@ -912,10 +912,7 @@ local function playAbilitySound(info, abilityName)
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
-		if info.KeepPlayingSound then
-			-- Don't cancel the old sound — let it keep playing to completion
-			-- It will clean itself up via its own Ended/Destroying connections
-		elseif info.FadeOut then
+		if info.FadeOut then
 			fadeOutSound(oldSound)
 		else
 			oldSound:Stop()
@@ -1266,7 +1263,7 @@ for _, child in ipairs(ToolBar:GetDescendants()) do
 				local sound = ActiveSounds[abilityName]
 				local info = Data[abilityName]
 
-				if sound and info and info.FadeOut == true and not info.KeepPlayingSound then
+				if sound and info and info.FadeOut == true then
 					ActiveSounds[abilityName] = nil
 					fadeOutSound(sound)
 				end
@@ -1521,8 +1518,12 @@ local SoundOverlays = {
 	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
-	["98210016679472"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Avita Exari
-	["104782720464668"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Venom Blast
+	["98210016679472"] = {
+		["Qetsiyah"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0 }, -- Avita Exari
+	},
+	["104782720464668"] = {
+		["Qetsiyah"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
+	},
 	["16449303310"] = { Sound = "16449297928", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
@@ -1592,6 +1593,12 @@ local SoundOverlays = {
 	},
 	["13577599585"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
+	},
+	-- Witch Abilities :
+	["10318171092"] = {
+		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
