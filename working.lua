@@ -1536,6 +1536,7 @@ local SoundOverlays = {
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
 	["17253625700"] = {
 	    ["Davina Claire"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
+	},
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
@@ -1543,6 +1544,7 @@ local SoundOverlays = {
 	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
 	["14606429535"] = {
 		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
+	},
 	["13154602444"] = {
 		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit Change
@@ -1550,6 +1552,7 @@ local SoundOverlays = {
 	-- Hope Mikaelson :
 	["12181508903"] = {
 		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
+	},
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Glace Solidatur
@@ -1557,6 +1560,7 @@ local SoundOverlays = {
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
 	["14813650927"] = {
 		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2.5, DelayTime = 0 }, -- Aquamalia
+	},
 	-- Esther Mikaelson :
 	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 1 }, -- Vamp Reversal
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 5 }, -- Pentagram
@@ -1570,6 +1574,7 @@ local SoundOverlays = {
 	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0 }, -- Harae Tamae
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
+	},
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
 	["115788596173476"] = { Sound = "101203984671407", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
@@ -1598,6 +1603,20 @@ local SoundOverlays = {
 	["10318171092"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+	},
+	-- Elder Witches :
+	["84319099882038"] = {
+		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Agnes"] = { Sound = "121671824051694", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	},
+	["137137104978289"] = { Sound = "114599395160541", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
+	["15980142966"] = {
+		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Agnes Needle of Sorrows
+	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
+	["97695195348256"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin Rare
 	},
 }
 
