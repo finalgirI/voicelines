@@ -1054,17 +1054,14 @@ local function checkAbility(child)
 
 			-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
 			if info and info.PlayOnEquipped then
-				-- Stop the sound if it's playing (unless KeepPlayingSound)
-				if not info.KeepPlayingSound then
-					local sound = ActiveSounds[abilityName]
-					if sound then
-						ActiveSounds[abilityName] = nil
-						if info.FadeOut then
-							fadeOutSound(sound)
-						else
-							sound:Stop()
-							sound:Destroy()
-						end
+				local sound = ActiveSounds[abilityName]
+				if sound then
+					ActiveSounds[abilityName] = nil
+					if info.FadeOut then
+						fadeOutSound(sound)
+					else
+						sound:Stop()
+						sound:Destroy()
 					end
 				end
 			elseif info and not Cooldowns[abilityName] then
@@ -1089,12 +1086,13 @@ local function checkAbility(child)
 			-- Note: Magic Shield cooldown is now handled in MainAbilitiesChanged
 			-- when switching away from the ability
 
-			if sound and info and info.FadeOut == true and not info.KeepPlayingSound then
+			if sound and info and info.FadeOut == true then
 				ActiveSounds[abilityName] = nil
 				fadeOutSound(sound)
-			else
-				Cooldowns[abilityName] = false
 			end
+
+			-- Always reset cooldown so the ability can play again next time
+			Cooldowns[abilityName] = false
 		end
 	end
 end
@@ -1509,10 +1507,10 @@ local SoundOverlays = {
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
 	["132899449516141"] = {
-		["Qetsiyah"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
-		["Freya Mikaelson"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+		["Freya Mikaelson"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
 	},
-	["122977939028875"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 4.2, CharacterRequired = "Freya Mikaelson" }, -- Astral Projection
+	["15174800421"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CharacterRequired = "Freya Mikaelson", KeepPlayingSound = true }, -- Astral Projection
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["83787551804971"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
@@ -1530,30 +1528,34 @@ local SoundOverlays = {
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-	["16554244260"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 7 }, -- Qet Res
+	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 3 }, -- Qet Res
 	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
 	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
-	["17253625700"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0, CharacterRequired = "Davina Claire" }, -- Blood Choke
+	["17253625700"] = {
+	    ["Davina Claire"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
-	["14606429535"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, CharacterRequired = "Davina Claire", KeepPlayingSound = true }, -- Bone Break Combo
+	["14606429535"] = {
+		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
 	["13154602444"] = {
 		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit Change
 	},
 	-- Hope Mikaelson :
-	["12181508903"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Sol 
+	["12181508903"] = {
+		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Glace Solidatur
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
-	["14813650927"] = { Sound = "127841579933142", Volume = 4, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Aquamalia 
+	["14813650927"] = {
+		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2.5, DelayTime = 0 }, -- Aquamalia
 	-- Esther Mikaelson :
 	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 1 }, -- Vamp Reversal
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 5 }, -- Pentagram
@@ -1565,9 +1567,10 @@ local SoundOverlays = {
 	["18902201212"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 0 }, -- Orgiinal Serum
 	-- Dark Josie :
 	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0 }, -- Harae Tamae
-	["14400859135"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, CharacterRequired = "Dark Josie" }, -- Dark Magic Blast
+	["14400859135"] = {
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
-	["115788596173476"] = { Sound = "101203984671407", Volume = 2.5, DelayTime = 0 }, -- I said hey
+	["115788596173476"] = { Sound = "101203984671407", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
 	["91395570209508"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
@@ -1587,10 +1590,12 @@ local SoundOverlays = {
 		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
 	},
-	["13577599585"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0, CharacterRequired = "Mary Louise" }, -- Vido
+	["13577599585"] = {
+		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
+local ActiveOverlaySounds = {} -- Track currently playing overlay Sound IDs to prevent duplicates (e.g. Illusion Attack plays 5x)
 
 local function fadeOutOverlaySound(overlaySound, duration)
 	if not overlaySound or not overlaySound.Parent then return end
@@ -1641,6 +1646,10 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 	end
 
 	local function doPlay()
+		-- Deduplicate: if this overlay Sound ID is already playing, skip it
+		-- (e.g. Illusion Attack creates 5 copies of the original sound, but we only want 1 overlay)
+		if ActiveOverlaySounds[overlayInfo.Sound] then return end
+
 		-- Always parent to the original sound's parent (the character) for 3D positional audio.
 		-- When KeepPlayingSound is true, reparent to SoundService if that parent is destroyed
 		-- so the overlay survives and keeps playing to completion.
@@ -1652,8 +1661,11 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 		ov.Parent = parent
 		ov:Play()
 
+		ActiveOverlaySounds[overlayInfo.Sound] = ov
+
 		-- Self-cleanup when the overlay finishes
 		ov.Ended:Connect(function()
+			ActiveOverlaySounds[overlayInfo.Sound] = nil
 			if ov and ov.Parent then ov:Destroy() end
 		end)
 
@@ -1678,6 +1690,13 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 				end)
 			end
 		end
+
+		-- Also clean up ActiveOverlaySounds if the overlay is destroyed unexpectedly
+		ov.Destroying:Connect(function()
+			if ActiveOverlaySounds[overlayInfo.Sound] == ov then
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			end
+		end)
 	end
 
 	-- Clean up OverlayTracked when the original sound is destroyed (for KeepPlayingSound overlays)
