@@ -839,6 +839,7 @@ local KnownKeys = {
 	CharacterRequired = true,
 	ChatText = true,
 	SimultaneousSound = true,
+	KeepPlayingSound = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -894,7 +895,10 @@ local function playAbilitySound(info, abilityName)
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
-		if info.FadeOut then
+		if info.KeepPlayingSound then
+			-- Don't cancel the old sound — let it keep playing to completion
+			-- It will clean itself up via its own Ended/Destroying connections
+		elseif info.FadeOut then
 			fadeOutSound(oldSound)
 		else
 			oldSound:Stop()
@@ -1018,15 +1022,17 @@ local function checkAbility(child)
 
 			-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
 			if info and info.PlayOnEquipped then
-				-- Stop the sound if it's playing
-				local sound = ActiveSounds[abilityName]
-				if sound then
-					ActiveSounds[abilityName] = nil
-					if info.FadeOut then
-						fadeOutSound(sound)
-					else
-						sound:Stop()
-						sound:Destroy()
+				-- Stop the sound if it's playing (unless KeepPlayingSound)
+				if not info.KeepPlayingSound then
+					local sound = ActiveSounds[abilityName]
+					if sound then
+						ActiveSounds[abilityName] = nil
+						if info.FadeOut then
+							fadeOutSound(sound)
+						else
+							sound:Stop()
+							sound:Destroy()
+						end
 					end
 				end
 			elseif info and not Cooldowns[abilityName] then
@@ -1051,7 +1057,7 @@ local function checkAbility(child)
 			-- Note: Magic Shield cooldown is now handled in MainAbilitiesChanged
 			-- when switching away from the ability
 
-			if sound and info and info.FadeOut == true then
+			if sound and info and info.FadeOut == true and not info.KeepPlayingSound then
 				ActiveSounds[abilityName] = nil
 				fadeOutSound(sound)
 			else
@@ -1230,7 +1236,7 @@ for _, child in ipairs(ToolBar:GetDescendants()) do
 				local sound = ActiveSounds[abilityName]
 				local info = Data[abilityName]
 
-				if sound and info and info.FadeOut == true then
+				if sound and info and info.FadeOut == true and not info.KeepPlayingSound then
 					ActiveSounds[abilityName] = nil
 					fadeOutSound(sound)
 				end
@@ -1324,8 +1330,8 @@ local SoundReplacements = {
 	["104782720464668"] = "91016794551142", -- Phasmatos Incendia
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["80430541489576"] = "14556366203", -- Turn To Stone
-	["98210016679472"] = "15237076338", -- Aleoras Subsitos
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
+	["116235007511881"] = "13203446447", -- Autem
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
 
@@ -1457,47 +1463,48 @@ end
 
 local SoundOverlays = {
 	-- Bonnie Bennett:
-	["18246473564"] = { Sound = "18246624544", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
+	["18246473564"] = { Sound = "18246464798", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["120250468841070"] = {
 		Overlays = {
-			{ Sound = "15601121759", Volume = 2.5, DelayTime = 3 }, -- Expression Grimoire
-			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 16 }, -- I Have Every Magic
+			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
+			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett" }, -- Channel Ancestors Bonnie
-	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett" }, -- Life Linking
-	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett" }, -- Psychic Restraint
+	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
+	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
+	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
+	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Psychic Restraint
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
 	["132899449516141"] = {
-		["Freya Mikaelson"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
-		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
+		["Freya Mikaelson"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
 	},
 	["122977939028875"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 4.2, CharacterRequired = "Freya Mikaelson" }, -- Astral Projection
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["83787551804971"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
-	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0 }, -- Sigil
+	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
 	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0 }, -- Aneurysm
 	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["98210016679472"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Avita Exari
-	["104782720464668"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
+	["104782720464668"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0, CharacterRequired = "Qetsiyah" }, -- Venom Blast
 	["16449303310"] = { Sound = "16449297928", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	["16554244260"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 7 }, -- Qet Res
-	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15 }, -- Cure Creation
+	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
-	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
+	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
 	["17253625700"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0, CharacterRequired = "Davina Claire" }, -- Blood Choke
-	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0 }, -- Blood Boil
+	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
@@ -1511,9 +1518,9 @@ local SoundOverlays = {
 	["12181508903"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Sol 
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
-	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0 }, -- Glace Solidatur
-	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0 }, -- Ventus
-	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5 }, -- Telek Head Rip
+	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Glace Solidatur
+	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
+	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
 	["14813650927"] = { Sound = "127841579933142", Volume = 4, DelayTime = 0, CharacterRequired = "Hope Mikaelson" }, -- Aquamalia 
 	-- Esther Mikaelson :
 	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 1 }, -- Vamp Reversal
@@ -1525,7 +1532,6 @@ local SoundOverlays = {
 	["91745299864148"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 0 }, -- Ultimate Weapon
 	["18902201212"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 0 }, -- Orgiinal Serum
 	-- Dark Josie :
-	["116235007511881"] = { Sound = "13203446447", Volume = 2.5, DelayTime = 0 }, -- Autem
 	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0 }, -- Harae Tamae
 	["14400859135"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, CharacterRequired = "Dark Josie" }, -- Dark Magic Blast
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
@@ -1538,16 +1544,16 @@ local SoundOverlays = {
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
 	-- Silas :
-	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0 }, -- 
+	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
 	-- Heretics :
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 	},
 	["14043844852"] = {
-		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0 }, -- HereticJointSpell
-		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0 }, -- HereticJointSpell
-		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0 }, -- HereticJointSpell
+		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
+		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
+		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
 	},
 	["13577599585"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0, CharacterRequired = "Mary Louise" }, -- Vido
 }
@@ -1584,6 +1590,7 @@ local OverlayKnownKeys = {
 	FadeOutDuration = true,
 	CharacterRequired = true,
 	Overlays = true,
+	KeepPlayingSound = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -1602,32 +1609,47 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 	end
 
 	local function doPlay()
-		if not sound or not sound.Parent then return end
+		-- With KeepPlayingSound, always parent to SoundService so it survives
+		-- even if the original sound's parent (e.g. character) is destroyed
+		local parent = overlayInfo.KeepPlayingSound and SoundService or (sound and sound.Parent) or SoundService
 
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
 		ov.Volume = overlayInfo.Volume or 2.5
-		ov.Parent = sound.Parent or SoundService
+		ov.Parent = parent
 		ov:Play()
 
+		-- Self-cleanup when the overlay finishes
 		ov.Ended:Connect(function()
 			if ov and ov.Parent then ov:Destroy() end
 		end)
 
-		local fadeDur = overlayInfo.FadeOutDuration
-		sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
-		sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+		if not overlayInfo.KeepPlayingSound then
+			-- Without KeepPlayingSound: fade out the overlay when the original sound ends/stops/is destroyed
+			local fadeDur = overlayInfo.FadeOutDuration
+			if sound then
+				sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Destroying:Connect(function()
+					fadeOutOverlaySound(ov, fadeDur)
+					OverlayTracked[sound] = nil
+				end)
+			end
+		end
+	end
+
+	-- Clean up OverlayTracked when the original sound is destroyed (for KeepPlayingSound overlays)
+	if sound and overlayInfo.KeepPlayingSound then
 		sound.Destroying:Connect(function()
-			fadeOutOverlaySound(ov, fadeDur)
 			OverlayTracked[sound] = nil
 		end)
 	end
 
 	if overlayInfo.DelayTime and overlayInfo.DelayTime > 0 then
 		task.delay(overlayInfo.DelayTime, doPlay)
-	elseif sound.IsPlaying then
+	elseif sound and sound.IsPlaying then
 		doPlay()
-	else
+	elseif sound then
 		-- Sound not playing yet — listen for it to start, with a timeout fallback
 		local played = false
 		local conn
