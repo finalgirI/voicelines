@@ -403,14 +403,14 @@ local Data = {
 	},
 
 	Ohun = {
-		Sound = "122224537699529",
+		Sound = "92404277403294",
 		Icon = "98499345224483",
 		PlayOnEquipped = true,
 		AddOnEquipTime = 23,
 	},
 
 	Pada = {
-		Sound = "119073134102134",
+		Sound = "91217804264943",
 		Icon = "98499345224483",
 	},
 
@@ -594,6 +594,7 @@ local Data = {
 		Icon = "18630085138",
 		["Lizzie Saltzman"] = "98540976660149",
 		["Hope Mikaelson"] = "88254920355046",
+		["Valerie Tulle"] = "134446708409005",
 	},
 
 	DelfanEotenCor = {
@@ -744,10 +745,7 @@ local Data = {
 
 	HarvestDaggerBastianna = {
 		Sounds = {
-			{Sound = "96452201447795", ChatText = "To be born, you must sacrifise!"},
-			{Sound = "79362032592167", ChatText = "Do you have faith in the harvest?"},
 			{Sound = "113939339508982", ChatText = "To be reborn, we must sacrifise."},
-			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith."},
 		},
 		Icon = "83531657472792",
 		CharacterRequired = "Bastianna Natale",
@@ -1358,7 +1356,7 @@ local NotificationSounds = {
 -- For messages with variable parts (e.g. "Klaus Mikaelson is tracking you..")
 -- Uses Lua string patterns to match
 local NotificationPatternSounds = {
-	{ Pattern = "is tracking you%.%.", Sound = "128623140442224", Volume = 3, CharacterRequired = "Davina Claire" },
+	{ Pattern = "is tracking you%.%.", Sound = "133908186403397", Volume = 3, CharacterRequired = "Davina Claire" },
 }
 
 -- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
@@ -1622,12 +1620,16 @@ local SoundOverlays = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
-	["115788596173476"] = { Sound = "101203984671407", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- I said hey
+	["115788596173476"] = { Sound = "101203984671407", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
 	["91395570209508"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["124779869136393"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
-	["89539286902417"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0, CharacterRequired = "Cleo Sowande" }, -- Mass Silence
+	["89539286902417"] = {
+	    ["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
+    },
+	["90347973452829"] = { Sound = "92404277403294", Volume = 2.5, DelayTime = 0 }, -- Ohun
+	["138866821877856"] = { Sound = "91217804264943", Volume = 2.5, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
 	-- Silas :
@@ -1636,6 +1638,9 @@ local SoundOverlays = {
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+	},
+	["12180424093"] = {
+		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0 }, -- Incendia
 	},
 	["14043844852"] = {
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
@@ -1650,6 +1655,14 @@ local SoundOverlays = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 	},
+	["12190650809"] = {
+			["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+			["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+	},
+	["8806156863"] = {
+		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
+		["Valerie Tulle"] = { Sound = "116763647482749", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
+	},
 	-- Elder Witches :
 	["84319099882038"] = {
 		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
@@ -1661,9 +1674,9 @@ local SoundOverlays = {
 	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Agnes Needle of Sorrows
+	},
 	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
 	["97695195348256"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin Rare
-	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
