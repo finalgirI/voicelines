@@ -1308,66 +1308,7 @@ local NotificationPatternSounds = {
 	{ Pattern = "is tracking you%.%.", Sound = "128623140442224", Volume = 3, CharacterRequired = "Davina Claire" },
 }
 
--- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
--- Replaces sounds played by other players/the server with your own custom sounds.
--- Only YOU hear the replacement. Everyone else still hears the original.
--- Add entries to SoundReplacements: ["original sound ID"] = "replacement sound ID"
 
---local SoundReplacements = {
---	["105594719818558"] = "130316188399085",
---}
-
-local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
-
-local function tryReplaceSound(sound)
-	if not sound:IsA("Sound") then return end
-	if ReplacedSounds[sound] then return end -- Already handled this sound
-
-	local id = sound.SoundId:gsub("rbxassetid://", "")
-	local replacement = SoundReplacements[id]
-
-	if replacement then
-		ReplacedSounds[sound] = true
-
-		-- Mute the original sound so you don't hear it
-		sound.Volume = 0
-
-		-- Also mute it if it was already playing at some volume
-		-- (in case the server sets volume after we intercept)
-		sound:GetPropertyChangedSignal("Volume"):Connect(function()
-			if ReplacedSounds[sound] then
-				sound.Volume = 0
-			end
-		end)
-
-		-- Play your replacement from the same location as the original
-		-- so it respects 3D distance (fades with distance from camera)
-		local newSound = Instance.new("Sound")
-		newSound.SoundId = "rbxassetid://" .. replacement
-		newSound.Volume = 2.5
-		newSound.Parent = sound.Parent or SoundService
-		newSound:Play()
-
-		newSound.Ended:Connect(function()
-			newSound:Destroy()
-		end)
-
-		-- If the original sound gets destroyed, clean up our reference
-		sound.Destroying:Connect(function()
-			ReplacedSounds[sound] = nil
-		end)
-	end
-end
-
--- Catch existing sounds already in the game
-for _, desc in game:GetDescendants() do
-	tryReplaceSound(desc)
-end
-
--- Catch new sounds added during gameplay (from server or other players)
-game.DescendantAdded:Connect(function(desc)
-	tryReplaceSound(desc)
-end)
 
 do
 	local FusionStatesFolder = ReplicatedStorage:FindFirstChild("Bindables")
