@@ -672,14 +672,18 @@ local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplic
 -- 2) Match character model to a player
 -- 3) Fallback: find the nearest player character by 3D distance (handles VFX parts)
 local function getSoundCharacterName(sound)
+	-- Returns: characterName, isDistanceFallback
+	-- isDistanceFallback is true when the name was guessed by proximity, not by parent hierarchy.
+	-- Distance fallback is unreliable for targeted abilities (sound near the target, not the caster).
+
 	local current = sound.Parent
 	while current do
 		if current:IsA("Player") then
-			return current:GetAttribute("CharacterName")
+			return current:GetAttribute("CharacterName"), false
 		end
 		local charName = current:GetAttribute("CharacterName")
 		if charName then
-			return charName
+			return charName, false
 		end
 		current = current.Parent
 	end
@@ -688,7 +692,7 @@ local function getSoundCharacterName(sound)
 		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
 			for _, player in Players:GetPlayers() do
 				if player.Character == current then
-					return player:GetAttribute("CharacterName")
+					return player:GetAttribute("CharacterName"), false
 				end
 			end
 		end
@@ -720,9 +724,9 @@ local function getSoundCharacterName(sound)
 				end
 			end
 		end
-		if bestName then return bestName end
+		if bestName then return bestName, true end
 	end
-	return nil
+	return nil, false
 end
 
 local function isLocalPlayerSound(sound)
@@ -1275,7 +1279,7 @@ local function tryOverlaySound(sound)
 	end)
 
 	OverlayTracked[sound] = true
-	local charName = getSoundCharacterName(sound)
+	local charName, isDistanceFallback = getSoundCharacterName(sound)
 
 	-- Multiple overlays that all play (Overlays array)
 	if entry.Overlays then
@@ -1286,8 +1290,13 @@ local function tryOverlaySound(sound)
 	end
 
 	-- Per-character overlays (character name keys)
+	-- IMPORTANT: Skip if charName came from the distance fallback.
+	-- Targeted abilities create sounds near the TARGET, not the caster.
+	-- If we trust the distance fallback, we'd play Mary Louise's overlay
+	-- when someone else uses Vido ON her — which is wrong.
+	-- Only trust the parent hierarchy (isDistanceFallback == false) for character-specific overlays.
 	if hasOverlayCharOverrides(entry) then
-		if charName and entry[charName] then
+		if charName and entry[charName] and not isDistanceFallback then
 			playSingleOverlay(sound, entry[charName], charName)
 		elseif entry.Sound then
 			playSingleOverlay(sound, entry, charName)
