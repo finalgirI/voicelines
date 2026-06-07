@@ -45,6 +45,14 @@ local Data = {
 
 local LOCAL_VOICELINES_ENABLED = false -- Set to true to hear your own ability voicelines again
 
+-- 3D audio distance settings for voiceline sounds
+-- EmitterSize: how close the listener must be to hear full volume (larger = louder when close)
+-- RollOffMinDistance: distance at which volume starts fading
+-- RollOffMaxDistance: distance at which volume reaches zero
+local VOICELINE_EMITTER_SIZE = 15
+local VOICELINE_ROLLOFF_MIN = 15
+local VOICELINE_ROLLOFF_MAX = 180
+
 local function normalize(id)
 	return tostring(id)
 		:gsub("rbxassetid://", "")
@@ -167,6 +175,10 @@ local function playAbilitySound(info, abilityName)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
+	sound.EmitterSize = VOICELINE_EMITTER_SIZE
+	sound.RollOffMinDistance = VOICELINE_ROLLOFF_MIN
+	sound.RollOffMaxDistance = VOICELINE_ROLLOFF_MAX
+	sound.RollOffMode = Enum.RollOffMode.LinearSquare
 
 	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
 	local character = Players.LocalPlayer.Character
@@ -207,6 +219,10 @@ local function playAbilitySound(info, abilityName)
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
+		simSound.EmitterSize = VOICELINE_EMITTER_SIZE
+		simSound.RollOffMinDistance = VOICELINE_ROLLOFF_MIN
+		simSound.RollOffMaxDistance = VOICELINE_ROLLOFF_MAX
+		simSound.RollOffMode = Enum.RollOffMode.LinearSquare
 
 		-- Parent to the character for 3D positional audio (same logic as main sound)
 		local character = Players.LocalPlayer.Character
@@ -731,18 +747,33 @@ end
 
 local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
-	if not localCharacter then return false end
+	if not localCharacter then return false, false end
 
 	-- Check: Is the sound parented inside the local player's character?
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
-			return true
+			return true, false -- isLocal, isDistanceFallback
 		end
 		current = current.Parent
 	end
 
-	return false
+	-- Fallback: check if the sound is very close to the local player's character
+	-- This catches VFX sounds that aren't parented to the character but are still "yours"
+	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
+	if localHRP and localHRP:IsA("BasePart") then
+		local soundPos = nil
+		if sound.Parent and sound.Parent:IsA("BasePart") then
+			soundPos = sound.Parent.Position
+		elseif sound.Parent and sound.Parent:IsA("Attachment") then
+			soundPos = sound.Parent.WorldPosition
+		end
+		if soundPos and (localHRP.Position - soundPos).Magnitude < 8 then
+			return true, true -- isLocal, isDistanceFallback
+		end
+	end
+
+	return false, false
 end
 
 local function tryReplaceSound(sound)
@@ -751,7 +782,21 @@ local function tryReplaceSound(sound)
 
 	-- Skip replacements for sounds from the local player's character
 	-- (the ability transparency system already handles voicelines for the local player)
-	if isLocalPlayerSound(sound) then return end -- Already handled this sound
+	-- Use the same enhanced detection as overlays: parent hierarchy + distance fallback
+	local isLocal, isDistFallback = isLocalPlayerSound(sound)
+	if isLocal and not isDistFallback then
+		ReplacedSounds[sound] = true
+		return -- Already handled this sound
+	end
+	-- If distance fallback matched, also check character name to confirm
+	if isLocal and isDistFallback then
+		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
+		local soundCharName = getSoundCharacterName(sound)
+		if soundCharName == localCharName then
+			ReplacedSounds[sound] = true
+			return
+		end
+	end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
@@ -811,7 +856,10 @@ local function tryReplaceSound(sound)
 	-- 3D audio fix: set EmitterSize so the sound stays at full volume
 	-- when the listener is very close to the source (prevents close-range clipping/silence)
 	if parent and parent ~= SoundService and parent:IsA("BasePart") then
-		newSound.EmitterSize = 10
+		newSound.EmitterSize = VOICELINE_EMITTER_SIZE
+		newSound.RollOffMinDistance = VOICELINE_ROLLOFF_MIN
+		newSound.RollOffMaxDistance = VOICELINE_ROLLOFF_MAX
+		newSound.RollOffMode = Enum.RollOffMode.LinearSquare
 	end
 
 	newSound.Parent = parent
@@ -990,8 +1038,8 @@ local SoundOverlays = {
 	},
 	-- Witch Abilities :
 	["10318171092"] = {
-		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0 }, -- DelfanEotenCor
-		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0 }, -- DelfanEotenCor
+		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 	},
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
@@ -1145,7 +1193,10 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 		-- 3D audio fix: set EmitterSize so the sound stays at full volume
 		-- when the listener is very close to the source (prevents close-range clipping/silence)
 		if parent and parent ~= SoundService and parent:IsA("BasePart") then
-			ov.EmitterSize = 10
+			ov.EmitterSize = VOICELINE_EMITTER_SIZE
+			ov.RollOffMinDistance = VOICELINE_ROLLOFF_MIN
+			ov.RollOffMaxDistance = VOICELINE_ROLLOFF_MAX
+			ov.RollOffMode = Enum.RollOffMode.LinearSquare
 		end
 
 		ov.Parent = parent
@@ -1232,7 +1283,11 @@ local function tryOverlaySound(sound)
 
 	-- Skip overlays for sounds from the local player's character
 	-- (the ability transparency system already handles voicelines for the local player)
-	if isLocalPlayerSound(sound) then return end
+	local isLocal, isDistFallback = isLocalPlayerSound(sound)
+	if isLocal and not isDistFallback then
+		OverlayTracked[sound] = true
+		return
+	end
 
 	-- Also skip if the sound belongs to the same character as the local player
 	-- BUT only trust the parent hierarchy check, NOT the distance fallback.
@@ -1242,6 +1297,18 @@ local function tryOverlaySound(sound)
 	if localCharName then
 		local soundCharName, isFallback = getSoundCharacterName(sound)
 		if soundCharName == localCharName and not isFallback then
+			OverlayTracked[sound] = true
+			return
+		end
+	end
+
+	-- If isLocalPlayerSound detected this as a distance-fallback match,
+	-- also check getSoundCharacterName to confirm it's actually our character.
+	-- This prevents overlays from playing when you're the caster but the sound
+	-- is in a detached VFX part near you.
+	if isLocal and isDistFallback then
+		local soundCharName2, isFallback2 = getSoundCharacterName(sound)
+		if soundCharName2 == localCharName then
 			OverlayTracked[sound] = true
 			return
 		end
