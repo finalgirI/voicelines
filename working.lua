@@ -1683,17 +1683,18 @@ local SoundOverlays = {
 	},
 	-- Elder Witches :
 	["84319099882038"] = {
-		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
-		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
-		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
-		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
-		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0 }, -- Ancestral Pain
+		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
 	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0 }, -- Insanity Hex
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
-	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
+	["129498686293958"] = { Sound = "89550767660084", Volume = 6.5, DelayTime = 0 }, -- Violin
+	["116235925618614"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
