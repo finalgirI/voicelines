@@ -1673,6 +1673,9 @@ local SoundOverlays = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 	},
+	["89539286902417"] = {
+		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
+	},
 	["12190650809"] = {
 			["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0 }, -- Motus
 			["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0 }, -- Motus
