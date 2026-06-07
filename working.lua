@@ -888,7 +888,22 @@ local function playAbilitySound(info, abilityName)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
-	sound.Parent = SoundService
+
+	-- Parent to the character's Head for 3D positional audio so the sound comes from the player's body.
+	-- Falls back to SoundService if the character or Head isn't available.
+	local character = Players.LocalPlayer.Character
+	local head = character and character:FindFirstChild("Head")
+	if head then
+		sound.Parent = head
+		-- Reparent to SoundService if the Head is destroyed so the sound can still finish playing
+		head.Destroying:Connect(function()
+			if sound and sound.Parent then
+				sound.Parent = SoundService
+			end
+		end)
+	else
+		sound.Parent = SoundService
+	end
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
@@ -907,7 +922,20 @@ local function playAbilitySound(info, abilityName)
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
-		simSound.Parent = SoundService
+
+		-- Parent to the character's Head for 3D positional audio (same as main sound)
+		local character = Players.LocalPlayer.Character
+		local head = character and character:FindFirstChild("Head")
+		if head then
+			simSound.Parent = head
+			head.Destroying:Connect(function()
+				if simSound and simSound.Parent then
+					simSound.Parent = SoundService
+				end
+			end)
+		else
+			simSound.Parent = SoundService
+		end
 
 		if info.DelayTime then
 			task.delay(info.DelayTime, function()
