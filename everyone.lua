@@ -696,8 +696,8 @@ local function getSoundCharacterName(sound)
 	end
 	-- Fallback: find nearest player character by 3D distance
 	-- This handles sounds in VFX parts that aren't parented to any character
-	-- IMPORTANT: Exclude the local player so the fallback never attributes
-	-- another player's sound to the local player (which would cause overlays to be skipped)
+	-- Include the local player so their VFX sounds get attributed to them,
+	-- which causes the overlay/replace system to correctly skip them.
 	local soundPos = nil
 	if sound:IsA("Sound") and sound.Parent and sound.Parent:IsA("BasePart") then
 		soundPos = sound.Parent.Position
@@ -708,9 +708,6 @@ local function getSoundCharacterName(sound)
 		local bestDist = 50 -- max distance to consider a match (increased for reliability)
 		local bestName = nil
 		for _, player in Players:GetPlayers() do
-			if player == Players.LocalPlayer then
-				continue -- Skip local player: their sounds are handled by the ability system
-			end
 			local char = player.Character
 			if char then
 				local hrp = char:FindFirstChild("HumanoidRootPart")
@@ -731,6 +728,8 @@ end
 local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
 	if not localCharacter then return false end
+
+	-- Check 1: Is the sound parented inside the local player's character?
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
@@ -738,6 +737,22 @@ local function isLocalPlayerSound(sound)
 		end
 		current = current.Parent
 	end
+
+	-- Check 2: Is the sound's position very close to the local player?
+	-- This catches VFX parts and other sounds the server creates near you.
+	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
+	if localHRP then
+		local soundPos = nil
+		if sound.Parent and sound.Parent:IsA("BasePart") then
+			soundPos = sound.Parent.Position
+		elseif sound.Parent and sound.Parent:IsA("Attachment") then
+			soundPos = sound.Parent.WorldPosition
+		end
+		if soundPos and (localHRP.Position - soundPos).Magnitude < 10 then
+			return true
+		end
+	end
+
 	return false
 end
 
@@ -796,6 +811,13 @@ local function tryReplaceSound(sound)
 	newSound.SoundId = "rbxassetid://" .. replacementId
 	newSound.Volume = 2.5
 
+	-- 3D audio fix: set EmitterSize so the sound stays at full volume
+	-- when the listener is very close to the source (prevents close-range clipping/silence)
+	if parent and parent ~= SoundService and parent:IsA("BasePart") then
+		newSound.EmitterSize = 10
+		newSound.RollOffMaxDistance = 100
+	end
+
 	-- Determine KeepPlayingSound from the entry (table format only)
 	local keepPlaying = false
 	if type(entry) == "table" and entry.KeepPlayingSound then
@@ -808,7 +830,13 @@ local function tryReplaceSound(sound)
 
 	if keepPlaying then
 		-- Reparent to SoundService if the parent is destroyed so the replacement keeps playing
+		-- Use AncestryChanged for more reliable reparenting
 		if parent and parent ~= SoundService then
+			newSound.AncestryChanged:Connect(function(_, newParent)
+				if newParent == nil and newSound and newSound.IsPlaying then
+					newSound.Parent = SoundService
+				end
+			end)
 			parent.Destroying:Connect(function()
 				if newSound and newSound.Parent then
 					newSound.Parent = SoundService
@@ -1082,8 +1110,18 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 
 	local function doPlay()
 		-- Deduplicate: if this overlay Sound ID is already playing, skip it
+		-- EXCEPT for KeepPlayingSound overlays: stop the old one and play fresh
 		local existing = ActiveOverlaySounds[overlayInfo.Sound]
-		if existing and existing.Parent and existing.IsPlaying then return end
+		if existing and existing.Parent and existing.IsPlaying then
+			if overlayInfo.KeepPlayingSound then
+				-- Stop old overlay so the new one plays fresh
+				existing:Stop()
+				existing:Destroy()
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			else
+				return
+			end
+		end
 		-- Clear stale entry if the old overlay is gone
 		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
@@ -1101,9 +1139,27 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 			parent = (sound and sound.Parent) or SoundService
 		end
 
+		-- For KeepPlayingSound: stop any existing overlay with the same ID so the new one plays fresh
+		if overlayInfo.KeepPlayingSound then
+			local existing = ActiveOverlaySounds[overlayInfo.Sound]
+			if existing and existing.Parent then
+				existing:Stop()
+				existing:Destroy()
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			end
+		end
+
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
 		ov.Volume = overlayInfo.Volume or 2.5
+
+		-- 3D audio fix: set EmitterSize so the sound stays at full volume
+		-- when the listener is very close to the source (prevents close-range clipping/silence)
+		if parent and parent ~= SoundService and parent:IsA("BasePart") then
+			ov.EmitterSize = 10
+			ov.RollOffMaxDistance = 100
+		end
+
 		ov.Parent = parent
 		ov:Play()
 
@@ -1117,9 +1173,13 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 
 		if overlayInfo.KeepPlayingSound then
 			-- Reparent to SoundService if the parent is destroyed so the overlay keeps playing
-			-- Always reparent (not just when IsPlaying) to avoid the overlay being destroyed
-			-- with its parent during timing gaps
+			-- Use AncestryChanged as a more reliable reparenting method than Destroying
 			if parent and parent ~= SoundService then
+				ov.AncestryChanged:Connect(function(_, newParent)
+					if newParent == nil and ov and ov.IsPlaying then
+						ov.Parent = SoundService
+					end
+				end)
 				parent.Destroying:Connect(function()
 					if ov and ov.Parent then
 						ov.Parent = SoundService
