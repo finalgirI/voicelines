@@ -1591,6 +1591,7 @@ local SoundOverlays = {
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174840611"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4 }, -- Channel Ancestors
+	},
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
 	["15640187002"] = { 
 	    ["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
@@ -1624,7 +1625,7 @@ local SoundOverlays = {
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Qet Res
-	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
+	["16404587910"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 9.8, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
 	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
