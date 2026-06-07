@@ -14,7 +14,7 @@ local WholeScreenComponents = MainInterface:WaitForChild("WholeScreenComponents"
 local ToolBar = WholeScreenComponents and WholeScreenComponents:WaitForChild("ToolBar", 30)
 if not ToolBar then return end
 
- local Data = {
+local Data = {
 	PhasmatosIncendia = {
 		Sound = "104818873099408",
 		Icon = "18630084620"
@@ -382,9 +382,9 @@ local function checkAbility(child)
 	end
 end
 
- --PlayOnEquipped: Play sound when ability is equipped/selected
- --Maps ability enum names to Data entries that should play on equip
- --MUST be defined before the event listeners below
+--PlayOnEquipped: Play sound when ability is equipped/selected
+--Maps ability enum names to Data entries that should play on equip
+--MUST be defined before the event listeners below
 local EquipSoundMap = {}
 
 -- Track current ability to detect when switching away from Magic Shield
@@ -842,7 +842,7 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-    ["104782720464668"] = {
+	["104782720464668"] = {
 		["Bonnie Bennett"] = { Sound = "14523220272", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
@@ -851,7 +851,7 @@ local SoundOverlays = {
 	},
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
 	["15640187002"] = { 
-	    ["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
+		["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	},
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
@@ -881,14 +881,12 @@ local SoundOverlays = {
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
- --	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
+	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
 	["16404587910"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 9.8, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
 	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
-	["17253625700"] = {
-		["Davina Claire"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
-	},
+	["17253625700"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
@@ -934,8 +932,8 @@ local SoundOverlays = {
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["124779869136393"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
 	["89539286902417"] = {
-	    ["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
-    },
+		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
+	},
 	["90347973452829"] = { Sound = "92404277403294", Volume = 2.5, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 2.5, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
