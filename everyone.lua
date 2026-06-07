@@ -43,6 +43,8 @@ local Data = {
 --	},
 --}
 
+local LOCAL_VOICELINES_ENABLED = false -- Set to true to hear your own ability voicelines again
+
 local function normalize(id)
 	return tostring(id)
 		:gsub("rbxassetid://", "")
@@ -115,6 +117,12 @@ end
 
 -- FIXED FUNCTION
 local function playAbilitySound(info, abilityName)
+
+	-- Skip own voicelines if disabled
+	if not LOCAL_VOICELINES_ENABLED then
+		Cooldowns[abilityName] = false
+		return
+	end
 
 	-- CharacterRequired check: skip if the player's character doesn't match
 	if info.CharacterRequired then
@@ -870,7 +878,7 @@ local SoundOverlays = {
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0 }, -- Aneurysm
+	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0,  }, -- Aneurysm
 	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	-- Qetsiyah :
