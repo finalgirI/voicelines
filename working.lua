@@ -837,7 +837,6 @@ local KnownKeys = {
 	CharacterRequired = true,
 	ChatText = true,
 	SimultaneousSound = true,
-	KeepPlayingSound = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -889,31 +888,11 @@ local function playAbilitySound(info, abilityName)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
-
-	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
-	local character = Players.LocalPlayer.Character
-	local head = character and character:FindFirstChild("Head")
-	if head then
-		sound.Parent = head
-		-- When KeepPlayingSound is true, reparent to SoundService if the character is destroyed
-		-- so the sound survives and keeps playing to completion.
-		if info.KeepPlayingSound then
-			head.Destroying:Connect(function()
-				if sound and sound.IsPlaying then
-					sound.Parent = SoundService
-				end
-			end)
-		end
-	else
-		sound.Parent = SoundService
-	end
+	sound.Parent = SoundService
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
-		if info.KeepPlayingSound then
-			-- Don't cancel the old sound — let it keep playing to completion
-			-- It will clean itself up via its own Ended/Destroying connections
-		elseif info.FadeOut then
+		if info.FadeOut then
 			fadeOutSound(oldSound)
 		else
 			oldSound:Stop()
@@ -928,22 +907,7 @@ local function playAbilitySound(info, abilityName)
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
-
-		-- Parent to the character for 3D positional audio (same logic as main sound)
-		local character = Players.LocalPlayer.Character
-		local head = character and character:FindFirstChild("Head")
-		if head then
-			simSound.Parent = head
-			if info.KeepPlayingSound then
-				head.Destroying:Connect(function()
-					if simSound and simSound.IsPlaying then
-						simSound.Parent = SoundService
-					end
-				end)
-			end
-		else
-			simSound.Parent = SoundService
-		end
+		simSound.Parent = SoundService
 
 		if info.DelayTime then
 			task.delay(info.DelayTime, function()
@@ -1052,6 +1016,7 @@ local function checkAbility(child)
 
 			-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
 			if info and info.PlayOnEquipped then
+				-- Stop the sound if it's playing
 				local sound = ActiveSounds[abilityName]
 				if sound then
 					ActiveSounds[abilityName] = nil
@@ -1087,10 +1052,9 @@ local function checkAbility(child)
 			if sound and info and info.FadeOut == true then
 				ActiveSounds[abilityName] = nil
 				fadeOutSound(sound)
+			else
+				Cooldowns[abilityName] = false
 			end
-
-			-- Always reset cooldown so the ability can play again next time
-			Cooldowns[abilityName] = false
 		end
 	end
 end
@@ -1264,7 +1228,7 @@ for _, child in ipairs(ToolBar:GetDescendants()) do
 				local sound = ActiveSounds[abilityName]
 				local info = Data[abilityName]
 
-				if sound and info and info.FadeOut == true and not info.KeepPlayingSound then
+				if sound and info and info.FadeOut == true then
 					ActiveSounds[abilityName] = nil
 					fadeOutSound(sound)
 				end
@@ -1341,8 +1305,69 @@ local NotificationSounds = {
 -- For messages with variable parts (e.g. "Klaus Mikaelson is tracking you..")
 -- Uses Lua string patterns to match
 local NotificationPatternSounds = {
-	{ Pattern = "is tracking you%.%.", Sound = "133908186403397", Volume = 3, CharacterRequired = "Davina Claire" },
+	{ Pattern = "is tracking you%.%.", Sound = "128623140442224", Volume = 3, CharacterRequired = "Davina Claire" },
 }
+
+-- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
+-- Replaces sounds played by other players/the server with your own custom sounds.
+-- Only YOU hear the replacement. Everyone else still hears the original.
+-- Add entries to SoundReplacements: ["original sound ID"] = "replacement sound ID"
+
+--local SoundReplacements = {
+--	["105594719818558"] = "130316188399085",
+--}
+
+local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
+
+local function tryReplaceSound(sound)
+	if not sound:IsA("Sound") then return end
+	if ReplacedSounds[sound] then return end -- Already handled this sound
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	local replacement = SoundReplacements[id]
+
+	if replacement then
+		ReplacedSounds[sound] = true
+
+		-- Mute the original sound so you don't hear it
+		sound.Volume = 0
+
+		-- Also mute it if it was already playing at some volume
+		-- (in case the server sets volume after we intercept)
+		sound:GetPropertyChangedSignal("Volume"):Connect(function()
+			if ReplacedSounds[sound] then
+				sound.Volume = 0
+			end
+		end)
+
+		-- Play your replacement from the same location as the original
+		-- so it respects 3D distance (fades with distance from camera)
+		local newSound = Instance.new("Sound")
+		newSound.SoundId = "rbxassetid://" .. replacement
+		newSound.Volume = 2.5
+		newSound.Parent = sound.Parent or SoundService
+		newSound:Play()
+
+		newSound.Ended:Connect(function()
+			newSound:Destroy()
+		end)
+
+		-- If the original sound gets destroyed, clean up our reference
+		sound.Destroying:Connect(function()
+			ReplacedSounds[sound] = nil
+		end)
+	end
+end
+
+-- Catch existing sounds already in the game
+for _, desc in game:GetDescendants() do
+	tryReplaceSound(desc)
+end
+
+-- Catch new sounds added during gameplay (from server or other players)
+game.DescendantAdded:Connect(function(desc)
+	tryReplaceSound(desc)
+end)
 
 do
 	local FusionStatesFolder = ReplicatedStorage:FindFirstChild("Bindables")
