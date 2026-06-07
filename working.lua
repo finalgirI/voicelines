@@ -1052,32 +1052,48 @@ local function checkAbility(child)
 		and transparency <= 0.01
 
 	if becameActive then
-		local abilities = IconMap[currentImage]
-		if not abilities then return end
+		-- Defer by one frame to check if the Image also changed.
+		-- When switching abilities, both Image and transparency change in the same frame.
+		-- If Image changed too, this was an ability SWITCH (not a use), so skip the sound.
+		local capturedImage = currentImage
+		local capturedChild = child
 
-		for _, abilityName in ipairs(abilities) do
-			local info = Data[abilityName]
+		task.defer(function()
+			if not capturedChild or not capturedChild.Parent then return end
 
-			-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
-			if info and info.PlayOnEquipped then
-				local sound = ActiveSounds[abilityName]
-				if sound then
-					ActiveSounds[abilityName] = nil
-					if info.FadeOut then
-						fadeOutSound(sound)
-					else
-						sound:Stop()
-						sound:Destroy()
-					end
-				end
-			elseif info and not Cooldowns[abilityName] then
-				Cooldowns[abilityName] = true
-
-				task.spawn(function()
-					playAbilitySound(info, abilityName)
-				end)
+			local imageNow = normalize(capturedChild.Image)
+			if imageNow ~= capturedImage then
+				-- Image changed = ability switch, not a use. Skip.
+				return
 			end
-		end
+
+			local abilities = IconMap[capturedImage]
+			if not abilities then return end
+
+			for _, abilityName in ipairs(abilities) do
+				local info = Data[abilityName]
+
+				-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
+				if info and info.PlayOnEquipped then
+					local sound = ActiveSounds[abilityName]
+					if sound then
+						ActiveSounds[abilityName] = nil
+						if info.FadeOut then
+							fadeOutSound(sound)
+						else
+							sound:Stop()
+							sound:Destroy()
+						end
+					end
+				elseif info and not Cooldowns[abilityName] then
+					Cooldowns[abilityName] = true
+
+					task.spawn(function()
+						playAbilitySound(info, abilityName)
+					end)
+				end
+			end
+		end)
 	end
 
 	-- When ability becomes inactive (icon becomes visible again)
