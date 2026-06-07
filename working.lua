@@ -1560,7 +1560,9 @@ local SoundOverlays = {
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
-	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Psychic Restraint
+	["8806156863"] = { 
+	    ["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
+	},
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
 	["132899449516141"] = {
@@ -1656,9 +1658,9 @@ local SoundOverlays = {
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 	},
 	["12180424093"] = {
-		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0 }, -- Incendia
-		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0 }, -- Incendia
-		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0 }, -- Incendia
+		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 	},
 	["14043844852"] = {
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
@@ -1677,8 +1679,8 @@ local SoundOverlays = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
 	},
 	["12190650809"] = {
-			["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0 }, -- Motus
-			["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0 }, -- Motus
+		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
 	["8806156863"] = {
 		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
@@ -1698,6 +1700,10 @@ local SoundOverlays = {
 	},
 	["129498686293958"] = { Sound = "89550767660084", Volume = 6.5, DelayTime = 0 }, -- Violin
 	["116235925618614"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
+	-- Voicelines :
+	["10318501440"] = {
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
+	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
