@@ -1385,7 +1385,7 @@ local NotificationPatternSounds = {
 
 local SoundReplacements = {
 	-- Simple format (applies to all characters):
-	["105594719818558"] = "130316188399085", -- Psychic Blast
+	["105594719818558"] = { Replacement = "130316188399085", KeepPlayingSound = true }, -- Psychic Blast
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Phasmatos Immortale
 	["80430541489576"] = "14556366203", -- Turn To Stone
@@ -1523,8 +1523,37 @@ local function tryReplaceSound(sound)
 	local newSound = Instance.new("Sound")
 	newSound.SoundId = "rbxassetid://" .. replacementId
 	newSound.Volume = 2.5
-	newSound.Parent = sound.Parent or SoundService
+
+	-- Determine KeepPlayingSound from the entry (table format only)
+	local keepPlaying = false
+	if type(entry) == "table" and entry.KeepPlayingSound then
+		keepPlaying = true
+	end
+
+	local parent = sound.Parent or SoundService
+	newSound.Parent = parent
 	newSound:Play()
+
+	if keepPlaying then
+		-- Reparent to SoundService if the parent is destroyed so the replacement keeps playing
+		if parent and parent ~= SoundService then
+			parent.Destroying:Connect(function()
+				if newSound and newSound.Parent then
+					newSound.Parent = SoundService
+				end
+			end)
+		end
+	else
+		-- Without KeepPlayingSound: fade out the replacement when the original sound ends/stops
+		if sound then
+			sound.Ended:Connect(function() fadeOutOverlaySound(newSound) end)
+			sound.Stopped:Connect(function() fadeOutOverlaySound(newSound) end)
+			sound.Destroying:Connect(function()
+				fadeOutOverlaySound(newSound)
+				ReplacedSounds[sound] = nil
+			end)
+		end
+	end
 
 	newSound.Ended:Connect(function()
 		newSound:Destroy()
