@@ -113,7 +113,6 @@ local Data = {
 	Harae = {
 		Sound = "70767045237007",
 		Icon = "18630087278",
-		KeepPlayingSound = true,
 		Volume = 0.8,
 		FadeOut = true,
 	},
@@ -671,7 +670,6 @@ local Data = {
 		["Freya Mikaelson"] = "71400747179829",
 		["Nora Hildegard"] = "131259403209726",
 		["Hope Mikaelson"] = "136985009471966",
-		KeepPlayingSound = true,
 	},
 
 	Invisique = {
