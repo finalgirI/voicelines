@@ -688,6 +688,8 @@ local function getSoundCharacterName(sound)
 	end
 	-- Fallback: find nearest player character by 3D distance
 	-- This handles sounds in VFX parts that aren't parented to any character
+	-- IMPORTANT: Exclude the local player so the fallback never attributes
+	-- another player's sound to the local player (which would cause overlays to be skipped)
 	local soundPos = nil
 	if sound:IsA("Sound") and sound.Parent and sound.Parent:IsA("BasePart") then
 		soundPos = sound.Parent.Position
@@ -695,9 +697,12 @@ local function getSoundCharacterName(sound)
 		soundPos = sound.Parent.WorldPosition
 	end
 	if soundPos then
-		local bestDist = 30 -- max distance to consider a match
+		local bestDist = 50 -- max distance to consider a match (increased for reliability)
 		local bestName = nil
 		for _, player in Players:GetPlayers() do
+			if player == Players.LocalPlayer then
+				continue -- Skip local player: their sounds are handled by the ability system
+			end
 			local char = player.Character
 			if char then
 				local hrp = char:FindFirstChild("HumanoidRootPart")
@@ -945,7 +950,7 @@ local SoundOverlays = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 	},
-	["12180424093"] = {
+	["12180424279"] = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
