@@ -1608,7 +1608,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
 	},
 	["13154602444"] = {
-		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
+		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 ,KeepPlayingSound = true }, -- Somnus
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit Change
 	},
 	-- Hope Mikaelson :
@@ -1633,11 +1633,11 @@ local SoundOverlays = {
 	["91745299864148"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 0 }, -- Ultimate Weapon
 	["18902201212"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 0 }, -- Orgiinal Serum
 	-- Dark Josie :
-	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0 }, -- Harae Tamae
+	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
-	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0 }, -- Ascendo
+	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101203984671407", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
 	["91395570209508"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
@@ -1701,8 +1701,8 @@ local SoundOverlays = {
 	["129498686293958"] = { Sound = "89550767660084", Volume = 6.5, DelayTime = 0 }, -- Violin
 	["116235925618614"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
 	-- Voicelines :
-	["10318501440"] = {
-		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
+	["12331530337"] = {
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat rip
 	},
 }
 
