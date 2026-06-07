@@ -1560,7 +1560,7 @@ local SoundOverlays = {
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
-	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Psychic Restraint
+	["8806156863"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Psychic Restraint
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
 	["132899449516141"] = {
@@ -1649,7 +1649,7 @@ local SoundOverlays = {
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
 	-- Silas :
-	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0 }, -- Illusion Attack
+	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, DebounceTime = 50 }, -- Illusion Attack
 	-- Heretics :
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
@@ -1657,6 +1657,8 @@ local SoundOverlays = {
 	},
 	["12180424093"] = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0 }, -- Incendia
+		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0 }, -- Incendia
+		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0 }, -- Incendia
 	},
 	["14043844852"] = {
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- HereticJointSpell
@@ -1685,11 +1687,11 @@ local SoundOverlays = {
 		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
 		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
 		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
-		["Agnes"] = { Sound = "121671824051694", Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
+		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0 }, -- Ancestral Pain
 	},
 	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0 }, -- Insanity Hex
 	["15980142966"] = {
-		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
+		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
 	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
 }
@@ -1729,6 +1731,7 @@ local OverlayKnownKeys = {
 	CharacterRequired = true,
 	Overlays = true,
 	KeepPlayingSound = true,
+	DebounceTime = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -1803,9 +1806,11 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 
 		if overlayInfo.KeepPlayingSound then
 			-- Reparent to SoundService if the parent is destroyed so the overlay keeps playing
+			-- Always reparent (not just when IsPlaying) to avoid the overlay being destroyed
+			-- with its parent during timing gaps
 			if parent and parent ~= SoundService then
 				parent.Destroying:Connect(function()
-					if ov and ov.IsPlaying then
+					if ov and ov.Parent then
 						ov.Parent = SoundService
 					end
 				end)
@@ -1892,8 +1897,9 @@ local function tryOverlaySound(sound)
 		OverlayTracked[sound] = true
 		return
 	end
+	local debounceTime = entry.DebounceTime or 1
 	OverlayOriginalDebounce[id] = true
-	task.delay(1, function()
+	task.delay(debounceTime, function()
 		OverlayOriginalDebounce[id] = nil
 	end)
 
