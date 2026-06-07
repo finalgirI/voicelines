@@ -113,6 +113,7 @@ local Data = {
 	Harae = {
 		Sound = "70767045237007",
 		Icon = "18630087278",
+		KeepPlayingSound = true,
 		Volume = 0.8,
 		FadeOut = true,
 	},
