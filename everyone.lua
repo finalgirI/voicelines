@@ -733,28 +733,13 @@ local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
 	if not localCharacter then return false end
 
-	-- Check 1: Is the sound parented inside the local player's character?
+	-- Check: Is the sound parented inside the local player's character?
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
 			return true
 		end
 		current = current.Parent
-	end
-
-	-- Check 2: Is the sound's position very close to the local player?
-	-- This catches VFX parts and other sounds the server creates near you.
-	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
-	if localHRP then
-		local soundPos = nil
-		if sound.Parent and sound.Parent:IsA("BasePart") then
-			soundPos = sound.Parent.Position
-		elseif sound.Parent and sound.Parent:IsA("Attachment") then
-			soundPos = sound.Parent.WorldPosition
-		end
-		if soundPos and (localHRP.Position - soundPos).Magnitude < 10 then
-			return true
-		end
 	end
 
 	return false
@@ -815,13 +800,6 @@ local function tryReplaceSound(sound)
 	newSound.SoundId = "rbxassetid://" .. replacementId
 	newSound.Volume = 2.5
 
-	-- 3D audio fix: set EmitterSize so the sound stays at full volume
-	-- when the listener is very close to the source (prevents close-range clipping/silence)
-	if parent and parent ~= SoundService and parent:IsA("BasePart") then
-		newSound.EmitterSize = 10
-		newSound.RollOffMaxDistance = 100
-	end
-
 	-- Determine KeepPlayingSound from the entry (table format only)
 	local keepPlaying = false
 	if type(entry) == "table" and entry.KeepPlayingSound then
@@ -829,6 +807,13 @@ local function tryReplaceSound(sound)
 	end
 
 	local parent = sound.Parent or SoundService
+
+	-- 3D audio fix: set EmitterSize so the sound stays at full volume
+	-- when the listener is very close to the source (prevents close-range clipping/silence)
+	if parent and parent ~= SoundService and parent:IsA("BasePart") then
+		newSound.EmitterSize = 10
+	end
+
 	newSound.Parent = parent
 	newSound:Play()
 
@@ -1161,7 +1146,6 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 		-- when the listener is very close to the source (prevents close-range clipping/silence)
 		if parent and parent ~= SoundService and parent:IsA("BasePart") then
 			ov.EmitterSize = 10
-			ov.RollOffMaxDistance = 100
 		end
 
 		ov.Parent = parent
@@ -1251,11 +1235,13 @@ local function tryOverlaySound(sound)
 	if isLocalPlayerSound(sound) then return end
 
 	-- Also skip if the sound belongs to the same character as the local player
-	-- (handles cases where the sound is in a VFX part, not directly in the character model)
+	-- BUT only trust the parent hierarchy check, NOT the distance fallback.
+	-- Distance fallback can wrongly attribute another player's VFX to the local player
+	-- when they're standing nearby, which would block overlays you should hear.
 	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
 	if localCharName then
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName == localCharName then
+		local soundCharName, isFallback = getSoundCharacterName(sound)
+		if soundCharName == localCharName and not isFallback then
 			OverlayTracked[sound] = true
 			return
 		end
