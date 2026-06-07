@@ -1672,8 +1672,8 @@ local SoundOverlays = {
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 	},
 	["12190650809"] = {
-			["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-			["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+			["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0 }, -- Motus
+			["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0 }, -- Motus
 	},
 	["8806156863"] = {
 		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
@@ -1681,18 +1681,17 @@ local SoundOverlays = {
 	},
 	-- Elder Witches :
 	["84319099882038"] = {
-		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Agnes"] = { Sound = "121671824051694", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
+		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
+		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
+		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0 }, -- Ancestral Pain
+		["Agnes"] = { Sound = "121671824051694", Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
 	},
-	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
+	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0 }, -- Insanity Hex
 	["15980142966"] = {
-		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Agnes Needle of Sorrows
+		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
 	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
-	["97695195348256"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin Rare
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
