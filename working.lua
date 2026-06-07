@@ -162,12 +162,12 @@ local Data = {
 		Icon = "128909320385582",
 	},
 
-	IgnisTempestas = {
-		Sound = "95468563095334",
-		Icon = "18630089900",
-		Volume = 1,
-		DelayTime = 0.4,
-	},
+	--IgnisTempestas = {
+	--	Sound = "95468563095334",
+	--	Icon = "18630089900",
+	--	Volume = 1,
+	--	DelayTime = 0.4,
+	--},
 
 	AvitaExari = {
 		Sound = "16118919066",
@@ -354,11 +354,11 @@ local Data = {
 		Icon = "83085294584462",
 	},
 
-	Aneurysm = {
-		Sound = "132015776882851",
-		Icon = "82552464417064",
-		FadeOut  = true,
-	},
+	--Aneurysm = {
+	--	Sound = "132015776882851",
+	--	Icon = "82552464417064",
+	--	FadeOut  = true,
+	--},
 
 	InsanityHex = {
 		Sound = "114599395160541",
@@ -518,11 +518,11 @@ local Data = {
 		DelayTime = 1,
 	},
 
-	PentagramEsther = {
-		Sound = "129460073622144",
-		Icon = "87208128166220",
-		DelayTime = 5,
-	},
+	--PentagramEsther = {
+	--	Sound = "129460073622144",
+	--	Icon = "87208128166220",
+	--	DelayTime = 5,
+	--},
 
 	ChainsEsther = {
 		Sound = "83942262095667",
@@ -546,11 +546,11 @@ local Data = {
 		Icon = "81666997829225",
 	},
 
-	TheUltimateWeaponEsther = {
-		Sound = "118918239866614",
-		Icon = "81666997829225",
-		DelayTime = 17,
-	},
+	--TheUltimateWeaponEsther = {
+	--	Sound = "118918239866614",
+	--	Icon = "81666997829225",
+	--	DelayTime = 17,
+	--},
 
 	EstherOriginalSerum = {
 		Sound = "91204949642033",
