@@ -917,7 +917,7 @@ local function playAbilitySound(info, abilityName)
 	if oldSound and oldSound ~= sound then
 		if info.FadeOut then
 			fadeOutSound(oldSound)
-		else
+		elseif not info.KeepPlayingSound then
 			oldSound:Stop()
 			oldSound:Destroy()
 		end
@@ -1590,7 +1590,7 @@ local SoundOverlays = {
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
-	["8806156863"] = { 
+	["15640187002"] = { 
 	    ["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	},
 	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
@@ -1605,7 +1605,7 @@ local SoundOverlays = {
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 3 }, -- Ancestor Attack End
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["122386959547514"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Aneurysm
+	["112911054571877"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0 }, -- Aneurysm
 	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["78739455755729"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	-- Qetsiyah :
@@ -1621,7 +1621,7 @@ local SoundOverlays = {
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 3, KeepPlayingSound = true }, -- Qet Res
+	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Qet Res
 	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
 	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
