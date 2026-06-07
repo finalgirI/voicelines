@@ -789,6 +789,7 @@ local function normalize(id)
 end
 
 local Cooldowns = {}
+local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
 local LastTransparency = {}
 local LastIcon = {}
 local ActiveSounds = {}
@@ -857,7 +858,10 @@ local function playAbilitySound(info, abilityName)
 	-- CharacterRequired check: skip if the player's character doesn't match
 	if info.CharacterRequired then
 		local charName = Players.LocalPlayer:GetAttribute("CharacterName")
-		if charName ~= info.CharacterRequired then return end
+		if charName ~= info.CharacterRequired then
+			Cooldowns[abilityName] = false
+			return
+		end
 	end
 
 	local characterName = Players.LocalPlayer:GetAttribute("CharacterName")
@@ -886,7 +890,10 @@ local function playAbilitySound(info, abilityName)
 		simultaneousSoundId = info.SimultaneousSound
 	end
 
-	if not soundId then return end  -- no character match and no default, skip
+	if not soundId then
+		Cooldowns[abilityName] = false
+		return
+	end
 
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
@@ -897,15 +904,12 @@ local function playAbilitySound(info, abilityName)
 	local head = character and character:FindFirstChild("Head")
 	if head then
 		sound.Parent = head
-		-- When KeepPlayingSound is true, reparent to SoundService if the character is destroyed
-		-- so the sound survives and keeps playing to completion.
-		if info.KeepPlayingSound then
-			head.Destroying:Connect(function()
-				if sound and sound.IsPlaying then
-					sound.Parent = SoundService
-				end
-			end)
-		end
+		-- Always reparent to SoundService if the parent is destroyed, so the sound can still play
+		head.Destroying:Connect(function()
+			if sound and sound.Parent then
+				sound.Parent = SoundService
+			end
+		end)
 	else
 		sound.Parent = SoundService
 	end
@@ -921,6 +925,13 @@ local function playAbilitySound(info, abilityName)
 	end
 
 	ActiveSounds[abilityName] = sound
+
+	-- Safety: auto-reset cooldown after timeout so it can never get permanently stuck
+	task.delay(COOLDOWN_TIMEOUT, function()
+		if Cooldowns[abilityName] then
+			Cooldowns[abilityName] = false
+		end
+	end)
 
 	-- Play simultaneous sound if provided
 	if simultaneousSoundId then
@@ -1120,7 +1131,11 @@ if _playerScripts then
 					if info and not Cooldowns[abilityName] then
 						Cooldowns[abilityName] = true
 						task.spawn(function()
-							playAbilitySound(info, abilityName)
+							local ok, err = pcall(playAbilitySound, info, abilityName)
+							if not ok then
+								warn("Voiceline error for", abilityName, err)
+								Cooldowns[abilityName] = false
+							end
 						end)
 					end
 				end)
@@ -1241,7 +1256,6 @@ for _, child in ipairs(ToolBar:GetDescendants()) do
 		LastIcon[child] = normalize(child.Image)
 
 		child:GetPropertyChangedSignal("ImageTransparency"):Connect(function()
-			task.wait(0.01)
 			checkAbility(child)
 		end)
 
@@ -1294,7 +1308,11 @@ do
 			if not Cooldowns[key] then
 				Cooldowns[key] = true
 				task.spawn(function()
-					playAbilitySound(actionInfo, key)
+					local ok, err = pcall(playAbilitySound, actionInfo, key)
+					if not ok then
+						warn("Voiceline error for", key, err)
+						Cooldowns[key] = false
+					end
 				end)
 			end
 		end)
@@ -1354,8 +1372,8 @@ local NotificationPatternSounds = {
 local SoundReplacements = {
 	-- Simple format (applies to all characters):
 	["105594719818558"] = "130316188399085", -- Psychic Blast
-	["104782720464668"] = "91016794551142", -- Phasmatos Incendia
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
+	["90326993393737"] = "15325084064", -- Phasmatos Immortale
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["116235007511881"] = "13203446447", -- Autem
@@ -1368,23 +1386,22 @@ local SoundReplacements = {
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
 
--- Helper: find which character a sound belongs to by walking up the parent hierarchy
--- Returns the CharacterName attribute value, or nil if not found
+-- Helper: find which character a sound belongs to
+-- 1) Walk up the parent hierarchy for Player/CharacterName attribute
+-- 2) Match character model to a player
+-- 3) Fallback: find the nearest player character by 3D distance (handles VFX parts)
 local function getSoundCharacterName(sound)
 	local current = sound.Parent
 	while current do
-		-- Check if this is a Player instance
 		if current:IsA("Player") then
 			return current:GetAttribute("CharacterName")
 		end
-		-- Check if this instance has a CharacterName attribute directly
 		local charName = current:GetAttribute("CharacterName")
 		if charName then
 			return charName
 		end
 		current = current.Parent
 	end
-	-- Fallback: try to match character model to a player
 	current = sound.Parent
 	while current do
 		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
@@ -1395,6 +1412,32 @@ local function getSoundCharacterName(sound)
 			end
 		end
 		current = current.Parent
+	end
+	-- Fallback: find nearest player character by 3D distance
+	-- This handles sounds in VFX parts that aren't parented to any character
+	local soundPos = nil
+	if sound:IsA("Sound") and sound.Parent and sound.Parent:IsA("BasePart") then
+		soundPos = sound.Parent.Position
+	elseif sound.Parent and sound.Parent:IsA("Attachment") then
+		soundPos = sound.Parent.WorldPosition
+	end
+	if soundPos then
+		local bestDist = 30 -- max distance to consider a match
+		local bestName = nil
+		for _, player in Players:GetPlayers() do
+			local char = player.Character
+			if char then
+				local hrp = char:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					local dist = (hrp.Position - soundPos).Magnitude
+					if dist < bestDist then
+						bestDist = dist
+						bestName = player:GetAttribute("CharacterName")
+					end
+				end
+			end
+		end
+		if bestName then return bestName end
 	end
 	return nil
 end
@@ -1497,6 +1540,9 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
+    ["104782720464668"] = {
+		["Bonnie Bennett"] = { Sound = "14523220272", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
+	},
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174840611"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 4, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Channel Ancestors Bonnie
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
@@ -1524,25 +1570,25 @@ local SoundOverlays = {
 	["104782720464668"] = {
 		["Qetsiyah"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
 	},
-	["16449303310"] = { Sound = "16449297928", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
+	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 3 }, -- Qet Res
+	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 3, KeepPlayingSound = true }, -- Qet Res
 	["13577599585"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
 	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
 	["17253625700"] = {
-	    ["Davina Claire"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
+		["Davina Claire"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	},
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
-	["14606429535"] = {
+	["10512733733"] = {
 		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
 	},
 	["13154602444"] = {
@@ -1562,7 +1608,7 @@ local SoundOverlays = {
 		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2.5, DelayTime = 0 }, -- Aquamalia
 	},
 	-- Esther Mikaelson :
-	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 1 }, -- Vamp Reversal
+	["18535374166"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 5 }, -- Pentagram
 	["75802267645216"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
@@ -1585,7 +1631,7 @@ local SoundOverlays = {
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
 	-- Silas :
-	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
+	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0 }, -- Illusion Attack
 	-- Heretics :
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
@@ -1612,7 +1658,7 @@ local SoundOverlays = {
 		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 		["Agnes"] = { Sound = "121671824051694", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
-	["137137104978289"] = { Sound = "114599395160541", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
+	["137137104978289"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Agnes Needle of Sorrows
 	["129498686293958"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Violin
@@ -1622,6 +1668,7 @@ local SoundOverlays = {
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
 local ActiveOverlaySounds = {} -- Track currently playing overlay Sound IDs to prevent duplicates (e.g. Illusion Attack plays 5x)
+local OverlayOriginalDebounce = {} -- Debounce per original sound ID to prevent multiple overlays from duplicate original sounds
 
 local function fadeOutOverlaySound(overlaySound, duration)
 	if not overlaySound or not overlaySound.Parent then return end
@@ -1671,15 +1718,46 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 		if charName ~= overlayInfo.CharacterRequired then return end
 	end
 
+	-- Capture the character model NOW (before any delay) so we can parent the overlay
+	-- to the character's body for proper 3D positional audio, even after a delay.
+	-- Without this, delayed overlays fall back to SoundService and play globally at full volume.
+	local capturedCharModel = nil
+	if sound and sound.Parent then
+		local current = sound.Parent
+		while current do
+			if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+				for _, player in Players:GetPlayers() do
+					if player.Character == current then
+						capturedCharModel = current
+						break
+					end
+				end
+				if capturedCharModel then break end
+			end
+			current = current.Parent
+		end
+	end
+
 	local function doPlay()
 		-- Deduplicate: if this overlay Sound ID is already playing, skip it
-		-- (e.g. Illusion Attack creates 5 copies of the original sound, but we only want 1 overlay)
-		if ActiveOverlaySounds[overlayInfo.Sound] then return end
+		local existing = ActiveOverlaySounds[overlayInfo.Sound]
+		if existing and existing.Parent and existing.IsPlaying then return end
+		-- Clear stale entry if the old overlay is gone
+		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
-		-- Always parent to the original sound's parent (the character) for 3D positional audio.
-		-- When KeepPlayingSound is true, reparent to SoundService if that parent is destroyed
-		-- so the overlay survives and keeps playing to completion.
-		local parent = (sound and sound.Parent) or SoundService
+		-- Parent to the character's Head for 3D positional audio so the overlay
+		-- sounds like it comes from the body, not globally.
+		-- Falls back to the original sound's parent, then SoundService.
+		local parent = nil
+		if capturedCharModel and capturedCharModel.Parent then
+			local head = capturedCharModel:FindFirstChild("Head")
+			if head then
+				parent = head
+			end
+		end
+		if not parent then
+			parent = (sound and sound.Parent) or SoundService
+		end
 
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
@@ -1696,7 +1774,7 @@ local function playSingleOverlay(sound, overlayInfo, charName)
 		end)
 
 		if overlayInfo.KeepPlayingSound then
-			-- Reparent to SoundService if the original parent is destroyed so the overlay keeps playing
+			-- Reparent to SoundService if the parent is destroyed so the overlay keeps playing
 			if parent and parent ~= SoundService then
 				parent.Destroying:Connect(function()
 					if ov and ov.IsPlaying then
@@ -1764,9 +1842,32 @@ local function tryOverlaySound(sound)
 	-- (the ability transparency system already handles voicelines for the local player)
 	if isLocalPlayerSound(sound) then return end
 
+	-- Also skip if the sound belongs to the same character as the local player
+	-- (handles cases where the sound is in a VFX part, not directly in the character model)
+	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
+	if localCharName then
+		local soundCharName = getSoundCharacterName(sound)
+		if soundCharName == localCharName then
+			OverlayTracked[sound] = true
+			return
+		end
+	end
+
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
 	if not entry then return end
+
+	-- Debounce: if we already created an overlay for this original sound ID recently,
+	-- skip it. This prevents abilities like Illusion Attack (which creates 5 duplicate
+	-- original sounds) from playing the overlay 5 times.
+	if OverlayOriginalDebounce[id] then
+		OverlayTracked[sound] = true
+		return
+	end
+	OverlayOriginalDebounce[id] = true
+	task.delay(1, function()
+		OverlayOriginalDebounce[id] = nil
+	end)
 
 	OverlayTracked[sound] = true
 	local charName = getSoundCharacterName(sound)
