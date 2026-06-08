@@ -374,7 +374,7 @@ local Data = {
 	},
 
 	GenevieveAsh = {
-		Sound = "93111269287330",
+		Sound = "119504583819814",
 		Icon = "82815418211348",
 		Volume = 3,
 	},
@@ -794,6 +794,7 @@ local FadingSounds = {}
 local LastEquipPlayTime = {}
 local EquipPlayLock = {}
 local SoundCycleIndex = {}  -- Tracks which sound to play next for abilities with multiple sounds
+local KeepPlayingSounds = {} -- Tracks sounds that should keep playing even when replaced
 
 local function fadeOutSound(sound)
 	if not sound or not sound.Parent then
@@ -837,6 +838,7 @@ local KnownKeys = {
 	CharacterRequired = true,
 	ChatText = true,
 	SimultaneousSound = true,
+	KeepPlayingSound = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -885,14 +887,21 @@ local function playAbilitySound(info, abilityName)
 
 	if not soundId then return end  -- no character match and no default, skip
 
+	-- Record play time so VoicelinesForEveryone can skip overlays/replacements for local player
+	-- Only set this AFTER all validation passes, so it only stamps when a sound actually plays
+	Players.LocalPlayer:SetAttribute("VoicelinesLastPlayTime", tick())
+
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
-	sound.Volume = info.Volume or 2.5
+	sound.Volume = info.Volume or 3
+
 	sound.Parent = SoundService
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
-		if info.FadeOut then
+		if KeepPlayingSounds[oldSound] then
+			-- Don't stop KeepPlayingSound sounds, let them finish naturally
+		elseif info.FadeOut then
 			fadeOutSound(oldSound)
 		else
 			oldSound:Stop()
@@ -902,11 +911,15 @@ local function playAbilitySound(info, abilityName)
 
 	ActiveSounds[abilityName] = sound
 
+	if info.KeepPlayingSound then
+		KeepPlayingSounds[sound] = true
+	end
+
 	-- Play simultaneous sound if provided
 	if simultaneousSoundId then
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
-		simSound.Volume = info.Volume or 2.5
+		simSound.Volume = info.Volume or 3
 		simSound.Parent = SoundService
 
 		if info.DelayTime then
@@ -940,6 +953,7 @@ local function playAbilitySound(info, abilityName)
 		end
 
 		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
 
 		if sound and sound.Parent and not FadingSounds[sound] then
 			sound:Destroy()
@@ -972,6 +986,7 @@ local function playAbilitySound(info, abilityName)
 		end
 
 		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
 	end)
 end
 
@@ -1020,7 +1035,9 @@ local function checkAbility(child)
 				local sound = ActiveSounds[abilityName]
 				if sound then
 					ActiveSounds[abilityName] = nil
-					if info.FadeOut then
+					if KeepPlayingSounds[sound] then
+						-- Don't stop KeepPlayingSound sounds
+					elseif info.FadeOut then
 						fadeOutSound(sound)
 					else
 						sound:Stop()
@@ -1049,7 +1066,7 @@ local function checkAbility(child)
 			-- Note: Magic Shield cooldown is now handled in MainAbilitiesChanged
 			-- when switching away from the ability
 
-			if sound and info and info.FadeOut == true then
+			if sound and info and info.FadeOut == true and not KeepPlayingSounds[sound] then
 				ActiveSounds[abilityName] = nil
 				fadeOutSound(sound)
 			else
@@ -1228,7 +1245,7 @@ for _, child in ipairs(ToolBar:GetDescendants()) do
 				local sound = ActiveSounds[abilityName]
 				local info = Data[abilityName]
 
-				if sound and info and info.FadeOut == true then
+				if sound and info and info.FadeOut == true and not KeepPlayingSounds[sound] then
 					ActiveSounds[abilityName] = nil
 					fadeOutSound(sound)
 				end
