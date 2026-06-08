@@ -940,6 +940,7 @@ local SoundOverlays = {
 	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174800421"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0 }, -- Channel Ancestors
+		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Astral Projection
 	},
 	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
 	["15640187002"] = { 
@@ -951,8 +952,7 @@ local SoundOverlays = {
 		["Freya Mikaelson"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
 	},
-	["15174800421"] = 
-		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Astral Projection
+
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["83787551804971"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Ancestor Attack End
