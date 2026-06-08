@@ -123,7 +123,7 @@ local Data = {
 	},
 
 	FianteFulguris = {
-		Sound = "81277472991928",
+		Sound = "90115515174277",
 		Icon = "18630088248",
 	},
 
@@ -134,7 +134,7 @@ local Data = {
 	},
 
 	SandClock = {
-		Sound = "102769052580596",
+		Sound = "74786986821079",
 		Icon = "18630281373",
 		DelayTime = 4.3,
 	},
@@ -146,7 +146,7 @@ local Data = {
 	},
 
 	ISaidHey = {
-		Sound = "101203984671407",
+		Sound = "101957577374614",
 		Icon = "116482478049852",
 		Volume = 0.8,
 		FadeOut = true,
@@ -166,7 +166,7 @@ local Data = {
 		Sound = "95468563095334",
 		Icon = "18630089900",
 		Volume = 1,
-		DelayTime = 0.4,
+		DelayTime = 0.6,
 	},
 
 	AvitaExari = {
@@ -226,10 +226,16 @@ local Data = {
 		Icon = "18630090139",
 		DelayTime = 15,
 	},
-
+	
 	TelekAttack = {
 		Sound = "94965672679001",
 		Icon = "135639275617447",
+	},
+
+	LocatorSpell = {
+		Icon = "87004194847894",
+		["Freya Mikaelson"] = "107779666764444",
+        DelayTime = 5.4,
 	},
 
 	TelekSubmission = {
@@ -296,6 +302,26 @@ local Data = {
 		Volume = 4,
 		FadeOut = true,
 	},
+
+	VampReversalFreya = {
+		Sound = "129676323948552",
+		Icon = "116098716846924",
+		DelayTime = 0.3,
+		FadeOut = true,
+	},
+
+	VampReversalFreya2 = {
+		Sound = "94259360187031",
+		Icon = "116098716846924",
+		DelayTime = 0.3,
+		FadeOut = true,
+	},
+	--VampReversalFreya3 = {
+	--	Sound = "89688396603399",
+	--	Icon = "116098716846924",
+	--	DelayTime = 0.3,
+	--	FadeOut = true,
+	--},
 
 	AstralProjection = {
 		Sound = "97414512710914",
@@ -601,6 +627,7 @@ local Data = {
 		Icon = "18630087815",
 		["Qetsiyah"] = "132701227107666",
 		["Bonnie Bennett"] = "93410039917419",
+		["Freya Mikaelson"] = "129158847870610",
 	},
 
 	AdSomnum = {
@@ -626,7 +653,7 @@ local Data = {
 
 	Aquamalia = {
 		Icon = "18630088717",
-		Volume = 3.5,
+		Volume = 2.5,
 		["Hope Mikaelson"] = "127841579933142",
 	},
 
@@ -681,14 +708,20 @@ local Data = {
 	SpineBreak = {
 		Icon = "18630085580",
 		["Katherine Pierce"] = "14841026112",
-		["Klaus Mikaelson"] = "104818873099408",
+		["Aurora De Martel"] = "97908940377337",
+	},
+
+	ThroatRip = {
+		Icon = "18630281055",
+		["Katherine Pierce"] = "14841026112",
+		["Aurora De Martel"] = "91514318555989",
 	},
 
 	HeartRip = {
 		Icon = "18630084285",
-		["Klaus Mikaelson"] = "116366940781850",
+		["Aurora De Martel"] = "71870170081183",
 		["Hope Mikaelson"] = "108349443247039",
-		["Elijah Mikaelson"] = "106923356211357",
+		["Rebekah Mikaelson"] = "89688396603399",
 		["Marcel Gerard"] = "110381933492775",
 	},
 
@@ -706,6 +739,7 @@ local Data = {
 	SuperSlap = {
 		Icon = "73276360094899",
 		["Hope Mikaelson"] = "125011735974039",
+		["Rebekah Mikaelson"] = "73616559992744", 
 	},
 
 	SuperKick = {
@@ -717,9 +751,15 @@ local Data = {
 
 	Choke = {
 		Icon = "18630084520",
-		["Papa Tunde"] = "120390222103231",
+		["Rebekah Mikaelson"] = "135260624293276",
 		["Mary Louise"] = "76991721803834",
 		["Hope Mikaelson"] = "88024240964591",
+	},
+
+	ChokeOut = {
+		Icon = "136852406200956",
+		["Rebekah Mikaelson"] = "103359391224128",
+		["Klaus Mikaelson"] = "110962212419680",
 	},
 
 	HeelStomp = {
@@ -732,8 +772,9 @@ local Data = {
 
 	ArmBreak = {
 		Icon = "71180787516661",
-		["Klaus Mikaelson"] = "98249961626855",
+		["Aurora De Martel"] = "111039547177303",
 		["Hope Mikaelson"] = "112336295176021",
+		["Rebekah Mikaelson"] = "95161950033776",
 	},
 
 	SnapNeck = {
