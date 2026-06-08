@@ -669,9 +669,10 @@ end
 
 local SoundReplacements = {
 	-- Simple format (applies to all characters):
-	["105594719818558"] = { Replacement = "130316188399085", KeepPlayingSound = true }, -- Psychic Blast
+	["105594719818558"] = "130316188399085", -- Psychic Blast
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
-	["90326993393737"] = "15325084064", -- Phasmatos Immortale
+	["90326993393737"] = "15325084064", -- Suctus Incendia
+	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["116235007511881"] = "13203446447", -- Autem
@@ -926,7 +927,7 @@ end
 
 local SoundOverlays = {
 	-- Bonnie Bennett:
-	["18246473564"] = { Sound = "18246464798", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
+	["18246466722"] = { Sound = "96700082212184", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["120250468841070"] = {
 		Overlays = {
 			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
@@ -982,7 +983,7 @@ local SoundOverlays = {
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
-	["82939375129525"] = { Sound = "82826752361269", Volume = 2.5, DelayTime = 0 }, -- Davina Magic Regen
+	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
 	["10512733733"] = {
 		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
 	},
@@ -996,7 +997,7 @@ local SoundOverlays = {
 	},
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
-	["104555655233957"] = { Sound = "99610680956880", Volume = 2.5, DelayTime = 0 }, -- Glace Solidatur
+	["104555655233957"] = { Sound = "99610680956880", Volume = 1.5, DelayTime = 0 }, -- Glace Solidatur
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
 	["14813650927"] = {
@@ -1025,8 +1026,8 @@ local SoundOverlays = {
 	["89539286902417"] = {
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
 	},
-	["90347973452829"] = { Sound = "92404277403294", Volume = 2.5, DelayTime = 0 }, -- Ohun
-	["138866821877856"] = { Sound = "91217804264943", Volume = 2.5, DelayTime = 0 }, -- Pada
+	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
+	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
 	-- Silas :
@@ -1064,6 +1065,10 @@ local SoundOverlays = {
 	["8806156863"] = {
 		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
 		["Valerie Tulle"] = { Sound = "116763647482749", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
+	},
+	-- Vampire Abilities :
+	["10318537598"] = {
+		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	-- Elder Witches :
 	["84319099882038"] = {
