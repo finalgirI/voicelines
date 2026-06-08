@@ -789,20 +789,23 @@ local function tryReplaceSound(sound)
 		ReplacedSounds[sound] = true
 		return
 	end
-	-- If distance fallback matched, also check character name to confirm
+	-- When distance fallback matched, DON'T skip — the sound might be from
+	-- a targeted ability used ON the local player. Only skip if the character
+	-- name is confirmed via parent hierarchy (not distance fallback).
 	if isLocal and isDistFallback then
 		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName == localCharName then
+		local soundCharName, soundIsDistFallback = getSoundCharacterName(sound)
+		if soundCharName == localCharName and not soundIsDistFallback then
 			ReplacedSounds[sound] = true
 			return
 		end
 	end
-	-- Also check character name directly (catches VFX sounds with CharacterName attribute)
+	-- Also check character name directly, but only trust parent hierarchy
+	-- (distance fallback is unreliable for targeted abilities — sound near target, not caster)
 	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
 	if localCharName then
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName == localCharName then
+		local soundCharName, soundIsDistFallback = getSoundCharacterName(sound)
+		if soundCharName == localCharName and not soundIsDistFallback then
 			ReplacedSounds[sound] = true
 			return
 		end
@@ -832,13 +835,15 @@ local function tryReplaceSound(sound)
 	else
 		-- Table format: check CharacterRequired first
 		if entry.CharacterRequired then
-			local charName = getSoundCharacterName(sound)
-			if charName ~= entry.CharacterRequired then return end
+			local charName, charIsDistFallback = getSoundCharacterName(sound)
+			-- Only skip if character name is confirmed via parent hierarchy.
+			-- Distance fallback is unreliable for targeted abilities (sound near target, not caster).
+			if charName ~= entry.CharacterRequired and not charIsDistFallback then return end
 		end
 
 		-- Check character-specific keys (like Data table pattern)
-		local charName = getSoundCharacterName(sound)
-		if charName and entry[charName] then
+		local charName, charIsDistFallback = getSoundCharacterName(sound)
+		if charName and entry[charName] and not charIsDistFallback then
 			replacementId = entry[charName]
 		elseif entry.Replacement then
 			replacementId = entry.Replacement
@@ -1127,10 +1132,14 @@ local function hasOverlayCharOverrides(info)
 	return false
 end
 
-local function playSingleOverlay(sound, overlayInfo, charName)
+local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallback)
 	if overlayInfo.CharacterRequired then
-		if not charName then charName = getSoundCharacterName(sound) end
-		if charName ~= overlayInfo.CharacterRequired then return end
+		if not charName then
+			charName, charIsDistFallback = getSoundCharacterName(sound)
+		end
+		-- Only skip if character name is confirmed via parent hierarchy.
+		-- Distance fallback is unreliable for targeted abilities (sound near target, not caster).
+		if charName ~= overlayInfo.CharacterRequired and not charIsDistFallback then return end
 	end
 
 	-- Capture the character model NOW (before any delay) so we can parent the overlay
@@ -1276,22 +1285,22 @@ local function tryOverlaySound(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
 
-	-- Skip overlays for sounds from the local player's character
-	-- (the ability transparency system already handles voicelines for the local player)
+	-- Skip overlays for sounds genuinely parented to the local player's character.
+	-- When isDistFallback is true, the sound is NEAR us but not parented to us —
+	-- this happens when someone uses a targeted ability ON us. Don't skip those.
 	local isLocal, isDistFallback = isLocalPlayerSound(sound)
 	if isLocal and not isDistFallback then
 		OverlayTracked[sound] = true
 		return
 	end
 
-	-- Skip overlays for sounds from the local player's own character.
-	-- Check getSoundCharacterName against our character name.
-	-- Trust both parent hierarchy AND distance fallback for self-voice filtering
-	-- (better to miss an overlay than hear your own ability sounds).
+	-- Skip overlays for sounds from the local player's own character,
+	-- but ONLY when the attribution is from parent hierarchy (not distance fallback).
+	-- Distance fallback incorrectly attributes targeted ability sounds to the local player.
 	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
 	if localCharName then
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName == localCharName then
+		local soundCharName, soundIsDistFallback = getSoundCharacterName(sound)
+		if soundCharName == localCharName and not soundIsDistFallback then
 			OverlayTracked[sound] = true
 			return
 		end
@@ -1331,7 +1340,7 @@ local function tryOverlaySound(sound)
 	-- Multiple overlays that all play (Overlays array)
 	if entry.Overlays then
 		for _, overlayInfo in ipairs(entry.Overlays) do
-			playSingleOverlay(sound, overlayInfo, charName)
+			playSingleOverlay(sound, overlayInfo, charName, isDistanceFallback)
 		end
 		return
 	end
@@ -1344,16 +1353,16 @@ local function tryOverlaySound(sound)
 	-- Only trust the parent hierarchy (isDistanceFallback == false) for character-specific overlays.
 	if hasOverlayCharOverrides(entry) then
 		if charName and entry[charName] and not isDistanceFallback then
-			playSingleOverlay(sound, entry[charName], charName)
+			playSingleOverlay(sound, entry[charName], charName, isDistanceFallback)
 		elseif entry.Sound then
-			playSingleOverlay(sound, entry, charName)
+			playSingleOverlay(sound, entry, charName, isDistanceFallback)
 		end
 		return
 	end
 
 	-- Simple overlay (Sound key, optional CharacterRequired)
 	if entry.Sound then
-		playSingleOverlay(sound, entry, charName)
+		playSingleOverlay(sound, entry, charName, isDistanceFallback)
 	end
 end
 
