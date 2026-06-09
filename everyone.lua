@@ -983,6 +983,7 @@ local SoundOverlays = {
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
+	["18193005989"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0 }, -- Forget to breathe
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -1296,6 +1297,9 @@ local AnimationSounds = {
 	["14065674638"] = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
+	["16794479576"] = {
+		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 2.5, DelayTime = 0 }, -- Force Cure Hope
+	},
 	["12940089696"] = {
 		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
 	},
@@ -1307,7 +1311,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 	},
-	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Illusion Attack 
+	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
@@ -1715,6 +1719,98 @@ for _, player in Players:GetPlayers() do
 		onOtherPlayerAdded(player)
 	end
 end
+
+-- [[ CHAT-BASED VOICELINE TRIGGERS ]]
+-- Plays a sound when a specific character says a matching chat message.
+-- Useful for compulsion actions where the chat bubble text determines the sound.
+
+local ChatVoicelineSounds = {
+	["Suffer"] = "17560604010",
+	["Attack"] = "17560606672",
+	["Everybody faint"] = "17560602849",
+	["Nobody move"] = "17560600778",
+}
+
+local ChatVoicelineCharacter = "Silas"
+local ChatVoicelineRequiredAnim = "17252773400" -- Mass Compulsion animation
+local ChatVoicelineCooldown = {}
+
+local function isPlayingAnim(character, animId)
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	if not humanoid then return false end
+	local animator = humanoid:FindFirstChildOfClass("Animator")
+	if not animator then return false end
+	for _, track in animator:GetPlayingAnimationTracks() do
+		local anim = track.Animation
+		if anim then
+			local id = normalize(anim.AnimationId)
+			if id == animId then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+local function onPlayerChatted(player, message)
+	if player:GetAttribute("CharacterName") ~= ChatVoicelineCharacter then return end
+
+	local msg = message:match("^%s*(.-)%s*$")
+	local soundId = nil
+	local matchedKey = nil
+	for key, id in pairs(ChatVoicelineSounds) do
+		if msg:sub(1, #key):lower() == key:lower() then
+			soundId = id
+			matchedKey = key
+			break
+		end
+	end
+	if not soundId then return end
+
+	-- Make sure Silas is actually doing Mass Compulsion animation
+	if not isPlayingAnim(player.Character, ChatVoicelineRequiredAnim) then return end
+
+	local key = player.UserId .. "_" .. matchedKey
+	if ChatVoicelineCooldown[key] then return end
+	ChatVoicelineCooldown[key] = true
+	task.delay(5, function() ChatVoicelineCooldown[key] = nil end)
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. soundId
+	sound.Volume = 2.5
+	sound:SetAttribute("IsLocalVoiceline", true)
+
+	local character = player.Character
+	local head = character and character:FindFirstChild("Head")
+	if head then
+		sound.Parent = head
+		head.Destroying:Connect(function()
+			pcall(function()
+				if sound and sound.Parent then
+					sound.Parent = SoundService
+				end
+			end)
+		end)
+	else
+		sound.Parent = SoundService
+	end
+
+	sound:Play()
+	sound.Ended:Connect(function()
+		if sound and sound.Parent then sound:Destroy() end
+	end)
+end
+
+local function hookPlayerChat(player)
+	player.Chatted:Connect(function(message)
+		onPlayerChatted(player, message)
+	end)
+end
+
+for _, player in Players:GetPlayers() do
+	hookPlayerChat(player)
+end
+Players.PlayerAdded:Connect(hookPlayerChat)
 
 -- Catch existing sounds already in the game
 for _, desc in game:GetDescendants() do
