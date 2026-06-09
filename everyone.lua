@@ -1231,8 +1231,7 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
 	},
-	["95735579522079"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
-	["95735579522079"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 17 }, -- White Oak Hunter
+	["95735579522079"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0, SimultaneousSound = "118918239866614", SimultaneousDelayTime = 17 }, -- White Oak Spell + White Oak Hunter
 	["18534997521"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
@@ -1241,7 +1240,7 @@ local AnimationSounds = {
 	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
-	["8875719165833"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
+	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
@@ -1251,7 +1250,6 @@ local AnimationSounds = {
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["15424579670"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.3, KeepPlayingSound = true }, -- Life Linking
-	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
@@ -1388,6 +1386,7 @@ local AnimSoundKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	SimultaneousSound = true,
+	SimultaneousDelayTime = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1475,8 +1474,11 @@ local function playAnimSound(animId, character, charName, track)
 				simSound.Parent = SoundService
 			end
 
-			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
-				task.delay(soundInfo.DelayTime, function()
+			-- Use SimultaneousDelayTime if provided, otherwise fall back to DelayTime
+			local simDelay = soundInfo.SimultaneousDelayTime
+			if simDelay == nil then simDelay = soundInfo.DelayTime end
+			if simDelay and simDelay > 0 then
+				task.delay(simDelay, function()
 					if simSound and simSound.Parent then
 						simSound:Play()
 					end
