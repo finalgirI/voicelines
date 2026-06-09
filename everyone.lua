@@ -1364,7 +1364,7 @@ local AnimationSounds = {
 	},
 
 	["80991149841796"] = {
-		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 70, DelayTime = 0.2 }, -- Freya Resurrection
+		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 100, DelayTime = 0.2 }, -- Freya Resurrection
 	}, 
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
