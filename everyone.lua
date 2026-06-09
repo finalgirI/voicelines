@@ -951,7 +951,6 @@ local SoundOverlays = {
 	-- Esther Mikaelson :
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4.5 }, -- Pentagram
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
-	["135718833680425"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
 	-- Dark Josie :
 	["13154602444"] = {
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
@@ -974,11 +973,6 @@ local SoundOverlays = {
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 	},
 	-- Witch Abilities :
-	["10318606207"] = {
-		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
-		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
-		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
-	},
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
 		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 ,KeepPlayingSound = true }, -- Somnus
@@ -1283,7 +1277,8 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
 	},
-	["95735579522079"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 17 }, -- White Oak
+	["95735579522079"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
+	["95735579522079"] = { Sound = "118918239866614", Volume = 2.5, DelayTime = 17 }, -- White Oak Hunter
 	["18534997521"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
