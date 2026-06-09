@@ -1298,7 +1298,7 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
 	["16794479576"] = {
-		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 2.5, DelayTime = 0 }, -- Force Cure Hope
+		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
 	},
 	["12940089696"] = {
 		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
@@ -1311,7 +1311,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 	},
-	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
+	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0 }, -- Disguise
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
@@ -1354,7 +1354,7 @@ local AnimationSounds = {
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
-		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1 }, -- Throat Rip Protection
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
 	},
     ["140173302204943"] = {
 	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
@@ -1421,14 +1421,8 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
 	},
 	["14571834582"] = {
-		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 2.5, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
-		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 3, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
-	},
-	["14616993509"] = {
-		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 2.5, DelayTime = 0, OncePerLifetime = true }, -- Turning
-	},
-	["10748176216"] = {
-		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 3, DelayTime = 1.5, OncePerLifetime = true }, -- Turning
+		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 4, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
+		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
 }
 
