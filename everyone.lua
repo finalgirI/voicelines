@@ -1413,8 +1413,8 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 	},
 	["12955990988"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
-		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Head siphon
 	},
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
