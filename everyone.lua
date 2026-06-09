@@ -15,7 +15,7 @@ local ToolBar = WholeScreenComponents and WholeScreenComponents:WaitForChild("To
 if not ToolBar then return end
 
 local Data = {
-	PhasmatosIncendia = {
+	TEST = {
 		Sound = "104818873099408",
 		Icon = "18630084620"
 	},
@@ -107,6 +107,7 @@ local KnownKeys = {
 	ChatText = true,
 	SimultaneousSound = true,
 	KeepPlayingSound = true,
+	TrustDistanceFallback = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -684,7 +685,7 @@ local SoundReplacements = {
 
 	-- Per-character different replacements:
 	-- ["original_sound_id"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" },
-	["14523178169"] = { ["Bonnie Bennett"] = "128948822253106" }, -- Bonnie Bennett only
+	["14523178169"] = { ["Bonnie Bennett"] = "128948822253106", TrustDistanceFallback = true }, -- Phasmatos Incendia (Bonnie Bennett only)
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -809,7 +810,7 @@ local function tryReplaceSound(sound)
 
 		-- Check character-specific keys (like Data table pattern)
 		local charName, charIsDistFallback = getSoundCharacterName(sound)
-		if charName and entry[charName] and not charIsDistFallback then
+		if charName and entry[charName] and (not charIsDistFallback or entry.TrustDistanceFallback) then
 			replacementId = entry[charName]
 		elseif entry.Replacement then
 			replacementId = entry.Replacement
@@ -1316,6 +1317,9 @@ local AnimationSounds = {
 	["17360483345"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
+	["10748435391"] = {
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+	},
     ["140173302204943"] = {
 	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
     },
@@ -1357,8 +1361,8 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 	},
 	["12955990988"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Head siphon
-		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Head siphon
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
