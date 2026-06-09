@@ -46,6 +46,7 @@ local Data = {
 		Icon = "18630084955",
 		["Bonnie Bennett"] = "114093297475680",
 		["Nora Hildegard"] = "131259403209726",
+		["Davina Claire"] = "109348032177998",
 	},
 
 	PhasmatosIncendia = {
