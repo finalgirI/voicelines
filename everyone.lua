@@ -918,7 +918,6 @@ local SoundOverlays = {
 	},
 	["15174800421"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0 }, -- Channel Ancestors
-		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Astral Projection
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
@@ -968,9 +967,7 @@ local SoundOverlays = {
 	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
-	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem
-	-- Silas :
-	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, DebounceTime = 50, KeepPlayingSound = true }, -- Illusion Attack
+	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
 	-- Heretics :
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
@@ -1404,11 +1401,11 @@ local AnimationSounds = {
 	},
 	-- Elder Witches :
 	["109730789965953"] = {
-	["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
-	["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
-	["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
-	["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
-	["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
+	["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
 	["14004031633"] = {
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
@@ -1422,6 +1419,7 @@ local AnimationSounds = {
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
 	},
+	["117199151496293"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Astral Projection
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
     ["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12189974108"] = {
