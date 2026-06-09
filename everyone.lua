@@ -785,26 +785,7 @@ local function tryReplaceSound(sound)
 	if not sound:IsA("Sound") then return end
 	if ReplacedSounds[sound] then return end
 
-	-- Skip replacements for sounds created by the local player's own playAbilitySound.
-	-- Tagged with IsLocalVoiceline attribute so we can reliably distinguish:
-	--   - Local player's OWN ability sounds (tagged → skip, the transparency system handles them)
-	--   - Targeted ability sounds parented to the local player's character by the server
-	--     (NOT tagged → process, these are abilities used ON us)
-	if sound:GetAttribute("IsLocalVoiceline") then
-		ReplacedSounds[sound] = true
-		return
-	end
-
-	-- Fallback: if the local player recently played a voiceline (within 2s),
-	-- skip ALL replacements to prevent echoes. The Voicelines script already played
-	-- the sound — we don't want VoicelinesForEveryone to also replace/overlay it.
-	-- This catches cases where the server sound is in a VFX part near the target
-	-- (so getSoundCharacterName returns the target's name, not the local player's).
-	local lastVPlayTime = Players.LocalPlayer:GetAttribute("VoicelinesLastPlayTime")
-	if lastVPlayTime and tick() - lastVPlayTime < 2 then
-		ReplacedSounds[sound] = true
-		return
-	end
+	-- (Local player sounds are no longer skipped — user wants to hear all replacements for their own sounds too)
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
@@ -990,8 +971,8 @@ local SoundOverlays = {
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
-	["129498686293958"] = { Sound = "89550767660084", Volume = 6.5, DelayTime = 0 }, -- Violin
-	["116235925618614"] = { Sound = "93111269287330", Volume = 6.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
+	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
+	["116235925618614"] = { Sound = "93111269287330", Volume = 3.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -1194,26 +1175,7 @@ local function tryOverlaySound(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
 
-	-- Skip overlays for sounds created by the local player's own playAbilitySound.
-	-- Tagged with IsLocalVoiceline attribute so we can reliably distinguish:
-	--   - Local player's OWN ability sounds (tagged → skip, the transparency system handles them)
-	--   - Targeted ability sounds parented to the local player's character by the server
-	--     (NOT tagged → process, these are abilities used ON us)
-	if sound:GetAttribute("IsLocalVoiceline") then
-		OverlayTracked[sound] = true
-		return
-	end
-
-	-- Fallback: if the local player recently played a voiceline (within 2s),
-	-- skip ALL overlays to prevent echoes. The Voicelines script already played
-	-- the sound — we don't want VoicelinesForEveryone to also overlay it.
-	-- This catches cases where the server sound is in a VFX part near the target
-	-- (so getSoundCharacterName returns the target's name, not the local player's).
-	local lastVPlayTime = Players.LocalPlayer:GetAttribute("VoicelinesLastPlayTime")
-	if lastVPlayTime and tick() - lastVPlayTime < 2 then
-		OverlayTracked[sound] = true
-		return
-	end
+	-- (Local player sounds are no longer skipped — user wants to hear all overlays for their own sounds too)
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
@@ -1302,11 +1264,9 @@ local AnimationSounds = {
 	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 0 }, -- Sandclock
 	},
-	["123606949189184"] = {
-		["Dark Josie"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
-	},
+	["13461060103"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
 	["113177696607441"] = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
