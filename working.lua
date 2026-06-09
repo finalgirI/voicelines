@@ -48,10 +48,10 @@ local Data = {
 		["Nora Hildegard"] = "131259403209726",
 	},
 
-	--PhasmatosIncendia = {
-	--	Sound = "91016794551142",
-	--	Icon = "18630281578"
-	--},
+	PhasmatosIncendia = {
+		Sound = "91016794551142",
+		Icon = "18630281578"
+	},
 
 	--ChannelAncestorsBonnie = {
 	--	Sound = "104749000603361",
