@@ -910,41 +910,22 @@ end
 
 local SoundOverlays = {
 	-- Bonnie Bennett:
-	["18246466722"] = { Sound = "96700082212184", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["120250468841070"] = {
 		Overlays = {
 			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-	["104782720464668"] = {
-		["Bonnie Bennett"] = { Sound = "14523220272", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
-	},
-	["98210016679472"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 0, CharacterRequired = "Bonnie Bennett" }, -- Aleoras Subsitos
 	["15174800421"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0 }, -- Channel Ancestors
 		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Astral Projection
 	},
-	["15561340625"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, CharacterRequired = "Bonnie Bennett", KeepPlayingSound = true }, -- Life Linking
-	["15640187002"] = { 
-		["Bonnie Bennett"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
-	},
-	["15773458898"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	-- Freya Mikaelson :
-	["132899449516141"] = {
-		["Freya Mikaelson"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
-		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry
-	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["83787551804971"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
-	["105485478849117"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Ancestor Attack End
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
-	["98210016679472"] = {
-		["Qetsiyah"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0 }, -- Avita Exari
-	},
 	["104782720464668"] = {
 		["Qetsiyah"] = { Sound = "81126580655893", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
 	},
@@ -954,17 +935,12 @@ local SoundOverlays = {
 	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
-	["16404587910"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	-- Davina Claire :
-	["120261058970428"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
-	["10512733733"] = {
-		["Davina Claire"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Bone Break Combo
-	},
 	-- Hope Mikaelson :
 	["12181508903"] = {
 		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
@@ -978,7 +954,9 @@ local SoundOverlays = {
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["135718833680425"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
 	-- Dark Josie :
-	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
+	["13154602444"] = {
+		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
+	},
 	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 2.6, KeepPlayingSound = true }, -- Fiante Fulguris
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
@@ -998,10 +976,6 @@ local SoundOverlays = {
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
-	},
-	["13589153134"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
-		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	-- Witch Abilities :
 	["10318606207"] = {
@@ -1306,6 +1280,7 @@ end
 -- Formats:
 --   All characters:  ["animation_id"] = { Sound = "sound_id", Volume = 2.5, DelayTime = 0 }
 --   Per-character:   ["animation_id"] = { ["Mary Louise"] = { Sound = "id1", Volume = 2.5, DelayTime = 0 }, ["Nora Hildegard"] = { Sound = "id2", Volume = 2.5, DelayTime = 0 } }
+--   CutOffWithAnimation: set to true to stop the overlay sound when the animation track ends (default: sound plays to completion)
 
 local AnimationSounds = {
 	-- All characters hear the same overlay when this animation plays:
@@ -1322,13 +1297,22 @@ local AnimationSounds = {
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["91593895077311"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["8875719165833"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
-
-	-- Per-character (bracket format, same as SoundOverlays):
-	["6713148336"] = {
-		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
+	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
+	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
+	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
+	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
+	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
+	["15424579670"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.3, KeepPlayingSound = true }, -- Life Linking
+	["8118882336"] = {
+		["Bonnie Bennett"] = { Sound = "14523220272", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
-	["124378131480490"] = {
+	-- Per-character (bracket format, same as SoundOverlays):
+	["13046802143"] = {
 		["Dark Josie"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+	},
+	["13461060103"] = {
+		["Dark Josie"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
 	},
 	["113177696607441"] = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
@@ -1341,17 +1325,37 @@ local AnimationSounds = {
 	["14065674638"] = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
+	["12940089696"] = {
+		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 4, DelayTime = 0 }, -- Vitris
+	},
+	["12363733313"] = {
+		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0, }, -- Light Ball
+	},
+	["14589451404"] = {
+		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
+		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+
+	},
+	["114658560645086"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Illusion Attack 
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
+	["10512733733"] = {
+		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+	}, 
+	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
+	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
+	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
+	["97900277040645"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Qetsiyah's Brain Fry
 	["80991149841796"] = {
 		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 20, DelayTime = 0 }, -- Freya Resurrection
 	}, 
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Aneurysm
+    ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-	["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Original Reversal 1
-	["136980766359708"] = { Sound = "94259360187031", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Original Reversal 2
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Original Reversal 1
+    ["136980766359708"] = { Sound = "94259360187031", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Original Reversal 2
 	["71385376638963"] = { Sound = "94711938117202", Volume = 20, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1367,13 +1371,22 @@ local AnimationSounds = {
 	["17360483345"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
+    ["140173302204943"] = {
+	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
+    },
 	["81743171989186"] = {
 		["Rebekah Mikaelson"] = { Sound = "73616559992744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
+		["Hope Mikaelson"] = { Sound = "125011735974039", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
 	},
 	["125965536527103"] = {
 		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	},
+    ["95988116850782"] = {
+	   ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	   ["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+    },
 	["72224780755559"] = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
@@ -1387,22 +1400,26 @@ local AnimationSounds = {
 	},
 	-- Elder Witches :
 	["109730789965953"] = {
-		["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
+	["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
+	["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
+	["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
+	["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Ancestral Pain
 	},
 	["14004031633"] = {
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 	},
+	["12955990988"] = {
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+	},
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
 	},
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
-	["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0 }, -- Glace Solidatur
+    ["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12189974108"] = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
@@ -1418,6 +1435,7 @@ local AnimSoundKnownKeys = {
 	KeepPlayingSound = true,
 	DelayTime = true,
 	FadeOutDuration = true,
+	CutOffWithAnimation = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1429,7 +1447,7 @@ local function hasAnimCharOverrides(info)
 	return false
 end
 
-local function playAnimSound(animId, character, charName)
+local function playAnimSound(animId, character, charName, track)
 	local entry = AnimationSounds[animId]
 	if not entry then return end
 
@@ -1457,6 +1475,12 @@ local function playAnimSound(animId, character, charName)
 
 	-- Play the overlay sound (plays ON TOP, does NOT mute/replace anything)
 	local function doPlay()
+		-- If CutOffWithAnimation is on, don't play if the animation already ended
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			AnimSoundCooldowns[key] = nil
+			return
+		end
+
 		local sound = Instance.new("Sound")
 		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
 		sound.Volume = soundInfo.Volume or 2.5
@@ -1479,7 +1503,15 @@ local function playAnimSound(animId, character, charName)
 
 		sound:Play()
 
-		if soundInfo.KeepPlayingSound then
+		-- CutOffWithAnimation: fade out the overlay when the animation track ends
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				AnimSoundCooldowns[key] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
 			-- Reparent to SoundService if parent is destroyed so it keeps playing
 			if head and head ~= SoundService then
 				head.Destroying:Connect(function()
@@ -1542,7 +1574,7 @@ local function hookAnimator(animator, character)
 		end
 
 		local charName = getAnimCharName(character)
-		playAnimSound(animId, character, charName)
+		playAnimSound(animId, character, charName, track)
 	end)
 
 	-- Clean up tracking when animator is destroyed
