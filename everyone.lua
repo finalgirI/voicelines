@@ -1295,7 +1295,7 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
 	["12940089696"] = {
-		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 4, DelayTime = 0 }, -- Vitris
+		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
 	},
 	["12363733313"] = {
 		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0 }, -- Light Ball
@@ -1304,7 +1304,6 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
-
 	},
 	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Illusion Attack 
 	["87900706821607"] = {
@@ -1319,11 +1318,11 @@ local AnimationSounds = {
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
 	-- Qetsiyah's Brain Fry - all animation variants (front + behind)
 	["12955966256"] = {
-		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStart
+		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStart
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-	["12955990988"] = {
-		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStartBehind
-	},
+
 	["80991149841796"] = {
 		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 30, DelayTime = 0.2 }, -- Freya Resurrection
 	}, 
@@ -1394,6 +1393,7 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
 	},
 	["12955990988"] = {
+		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStartBehind
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
@@ -1409,9 +1409,20 @@ local AnimationSounds = {
 	["12189974108"] = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
 	["14427195564"] = {
 		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
+	},
+	["14571834582"] = {
+		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 2.5, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
+		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 3, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
+	},
+	["14616993509"] = {
+		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 2.5, DelayTime = 0, OncePerLifetime = true }, -- Turning
+	},
+	["10748176216"] = {
+		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 3, DelayTime = 1.5, OncePerLifetime = true }, -- Turning
 	},
 }
 
