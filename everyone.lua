@@ -956,7 +956,7 @@ local SoundOverlays = {
 	-- Witch Abilities :
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
-		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 , KeepPlayingSound = true }, -- Somnus
+		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Somnus
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
 	},
 	["8806156863"] = {
