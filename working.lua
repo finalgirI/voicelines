@@ -926,7 +926,7 @@ local function playAbilitySound(info, abilityName)
 
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
-	sound.Volume = info.Volume or 3
+	sound.Volume = info.Volume or 2.5
 
 	sound.Parent = SoundService
 
@@ -952,7 +952,7 @@ local function playAbilitySound(info, abilityName)
 	if simultaneousSoundId then
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
-		simSound.Volume = info.Volume or 3
+		simSound.Volume = info.Volume or 2.5
 		simSound.Parent = SoundService
 
 		if info.DelayTime then
