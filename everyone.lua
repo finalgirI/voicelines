@@ -63,6 +63,7 @@ local LastEquipPlayTime = {}
 local EquipPlayLock = {}
 local SoundCycleIndex = {}  -- Tracks which sound to play next for abilities with multiple sounds
 local KeepPlayingSounds = {} -- Tracks sounds that should keep playing even when replaced
+local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
 
 local function fadeOutSound(sound)
 	if not sound or not sound.Parent then
@@ -108,6 +109,7 @@ local KnownKeys = {
 	SimultaneousSound = true,
 	KeepPlayingSound = true,
 	TrustDistanceFallback = true,
+	OncePerLifetime = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -818,6 +820,13 @@ local function tryReplaceSound(sound)
 		end
 	end
 
+	-- OncePerLifetime: skip if already played this character life
+	if entry.OncePerLifetime or (type(entry) == "string" and OncePerLifetimePlayed["replace_" .. id]) then
+		local key = "replace_" .. id
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
+
 	ReplacedSounds[sound] = true
 
 	-- Mute the original sound so you don't hear it
@@ -903,7 +912,7 @@ local SoundOverlays = {
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Firstborn Devastation
+	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
@@ -963,6 +972,12 @@ local SoundOverlays = {
 	},
 	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
+	["135718833680425"] = {
+		Overlays = {
+			{ Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
+			{ Sound = "118918239866614", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- White Oak Hunter
+		},
+	},
 	["12171371908"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
@@ -1004,6 +1019,7 @@ local OverlayKnownKeys = {
 	Overlays = true,
 	KeepPlayingSound = true,
 	DebounceTime = true,
+	OncePerLifetime = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -1016,6 +1032,13 @@ local function hasOverlayCharOverrides(info)
 end
 
 local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallback)
+	-- OncePerLifetime: skip if already played this character life
+	if overlayInfo.OncePerLifetime then
+		local key = "overlay_" .. overlayInfo.Sound
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
+
 	if overlayInfo.CharacterRequired then
 		if not charName then
 			charName, charIsDistFallback = getSoundCharacterName(sound)
@@ -1232,12 +1255,11 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
 	},
-	["95735579522079"] = { Sound = "139418993300939", Volume = 2.5, DelayTime = 0, SimultaneousSound = "118918239866614", SimultaneousDelayTime = 17 }, -- White Oak Spell + White Oak Hunter
 	["18534997521"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
-	["18894484105"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 14, KeepPlayingSound = true }, -- Orginal Serum
+	["18894484105"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 14 }, -- Orginal Serum
 	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
@@ -1253,7 +1275,7 @@ local AnimationSounds = {
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
-	["13046802143"] = {
+	["15424577510"] = {
 		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5 }, -- Life Linking
 	},
 	-- Per-character (bracket format, same as SoundOverlays):
@@ -1325,7 +1347,7 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
-		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip Protectio
 	},
     ["140173302204943"] = {
 	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
@@ -1386,6 +1408,9 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
+	["14427195564"] = {
+		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 2.5, DelayTime = 0 }, -- Red Oak protection
+	},
 }
 
 local AnimSoundCooldowns = {}
@@ -1399,6 +1424,7 @@ local AnimSoundKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	SimultaneousSound = true,
+	OncePerLifetime = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1427,6 +1453,13 @@ local function playAnimSound(animId, character, charName, track)
 	end
 
 	if not soundInfo or not soundInfo.Sound then return end
+
+	-- OncePerLifetime: skip if already played this character life
+	if soundInfo.OncePerLifetime then
+		local key = "anim_" .. soundInfo.Sound
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
 
 	-- Debounce to prevent sound spam
 	local key = animId .. "_" .. (charName or "unknown")
@@ -1641,6 +1674,11 @@ local function hookCharacterAnimations(character)
 		end)
 	end
 end
+
+-- Reset OncePerLifetime tracking on respawn
+Players.LocalPlayer.CharacterAdded:Connect(function()
+	OncePerLifetimePlayed = {}
+end)
 
 -- Hook local player's character
 Players.LocalPlayer.CharacterAdded:Connect(hookCharacterAnimations)
