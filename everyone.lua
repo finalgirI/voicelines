@@ -219,7 +219,7 @@ local function playAbilitySound(info, abilityName)
 	if simultaneousSoundId then
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
-		simSound.Volume = info.Volume or 3
+		simSound.Volume = info.Volume or 2.5
 		simSound:SetAttribute("IsLocalVoiceline", true)
 
 		-- Parent to the character for 3D positional audio (same logic as main sound)
@@ -684,6 +684,7 @@ local SoundReplacements = {
 
 	-- Per-character different replacements:
 	-- ["original_sound_id"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" },
+	["14523178169"] = { ["Bonnie Bennett"] = "128948822253106" }, -- Bonnie Bennett only
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -902,8 +903,6 @@ local SoundOverlays = {
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
-	["118057080289155"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
@@ -922,9 +921,6 @@ local SoundOverlays = {
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
 	-- Hope Mikaelson :
-	["12181508903"] = {
-		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
-	},
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
@@ -1255,8 +1251,6 @@ local AnimationSounds = {
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["15424579670"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.3, KeepPlayingSound = true }, -- Life Linking
-	["8118882336"] = {
-		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
@@ -1278,7 +1272,7 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 4, DelayTime = 0 }, -- Vitris
 	},
 	["12363733313"] = {
-		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0, }, -- Light Ball
+		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0 }, -- Light Ball
 	},
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
@@ -1293,6 +1287,8 @@ local AnimationSounds = {
 	["10512733733"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
+	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Firstborn Devastation
+	["126225947243763"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
@@ -1300,13 +1296,12 @@ local AnimationSounds = {
 	["12955966256"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStart
 	["12955990988"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStartBehind
 	["80991149841796"] = {
-		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 20, DelayTime = 0 }, -- Freya Resurrection
+		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 30, DelayTime = 0.4 }, -- Freya Resurrection
 	}, 
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Original Reversal 1
-    ["136980766359708"] = { Sound = "94259360187031", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Original Reversal 2
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 20, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1370,9 +1365,12 @@ local AnimationSounds = {
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
 	},
-	["117199151496293"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Astral Projection
+	["127428104014955"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0 }, -- Astral Projection
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
     ["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
+	["12363700089"] = {
+		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
+	},
 	["12189974108"] = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
@@ -1389,6 +1387,7 @@ local AnimSoundKnownKeys = {
 	DelayTime = true,
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
+	SimultaneousSound = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1455,6 +1454,52 @@ local function playAnimSound(animId, character, charName, track)
 		end
 
 		sound:Play()
+
+		-- Play simultaneous sound if provided
+		if soundInfo.SimultaneousSound then
+			local simSound = Instance.new("Sound")
+			simSound.SoundId = "rbxassetid://" .. normalize(soundInfo.SimultaneousSound)
+			simSound.Volume = soundInfo.Volume or 2.5
+			simSound:SetAttribute("IsLocalVoiceline", true)
+
+			if head then
+				simSound.Parent = head
+				head.Destroying:Connect(function()
+					pcall(function()
+						if simSound and simSound.Parent then
+							simSound.Parent = SoundService
+						end
+					end)
+				end)
+			else
+				simSound.Parent = SoundService
+			end
+
+			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+				task.delay(soundInfo.DelayTime, function()
+					if simSound and simSound.Parent then
+						simSound:Play()
+					end
+				end)
+			else
+				simSound:Play()
+			end
+
+			-- CutOffWithAnimation: fade out the simultaneous sound too
+			if soundInfo.CutOffWithAnimation and track then
+				track.Ended:Connect(function()
+					if simSound and simSound.Parent then
+						fadeOutOverlaySound(simSound, soundInfo.FadeOutDuration)
+					end
+				end)
+			elseif not soundInfo.KeepPlayingSound then
+				simSound.Ended:Connect(function()
+					if simSound and simSound.Parent then
+						simSound:Destroy()
+					end
+				end)
+			end
+		end
 
 		-- CutOffWithAnimation: fade out the overlay when the animation track ends
 		if soundInfo.CutOffWithAnimation and track then
