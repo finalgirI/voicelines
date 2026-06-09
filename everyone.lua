@@ -955,7 +955,7 @@ local SoundOverlays = {
 	["13154602444"] = {
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
 	},
-	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 2.6, KeepPlayingSound = true }, -- Fiante Fulguris
+	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 0 }, -- Fiante Fulguris
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
@@ -1302,9 +1302,9 @@ local AnimationSounds = {
 	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
-		["Dark Josie"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
 	},
-	["13461060103"] = {
+	["123606949189184"] = {
 		["Dark Josie"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
 	},
 	["113177696607441"] = {
