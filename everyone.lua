@@ -964,7 +964,6 @@ local SoundOverlays = {
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
-	["91395570209508"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
@@ -1300,6 +1299,8 @@ local AnimationSounds = {
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
+	["132001244832758"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
+	["120098338547414"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
@@ -1347,7 +1348,9 @@ local AnimationSounds = {
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
-	["97900277040645"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Qetsiyah's Brain Fry
+	-- Qetsiyah's Brain Fry - all animation variants (front + behind)
+	["12955966256"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStart
+	["12955990988"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStartBehind
 	["80991149841796"] = {
 		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 20, DelayTime = 0 }, -- Freya Resurrection
 	}, 
@@ -1363,6 +1366,7 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 	},
 	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
+	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	-- Vampire Abilities :
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
