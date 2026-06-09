@@ -1294,10 +1294,14 @@ local AnimationSounds = {
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
 	-- Qetsiyah's Brain Fry - all animation variants (front + behind)
-	["12955966256"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStart
-	["12955990988"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStartBehind
+	["12955966256"] = {
+		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStart
+	},
+	["12955990988"] = {
+		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry casterStartBehind
+	},
 	["80991149841796"] = {
-		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 30, DelayTime = 0.4 }, -- Freya Resurrection
+		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 30, DelayTime = 0.2 }, -- Freya Resurrection
 	}, 
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
