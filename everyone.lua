@@ -950,7 +950,6 @@ local SoundOverlays = {
 	["10006479564"] = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2.5, DelayTime = 0.2 }, -- Hand Of Glory
 	},
-	["17253212200"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0 }, -- Disguise
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
@@ -1304,6 +1303,7 @@ local AnimationSounds = {
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Disguise
 	["8118882336"] = {
 		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
