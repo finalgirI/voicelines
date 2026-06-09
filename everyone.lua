@@ -974,8 +974,8 @@ local SoundOverlays = {
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
-	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
-	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
+	["90347973452829"] = { Sound = "92404277403294", Volume = 6, DelayTime = 0 }, -- Ohun
+	["138866821877856"] = { Sound = "91217804264943", Volume = 6, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0.2 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
 	-- Heretics :
