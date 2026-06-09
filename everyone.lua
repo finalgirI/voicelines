@@ -956,12 +956,8 @@ local SoundOverlays = {
 	-- Witch Abilities :
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
-		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 ,KeepPlayingSound = true }, -- Somnus
+		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 , KeepPlayingSound = true }, -- Somnus
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
-	},
-	["12190650809"] = {
-		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
 	["8806156863"] = {
 		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
@@ -1260,11 +1256,11 @@ local AnimationSounds = {
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
 	["15424579670"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.3, KeepPlayingSound = true }, -- Life Linking
 	["8118882336"] = {
-		["Bonnie Bennett"] = { Sound = "14523220272", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
+		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 0 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
 	},
 	["13461060103"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
 	["113177696607441"] = {
