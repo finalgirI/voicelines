@@ -859,11 +859,26 @@ local function tryReplaceSound(sound)
 
 	local parent = sound.Parent
 
+	-- Never parent to SoundService — sounds there play globally at full volume with no 3D falloff
+	if parent == SoundService then
+		parent = nil
+	end
+
 	if parent then
 		newSound.Parent = parent
 	else
-		-- Original sound has no parent (already destroyed) — just fade out the replacement immediately
-		newSound.Parent = Players.LocalPlayer.Character or workspace
+		-- Original sound has no parent or was in SoundService — try to find the character's body
+		local charName = getSoundCharacterName(sound)
+		local bodyParent = nil
+		if charName then
+			for _, player in Players:GetPlayers() do
+				if player:GetAttribute("CharacterName") == charName and player.Character then
+					bodyParent = findSoundParent(player.Character) or player.Character
+					break
+				end
+			end
+		end
+		newSound.Parent = bodyParent or Players.LocalPlayer.Character or workspace
 		fadeOutSound(newSound)
 		return
 	end
@@ -1102,7 +1117,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 
 		-- Parent to the character's body for 3D positional audio so the overlay
 		-- sounds like it comes from the body, not globally.
-		-- Falls back to the original sound's parent. Never uses SoundService.
+		-- Never uses SoundService — sounds there play globally at full volume.
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
 			parent = findSoundParent(capturedCharModel)
@@ -1110,8 +1125,21 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		if not parent then
 			parent = sound and sound.Parent
 		end
+		-- Never parent to SoundService — find a character body instead
+		if parent == SoundService then
+			parent = nil
+			local charName = getSoundCharacterName(sound)
+			if charName then
+				for _, player in Players:GetPlayers() do
+					if player:GetAttribute("CharacterName") == charName and player.Character then
+						parent = findSoundParent(player.Character) or player.Character
+						break
+					end
+				end
+			end
+		end
 		if not parent then
-			return -- No valid parent found, skip this overlay
+			parent = Players.LocalPlayer.Character or workspace
 		end
 
 		-- For KeepPlayingSound: stop any existing overlay with the same ID so the new one plays fresh
