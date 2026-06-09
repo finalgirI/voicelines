@@ -968,7 +968,7 @@ local SoundOverlays = {
 	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
-	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.3 }, -- Mud Golem
+	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem
 	-- Silas :
 	["17253212200"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, DebounceTime = 50, KeepPlayingSound = true }, -- Illusion Attack
 	-- Heretics :
@@ -1294,7 +1294,7 @@ local AnimationSounds = {
 	["18894484105"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 14, KeepPlayingSound = true }, -- Orginal Serum
 	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
-	["91593895077311"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
+	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["8875719165833"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
