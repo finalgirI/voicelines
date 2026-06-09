@@ -54,6 +54,12 @@ local Data = {
 		Icon = "18630281578"
 	},
 
+	Somnus = {
+		Sound = "95823566800088",
+		Icon = "109870855790839",
+		Volume = 9,
+	},
+
 	--ChannelAncestorsBonnie = {
 	--	Sound = "104749000603361",
 	--	Icon = "18630281775",
@@ -310,12 +316,6 @@ local Data = {
 	--	Icon = "127086238458899",
 	--	DelayTime = 8,
 	--	FadeOut = true,
-	--},
-
-	--Somnus = {
-	--	Sound = "95823566800088",
-	--	Icon = "109870855790839",
-	--	Volume = 9,
 	--},
 
 	--BoneBreakCombo = {
