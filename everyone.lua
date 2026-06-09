@@ -965,7 +965,7 @@ local SoundOverlays = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
 	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
-	["116235925618614"] = { Sound = "93111269287330", Volume = 3.5, DelayTime = 0 }, -- Genevieve Outburst (ash)
+	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -1258,7 +1258,6 @@ local AnimationSounds = {
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
 	},
-	["13461060103"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Harae
 	["113177696607441"] = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
