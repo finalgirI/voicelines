@@ -1715,8 +1715,8 @@ for _, player in Players:GetPlayers() do
 end
 
 -- [[ CHAT-BASED VOICELINE TRIGGERS ]]
--- Plays a sound when a specific character says a matching chat message.
--- Useful for compulsion actions where the chat bubble text determines the sound.
+-- Plays a sound when a specific character's chat bubble shows matching text.
+-- Watches for BillboardGui chat bubbles on character heads (works with DisplayBubble).
 
 local ChatVoicelineSounds = {
 	["Suffer"] = "17560604010",
@@ -1726,30 +1726,34 @@ local ChatVoicelineSounds = {
 }
 
 local ChatVoicelineCharacter = "Silas"
-local ChatVoicelineRequiredAnim = "17252773400" -- Mass Compulsion animation
 local ChatVoicelineCooldown = {}
 
-local function isPlayingAnim(character, animId)
-	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-	if not humanoid then return false end
-	local animator = humanoid:FindFirstChildOfClass("Animator")
-	if not animator then return false end
-	for _, track in animator:GetPlayingAnimationTracks() do
-		local anim = track.Animation
-		if anim then
-			local id = normalize(anim.AnimationId)
-			if id == animId then
-				return true
-			end
+local function getCharNameFromCharacter(character)
+	for _, player in Players:GetPlayers() do
+		if player.Character == character then
+			return player:GetAttribute("CharacterName")
 		end
 	end
-	return false
+	return nil
 end
 
-local function onPlayerChatted(player, message)
-	if player:GetAttribute("CharacterName") ~= ChatVoicelineCharacter then return end
+local function matchChatBubbleText(bubbleGui, character)
+	if not bubbleGui or not bubbleGui:IsA("BillboardGui") then return end
 
-	local msg = message:match("^%s*(.-)%s*$")
+	local charName = getCharNameFromCharacter(character)
+	if charName ~= ChatVoicelineCharacter then return end
+
+	-- Find the text inside the bubble
+	local bubbleText = nil
+	for _, desc in bubbleGui:GetDescendants() do
+		if desc:IsA("TextLabel") and desc.Text and desc.Text ~= "" then
+			bubbleText = desc.Text
+			break
+		end
+	end
+	if not bubbleText then return end
+
+	local msg = bubbleText:match("^%s*(.-)%s*$")
 	local soundId = nil
 	local matchedKey = nil
 	for key, id in pairs(ChatVoicelineSounds) do
@@ -1761,10 +1765,9 @@ local function onPlayerChatted(player, message)
 	end
 	if not soundId then return end
 
-	-- Make sure Silas is actually doing Mass Compulsion animation
-	if not isPlayingAnim(player.Character, ChatVoicelineRequiredAnim) then return end
-
-	local key = player.UserId .. "_" .. matchedKey
+	local player = Players:GetPlayerFromCharacter(character)
+	local userId = player and player.UserId or 0
+	local key = userId .. "_" .. matchedKey
 	if ChatVoicelineCooldown[key] then return end
 	ChatVoicelineCooldown[key] = true
 	task.delay(5, function() ChatVoicelineCooldown[key] = nil end)
@@ -1774,8 +1777,7 @@ local function onPlayerChatted(player, message)
 	sound.Volume = 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
 
-	local character = player.Character
-	local head = character and character:FindFirstChild("Head")
+	local head = character:FindFirstChild("Head")
 	if head then
 		sound.Parent = head
 		head.Destroying:Connect(function()
@@ -1795,16 +1797,39 @@ local function onPlayerChatted(player, message)
 	end)
 end
 
-local function hookPlayerChat(player)
-	player.Chatted:Connect(function(message)
-		onPlayerChatted(player, message)
+local function hookCharacterChatBubbles(character)
+	if not character then return end
+	local head = character:FindFirstChild("Head")
+	if head then
+		head.ChildAdded:Connect(function(child)
+			task.defer(function()
+				matchChatBubbleText(child, character)
+			end)
+		end)
+	end
+	character.ChildAdded:Connect(function(child)
+		if child.Name == "Head" then
+			child.ChildAdded:Connect(function(grandchild)
+				task.defer(function()
+					matchChatBubbleText(grandchild, character)
+				end)
+			end)
+		end
 	end)
 end
 
-for _, player in Players:GetPlayers() do
-	hookPlayerChat(player)
+-- Hook existing and future player characters
+local function onPlayerAdded(player)
+	player.CharacterAdded:Connect(hookCharacterChatBubbles)
+	if player.Character then
+		hookCharacterChatBubbles(player.Character)
+	end
 end
-Players.PlayerAdded:Connect(hookPlayerChat)
+
+for _, player in Players:GetPlayers() do
+	onPlayerAdded(player)
+end
+Players.PlayerAdded:Connect(onPlayerAdded)
 
 -- Catch existing sounds already in the game
 for _, desc in game:GetDescendants() do
