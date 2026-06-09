@@ -78,7 +78,7 @@ local function fadeOutSound(sound)
 
 	local tween = TweenService:Create(
 		sound,
-		TweenInfo.new(0.8),
+		TweenInfo.new(0.4),
 		{ Volume = 0 }
 	)
 
@@ -92,6 +92,39 @@ local function fadeOutSound(sound)
 
 		FadingSounds[sound] = nil
 	end)
+end
+
+-- Find the best body part to parent a sound to for 3D positional audio
+local function findSoundParent(character)
+	if not character or not character.Parent then return nil end
+	local head = character:FindFirstChild("Head")
+	if head then return head end
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	if hrp then return hrp end
+	local upperTorso = character:FindFirstChild("UpperTorso")
+	if upperTorso then return upperTorso end
+	local torso = character:FindFirstChild("Torso")
+	if torso then return torso end
+	return nil
+end
+
+-- Parent a sound to the character's body for 3D audio.
+-- When the body part is destroyed, reparent to SoundService temporarily then fade out.
+local function parentSoundToBody(sound, character)
+	local parent = findSoundParent(character)
+	if parent then
+		sound.Parent = parent
+		parent.Destroying:Connect(function()
+			pcall(function()
+				if sound and sound.Parent then
+					sound.Parent = SoundService
+					fadeOutSound(sound)
+				end
+			end)
+		end)
+	else
+		sound.Parent = SoundService
+	end
 end
 
 -- Known property keys that are NOT character overrides
@@ -177,20 +210,7 @@ local function playAbilitySound(info, abilityName)
 
 	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
 	local character = Players.LocalPlayer.Character
-	local head = character and character:FindFirstChild("Head")
-	if head then
-		sound.Parent = head
-		-- Reparent to SoundService if the parent is destroyed, so the sound can still play
-		head.Destroying:Connect(function()
-			pcall(function()
-				if sound and sound.Parent then
-					sound.Parent = SoundService
-				end
-			end)
-		end)
-	else
-		sound.Parent = SoundService
-	end
+	parentSoundToBody(sound, character)
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
@@ -227,21 +247,7 @@ local function playAbilitySound(info, abilityName)
 
 		-- Parent to the character for 3D positional audio (same logic as main sound)
 		local character = Players.LocalPlayer.Character
-		local head = character and character:FindFirstChild("Head")
-		if head then
-			simSound.Parent = head
-			if info.KeepPlayingSound then
-				head.Destroying:Connect(function()
-					pcall(function()
-						if simSound and simSound.IsPlaying then
-							simSound.Parent = SoundService
-						end
-					end)
-				end)
-			end
-		else
-			simSound.Parent = SoundService
-		end
+		parentSoundToBody(simSound, character)
 
 		if info.DelayTime then
 			task.delay(info.DelayTime, function()
@@ -858,14 +864,10 @@ local function tryReplaceSound(sound)
 	newSound:Play()
 
 	if keepPlaying then
-		-- Reparent to SoundService if the parent is destroyed so the replacement keeps playing
+		-- When the parent is destroyed, fade out instead of reparenting to SoundService
 		if parent and parent ~= SoundService then
 			parent.Destroying:Connect(function()
-				pcall(function()
-					if newSound and newSound.Parent then
-						newSound.Parent = SoundService
-					end
-				end)
+				fadeOutSound(newSound)
 			end)
 		end
 	else
@@ -998,7 +1000,7 @@ local function fadeOutOverlaySound(overlaySound, duration)
 
 	local tween = TweenService:Create(
 		overlaySound,
-		TweenInfo.new(duration or 0.8),
+		TweenInfo.new(duration or 0.4),
 		{ Volume = 0 }
 	)
 
@@ -1094,10 +1096,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		-- Falls back to the original sound's parent, then SoundService.
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
-			local head = capturedCharModel:FindFirstChild("Head")
-			if head then
-				parent = head
-			end
+			parent = findSoundParent(capturedCharModel)
 		end
 		if not parent then
 			parent = (sound and sound.Parent) or SoundService
@@ -1129,14 +1128,10 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		end)
 
 		if overlayInfo.KeepPlayingSound then
-			-- Reparent to SoundService if the parent is destroyed so the overlay keeps playing
+			-- When the parent is destroyed, fade out instead of reparenting to SoundService
 			if parent and parent ~= SoundService then
 				parent.Destroying:Connect(function()
-					pcall(function()
-						if ov and ov.Parent then
-							ov.Parent = SoundService
-						end
-					end)
+					fadeOutSound(ov)
 				end)
 			end
 		else
@@ -1390,7 +1385,7 @@ local AnimationSounds = {
 	["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	["Papa Tunde"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
 	["14004031633"] = {
@@ -1495,20 +1490,8 @@ local function playAnimSound(animId, character, charName, track)
 		sound.Volume = soundInfo.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		-- Parent to character head for 3D positional audio
-		local head = character and character:FindFirstChild("Head")
-		if head then
-			sound.Parent = head
-			head.Destroying:Connect(function()
-				pcall(function()
-					if sound and sound.Parent then
-						sound.Parent = SoundService
-					end
-				end)
-			end)
-		else
-			sound.Parent = SoundService
-		end
+		-- Parent to character body for 3D positional audio
+		parentSoundToBody(sound, character)
 
 		sound:Play()
 
@@ -1519,18 +1502,7 @@ local function playAnimSound(animId, character, charName, track)
 			simSound.Volume = soundInfo.Volume or 2.5
 			simSound:SetAttribute("IsLocalVoiceline", true)
 
-			if head then
-				simSound.Parent = head
-				head.Destroying:Connect(function()
-					pcall(function()
-						if simSound and simSound.Parent then
-							simSound.Parent = SoundService
-						end
-					end)
-				end)
-			else
-				simSound.Parent = SoundService
-			end
+			parentSoundToBody(simSound, character)
 
 			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
 				task.delay(soundInfo.DelayTime, function()
@@ -1567,16 +1539,7 @@ local function playAnimSound(animId, character, charName, track)
 				AnimSoundCooldowns[key] = nil
 			end)
 		elseif soundInfo.KeepPlayingSound then
-			-- Reparent to SoundService if parent is destroyed so it keeps playing
-			if head and head ~= SoundService then
-				head.Destroying:Connect(function()
-					pcall(function()
-						if sound and sound.Parent then
-							sound.Parent = SoundService
-						end
-					end)
-				end)
-			end
+			-- KeepPlayingSound fade-out is already handled by parentSoundToBody above
 		else
 			-- Auto-cleanup after sound ends
 			sound.Ended:Connect(function()
@@ -1777,19 +1740,7 @@ local function matchChatBubbleText(bubbleGui, character)
 	sound.Volume = 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
 
-	local head = character:FindFirstChild("Head")
-	if head then
-		sound.Parent = head
-		head.Destroying:Connect(function()
-			pcall(function()
-				if sound and sound.Parent then
-					sound.Parent = SoundService
-				end
-			end)
-		end)
-	else
-		sound.Parent = SoundService
-	end
+	parentSoundToBody(sound, character)
 
 	sound:Play()
 	sound.Ended:Connect(function()
