@@ -935,6 +935,7 @@ local SoundOverlays = {
 	["10006479564"] = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2.5, DelayTime = 0.2 }, -- Hand Of Glory
 	},
+	["17253212200"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0 }, -- Disguise
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
@@ -944,6 +945,9 @@ local SoundOverlays = {
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
+	["13707254344"] = {
+		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
+	},
 	-- Esther Mikaelson :
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4.5 }, -- Pentagram
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
@@ -1314,7 +1318,6 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 	},
-	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0 }, -- Disguise
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
@@ -1333,12 +1336,12 @@ local AnimationSounds = {
 	},
 
 	["80991149841796"] = {
-		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 30, DelayTime = 0.2 }, -- Freya Resurrection
+		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 70, DelayTime = 0.2 }, -- Freya Resurrection
 	}, 
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1352,16 +1355,13 @@ local AnimationSounds = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
-	["17360483345"] = {
+	["10748428964"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
 	},
-    ["140173302204943"] = {
-	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
-    },
 	["81743171989186"] = {
 		["Rebekah Mikaelson"] = { Sound = "73616559992744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
 		["Hope Mikaelson"] = { Sound = "125011735974039", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
@@ -1407,7 +1407,7 @@ local AnimationSounds = {
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	["77528653756706"] = {
-		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
+		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
 	},
 	["127428104014955"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Astral Projection
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
