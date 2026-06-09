@@ -903,7 +903,7 @@ local SoundOverlays = {
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
+	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Firstborn Devastation
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
