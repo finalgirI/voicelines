@@ -924,7 +924,10 @@ local SoundOverlays = {
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
 	-- Davina Claire :
-	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission
+	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
+	["10006479564"] = {
+		["Davina Claire"] = { Sound = "112486710306576", Volume = 2.5, DelayTime = 0.2 }, -- Hand Of Glory
+	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["106982949473166"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
