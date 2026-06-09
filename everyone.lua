@@ -169,7 +169,7 @@ local function playAbilitySound(info, abilityName)
 
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
-	sound.Volume = info.Volume or 3
+	sound.Volume = info.Volume or 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
 
 	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
@@ -835,7 +835,7 @@ local function tryReplaceSound(sound)
 	-- so it respects 3D distance (fades with distance from camera)
 	local newSound = Instance.new("Sound")
 	newSound.SoundId = "rbxassetid://" .. replacementId
-	newSound.Volume = 3
+	newSound.Volume = 2.5
 
 	-- Determine KeepPlayingSound from the entry (table format only)
 	local keepPlaying = false
@@ -1087,7 +1087,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
-		ov.Volume = overlayInfo.Volume or 3
+		ov.Volume = overlayInfo.Volume or 2.5
 
 		ov.Parent = parent
 		ov:Play()
@@ -1386,7 +1386,6 @@ local AnimSoundKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	SimultaneousSound = true,
-	SimultaneousDelayTime = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1474,11 +1473,8 @@ local function playAnimSound(animId, character, charName, track)
 				simSound.Parent = SoundService
 			end
 
-			-- Use SimultaneousDelayTime if provided, otherwise fall back to DelayTime
-			local simDelay = soundInfo.SimultaneousDelayTime
-			if simDelay == nil then simDelay = soundInfo.DelayTime end
-			if simDelay and simDelay > 0 then
-				task.delay(simDelay, function()
+			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+				task.delay(soundInfo.DelayTime, function()
 					if simSound and simSound.Parent then
 						simSound:Play()
 					end
