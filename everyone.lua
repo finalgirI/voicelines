@@ -1008,7 +1008,7 @@ local SoundOverlays = {
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
 	},
-	["18193005989"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0 }, -- Forget to breathe
+	["18193005989"] = { Sound = "98703979367465", Volume = 5, DelayTime = 0 }, -- Forget to breathe
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
