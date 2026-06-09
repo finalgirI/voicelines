@@ -35,6 +35,19 @@ local Data = {
 		["Nora Hildegard"] = "80580720829811",
 	},
 
+	Harae = {
+		Sound = "70767045237007",
+		Icon = "18630087278",
+		Volume = 0.8,
+		FadeOut = true,
+	},
+
+	Motus = {
+		Icon = "18630084955",
+		["Bonnie Bennett"] = "114093297475680",
+		["Nora Hildegard"] = "131259403209726",
+	},
+
 	--PhasmatosIncendia = {
 	--	Sound = "91016794551142",
 	--	Icon = "18630281578"
@@ -128,13 +141,6 @@ local Data = {
 	--Autem = {
 	--	Sound = "13203446447",
 	--	Icon = "18630087239",
-	--},
-
-	--Harae = {
-	--	Sound = "70767045237007",
-	--	Icon = "18630087278",
-	--	Volume = 0.8,
-	--	FadeOut = true,
 	--},
 
 	--DarkMagicBolts = {
@@ -703,14 +709,6 @@ local Data = {
 	--	["Davina Claire"] = "76239424251739",
 	--	["Freya Mikaelson"] = "83319807623114",
 	--	["Hope Mikaelson"] = "91081771194142",
-	--},
-
-	--Motus = {
-	--	Icon = "18630084955",
-	--	["Bonnie Bennett"] = "114093297475680",
-	--	["Freya Mikaelson"] = "71400747179829",
-	--	["Nora Hildegard"] = "131259403209726",
-	--	["Hope Mikaelson"] = "136985009471966",
 	--},
 
 	--SpineBreak = {
