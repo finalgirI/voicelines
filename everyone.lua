@@ -1353,6 +1353,8 @@ local AnimationSounds = {
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Mary Louise"] = { Sound = "76991721803834", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
 	-- Elder Witches :
 	["109730789965953"] = {
