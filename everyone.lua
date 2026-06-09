@@ -1295,7 +1295,7 @@ local AnimationSounds = {
 	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
-	["8875719165833"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Telek Attack
+	["8875719165833"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
