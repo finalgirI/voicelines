@@ -912,7 +912,7 @@ local SoundOverlays = {
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["108868471356703"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
+	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
@@ -921,7 +921,6 @@ local SoundOverlays = {
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
-	["74468391415531"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0 }, -- Walk Through
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
 	-- Davina Claire :
@@ -949,7 +948,7 @@ local SoundOverlays = {
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["90347973452829"] = { Sound = "92404277403294", Volume = 3, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 3, DelayTime = 0 }, -- Pada
-	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0 }, -- Inspire
+	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0.2 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
 	-- Heretics :
 	["13008144854"] = {
@@ -959,8 +958,9 @@ local SoundOverlays = {
 	-- Witch Abilities :
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
-		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Somnus
+		["Davina Claire"] = { Sound = "95823566800088", Volume = 8, DelayTime = 0 }, -- Somnus
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
+		TrustDistanceFallback = true,
 	},
 	["8806156863"] = {
 		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
@@ -1020,6 +1020,7 @@ local OverlayKnownKeys = {
 	KeepPlayingSound = true,
 	DebounceTime = true,
 	OncePerLifetime = true,
+	TrustDistanceFallback = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -1228,7 +1229,7 @@ local function tryOverlaySound(sound)
 	-- when someone else uses Vido ON her — which is wrong.
 	-- Only trust the parent hierarchy (isDistanceFallback == false) for character-specific overlays.
 	if hasOverlayCharOverrides(entry) then
-		if charName and entry[charName] and not isDistanceFallback then
+		if charName and entry[charName] and (not isDistanceFallback or entry.TrustDistanceFallback) then
 			playSingleOverlay(sound, entry[charName], charName, isDistanceFallback)
 		elseif entry.Sound then
 			playSingleOverlay(sound, entry, charName, isDistanceFallback)
@@ -1305,7 +1306,7 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 
 	},
-	["114658560645086"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Illusion Attack 
+	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Illusion Attack 
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
@@ -1330,7 +1331,7 @@ local AnimationSounds = {
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
     ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
-	["71385376638963"] = { Sound = "94711938117202", Volume = 20, DelayTime = 0 }, -- Dissulta
+	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1347,7 +1348,8 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
-		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip Protectio
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1 }, -- Throat Rip Protection
 	},
     ["140173302204943"] = {
 	    ["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Kick
@@ -1409,7 +1411,7 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
 	["14427195564"] = {
-		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 2.5, DelayTime = 0 }, -- Red Oak protection
+		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
 	},
 }
 
