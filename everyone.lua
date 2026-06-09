@@ -109,21 +109,20 @@ local function findSoundParent(character)
 end
 
 -- Parent a sound to the character's body for 3D audio.
--- When the body part is destroyed, reparent to SoundService temporarily then fade out.
+-- When the body part is destroyed, fade out immediately (never reparent to SoundService).
+-- If no body part is found, parent to the character model itself as a last resort.
 local function parentSoundToBody(sound, character)
 	local parent = findSoundParent(character)
 	if parent then
 		sound.Parent = parent
 		parent.Destroying:Connect(function()
-			pcall(function()
-				if sound and sound.Parent then
-					sound.Parent = SoundService
-					fadeOutSound(sound)
-				end
-			end)
+			fadeOutSound(sound)
 		end)
-	else
-		sound.Parent = SoundService
+	elseif character and character.Parent then
+		sound.Parent = character
+		character.Destroying:Connect(function()
+			fadeOutSound(sound)
+		end)
 	end
 end
 
@@ -858,18 +857,24 @@ local function tryReplaceSound(sound)
 		keepPlaying = true
 	end
 
-	local parent = sound.Parent or SoundService
+	local parent = sound.Parent
 
-	newSound.Parent = parent
+	if parent then
+		newSound.Parent = parent
+	else
+		-- Original sound has no parent (already destroyed) — just fade out the replacement immediately
+		newSound.Parent = Players.LocalPlayer.Character or workspace
+		fadeOutSound(newSound)
+		return
+	end
+
 	newSound:Play()
 
 	if keepPlaying then
 		-- When the parent is destroyed, fade out instead of reparenting to SoundService
-		if parent and parent ~= SoundService then
-			parent.Destroying:Connect(function()
-				fadeOutSound(newSound)
-			end)
-		end
+		parent.Destroying:Connect(function()
+			fadeOutSound(newSound)
+		end)
 	else
 		-- Without KeepPlayingSound: fade out the replacement when the original sound ends/stops
 		if sound then
@@ -1091,15 +1096,18 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		-- Clear stale entry if the old overlay is gone
 		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
-		-- Parent to the character's Head for 3D positional audio so the overlay
+		-- Parent to the character's body for 3D positional audio so the overlay
 		-- sounds like it comes from the body, not globally.
-		-- Falls back to the original sound's parent, then SoundService.
+		-- Falls back to the original sound's parent. Never uses SoundService.
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
 			parent = findSoundParent(capturedCharModel)
 		end
 		if not parent then
-			parent = (sound and sound.Parent) or SoundService
+			parent = sound and sound.Parent
+		end
+		if not parent then
+			return -- No valid parent found, skip this overlay
 		end
 
 		-- For KeepPlayingSound: stop any existing overlay with the same ID so the new one plays fresh
