@@ -1252,8 +1252,10 @@ local AnimationSounds = {
 	["120098338547414"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
-	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0 }, -- Wound Infliction
-	["15424579670"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.3, KeepPlayingSound = true }, -- Life Linking
+	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
+	["13046802143"] = {
+		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5 }, -- Life Linking
+	},
 	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
@@ -1372,7 +1374,7 @@ local AnimationSounds = {
 	["77528653756706"] = {
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
 	},
-	["127428104014955"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0 }, -- Astral Projection
+	["127428104014955"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Astral Projection
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
     ["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
