@@ -934,9 +934,6 @@ local SoundOverlays = {
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
 	},
 	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 0 }, -- Fiante Fulguris
-	["14400859135"] = {
-		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
-	},
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	-- Cleo Sowande :
@@ -966,6 +963,9 @@ local SoundOverlays = {
 	},
 	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
+	["12171371908"] = {
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
+	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
