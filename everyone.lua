@@ -685,7 +685,6 @@ local SoundReplacements = {
 
 	-- Per-character different replacements:
 	-- ["original_sound_id"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" },
-	["14523178169"] = { ["Bonnie Bennett"] = "128948822253106", TrustDistanceFallback = true }, -- Phasmatos Incendia (Bonnie Bennett only)
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -1243,6 +1242,9 @@ local AnimationSounds = {
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["8118882336"] = {
+		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
+	},
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
 	["132001244832758"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
