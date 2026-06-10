@@ -1395,7 +1395,7 @@ local AnimationSounds = {
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15835470076"] = { 
-		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
+		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
 	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Disguise
 	["8118882336"] = {
