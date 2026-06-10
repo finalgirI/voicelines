@@ -94,6 +94,13 @@ local function fadeOutSound(sound)
 	end)
 end
 
+-- Configure 3D positional audio on a sound so it properly fades with distance
+local function configure3DAudio(sound)
+	sound.RollOffMode = Enum.RollOffMode.Interpolation
+	sound.RollOffMinDistance = 10
+	sound.RollOffMaxDistance = 200
+end
+
 -- Find the best body part to parent a sound to for 3D positional audio
 local function findSoundParent(character)
 	if not character or not character.Parent then return nil end
@@ -205,6 +212,7 @@ local function playAbilitySound(info, abilityName)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
+	configure3DAudio(sound)
 	sound:SetAttribute("IsLocalVoiceline", true)
 
 	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
@@ -242,6 +250,7 @@ local function playAbilitySound(info, abilityName)
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
+		configure3DAudio(simSound)
 		simSound:SetAttribute("IsLocalVoiceline", true)
 
 		-- Parent to the character for 3D positional audio (same logic as main sound)
@@ -850,6 +859,7 @@ local function tryReplaceSound(sound)
 	local newSound = Instance.new("Sound")
 	newSound.SoundId = "rbxassetid://" .. replacementId
 	newSound.Volume = 2.5
+	configure3DAudio(newSound)
 
 	-- Determine KeepPlayingSound from the entry (table format only)
 	local keepPlaying = false
@@ -878,9 +888,42 @@ local function tryReplaceSound(sound)
 				end
 			end
 		end
-		newSound.Parent = bodyParent or Players.LocalPlayer.Character or workspace
-		fadeOutSound(newSound)
-		return
+		-- If we still can't find a parent, try nearest player character by 3D distance
+		if not bodyParent then
+			local soundPos = nil
+			if sound.Parent and sound.Parent:IsA("BasePart") then
+				soundPos = sound.Parent.Position
+			elseif sound.Parent and sound.Parent:IsA("Attachment") then
+				soundPos = sound.Parent.WorldPosition
+			end
+			if soundPos then
+				local bestDist = 100
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+						if hrp then
+							local dist = (hrp.Position - soundPos).Magnitude
+							if dist < bestDist then
+								bestDist = dist
+								bodyParent = findSoundParent(player.Character) or player.Character
+							end
+						end
+					end
+				end
+			end
+		end
+		if bodyParent then
+			newSound.Parent = bodyParent
+			newSound:Play()
+			newSound.Ended:Connect(function()
+				if newSound and newSound.Parent then newSound:Destroy() end
+			end)
+		else
+			-- Can't find any parent — skip the replacement entirely
+			newSound:Destroy()
+			ReplacedSounds[sound] = nil
+			return
+		end
 	end
 
 	newSound:Play()
@@ -1135,7 +1178,35 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			end
 		end
 		if not parent then
-			parent = Players.LocalPlayer.Character or workspace
+			-- Try to find the nearest player character by 3D distance from the original sound
+			local soundPos = nil
+			if sound and sound.Parent then
+				if sound.Parent:IsA("BasePart") then
+					soundPos = sound.Parent.Position
+				elseif sound.Parent:IsA("Attachment") then
+					soundPos = sound.Parent.WorldPosition
+				end
+			end
+			if soundPos then
+				local bestDist = 100
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+						if hrp then
+							local dist = (hrp.Position - soundPos).Magnitude
+							if dist < bestDist then
+								bestDist = dist
+								parent = findSoundParent(player.Character) or player.Character
+							end
+						end
+					end
+				end
+			end
+			-- If we still can't find a parent, skip the overlay entirely
+			-- (don't fall back to local player's character — that plays at full volume regardless of distance)
+			if not parent then
+				return
+			end
 		end
 
 		-- For KeepPlayingSound: stop any existing overlay with the same ID so the new one plays fresh
@@ -1151,6 +1222,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
 		ov.Volume = overlayInfo.Volume or 2.5
+		configure3DAudio(ov)
 
 		ov.Parent = parent
 		ov:Play()
@@ -1537,6 +1609,7 @@ local function playAnimSound(animId, character, charName, track)
 		local sound = Instance.new("Sound")
 		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
 		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
 		sound:SetAttribute("IsLocalVoiceline", true)
 
 		-- Parent to character body for 3D positional audio
@@ -1549,6 +1622,7 @@ local function playAnimSound(animId, character, charName, track)
 			local simSound = Instance.new("Sound")
 			simSound.SoundId = "rbxassetid://" .. normalize(soundInfo.SimultaneousSound)
 			simSound.Volume = soundInfo.Volume or 2.5
+			configure3DAudio(simSound)
 			simSound:SetAttribute("IsLocalVoiceline", true)
 
 			parentSoundToBody(simSound, character)
@@ -1787,6 +1861,7 @@ local function matchChatBubbleText(bubbleGui, character)
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. soundId
 	sound.Volume = 2.5
+	configure3DAudio(sound)
 	sound:SetAttribute("IsLocalVoiceline", true)
 
 	parentSoundToBody(sound, character)
