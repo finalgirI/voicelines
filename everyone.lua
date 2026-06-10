@@ -1407,7 +1407,7 @@ local AnimationSounds = {
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
-	["75121459355526"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0 }, -- Soul Bind
+	["87439615254048"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Soul Bind
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
@@ -1434,6 +1434,10 @@ local AnimationSounds = {
 		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Bonnie Bennett"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+	},
+	["6713148336"] = {
+		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 2.5, DelayTime = 0 }, -- Errox Femus
 	},
 	["131550349409770"] = {
 		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2, DelayTime = 0 }, -- Aquamalia
@@ -1542,10 +1546,14 @@ local AnimationSounds = {
 	},
 	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
 	["14004031633"] = {
+		GroupCooldown = 10, -- shared 10s cooldown across ALL characters to prevent echo
 		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
 		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
 		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
 		["Dark Josie"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Oscar"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Malcolm"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Beau"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
 	},
 	["12955990988"] = {
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStartBehind
@@ -1626,10 +1634,18 @@ local function playAnimSound(animId, character, charName, track)
 	end
 
 	-- Debounce to prevent sound spam
-	local key = animId .. "_" .. (charName or "unknown")
+	-- GroupCooldown: shared cooldown across ALL characters for this animation (prevents echo)
+	local key, cooldownTime
+	if entry.GroupCooldown then
+		key = animId .. "_group" -- shared key so any character blocks all others
+		cooldownTime = entry.GroupCooldown
+	else
+		key = animId .. "_" .. (charName or "unknown")
+		cooldownTime = ANIM_SOUND_COOLDOWN
+	end
 	if AnimSoundCooldowns[key] then return end
 	AnimSoundCooldowns[key] = true
-	task.delay(ANIM_SOUND_COOLDOWN, function()
+	task.delay(cooldownTime, function()
 		AnimSoundCooldowns[key] = nil
 	end)
 
