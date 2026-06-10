@@ -60,6 +60,13 @@ local Data = {
 		Volume = 9,
 	},
 
+	Incendia = {
+		Icon = "18630085138",
+		["Lizzie Saltzman"] = "98540976660149",
+		["Hope Mikaelson"] = "88254920355046",
+		["Valerie Tulle"] = "134446708409005",
+	},
+
 	--ChannelAncestorsBonnie = {
 	--	Sound = "104749000603361",
 	--	Icon = "18630281775",
@@ -635,13 +642,6 @@ local Data = {
 	--OrganLiquify = {
 	--	Icon = "18630090630",
 	--	Sound = "85818992177233",
-	--},
-
-	--Incendia = {
-	--	Icon = "18630085138",
-	--	["Lizzie Saltzman"] = "98540976660149",
-	--	["Hope Mikaelson"] = "88254920355046",
-	--	["Valerie Tulle"] = "134446708409005",
 	--},
 
 	--DelfanEotenCor = {
