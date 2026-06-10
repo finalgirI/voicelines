@@ -710,6 +710,7 @@ local SoundReplacements = {
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["116235007511881"] = "13203446447", -- Autem
 	["105998583954931"] = "13441892676", -- Harae
+	["112458851193845"] = "16767898955", -- Destroy Purgatory
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
 
@@ -998,7 +999,6 @@ local SoundOverlays = {
 		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
 	},
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
-	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
@@ -1455,10 +1455,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-
-	["80991149841796"] = {
-		["Freya Mikaelson"] = { Sound = "135953039500242", Volume = 100, DelayTime = 0.2 }, -- Freya Resurrection
-	}, 
+	["80991149841796"] = { Sound = "135953039500242", Volume = 100, DelayTime = 0.2 }, -- Freya Resurrection
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
@@ -1555,7 +1552,6 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
 	},
 	["14571834582"] = {
-		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 4, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
 	["6713148336"] = {
