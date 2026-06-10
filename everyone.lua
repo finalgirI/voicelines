@@ -96,9 +96,9 @@ end
 
 -- Configure 3D positional audio on a sound so it properly fades with distance
 local function configure3DAudio(sound)
-	sound.RollOffMode = Enum.RollOffMode.Inverse
-	sound.RollOffMinDistance = 30
-	sound.RollOffMaxDistance = 200
+	sound.RollOffMode = Enum.RollOffMode.InverseTapered
+	sound.RollOffMinDistance = 10
+	sound.RollOffMaxDistance = 10000
 end
 
 -- Find the best body part to parent a sound to for 3D positional audio
