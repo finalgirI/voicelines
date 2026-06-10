@@ -53,6 +53,14 @@ local Data = {
 		Volume = 9,
 	},
 
+	Incendia = {
+		Icon = "18630085138",
+		["Bonnie Bennett"] = "74863711273747",
+		--["Lizzie Saltzman"] = "98540976660149",
+		--["Hope Mikaelson"] = "88254920355046",
+		--["Valerie Tulle"] = "134446708409005",
+	},
+
 	--Harae = {
 	--	Sound = "70767045237007",
 	--	Icon = "18630087278",
@@ -60,12 +68,6 @@ local Data = {
 	--	FadeOut = true,
 	--},
 
-	--Incendia = {
-	--	Icon = "18630085138",
-	--	["Lizzie Saltzman"] = "98540976660149",
-	--	["Hope Mikaelson"] = "88254920355046",
-	--	["Valerie Tulle"] = "134446708409005",
-	--},
 
 	--ChannelAncestorsBonnie = {
 	--	Sound = "104749000603361",
