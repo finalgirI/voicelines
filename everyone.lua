@@ -2,6 +2,7 @@ local Players = game:GetService("Players")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
 
 local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui", 30)
 if not PlayerGui then return end
@@ -1019,7 +1020,7 @@ local SoundOverlays = {
 		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
 	},
 	-- Esther Mikaelson :
-	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4.5 }, -- Pentagram
+	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	-- Dark Josie :
 	["13154602444"] = {
@@ -1822,8 +1823,8 @@ for _, player in Players:GetPlayers() do
 end
 
 -- [[ CHAT-BASED VOICELINE TRIGGERS ]]
--- Plays a sound when a specific character's chat bubble shows matching text.
--- Watches for BillboardGui chat bubbles on character heads (works with DisplayBubble).
+-- Plays a sound when a specific character sends a chat message matching specific text.
+-- Uses TextChatService.MessageReceived for reliable detection (no UI scraping).
 
 local ChatVoicelineSounds = {
 	["Suffer"] = "17560604010",
@@ -1835,32 +1836,22 @@ local ChatVoicelineSounds = {
 local ChatVoicelineCharacter = "Silas"
 local ChatVoicelineCooldown = {}
 
-local function getCharNameFromCharacter(character)
-	for _, player in Players:GetPlayers() do
-		if player.Character == character then
-			return player:GetAttribute("CharacterName")
-		end
-	end
-	return nil
-end
+local function onChatMessageReceived(textChatMessage)
+	if not textChatMessage then return end
 
-local function matchChatBubbleText(bubbleGui, character)
-	if not bubbleGui or not bubbleGui:IsA("BillboardGui") then return end
+	local textSource = textChatMessage.TextSource
+	if not textSource then return end
 
-	local charName = getCharNameFromCharacter(character)
+	local player = Players:GetPlayerByUserId(textSource.UserId)
+	if not player then return end
+
+	local charName = player:GetAttribute("CharacterName")
 	if charName ~= ChatVoicelineCharacter then return end
 
-	-- Find the text inside the bubble
-	local bubbleText = nil
-	for _, desc in bubbleGui:GetDescendants() do
-		if desc:IsA("TextLabel") and desc.Text and desc.Text ~= "" then
-			bubbleText = desc.Text
-			break
-		end
-	end
-	if not bubbleText then return end
+	local msg = textChatMessage.Text
+	if not msg then return end
+	msg = msg:match("^%s*(.-)%s*$")
 
-	local msg = bubbleText:match("^%s*(.-)%s*$")
 	local soundId = nil
 	local matchedKey = nil
 	for key, id in pairs(ChatVoicelineSounds) do
@@ -1872,12 +1863,13 @@ local function matchChatBubbleText(bubbleGui, character)
 	end
 	if not soundId then return end
 
-	local player = Players:GetPlayerFromCharacter(character)
-	local userId = player and player.UserId or 0
-	local key = userId .. "_" .. matchedKey
-	if ChatVoicelineCooldown[key] then return end
-	ChatVoicelineCooldown[key] = true
-	task.delay(5, function() ChatVoicelineCooldown[key] = nil end)
+	local cooldownKey = textSource.UserId .. "_" .. matchedKey
+	if ChatVoicelineCooldown[cooldownKey] then return end
+	ChatVoicelineCooldown[cooldownKey] = true
+	task.delay(5, function() ChatVoicelineCooldown[cooldownKey] = nil end)
+
+	local character = player.Character
+	if not character then return end
 
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. soundId
@@ -1893,39 +1885,7 @@ local function matchChatBubbleText(bubbleGui, character)
 	end)
 end
 
-local function hookCharacterChatBubbles(character)
-	if not character then return end
-	local head = character:FindFirstChild("Head")
-	if head then
-		head.ChildAdded:Connect(function(child)
-			task.defer(function()
-				matchChatBubbleText(child, character)
-			end)
-		end)
-	end
-	character.ChildAdded:Connect(function(child)
-		if child.Name == "Head" then
-			child.ChildAdded:Connect(function(grandchild)
-				task.defer(function()
-					matchChatBubbleText(grandchild, character)
-				end)
-			end)
-		end
-	end)
-end
-
--- Hook existing and future player characters
-local function onPlayerAdded(player)
-	player.CharacterAdded:Connect(hookCharacterChatBubbles)
-	if player.Character then
-		hookCharacterChatBubbles(player.Character)
-	end
-end
-
-for _, player in Players:GetPlayers() do
-	onPlayerAdded(player)
-end
-Players.PlayerAdded:Connect(onPlayerAdded)
+TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
 -- Catch existing sounds already in the game
 for _, desc in game:GetDescendants() do
