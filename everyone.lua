@@ -97,8 +97,8 @@ end
 -- Configure 3D positional audio on a sound so it properly fades with distance
 local function configure3DAudio(sound)
 	sound.RollOffMode = Enum.RollOffMode.InverseTapered
-	sound.RollOffMinDistance = 10
-	sound.RollOffMaxDistance = 1000
+	sound.RollOffMinDistance = 5
+	sound.RollOffMaxDistance = 150
 end
 
 -- Find the best body part to parent a sound to for 3D positional audio
@@ -126,11 +126,20 @@ local function parentSoundToBody(sound, character)
 			fadeOutSound(sound)
 		end)
 	elseif character and character.Parent then
-		sound.Parent = character
-		character.Destroying:Connect(function()
-			fadeOutSound(sound)
-		end)
+		-- Never parent to a Model (breaks 3D audio). Create an Attachment on a body part instead.
+		local attachPart = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChildWhichIsA("BasePart")
+		if attachPart then
+			local att = Instance.new("Attachment")
+			att.Parent = attachPart
+			sound.Parent = att
+			att.Destroying:Connect(function() fadeOutSound(sound) end)
+		else
+			-- No BasePart at all — skip playing rather than blast at full volume
+			sound:Destroy()
+			return false
+		end
 	end
+	return true
 end
 
 -- Known property keys that are NOT character overrides
@@ -217,7 +226,10 @@ local function playAbilitySound(info, abilityName)
 
 	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
 	local character = Players.LocalPlayer.Character
-	parentSoundToBody(sound, character)
+	if not parentSoundToBody(sound, character) then
+		Cooldowns[abilityName] = false
+		return
+	end
 
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
@@ -869,21 +881,25 @@ local function tryReplaceSound(sound)
 
 	local parent = sound.Parent
 
-	-- Never parent to SoundService — sounds there play globally at full volume with no 3D falloff
-	if parent == SoundService then
+	-- Never parent to SoundService or a Model — 3D audio only works on BasePart/Attachment
+	if parent == SoundService or (parent and parent:IsA("Model")) then
+		parent = nil
+	end
+	-- Only use the original parent if it's a BasePart or Attachment
+	if parent and not parent:IsA("BasePart") and not parent:IsA("Attachment") then
 		parent = nil
 	end
 
 	if parent then
 		newSound.Parent = parent
 	else
-		-- Original sound has no parent or was in SoundService — try to find the character's body
+		-- Original sound has no valid 3D parent — try to find the character's body
 		local charName = getSoundCharacterName(sound)
 		local bodyParent = nil
 		if charName then
 			for _, player in Players:GetPlayers() do
 				if player:GetAttribute("CharacterName") == charName and player.Character then
-					bodyParent = findSoundParent(player.Character) or player.Character
+					bodyParent = findSoundParent(player.Character)
 					break
 				end
 			end
@@ -905,7 +921,7 @@ local function tryReplaceSound(sound)
 							local dist = (hrp.Position - soundPos).Magnitude
 							if dist < bestDist then
 								bestDist = dist
-								bodyParent = findSoundParent(player.Character) or player.Character
+								bodyParent = findSoundParent(player.Character)
 							end
 						end
 					end
@@ -919,7 +935,7 @@ local function tryReplaceSound(sound)
 				if newSound and newSound.Parent then newSound:Destroy() end
 			end)
 		else
-			-- Can't find any parent — skip the replacement entirely
+			-- Can't find any BasePart parent — skip the replacement entirely
 			newSound:Destroy()
 			ReplacedSounds[sound] = nil
 			return
@@ -1161,17 +1177,22 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		if capturedCharModel and capturedCharModel.Parent then
 			parent = findSoundParent(capturedCharModel)
 		end
-		if not parent then
-			parent = sound and sound.Parent
+		if not parent and sound and sound.Parent then
+			-- Only use the original sound's parent if it's a BasePart or Attachment (3D audio works)
+			if sound.Parent:IsA("BasePart") or sound.Parent:IsA("Attachment") then
+				parent = sound.Parent
+			end
 		end
-		-- Never parent to SoundService — find a character body instead
-		if parent == SoundService then
+		-- Never parent to SoundService or a Model — find a character body instead
+		if parent == SoundService or (parent and parent:IsA("Model")) then
 			parent = nil
+		end
+		if not parent then
 			local charName = getSoundCharacterName(sound)
 			if charName then
 				for _, player in Players:GetPlayers() do
 					if player:GetAttribute("CharacterName") == charName and player.Character then
-						parent = findSoundParent(player.Character) or player.Character
+						parent = findSoundParent(player.Character)
 						break
 					end
 				end
@@ -1196,14 +1217,14 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 							local dist = (hrp.Position - soundPos).Magnitude
 							if dist < bestDist then
 								bestDist = dist
-								parent = findSoundParent(player.Character) or player.Character
+								parent = findSoundParent(player.Character)
 							end
 						end
 					end
 				end
 			end
-			-- If we still can't find a parent, skip the overlay entirely
-			-- (don't fall back to local player's character — that plays at full volume regardless of distance)
+			-- If we still can't find a BasePart parent, skip the overlay entirely
+			-- (don't fall back to Model or local player — that plays at full volume regardless of distance)
 			if not parent then
 				return
 			end
@@ -1916,4 +1937,6 @@ end
 game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
+	
+	
 end)
