@@ -708,7 +708,7 @@ local SoundReplacements = {
 	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
-	["116235007511881"] = "13203446447", -- Autem
+	["116235007511881"] = { Replacement = "13203446447", KeepPlayingSound = true }, -- Autem
 	["105998583954931"] = "13441892676", -- Harae
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
@@ -1473,7 +1473,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-	["80991149841796"] = { Sound = "135953039500242", Volume = 100, DelayTime = 0.2 }, -- Freya Resurrection
+	["80991149841796"] = { Sound = "135953039500242", Volume = 60, DelayTime = 0.2 }, -- Freya Resurrection
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
@@ -1482,18 +1482,18 @@ local AnimationSounds = {
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
-		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
 	},
 	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
 	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	-- Vampire Abilities :
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
-	["10748428964"] = {
+	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1507,30 +1507,30 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Marcel Gerad"] = { Sound = "125972157691262", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
+		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
 	}, 
     ["95988116850782"] = {
 	   ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
 	   ["Dark Josie"] = { fSound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-	   ["Caroline Forbes"] = { Sound = "82935740630457", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+		["Caroline Forbes"] = { Sound = "82935740630457", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
     },
 	["72224780755559"] = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
-		["Marcel Gerad"] = { Sound = "134565387051180", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
+		["Marcel Gerard"] = { Sound = "134565387051180", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
 	},
 	["12308726489"] = {
 		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-		["Marcel Gerad"] = { Sound = "110930423196956", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
+		["Marcel Gerard"] = { Sound = "110930423196956", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Mary Louise"] = { Sound = "76991721803834", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Marcel Gerad"] = { Sound = "80192436290512", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
 	-- Elder Witches :
 	["109730789965953"] = {
@@ -1846,7 +1846,6 @@ local ChatVoicelineSounds = {
 	["Nobody move"] = "17560600778",
 }
 
-local ChatVoicelineCharacter = "Silas"
 local ChatVoicelineCooldown = {}
 
 local function onChatMessageReceived(textChatMessage)
@@ -1857,9 +1856,6 @@ local function onChatMessageReceived(textChatMessage)
 
 	local player = Players:GetPlayerByUserId(textSource.UserId)
 	if not player then return end
-
-	local charName = player:GetAttribute("CharacterName")
-	if charName ~= ChatVoicelineCharacter then return end
 
 	local msg = textChatMessage.Text
 	if not msg then return end
@@ -1900,16 +1896,200 @@ end
 
 TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
--- Catch existing sounds already in the game
+-- [[ PARTICLE DETECTION SOUND SYSTEM ]]
+-- Detects specific ParticleEmitters on characters and plays a sound from their position.
+-- When the particle is removed, the sound fades out.
+-- Supports KeepPlayingSound so the sound continues even after the particle is gone.
+-- Supports CharacterRequired to only trigger for specific characters (the character the particle is ON).
+-- Supports CasterRequired to only trigger when a specific character CAST the ability.
+--   Since the caster isn't stored on the particle, CasterRequired checks if a player
+--   with that CharacterName is within range of the victim (they'd be nearby when casting).
+-- Supports DebounceTime to prevent re-triggering too quickly.
+
+local ParticleSounds = {
+	-- Per-character format (like SoundOverlays):
+	-- ["ParticleEmitterName"] = {
+	-- 	["Character Name"] = { Sound = "soundId", Volume = 2.5, KeepPlayingSound = false, DelayTime = 0, DebounceTime = 0 },
+	-- },
+	-- Simple format (applies to all characters):
+	-- ["ParticleEmitterName"] = { Sound = "soundId", Volume = 2.5 },
+
+	-- AdSomnum (Sleep) particle
+	["AdSomnumSleep"] = {
+		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 2.5, DelayTime = 0 },
+	},
+
+	-- Immobilus (Stun) spiral on victim
+	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
+
+	-- Pain effect on victim
+	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
+}
+
+local ActiveParticleSounds = {} -- [particle] = soundInstance
+local ParticleDebounce = {} -- [particleName_characterName] = true
+
+local function getCharacterFromParticle(particle)
+	local current = particle.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			return current
+		end
+		current = current.Parent
+	end
+	-- Fallback: check if parent is a body part inside a character
+	if particle.Parent and particle.Parent:IsA("BasePart") then
+		local partParent = particle.Parent.Parent
+		if partParent and partParent:IsA("Model") and partParent:FindFirstChildOfClass("Humanoid") then
+			return partParent
+		end
+	end
+	return nil
+end
+
+local function getCharacterNameFromModel(model)
+	for _, player in Players:GetPlayers() do
+		if player.Character == model then
+			return player:GetAttribute("CharacterName")
+		end
+	end
+	return nil
+end
+
+local function tryPlayParticleSound(particle)
+	if not particle:IsA("ParticleEmitter") then return end
+	if not particle.Enabled then return end
+	if ActiveParticleSounds[particle] then return end
+
+	local entry = ParticleSounds[particle.Name]
+	if not entry then return end
+
+	local character = getCharacterFromParticle(particle)
+	if not character then return end
+
+	-- Skip if this is the local player's character (optional, remove if you want to hear your own)
+	local localChar = Players.LocalPlayer.Character
+	if character == localChar then return end
+
+	-- Resolve entry: per-character format vs simple format
+	local charName = getCharacterNameFromModel(character)
+	local resolvedEntry = nil
+
+	if type(entry) == "table" then
+		-- Check for per-character key first
+		if charName and entry[charName] then
+			resolvedEntry = entry[charName]
+		elseif entry.Sound then
+			-- Simple format (no character sub-keys, just direct properties)
+			resolvedEntry = entry
+		end
+	else
+		return -- Invalid format
+	end
+
+	if not resolvedEntry then return end
+
+	-- CasterRequired check (the character who CAST the ability)
+	-- Checks if a player with that CharacterName is within range of the victim
+	if resolvedEntry.CasterRequired then
+		local victimHRP = character:FindFirstChild("HumanoidRootPart")
+		if not victimHRP then return end
+		local foundCaster = false
+		for _, player in Players:GetPlayers() do
+			if player:GetAttribute("CharacterName") == resolvedEntry.CasterRequired and player.Character then
+				local casterHRP = player.Character:FindFirstChild("HumanoidRootPart")
+				if casterHRP and (casterHRP.Position - victimHRP.Position).Magnitude <= 80 then
+					foundCaster = true
+					break
+				end
+			end
+		end
+		if not foundCaster then return end
+	end
+
+	-- Debounce check
+	local debounceKey = particle.Name .. "_" .. (charName or "unknown")
+	if resolvedEntry.DebounceTime and ParticleDebounce[debounceKey] then return end
+
+	-- Play the sound from the character's body
+	local function doPlay()
+		if not particle or not particle.Parent then return end -- particle was removed during delay
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. resolvedEntry.Sound
+		sound.Volume = resolvedEntry.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+		configure3DAudio(sound)
+
+		local parentResult = parentSoundToBody(sound, character)
+		if parentResult == false then return end -- parentSoundToBody destroyed it
+
+		sound:Play()
+		ActiveParticleSounds[particle] = sound
+
+		-- Handle particle removal
+		local keepPlaying = resolvedEntry.KeepPlayingSound or false
+
+		if keepPlaying then
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then sound:Destroy() end
+				ActiveParticleSounds[particle] = nil
+			end)
+		else
+			particle:GetPropertyChangedSignal("Enabled"):Connect(function()
+				if not particle.Enabled and ActiveParticleSounds[particle] then
+					fadeOutSound(sound)
+					ActiveParticleSounds[particle] = nil
+				end
+			end)
+			particle.Destroying:Connect(function()
+				if ActiveParticleSounds[particle] == sound then
+					fadeOutSound(sound)
+					ActiveParticleSounds[particle] = nil
+				end
+			end)
+		end
+
+		sound.Ended:Connect(function()
+			if ActiveParticleSounds[particle] == sound then
+				ActiveParticleSounds[particle] = nil
+			end
+		end)
+	end
+
+	-- Debounce
+	if resolvedEntry.DebounceTime and resolvedEntry.DebounceTime > 0 then
+		ParticleDebounce[debounceKey] = true
+		task.delay(resolvedEntry.DebounceTime, function() ParticleDebounce[debounceKey] = nil end)
+	end
+
+	if resolvedEntry.DelayTime and resolvedEntry.DelayTime > 0 then
+		task.delay(resolvedEntry.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+-- Scan existing particles
 for _, desc in game:GetDescendants() do
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
+	tryPlayParticleSound(desc)
 end
 
--- Catch new sounds added during gameplay (from server or other players)
+-- Catch new instances added during gameplay
 game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
-	
-	
+	tryPlayParticleSound(desc)
+end)
+
+-- Also detect when particles get enabled (they might exist but be disabled initially)
+game.DescendantAdded:Connect(function(desc)
+	if desc:IsA("ParticleEmitter") then
+		desc:GetPropertyChangedSignal("Enabled"):Connect(function()
+			if desc.Enabled then
+				tryPlayParticleSound(desc)
+			end
+		end)
+	end
 end)
