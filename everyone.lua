@@ -689,7 +689,7 @@ end
 
 local SoundReplacements = {
 	-- Simple format (applies to all characters):
-	["105594719818558"] = "130316188399085", -- Psychic Blast
+	["105594719818558"] = "15366096625", -- Psychic Blast
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Suctus Incendia
 	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
