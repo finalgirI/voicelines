@@ -35,13 +35,6 @@ local Data = {
 		["Nora Hildegard"] = "80580720829811",
 	},
 
-	Harae = {
-		Sound = "70767045237007",
-		Icon = "18630087278",
-		Volume = 0.8,
-		FadeOut = true,
-	},
-
 	Motus = {
 		Icon = "18630084955",
 		["Bonnie Bennett"] = "114093297475680",
@@ -59,6 +52,13 @@ local Data = {
 		Icon = "109870855790839",
 		Volume = 9,
 	},
+
+	--Harae = {
+	--	Sound = "70767045237007",
+	--	Icon = "18630087278",
+	--	Volume = 0.8,
+	--	FadeOut = true,
+	--},
 
 	--Incendia = {
 	--	Icon = "18630085138",
