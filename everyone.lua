@@ -962,6 +962,24 @@ local function tryReplaceSound(sound)
 				ReplacedSounds[sound] = nil
 			end)
 		end
+		-- When the parent part is destroyed, the replacement sound would also be destroyed
+		-- before it can fade out. Reparent it to a temporary holder so the fade completes.
+		if parent and parent ~= SoundService and not parent:IsA("Model") then
+			parent.Destroying:Connect(function()
+				if newSound and newSound.Parent then
+					local tempAtt = Instance.new("Attachment")
+					tempAtt.Name = "FadeOutHolder"
+					tempAtt.Parent = SoundService
+					newSound.Parent = tempAtt
+					if not FadingSounds[newSound] then
+						fadeOutOverlaySound(newSound)
+					end
+					newSound.Destroying:Connect(function()
+						if tempAtt and tempAtt.Parent then tempAtt:Destroy() end
+					end)
+				end
+			end)
+		end
 	end
 
 	newSound.Ended:Connect(function()
