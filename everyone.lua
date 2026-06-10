@@ -991,7 +991,6 @@ local SoundOverlays = {
 	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
@@ -1016,9 +1015,6 @@ local SoundOverlays = {
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
-	["13707254344"] = {
-		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
-	},
 	-- Esther Mikaelson :
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
@@ -1397,7 +1393,7 @@ local AnimationSounds = {
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
-	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Disguise
+	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 3, KeepPlayingSound = true }, -- Disguise
 	["8118882336"] = {
 		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
@@ -1426,6 +1422,9 @@ local AnimationSounds = {
 	["14065674638"] = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
+	["71157109677249"] = {
+		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
+	},
 	["16794479576"] = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
 	},
@@ -1450,6 +1449,7 @@ local AnimationSounds = {
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
+	["100950296033969"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Firstborn Devastation
 	-- Qetsiyah's Brain Fry - all animation variants (front + behind)
 	["12955966256"] = {
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStart
