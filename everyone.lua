@@ -709,6 +709,7 @@ local SoundReplacements = {
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["116235007511881"] = "13203446447", -- Autem
+	["105998583954931"] = "13441892676", -- Harae
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
 
@@ -1051,7 +1052,6 @@ local SoundOverlays = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
 	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
-	["105998583954931"] = { Sound = "70767045237007", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Harae Tamae
 	["135718833680425"] = {
 		Overlays = {
 			{ Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
@@ -1436,7 +1436,6 @@ local AnimationSounds = {
 	},
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
-		["Dark Josie"] = { Sound = "81204185561575", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 	},
 	["87900706821607"] = {
