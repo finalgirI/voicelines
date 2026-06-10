@@ -929,9 +929,6 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-	["15174800421"] = { 
-		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0 }, -- Channel Ancestors
-	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
@@ -1006,7 +1003,7 @@ local SoundOverlays = {
 		},
 	},
 	["14400859135"] = {
-		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0 }, -- Dark Magic Blast
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
 	["18193005989"] = { Sound = "98703979367465", Volume = 5, DelayTime = 0 }, -- Forget to breathe
 }
@@ -1303,6 +1300,9 @@ local AnimationSounds = {
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["15835470076"] = { 
+		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
+	},
 	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Disguise
 	["8118882336"] = {
 		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
@@ -1369,7 +1369,7 @@ local AnimationSounds = {
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 1, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1385,9 +1385,10 @@ local AnimationSounds = {
 	},
 	["10748428964"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
-		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
 	},
 	["81743171989186"] = {
@@ -1398,36 +1399,45 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-	},
+		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Marcel Gerad"] = { Sound = "125972157691262", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
+	}, 
     ["95988116850782"] = {
 	   ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-	   ["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	   ["Dark Josie"] = { fSound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	   ["Caroline Forbes"] = { Sound = "82935740630457", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
     },
 	["72224780755559"] = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
+		["Marcel Gerad"] = { Sound = "134565387051180", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
 	},
-	["12308763416"] = {
+	["12308726489"] = {
 		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
+		["Marcel Gerad"] = { Sound = "110930423196956", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Mary Louise"] = { Sound = "76991721803834", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Marcel Gerad"] = { Sound = "80192436290512", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
 	-- Elder Witches :
 	["109730789965953"] = {
-	["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Bastianna Natale"] = { Sound = "70512941919646", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
+	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
 	["14004031633"] = {
-		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
-		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
-		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell
+		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
+		["Dark Josie"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
 	},
 	["12955990988"] = {
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStartBehind
@@ -1454,6 +1464,9 @@ local AnimationSounds = {
 	["14571834582"] = {
 		["Hope Mikaelson"] = { Sound = "72373310588316", Volume = 4, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
+	},
+	["6713148336"] = {
+		["Sheila Bennett"] = { Sound = "139747284454633", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Errox Femus Sheila
 	},
 }
 
