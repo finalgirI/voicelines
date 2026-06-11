@@ -1465,10 +1465,10 @@ end
 -- Uses TextChatService.MessageReceived for reliable detection (no UI scraping).
 
 local ChatVoicelineSounds = {
-	["Suffer"] = "17560604010",
-	["Attack"] = "17560606672",
-	["Everybody faint"] = "17560602849",
-	["Nobody move"] = "17560600778",
+	["Suffer"] = { Sound = "17560604010", CharacterRequired = "Silas" },
+	["Attack"] = { Sound = "17560606672", CharacterRequired = "Silas" },
+	["Everybody faint"] = { Sound = "17560602849", CharacterRequired = "Silas" },
+	["Nobody move"] = { Sound = "17560600778", CharacterRequired = "Silas" },
 }
 
 local ChatVoicelineCooldown = {}
@@ -1488,14 +1488,26 @@ local function onChatMessageReceived(textChatMessage)
 
 	local soundId = nil
 	local matchedKey = nil
-	for key, id in pairs(ChatVoicelineSounds) do
+	local chatEntry = nil
+	for key, entry in pairs(ChatVoicelineSounds) do
 		if msg:sub(1, #key):lower() == key:lower() then
-			soundId = id
+			if type(entry) == "string" then
+				soundId = entry
+			else
+				soundId = entry.Sound
+			end
 			matchedKey = key
+			chatEntry = entry
 			break
 		end
 	end
 	if not soundId then return end
+
+	-- CharacterRequired check
+	if type(chatEntry) == "table" and chatEntry.CharacterRequired then
+		local charName = player:GetAttribute("CharacterName")
+		if charName ~= chatEntry.CharacterRequired then return end
+	end
 
 	local cooldownKey = textSource.UserId .. "_" .. matchedKey
 	if ChatVoicelineCooldown[cooldownKey] then return end
