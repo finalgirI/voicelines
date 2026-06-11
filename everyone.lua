@@ -6,8 +6,6 @@ local TextChatService = game:GetService("TextChatService")
 
 local LOCAL_VOICELINES_ENABLED = true -- Set to true to hear your own ability voicelines again
 
-
-
 local function normalize(id)
 	return tostring(id)
 		:gsub("rbxassetid://", "")
@@ -122,7 +120,6 @@ local function hasCharacterOverrides(info)
 	return false
 end
 
--- FIXED FUNCTION
 local function playAbilitySound(info, abilityName)
 
 	-- Skip own voicelines if disabled
@@ -290,14 +287,6 @@ local function playAbilitySound(info, abilityName)
 	end)
 end
 
-
-
-
-
-
-
-
-
 -- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
 -- Replaces sounds played by other players/the server with your own custom sounds.
 -- Only YOU hear the replacement. Everyone else still hears the original.
@@ -317,10 +306,8 @@ local SoundReplacements = {
 	["105998583954931"] = "13441892676", -- Harae
 	["14043844852"] = "13904360117", -- Heretic Joint Spell
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
-	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
-
 	-- Per-character different replacements:
-	-- ["original_sound_id"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" },
+
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -628,7 +615,7 @@ local SoundOverlays = {
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-	--	["16554249588"] = { Sound = "96414682813420", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, DebounceTime = 20 }, -- Qet Res
+
 	-- Davina Claire :
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
@@ -685,7 +672,7 @@ local SoundOverlays = {
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
-	--["18193005989"] = { Sound = "98703979367465", Volume = 5, DelayTime = 0 }, -- Forget to breathe
+
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -1533,6 +1520,18 @@ TextChatService.MessageReceived:Connect(onChatMessageReceived)
 -- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
 
 local MassCompulsionSounds = {
+	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint",
+		["Silas"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer",
+		["Silas"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack",
+		["Silas"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move",
+		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
 }
 
 local MassCompulsionCooldown = {}
@@ -1559,7 +1558,18 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local character = casterPlayer.Character
 	if not character then return end
 
-	-- Only the local player (caster) already knows their command; no chat bubble needed
+	-- Show chat bubble if ChatText is provided (so other players see the command)
+	local chatText = soundInfo.ChatText
+	if not chatText then
+		-- Fallback: check top-level entry for ChatText if character override was used
+		local topLevelInfo = MassCompulsionSounds[actionName]
+		if topLevelInfo and topLevelInfo.ChatText then
+			chatText = topLevelInfo.ChatText
+		end
+	end
+	if chatText then
+		game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
+	end
 
 	local function doPlay()
 		local sound = Instance.new("Sound")
