@@ -314,7 +314,7 @@ local SoundReplacements = {
 	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
-	["116235007511881"] = { Replacement = "13203446447", KeepPlayingSound = true }, -- Autem
+	["116235007511881"] = "13203446447", -- Autem
 	["105998583954931"] = "13441892676", -- Harae
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
