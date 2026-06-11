@@ -614,6 +614,9 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
+	["14523178169"] = {
+		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
+	},
 	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
@@ -667,10 +670,6 @@ local SoundOverlays = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
 		TrustDistanceFallback = true,
-	},
-	["8806156863"] = {
-		["Nora Hildegard"] = { Sound = "80580720829811", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
-		["Valerie Tulle"] = { Sound = "116763647482749", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Invisique
 	},
 	-- Elder Witches :
 	["15980142966"] = {
@@ -1019,9 +1018,6 @@ local AnimationSounds = {
 	["15619485183"] = { Sound = "95435320218587", Volume = 3.2, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
-	},
-	["8118882336"] = {
-		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
@@ -1533,10 +1529,18 @@ TextChatService.MessageReceived:Connect(onChatMessageReceived)
 -- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
 
 local MassCompulsionSounds = {
-	["Faint"] = { Sound = "17560602849", Volume = 3, ChatText = "Everybody faint" },
-	["Suffer"] = { Sound = "17560604010", Volume = 3, ChatText = "Suffer" },
-	["Attack"] = { Sound = "17560606672", Volume = 3, ChatText = "Attack" },
-	["Freeze"] = { Sound = "17560600778", Volume = 3, ChatText = "Nobody move" },
+	["Faint"] = { Sound = "17560602849", Volume = 3, ChatText = "Everybody faint",
+		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Suffer"] = { Sound = "17560604010", Volume = 3, ChatText = "Suffer",
+		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Attack"] = { Sound = "17560606672", Volume = 3, ChatText = "Attack",
+		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
+	["Freeze"] = { Sound = "17560600778", Volume = 3, ChatText = "Nobody move",
+		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
 }
 
 local MassCompulsionCooldown = {}
@@ -1549,6 +1553,12 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local soundInfo = MassCompulsionSounds[actionName]
 	if not soundInfo then return end
 
+	-- Check for character-specific override
+	local casterCharName = casterPlayer:GetAttribute("CharacterName")
+	if casterCharName and soundInfo[casterCharName] then
+		soundInfo = soundInfo[casterCharName]
+	end
+
 	local cooldownKey = tostring(casterPlayer.UserId) .. "_" .. actionName
 	if MassCompulsionCooldown[cooldownKey] then return end
 	MassCompulsionCooldown[cooldownKey] = true
@@ -1559,18 +1569,26 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 
 	-- Only the local player (caster) already knows their command; no chat bubble needed
 
-	local sound = Instance.new("Sound")
-	sound.SoundId = "rbxassetid://" .. soundInfo.Sound
-	sound.Volume = soundInfo.Volume or 2.5
-	configure3DAudio(sound)
-	sound:SetAttribute("IsLocalVoiceline", true)
+	local function doPlay()
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. soundInfo.Sound
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
 
-	parentSoundToBody(sound, character)
+		parentSoundToBody(sound, character)
 
-	sound:Play()
-	sound.Ended:Connect(function()
-		if sound and sound.Parent then sound:Destroy() end
-	end)
+		sound:Play()
+		sound.Ended:Connect(function()
+			if sound and sound.Parent then sound:Destroy() end
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
 end
 
 local ReplicatedAbilityEffect = ReplicatedStorage:FindFirstChild("Remotes")
