@@ -1180,7 +1180,7 @@ local AnimationSounds = {
 	},
 	["127428104014955"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Astral Projection
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
-    ["138457929259080"] = { Sound = "99610680956880", Volume = 1.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
+    ["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
 		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
 	},
