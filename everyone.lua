@@ -45,14 +45,12 @@ local function fadeOutSound(sound)
 	end)
 end
 
--- Configure 3D positional audio on a sound so it properly fades with distance
 local function configure3DAudio(sound)
 	sound.RollOffMode = Enum.RollOffMode.InverseTapered
 	sound.RollOffMinDistance = 10
 	sound.RollOffMaxDistance = 10000
 end
 
--- Find the best body part to parent a sound to for 3D positional audio
 local function findSoundParent(character)
 	if not character or not character.Parent then return nil end
 	local head = character:FindFirstChild("Head")
@@ -66,9 +64,6 @@ local function findSoundParent(character)
 	return nil
 end
 
--- Parent a sound to the character's body for 3D audio.
--- When the body part is destroyed, fade out immediately (never reparent to SoundService).
--- If no body part is found, parent to the character model itself as a last resort.
 local function parentSoundToBody(sound, character)
 	local parent = findSoundParent(character)
 	if parent then
@@ -77,7 +72,6 @@ local function parentSoundToBody(sound, character)
 			fadeOutSound(sound)
 		end)
 	elseif character and character.Parent then
-		-- Never parent to a Model (breaks 3D audio). Create an Attachment on a body part instead.
 		local attachPart = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChildWhichIsA("BasePart")
 		if attachPart then
 			local att = Instance.new("Attachment")
@@ -85,7 +79,6 @@ local function parentSoundToBody(sound, character)
 			sound.Parent = att
 			att.Destroying:Connect(function() fadeOutSound(sound) end)
 		else
-			-- No BasePart at all — skip playing rather than blast at full volume
 			sound:Destroy()
 			return false
 		end
@@ -93,7 +86,6 @@ local function parentSoundToBody(sound, character)
 	return true
 end
 
--- Known property keys that are NOT character overrides
 local KnownKeys = {
 	Sound = true,
 	Sounds = true,
@@ -122,13 +114,11 @@ end
 
 local function playAbilitySound(info, abilityName)
 
-	-- Skip own voicelines if disabled
 	if not LOCAL_VOICELINES_ENABLED then
 		Cooldowns[abilityName] = false
 		return
 	end
 
-	-- CharacterRequired check: skip if the player's character doesn't match
 	if info.CharacterRequired then
 		local charName = Players.LocalPlayer:GetAttribute("CharacterName")
 		if charName ~= info.CharacterRequired then
@@ -144,7 +134,6 @@ local function playAbilitySound(info, abilityName)
 	local chatText = nil
 	local simultaneousSoundId = nil
 
-	-- Cycling sounds support: if info.Sounds is a table, cycle through them
 	if info.Sounds and not charSound then
 		local index = SoundCycleIndex[abilityName] or 1
 		local entry = info.Sounds[index]
@@ -155,7 +144,6 @@ local function playAbilitySound(info, abilityName)
 		else
 			soundId = entry
 		end
-		-- Advance to next sound, wrap around after the last one
 		SoundCycleIndex[abilityName] = (index % #info.Sounds) + 1
 	else
 		soundId = charSound or info.Sound
@@ -174,7 +162,6 @@ local function playAbilitySound(info, abilityName)
 	configure3DAudio(sound)
 	sound:SetAttribute("IsLocalVoiceline", true)
 
-	-- Parent to the character for 3D positional audio so the sound comes from the player's model.
 	local character = Players.LocalPlayer.Character
 	if not parentSoundToBody(sound, character) then
 		Cooldowns[abilityName] = false
@@ -184,7 +171,6 @@ local function playAbilitySound(info, abilityName)
 	local oldSound = ActiveSounds[abilityName]
 	if oldSound and oldSound ~= sound then
 		if KeepPlayingSounds[oldSound] then
-			-- Don't stop KeepPlayingSound sounds, let them finish naturally
 		elseif info.FadeOut then
 			fadeOutSound(oldSound)
 		else
@@ -200,14 +186,12 @@ local function playAbilitySound(info, abilityName)
 		KeepPlayingSounds[sound] = true
 	end
 
-	-- Safety: auto-reset cooldown after timeout so it can never get permanently stuck
 	task.delay(COOLDOWN_TIMEOUT, function()
 		if Cooldowns[abilityName] then
 			Cooldowns[abilityName] = false
 		end
 	end)
 
-	-- Play simultaneous sound if provided
 	if simultaneousSoundId then
 		local simSound = Instance.new("Sound")
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
@@ -215,7 +199,6 @@ local function playAbilitySound(info, abilityName)
 		configure3DAudio(simSound)
 		simSound:SetAttribute("IsLocalVoiceline", true)
 
-		-- Parent to the character for 3D positional audio (same logic as main sound)
 		local character = Players.LocalPlayer.Character
 		parentSoundToBody(simSound, character)
 
@@ -236,13 +219,7 @@ local function playAbilitySound(info, abilityName)
 		end)
 	end
 
-	-- Show chat bubble if ChatText is provided
-	if chatText then
-		local character = Players.LocalPlayer.Character
-		if character then
-			game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
-		end
-	end
+
 
 	local function cleanup()
 		if ActiveSounds[abilityName] == sound then
@@ -258,13 +235,11 @@ local function playAbilitySound(info, abilityName)
 	end
 
 	if info.DelayTime then
-		-- Capture the sound reference for the closure to avoid variable capture issues
 		local delayedSound = sound
 		task.delay(info.DelayTime, function()
 			if ActiveSounds[abilityName] == delayedSound and delayedSound.Parent then
 				delayedSound:Play()
 			else
-				-- Clean up the delayed sound if it's no longer active
 				if delayedSound and delayedSound.Parent and not FadingSounds[delayedSound] then
 					delayedSound:Destroy()
 				end
@@ -287,16 +262,7 @@ local function playAbilitySound(info, abilityName)
 	end)
 end
 
--- [[ CLIENT-SIDE SOUND REPLACEMENT SYSTEM ]]
--- Replaces sounds played by other players/the server with your own custom sounds.
--- Only YOU hear the replacement. Everyone else still hears the original.
--- Formats:
---   Simple (all characters):  ["original ID"] = "replacement ID"
---   Character-specific only: ["original ID"] = { Replacement = "replacement ID", CharacterRequired = "Nora Hildegard" }
---   Per-character different:  ["original ID"] = { ["Nora Hildegard"] = "id1", ["Bonnie Bennett"] = "id2" }
-
 local SoundReplacements = {
-	-- Simple format (applies to all characters):
 	["105594719818558"] = "15366096625", -- Psychic Blast
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Suctus Incendia
@@ -305,21 +271,12 @@ local SoundReplacements = {
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = "13441892676", -- Harae
 	["14043844852"] = "13904360117", -- Heretic Joint Spell
-	-- Character-specific format (only replaces when Nora Hildegard plays it):
-	-- Per-character different replacements:
 
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
 
--- Helper: find which character a sound belongs to
--- 1) Walk up the parent hierarchy for Player/CharacterName attribute
--- 2) Match character model to a player
--- 3) Fallback: find the nearest player character by 3D distance (handles VFX parts)
 local function getSoundCharacterName(sound)
-	-- Returns: characterName, isDistanceFallback
-	-- isDistanceFallback is true when the name was guessed by proximity, not by parent hierarchy.
-	-- Distance fallback is unreliable for targeted abilities (sound near the target, not the caster).
 
 	local current = sound.Parent
 	while current do
@@ -343,10 +300,6 @@ local function getSoundCharacterName(sound)
 		end
 		current = current.Parent
 	end
-	-- Fallback: find nearest player character by 3D distance
-	-- This handles sounds in VFX parts that aren't parented to any character
-	-- Include the local player so their VFX sounds get attributed to them,
-	-- which causes the overlay/replace system to correctly skip them.
 	local soundPos = nil
 	if sound:IsA("Sound") and sound.Parent and sound.Parent:IsA("BasePart") then
 		soundPos = sound.Parent.Position
@@ -378,7 +331,6 @@ local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
 	if not localCharacter then return false, false end
 
-	-- Check: Is the sound parented inside the local player's character?
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
@@ -387,8 +339,6 @@ local function isLocalPlayerSound(sound)
 		current = current.Parent
 	end
 
-	-- Fallback: check if the sound is very close to the local player's character
-	-- This catches VFX sounds that aren't parented to the character but are still "yours"
 	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
 	if localHRP and localHRP:IsA("BasePart") then
 		local soundPos = nil
@@ -409,28 +359,20 @@ local function tryReplaceSound(sound)
 	if not sound:IsA("Sound") then return end
 	if ReplacedSounds[sound] then return end
 
-	-- (Local player sounds are no longer skipped — user wants to hear all replacements for their own sounds too)
-
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
 
 	if not entry then return end
 
-	-- Determine the replacement sound ID based on format
 	local replacementId
 	if type(entry) == "string" then
-		-- Simple format: ["id"] = "replacement_id" (applies to all characters)
 		replacementId = entry
 	else
-		-- Table format: check CharacterRequired first
 		if entry.CharacterRequired then
 			local charName, charIsDistFallback = getSoundCharacterName(sound)
-			-- Only skip if character name is confirmed via parent hierarchy.
-			-- Distance fallback is unreliable for targeted abilities (sound near target, not caster).
 			if charName ~= entry.CharacterRequired and not charIsDistFallback then return end
 		end
 
-		-- Check character-specific keys (like Data table pattern)
 		local charName, charIsDistFallback = getSoundCharacterName(sound)
 		if charName and entry[charName] and (not charIsDistFallback or entry.TrustDistanceFallback) then
 			replacementId = entry[charName]
@@ -441,7 +383,6 @@ local function tryReplaceSound(sound)
 		end
 	end
 
-	-- OncePerLifetime: skip if already played this character life
 	if entry.OncePerLifetime or (type(entry) == "string" and OncePerLifetimePlayed["replace_" .. id]) then
 		local key = "replace_" .. id
 		if OncePerLifetimePlayed[key] then return end
@@ -450,25 +391,19 @@ local function tryReplaceSound(sound)
 
 	ReplacedSounds[sound] = true
 
-	-- Mute the original sound so you don't hear it
 	sound.Volume = 0
 
-	-- Also mute it if it was already playing at some volume
-	-- (in case the server sets volume after we intercept)
 	sound:GetPropertyChangedSignal("Volume"):Connect(function()
 		if ReplacedSounds[sound] then
 			sound.Volume = 0
 		end
 	end)
 
-	-- Play your replacement from the same location as the original
-	-- so it respects 3D distance (fades with distance from camera)
 	local newSound = Instance.new("Sound")
 	newSound.SoundId = "rbxassetid://" .. replacementId
 	newSound.Volume = 2.5
 	configure3DAudio(newSound)
 
-	-- Determine KeepPlayingSound from the entry (table format only)
 	local keepPlaying = false
 	if type(entry) == "table" and entry.KeepPlayingSound then
 		keepPlaying = true
@@ -476,11 +411,9 @@ local function tryReplaceSound(sound)
 
 	local parent = sound.Parent
 
-	-- Never parent to SoundService or a Model — 3D audio only works on BasePart/Attachment
 	if parent == SoundService or (parent and parent:IsA("Model")) then
 		parent = nil
 	end
-	-- Only use the original parent if it's a BasePart or Attachment
 	if parent and not parent:IsA("BasePart") and not parent:IsA("Attachment") then
 		parent = nil
 	end
@@ -488,7 +421,6 @@ local function tryReplaceSound(sound)
 	if parent then
 		newSound.Parent = parent
 	else
-		-- Original sound has no valid 3D parent — try to find the character's body
 		local charName = getSoundCharacterName(sound)
 		local bodyParent = nil
 		if charName then
@@ -499,7 +431,6 @@ local function tryReplaceSound(sound)
 				end
 			end
 		end
-		-- If we still can't find a parent, try nearest player character by 3D distance
 		if not bodyParent then
 			local soundPos = nil
 			if sound.Parent and sound.Parent:IsA("BasePart") then
@@ -530,7 +461,6 @@ local function tryReplaceSound(sound)
 				if newSound and newSound.Parent then newSound:Destroy() end
 			end)
 		else
-			-- Can't find any BasePart parent — skip the replacement entirely
 			newSound:Destroy()
 			ReplacedSounds[sound] = nil
 			return
@@ -540,12 +470,10 @@ local function tryReplaceSound(sound)
 	newSound:Play()
 
 	if keepPlaying then
-		-- When the parent is destroyed, fade out instead of reparenting to SoundService
 		parent.Destroying:Connect(function()
 			fadeOutSound(newSound)
 		end)
 	else
-		-- Without KeepPlayingSound: fade out the replacement when the original sound ends/stops
 		if sound then
 			sound.Ended:Connect(function() fadeOutOverlaySound(newSound) end)
 			sound.Stopped:Connect(function() fadeOutOverlaySound(newSound) end)
@@ -554,8 +482,6 @@ local function tryReplaceSound(sound)
 				ReplacedSounds[sound] = nil
 			end)
 		end
-		-- When the parent part is destroyed, the replacement sound would also be destroyed
-		-- before it can fade out. Reparent it to a temporary holder so the fade completes.
 		if parent and parent ~= SoundService and not parent:IsA("Model") then
 			parent.Destroying:Connect(function()
 				if newSound and newSound.Parent then
@@ -578,23 +504,12 @@ local function tryReplaceSound(sound)
 		newSound:Destroy()
 	end)
 
-	-- If the original sound gets destroyed, clean up our reference
 	sound.Destroying:Connect(function()
 		ReplacedSounds[sound] = nil
 	end)
 end
 
--- [[ CLIENT-SIDE SOUND OVERLAY SYSTEM ]]
--- Plays an additional sound ON TOP of the original (does NOT mute the original).
--- When the original sound stops/ends, the overlay fades out too.
--- Supports DelayTime so the overlay can start after a delay.
--- Supports CharacterRequired to only overlay when a specific character plays the sound.
--- Formats:
---   All characters:  ["original ID"] = { Sound = "overlay ID", Volume = 2.5, DelayTime = 0, FadeOutDuration = 0.8 }
---   Character-specific: ["original ID"] = { Sound = "overlay ID", Volume = 2.5, CharacterRequired = "Nora Hildegard" }
-
 local SoundOverlays = {
-	-- Bonnie Bennett:
 	["120250468841070"] = {
 		Overlays = {
 			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
@@ -604,10 +519,8 @@ local SoundOverlays = {
 	["14523178169"] = {
 		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
-	-- Freya Mikaelson :
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
-	-- Qetsiyah :
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
 		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
@@ -616,7 +529,6 @@ local SoundOverlays = {
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 
-	-- Davina Claire :
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["10006479564"] = {
@@ -625,40 +537,33 @@ local SoundOverlays = {
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
-	-- Hope Mikaelson :
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
-	-- Esther Mikaelson :
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
-	-- Dark Josie :
 	["13154602444"] = {
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
 	},
 	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 0 }, -- Fiante Fulguris
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
-	-- Cleo Sowande :
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["90347973452829"] = { Sound = "92404277403294", Volume = 6, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 6, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0.2 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
-	-- Heretics :
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Mary Louise"] = { Sound = "79541636928372", Volume = 6, DelayTime = 0 }, -- Strangulo Ventus
 	},
-	-- Witch Abilities :
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
 		TrustDistanceFallback = true,
 	},
-	-- Elder Witches :
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
@@ -725,7 +630,6 @@ local function hasOverlayCharOverrides(info)
 end
 
 local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallback)
-	-- OncePerLifetime: skip if already played this character life
 	if overlayInfo.OncePerLifetime then
 		local key = "overlay_" .. overlayInfo.Sound
 		if OncePerLifetimePlayed[key] then return end
@@ -736,14 +640,9 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		if not charName then
 			charName, charIsDistFallback = getSoundCharacterName(sound)
 		end
-		-- Only skip if character name is confirmed via parent hierarchy.
-		-- Distance fallback is unreliable for targeted abilities (sound near target, not caster).
 		if charName ~= overlayInfo.CharacterRequired and not charIsDistFallback then return end
 	end
 
-	-- Capture the character model NOW (before any delay) so we can parent the overlay
-	-- to the character's body for proper 3D positional audio, even after a delay.
-	-- Without this, delayed overlays fall back to SoundService and play globally at full volume.
 	local capturedCharModel = nil
 	if sound and sound.Parent then
 		local current = sound.Parent
@@ -762,12 +661,9 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 	end
 
 	local function doPlay()
-		-- Deduplicate: if this overlay Sound ID is already playing, skip it
-		-- EXCEPT for KeepPlayingSound overlays: stop the old one and play fresh
 		local existing = ActiveOverlaySounds[overlayInfo.Sound]
 		if existing and existing.Parent and existing.IsPlaying then
 			if overlayInfo.KeepPlayingSound then
-				-- Stop old overlay so the new one plays fresh
 				existing:Stop()
 				existing:Destroy()
 				ActiveOverlaySounds[overlayInfo.Sound] = nil
@@ -775,23 +671,17 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 				return
 			end
 		end
-		-- Clear stale entry if the old overlay is gone
 		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
-		-- Parent to the character's body for 3D positional audio so the overlay
-		-- sounds like it comes from the body, not globally.
-		-- Never uses SoundService — sounds there play globally at full volume.
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
 			parent = findSoundParent(capturedCharModel)
 		end
 		if not parent and sound and sound.Parent then
-			-- Only use the original sound's parent if it's a BasePart or Attachment (3D audio works)
 			if sound.Parent:IsA("BasePart") or sound.Parent:IsA("Attachment") then
 				parent = sound.Parent
 			end
 		end
-		-- Never parent to SoundService or a Model — find a character body instead
 		if parent == SoundService or (parent and parent:IsA("Model")) then
 			parent = nil
 		end
@@ -807,7 +697,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			end
 		end
 		if not parent then
-			-- Try to find the nearest player character by 3D distance from the original sound
 			local soundPos = nil
 			if sound and sound.Parent then
 				if sound.Parent:IsA("BasePart") then
@@ -831,14 +720,11 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 					end
 				end
 			end
-			-- If we still can't find a BasePart parent, skip the overlay entirely
-			-- (don't fall back to Model or local player — that plays at full volume regardless of distance)
 			if not parent then
 				return
 			end
 		end
 
-		-- For KeepPlayingSound: stop any existing overlay with the same ID so the new one plays fresh
 		if overlayInfo.KeepPlayingSound then
 			local existing = ActiveOverlaySounds[overlayInfo.Sound]
 			if existing and existing.Parent then
@@ -858,21 +744,18 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 
 		ActiveOverlaySounds[overlayInfo.Sound] = ov
 
-		-- Self-cleanup when the overlay finishes
 		ov.Ended:Connect(function()
 			ActiveOverlaySounds[overlayInfo.Sound] = nil
 			if ov and ov.Parent then ov:Destroy() end
 		end)
 
 		if overlayInfo.KeepPlayingSound then
-			-- When the parent is destroyed, fade out instead of reparenting to SoundService
 			if parent and parent ~= SoundService then
 				parent.Destroying:Connect(function()
 					fadeOutSound(ov)
 				end)
 			end
 		else
-			-- Without KeepPlayingSound: fade out the overlay when the original sound ends/stops/is destroyed
 			local fadeDur = overlayInfo.FadeOutDuration
 			if sound then
 				sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
@@ -884,7 +767,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			end
 		end
 
-		-- Also clean up ActiveOverlaySounds if the overlay is destroyed unexpectedly
 		ov.Destroying:Connect(function()
 			if ActiveOverlaySounds[overlayInfo.Sound] == ov then
 				ActiveOverlaySounds[overlayInfo.Sound] = nil
@@ -892,7 +774,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		end)
 	end
 
-	-- Clean up OverlayTracked when the original sound is destroyed (for KeepPlayingSound overlays)
 	if sound and overlayInfo.KeepPlayingSound then
 		sound.Destroying:Connect(function()
 			OverlayTracked[sound] = nil
@@ -904,7 +785,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 	elseif sound and sound.IsPlaying then
 		doPlay()
 	elseif sound then
-		-- Sound not playing yet — listen for it to start, with a timeout fallback
 		local played = false
 		local conn
 		conn = sound.Played:Connect(function()
@@ -912,8 +792,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			if conn then conn:Disconnect() end
 			doPlay()
 		end)
-		-- Fallback: if the sound starts playing before our listener was set up,
-		-- or if Played never fires, check again shortly
 		task.delay(0.1, function()
 			if conn then conn:Disconnect() end
 			if not played and sound and sound.Parent and sound.IsPlaying then
@@ -927,15 +805,10 @@ local function tryOverlaySound(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
 
-	-- (Local player sounds are no longer skipped — user wants to hear all overlays for their own sounds too)
-
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
 	if not entry then return end
 
-	-- Debounce: if we already created an overlay for this original sound ID recently,
-	-- skip it. This prevents abilities like Illusion Attack (which creates 5 duplicate
-	-- original sounds) from playing the overlay 5 times.
 	if OverlayOriginalDebounce[id] then
 		OverlayTracked[sound] = true
 		return
@@ -949,7 +822,6 @@ local function tryOverlaySound(sound)
 	OverlayTracked[sound] = true
 	local charName, isDistanceFallback = getSoundCharacterName(sound)
 
-	-- Multiple overlays that all play (Overlays array)
 	if entry.Overlays then
 		for _, overlayInfo in ipairs(entry.Overlays) do
 			playSingleOverlay(sound, overlayInfo, charName, isDistanceFallback)
@@ -957,12 +829,6 @@ local function tryOverlaySound(sound)
 		return
 	end
 
-	-- Per-character overlays (character name keys)
-	-- IMPORTANT: Skip if charName came from the distance fallback.
-	-- Targeted abilities create sounds near the TARGET, not the caster.
-	-- If we trust the distance fallback, we'd play Mary Louise's overlay
-	-- when someone else uses Vido ON her — which is wrong.
-	-- Only trust the parent hierarchy (isDistanceFallback == false) for character-specific overlays.
 	if hasOverlayCharOverrides(entry) then
 		if charName and entry[charName] and (not isDistanceFallback or entry.TrustDistanceFallback) then
 			playSingleOverlay(sound, entry[charName], charName, isDistanceFallback)
@@ -972,22 +838,12 @@ local function tryOverlaySound(sound)
 		return
 	end
 
-	-- Simple overlay (Sound key, optional CharacterRequired)
 	if entry.Sound then
 		playSingleOverlay(sound, entry, charName, isDistanceFallback)
 	end
 end
 
--- [[ ANIMATION-BASED SOUND OVERLAY SYSTEM ]]
--- Plays an additional sound ON TOP of the animation (does NOT mute/replace anything).
--- Uses the same bracket format as SoundOverlays for character-specific entries.
--- Formats:
---   All characters:  ["animation_id"] = { Sound = "sound_id", Volume = 2.5, DelayTime = 0 }
---   Per-character:   ["animation_id"] = { ["Mary Louise"] = { Sound = "id1", Volume = 2.5, DelayTime = 0 }, ["Nora Hildegard"] = { Sound = "id2", Volume = 2.5, DelayTime = 0 } }
---   CutOffWithAnimation: set to true to stop the overlay sound when the animation track ends (default: sound plays to completion)
-
 local AnimationSounds = {
-	-- All characters hear the same overlay when this animation plays:
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
@@ -1016,7 +872,6 @@ local AnimationSounds = {
 	["15424577510"] = {
 		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5 }, -- Life Linking
 	},
-	-- Per-character (bracket format, same as SoundOverlays):
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
 	},
@@ -1065,7 +920,6 @@ local AnimationSounds = {
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
-	-- Qetsiyah's Brain Fry - all animation variants (front + behind)
 	["12955966256"] = {
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStart
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
@@ -1084,7 +938,6 @@ local AnimationSounds = {
 	},
 	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
 	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
-	-- Vampire Abilities :
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
@@ -1133,7 +986,6 @@ local AnimationSounds = {
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
-	-- Elder Witches :
 	["109730789965953"] = {
 		["Bastianna Natale"] = { Sound = "83432170862902", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	    ["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
@@ -1199,7 +1051,6 @@ local function playAnimSound(animId, character, charName, track)
 	local entry = AnimationSounds[animId]
 	if not entry then return end
 
-	-- Determine which sound info to use
 	local soundInfo
 	if hasAnimCharOverrides(entry) then
 		if charName and entry[charName] then
@@ -1213,15 +1064,12 @@ local function playAnimSound(animId, character, charName, track)
 
 	if not soundInfo or not soundInfo.Sound then return end
 
-	-- OncePerLifetime: skip if already played this character life
 	if soundInfo.OncePerLifetime then
 		local key = "anim_" .. soundInfo.Sound
 		if OncePerLifetimePlayed[key] then return end
 		OncePerLifetimePlayed[key] = true
 	end
 
-	-- Debounce to prevent sound spam
-	-- GroupCooldown: shared cooldown across ALL characters for this animation (prevents echo)
 	local key, cooldownTime
 	if entry.GroupCooldown then
 		key = animId .. "_group" -- shared key so any character blocks all others
@@ -1236,9 +1084,7 @@ local function playAnimSound(animId, character, charName, track)
 		AnimSoundCooldowns[key] = nil
 	end)
 
-	-- Play the overlay sound (plays ON TOP, does NOT mute/replace anything)
 	local function doPlay()
-		-- If CutOffWithAnimation is on, don't play if the animation already ended
 		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
 			AnimSoundCooldowns[key] = nil
 			return
@@ -1250,12 +1096,10 @@ local function playAnimSound(animId, character, charName, track)
 		configure3DAudio(sound)
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		-- Parent to character body for 3D positional audio
 		parentSoundToBody(sound, character)
 
 		sound:Play()
 
-		-- Play simultaneous sound if provided
 		if soundInfo.SimultaneousSound then
 			local simSound = Instance.new("Sound")
 			simSound.SoundId = "rbxassetid://" .. normalize(soundInfo.SimultaneousSound)
@@ -1275,7 +1119,6 @@ local function playAnimSound(animId, character, charName, track)
 				simSound:Play()
 			end
 
-			-- CutOffWithAnimation: fade out the simultaneous sound too
 			if soundInfo.CutOffWithAnimation and track then
 				track.Ended:Connect(function()
 					if simSound and simSound.Parent then
@@ -1291,7 +1134,6 @@ local function playAnimSound(animId, character, charName, track)
 			end
 		end
 
-		-- CutOffWithAnimation: fade out the overlay when the animation track ends
 		if soundInfo.CutOffWithAnimation and track then
 			track.Ended:Connect(function()
 				if sound and sound.Parent then
@@ -1300,9 +1142,7 @@ local function playAnimSound(animId, character, charName, track)
 				AnimSoundCooldowns[key] = nil
 			end)
 		elseif soundInfo.KeepPlayingSound then
-			-- KeepPlayingSound fade-out is already handled by parentSoundToBody above
 		else
-			-- Auto-cleanup after sound ends
 			sound.Ended:Connect(function()
 				if sound and sound.Parent then
 					sound:Destroy()
@@ -1311,13 +1151,11 @@ local function playAnimSound(animId, character, charName, track)
 			end)
 		end
 
-		-- Safety: auto-reset cooldown after timeout
 		task.delay(COOLDOWN_TIMEOUT, function()
 			AnimSoundCooldowns[key] = nil
 		end)
 	end
 
-	-- Support DelayTime (same as SoundOverlays)
 	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
 		task.delay(soundInfo.DelayTime, doPlay)
 	else
@@ -1347,7 +1185,6 @@ local function hookAnimator(animator, character)
 		local animId = normalize(anim.AnimationId)
 		if animId == "" or animId == "0" then return end
 
-		-- For local player: skip if local voicelines are disabled
 		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
 			return
 		end
@@ -1356,7 +1193,6 @@ local function hookAnimator(animator, character)
 		playAnimSound(animId, character, charName, track)
 	end)
 
-	-- Clean up tracking when animator is destroyed
 	animator.Destroying:Connect(function()
 		hookedAnimators[animator] = nil
 	end)
@@ -1370,7 +1206,6 @@ local function hookCharacterAnimations(character)
 		if animator then
 			hookAnimator(animator, character)
 		else
-			-- Animator might be created later (e.g. after character fully loads)
 			local conn
 			conn = humanoid.ChildAdded:Connect(function(child)
 				if child:IsA("Animator") then
@@ -1378,7 +1213,6 @@ local function hookCharacterAnimations(character)
 					hookAnimator(child, character)
 				end
 			end)
-			-- Fallback: try again after a short delay
 			task.delay(3, function()
 				if conn then conn:Disconnect() end
 				local anim = humanoid:FindFirstChildOfClass("Animator")
@@ -1393,7 +1227,6 @@ local function hookCharacterAnimations(character)
 	if humanoid then
 		tryHook(humanoid)
 	else
-		-- Humanoid might not exist yet after respawn — wait for it
 		local conn
 		conn = character.ChildAdded:Connect(function(child)
 			if child:IsA("Humanoid") then
@@ -1401,7 +1234,6 @@ local function hookCharacterAnimations(character)
 				tryHook(child)
 			end
 		end)
-		-- Fallback: retry after a short delay
 		task.delay(5, function()
 			if conn then conn:Disconnect() end
 			local h = character:FindFirstChildOfClass("Humanoid")
@@ -1412,18 +1244,15 @@ local function hookCharacterAnimations(character)
 	end
 end
 
--- Reset OncePerLifetime tracking on respawn
 Players.LocalPlayer.CharacterAdded:Connect(function()
 	OncePerLifetimePlayed = {}
 end)
 
--- Hook local player's character
 Players.LocalPlayer.CharacterAdded:Connect(hookCharacterAnimations)
 if Players.LocalPlayer.Character then
 	hookCharacterAnimations(Players.LocalPlayer.Character)
 end
 
--- Hook other players' characters
 local function onOtherPlayerAdded(player)
 	player.CharacterAdded:Connect(hookCharacterAnimations)
 	if player.Character then
@@ -1437,10 +1266,6 @@ for _, player in Players:GetPlayers() do
 		onOtherPlayerAdded(player)
 	end
 end
-
--- [[ CHAT-BASED VOICELINE TRIGGERS ]]
--- Plays a sound when a specific character sends a chat message matching specific text.
--- Uses TextChatService.MessageReceived for reliable detection (no UI scraping).
 
 local ChatVoicelineSounds = {
 	["Suffer"] = "17560604010",
@@ -1477,7 +1302,6 @@ local function onChatMessageReceived(textChatMessage)
 	end
 	if not chatEntry then return end
 
-	-- Resolve sound ID: per-character format or simple string
 	local charName = player:GetAttribute("CharacterName")
 	if type(chatEntry) == "string" then
 		soundId = chatEntry
@@ -1514,23 +1338,22 @@ end
 
 TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
--- [[ MASS COMPUSSION SOUND SYSTEM ]]
--- Detects Mass Compulsion actions via ReplicatedAbilityEffect and plays the corresponding sound.
--- The compulsion commands don't go through real chat, so we hook into the ability replication event.
--- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
-
 local MassCompulsionSounds = {
 	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint",
 		["Silas"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["The Trickster"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 	},
 	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer",
 		["Silas"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["The Trickster"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 	},
 	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack",
 		["Silas"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["The Trickster"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 	},
 	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move",
 		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["The Trickster"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 	},
 }
 
@@ -1544,7 +1367,6 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local soundInfo = MassCompulsionSounds[actionName]
 	if not soundInfo then return end
 
-	-- Check for character-specific override
 	local casterCharName = casterPlayer:GetAttribute("CharacterName")
 	if casterCharName and soundInfo[casterCharName] then
 		soundInfo = soundInfo[casterCharName]
@@ -1558,18 +1380,14 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local character = casterPlayer.Character
 	if not character then return end
 
-	-- Show chat bubble if ChatText is provided (so other players see the command)
 	local chatText = soundInfo.ChatText
 	if not chatText then
-		-- Fallback: check top-level entry for ChatText if character override was used
 		local topLevelInfo = MassCompulsionSounds[actionName]
 		if topLevelInfo and topLevelInfo.ChatText then
 			chatText = topLevelInfo.ChatText
 		end
 	end
-	if chatText then
-		game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
-	end
+
 
 	local function doPlay()
 		local sound = Instance.new("Sound")
@@ -1603,17 +1421,14 @@ if ReplicatedAbilityEffect then
 		if abilityName ~= "Mass Compulsion" then return end
 
 		if methodName == "effect" then
-			-- effect(p1, casterPlayer, victimList) — track the caster
 			local _, casterPlayer = ...
 			if casterPlayer and casterPlayer:IsA("Player") then
 				LastMassCompulsionCaster = casterPlayer
 			end
 		elseif methodName == "applyAction" then
-			-- applyAction(actionName, subMethod, arg)
 			local actionName = ...
 			local caster = LastMassCompulsionCaster
 
-			-- Fallback: if we didn't track the caster from effect, search for CasterAttachment
 			if not caster then
 				for _, player in Players:GetPlayers() do
 					if player.Character then
@@ -1633,33 +1448,14 @@ if ReplicatedAbilityEffect then
 	end)
 end
 
--- [[ PARTICLE DETECTION SOUND SYSTEM ]]
--- Detects specific ParticleEmitters on characters and plays a sound from their position.
--- When the particle is removed, the sound fades out.
--- Supports KeepPlayingSound so the sound continues even after the particle is gone.
--- Supports CharacterRequired to only trigger for specific characters (the character the particle is ON).
--- Supports CasterRequired to only trigger when a specific character CAST the ability.
---   Since the caster isn't stored on the particle, CasterRequired checks if a player
---   with that CharacterName is within range of the victim (they'd be nearby when casting).
--- Supports DebounceTime to prevent re-triggering too quickly.
-
 local ParticleSounds = {
-	-- Per-character format (like SoundOverlays):
-	-- ["ParticleEmitterName"] = {
-	-- 	["Character Name"] = { Sound = "soundId", Volume = 2.5, KeepPlayingSound = false, DelayTime = 0, DebounceTime = 0 },
-	-- },
-	-- Simple format (applies to all characters):
-	-- ["ParticleEmitterName"] = { Sound = "soundId", Volume = 2.5 },
 
-	-- AdSomnum (Sleep) particle
 	["AdSomnumSleep"] = {
 		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 3, DelayTime = 1, KeepPlayingSound = true },
 	},
 
-	-- Immobilus (Stun) spiral on victim
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
 
-	-- Pain effect on victim
 	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
 }
 
@@ -1674,7 +1470,6 @@ local function getCharacterFromParticle(particle)
 		end
 		current = current.Parent
 	end
-	-- Fallback: check if parent is a body part inside a character
 	if particle.Parent and particle.Parent:IsA("BasePart") then
 		local partParent = particle.Parent.Parent
 		if partParent and partParent:IsA("Model") and partParent:FindFirstChildOfClass("Humanoid") then
@@ -1704,20 +1499,14 @@ local function tryPlayParticleSound(particle)
 	local character = getCharacterFromParticle(particle)
 	if not character then return end
 
-	-- Skip if this is the local player's character (optional, remove if you want to hear your own)
-	local localChar = Players.LocalPlayer.Character
-	if character == localChar then return end
 
-	-- Resolve entry: per-character format vs simple format
 	local charName = getCharacterNameFromModel(character)
 	local resolvedEntry = nil
 
 	if type(entry) == "table" then
-		-- Check for per-character key first
 		if charName and entry[charName] then
 			resolvedEntry = entry[charName]
 		elseif entry.Sound then
-			-- Simple format (no character sub-keys, just direct properties)
 			resolvedEntry = entry
 		end
 	else
@@ -1726,8 +1515,6 @@ local function tryPlayParticleSound(particle)
 
 	if not resolvedEntry then return end
 
-	-- CasterRequired check (the character who CAST the ability)
-	-- Checks if a player with that CharacterName is within range of the victim
 	if resolvedEntry.CasterRequired then
 		local victimHRP = character:FindFirstChild("HumanoidRootPart")
 		if not victimHRP then return end
@@ -1744,11 +1531,9 @@ local function tryPlayParticleSound(particle)
 		if not foundCaster then return end
 	end
 
-	-- Debounce check
 	local debounceKey = particle.Name .. "_" .. (charName or "unknown")
 	if resolvedEntry.DebounceTime and ParticleDebounce[debounceKey] then return end
 
-	-- Play the sound from the character's body
 	local function doPlay()
 		if not particle or not particle.Parent then return end -- particle was removed during delay
 		local sound = Instance.new("Sound")
@@ -1763,7 +1548,6 @@ local function tryPlayParticleSound(particle)
 		sound:Play()
 		ActiveParticleSounds[particle] = sound
 
-		-- Handle particle removal
 		local keepPlaying = resolvedEntry.KeepPlayingSound or false
 
 		if keepPlaying then
@@ -1793,7 +1577,6 @@ local function tryPlayParticleSound(particle)
 		end)
 	end
 
-	-- Debounce
 	if resolvedEntry.DebounceTime and resolvedEntry.DebounceTime > 0 then
 		ParticleDebounce[debounceKey] = true
 		task.delay(resolvedEntry.DebounceTime, function() ParticleDebounce[debounceKey] = nil end)
@@ -1806,40 +1589,7 @@ local function tryPlayParticleSound(particle)
 	end
 end
 
--- [[ ANIMATION + SOUND COMBO DETECTION SYSTEM ]]
--- Detects when a specific animation AND a specific sound play together on the same character
--- within a short time window, then plays an additional voiceline sound.
--- This is useful when you only want a voiceline to play if BOTH the animation and sound
--- fire together (e.g. to avoid false triggers from animation-only or sound-only events).
---
--- Format:
---   ["combo_key"] = {
---       AnimationId = "animation_id",
---       SoundId = "sound_id",
---       Sound = "voiceline_id",
---       Volume = 2.5,
---       DelayTime = 0,
---       KeepPlayingSound = false,
---       CutOffWithAnimation = false,
---       CharacterRequired = "Character Name",  -- optional: only trigger for this character
---       WindowTime = 0.5,  -- max seconds between animation and sound to count as a combo (default 0.5)
---   }
---   Per-character format (string ID):
---   ["combo_key"] = {
---       AnimationId = "animation_id",
---       SoundId = "sound_id",
---       ["Hope Mikaelson"] = "id1",
---       ["Mary Louise"] = "id2",
---   }
---   Per-character format (table with options):
---   ["combo_key"] = {
---       AnimationId = "animation_id",
---       SoundId = "sound_id",
---       ["Hope Mikaelson"] = { Sound = "id1", Volume = 2.5 },
---   }
-
 local AnimationSoundCombos = {
-	-- Example entries (uncomment and customize):
 	 ["Somnus"] = {
 		AnimationId = "6713148336",
 		SoundId = "13154602444",
@@ -1872,16 +1622,13 @@ local function hasComboCharOverrides(info)
 	return false
 end
 
--- Track recent animation plays per character: [character] = { [animId] = { time = tick(), track = track } }
 local RecentAnimPlays = {}
--- Track recent sound plays per character: [character] = { [soundId] = { time = tick(), sound = soundInstance } }
 local RecentSoundPlays = {}
 
 local ComboCooldowns = {}
 local COMBO_COOLDOWN = 1 -- seconds between same combo triggering
 
 local function playComboSound(comboEntry, character, charName, track)
-	-- Resolve which sound info to use (per-character or simple)
 	local soundInfo
 	if hasComboCharOverrides(comboEntry) then
 		if charName and comboEntry[charName] then
@@ -1893,13 +1640,10 @@ local function playComboSound(comboEntry, character, charName, track)
 		soundInfo = comboEntry
 	end
 
-	-- Support string format: ["Hope Mikaelson"] = "id" (convert to table)
 	if type(soundInfo) == "string" then
 		soundInfo = { Sound = soundInfo }
 	end
 
-	-- Merge top-level defaults (Volume, KeepPlayingSound, DelayTime, etc.) into character overrides
-	-- so you don't have to repeat them inside every character sub-table
 	if soundInfo ~= comboEntry then
 		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
 			if soundInfo[key] == nil and comboEntry[key] ~= nil then
@@ -1910,12 +1654,10 @@ local function playComboSound(comboEntry, character, charName, track)
 
 	if not soundInfo or not soundInfo.Sound then return end
 
-	-- CharacterRequired check
 	if soundInfo.CharacterRequired then
 		if charName ~= soundInfo.CharacterRequired then return end
 	end
 
-	-- Cooldown check
 	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.SoundId or "") .. "_" .. (charName or "unknown")
 	if ComboCooldowns[cooldownKey] then return end
 	ComboCooldowns[cooldownKey] = true
@@ -1924,7 +1666,6 @@ local function playComboSound(comboEntry, character, charName, track)
 	end)
 
 	local function doPlay()
-		-- If CutOffWithAnimation is on, don't play if the animation already ended
 		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
 			ComboCooldowns[cooldownKey] = nil
 			return
@@ -1940,7 +1681,6 @@ local function playComboSound(comboEntry, character, charName, track)
 
 		sound:Play()
 
-		-- CutOffWithAnimation: fade out when the animation track ends
 		if soundInfo.CutOffWithAnimation and track then
 			track.Ended:Connect(function()
 				if sound and sound.Parent then
@@ -1949,7 +1689,6 @@ local function playComboSound(comboEntry, character, charName, track)
 				ComboCooldowns[cooldownKey] = nil
 			end)
 		elseif soundInfo.KeepPlayingSound then
-			-- KeepPlayingSound: sound continues even after animation/sound end
 		else
 			sound.Ended:Connect(function()
 				if sound and sound.Parent then
@@ -1959,7 +1698,6 @@ local function playComboSound(comboEntry, character, charName, track)
 			end)
 		end
 
-		-- Safety: auto-reset cooldown after timeout
 		task.delay(COOLDOWN_TIMEOUT, function()
 			ComboCooldowns[cooldownKey] = nil
 		end)
@@ -1973,24 +1711,20 @@ local function playComboSound(comboEntry, character, charName, track)
 end
 
 local function checkCombosForAnimation(animId, character, charName, track)
-	-- Record this animation play
 	if not RecentAnimPlays[character] then
 		RecentAnimPlays[character] = {}
 	end
 	RecentAnimPlays[character][animId] = { time = tick(), track = track }
 
-	-- Check all combos for this animation ID
 	for _, comboEntry in pairs(AnimationSoundCombos) do
 		if normalize(comboEntry.AnimationId) == animId then
 			local soundId = normalize(comboEntry.SoundId)
 			local windowTime = comboEntry.WindowTime or 0.5
 
-			-- Check if the matching sound was recently played on this character
 			local soundPlays = RecentSoundPlays[character]
 			if soundPlays and soundPlays[soundId] then
 				local elapsed = tick() - soundPlays[soundId].time
 				if elapsed <= windowTime then
-					-- Combo detected! Play the combo sound
 					playComboSound(comboEntry, character, charName, track)
 				end
 			end
@@ -1999,24 +1733,20 @@ local function checkCombosForAnimation(animId, character, charName, track)
 end
 
 local function checkCombosForSound(soundId, character, charName, soundInstance)
-	-- Record this sound play
 	if not RecentSoundPlays[character] then
 		RecentSoundPlays[character] = {}
 	end
 	RecentSoundPlays[character][soundId] = { time = tick(), sound = soundInstance }
 
-	-- Check all combos for this sound ID
 	for _, comboEntry in pairs(AnimationSoundCombos) do
 		if normalize(comboEntry.SoundId) == soundId then
 			local animId = normalize(comboEntry.AnimationId)
 			local windowTime = comboEntry.WindowTime or 0.5
 
-			-- Check if the matching animation was recently played on this character
 			local animPlays = RecentAnimPlays[character]
 			if animPlays and animPlays[animId] then
 				local elapsed = tick() - animPlays[animId].time
 				if elapsed <= windowTime then
-					-- Combo detected! Play the combo sound
 					playComboSound(comboEntry, character, charName, animPlays[animId].track)
 				end
 			end
@@ -2024,7 +1754,6 @@ local function checkCombosForSound(soundId, character, charName, soundInstance)
 	end
 end
 
--- Clean up stale entries periodically to prevent memory leaks
 task.spawn(function()
 	while true do
 		task.wait(5)
@@ -2054,8 +1783,6 @@ task.spawn(function()
 	end
 end)
 
--- Hook into the existing animation detection to also check combos
--- We wrap the existing hookAnimator to also call checkCombosForAnimation
 local originalHookAnimator = hookAnimator
 hookAnimator = function(animator, character)
 	if hookedAnimators[animator] then return end
@@ -2068,41 +1795,32 @@ hookAnimator = function(animator, character)
 		local animId = normalize(anim.AnimationId)
 		if animId == "" or animId == "0" then return end
 
-		-- For local player: skip if local voicelines are disabled
 		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
 			return
 		end
 
 		local charName = getAnimCharName(character)
 
-		-- Play animation-based sounds (existing system)
 		playAnimSound(animId, character, charName, track)
 
-		-- Check animation+sound combos (new system)
 		checkCombosForAnimation(animId, character, charName, track)
 	end)
 
-	-- Clean up tracking when animator is destroyed
 	animator.Destroying:Connect(function()
 		hookedAnimators[animator] = nil
 	end)
 end
 
--- Hook into sound detection to also check combos
--- We wrap the existing tryOverlaySound to also call checkCombosForSound
 local originalTryOverlaySound = tryOverlaySound
 tryOverlaySound = function(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
 
-	-- Call original overlay logic
 	originalTryOverlaySound(sound)
 
-	-- Check animation+sound combos
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	if id == "" then return end
 
-	-- Find which character this sound belongs to
 	local character = nil
 	local current = sound.Parent
 	while current do
@@ -2124,23 +1842,18 @@ tryOverlaySound = function(sound)
 	end
 end
 
--- [[ END ANIMATION + SOUND COMBO DETECTION SYSTEM ]]
-
--- Scan existing particles
 for _, desc in game:GetDescendants() do
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
 end
 
--- Catch new instances added during gameplay
 game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
 end)
 
--- Also detect when particles get enabled (they might exist but be disabled initially)
 game.DescendantAdded:Connect(function(desc)
 	if desc:IsA("ParticleEmitter") then
 		desc:GetPropertyChangedSignal("Enabled"):Connect(function()
