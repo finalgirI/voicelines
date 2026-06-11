@@ -684,7 +684,7 @@ local SoundOverlays = {
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
-	["18193005989"] = { Sound = "98703979367465", Volume = 5, DelayTime = 0 }, -- Forget to breathe
+	--["18193005989"] = { Sound = "98703979367465", Volume = 5, DelayTime = 0 }, -- Forget to breathe
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -1465,18 +1465,11 @@ end
 -- Uses TextChatService.MessageReceived for reliable detection (no UI scraping).
 
 local ChatVoicelineSounds = {
-	["Suffer"] = {
-		["Silas"] = "17560604010",
-	},
-	["Attack"] = {
-		["Silas"] = "17560606672",
-	},
-	["Everybody faint"] = {
-		["Silas"] = "17560602849",
-	},
-	["Nobody move"] = {
-		["Silas"] = "17560600778",
-	},
+	["Suffer"] = "17560604010",
+	["Attack"] = "17560606672",
+	["Everybody faint"] = "17560602849",
+	["Nobody move"] = "17560600778",
+	["Forget to breathe"] = "98703979367465",
 }
 
 local ChatVoicelineCooldown = {}
