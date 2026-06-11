@@ -1074,7 +1074,7 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 		["Bonnie Bennett"] = { Sound = "80761083713462", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
-	["126225947243763"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
+	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
