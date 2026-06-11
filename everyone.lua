@@ -660,6 +660,7 @@ local SoundOverlays = {
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+		["Mary Louise"] = { Sound = "79541636928372", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 	},
 	-- Witch Abilities :
 	["89539286902417"] = {
@@ -1015,10 +1016,10 @@ local AnimationSounds = {
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["87439615254048"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Soul Bind
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["15619485183"] = { Sound = "95435320218587", Volume = 3.2, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
-	["17253129249"] = { Sound = "123143857916410", Volume = 2.5, DelayTime = 3, KeepPlayingSound = true }, -- Disguise
 	["8118882336"] = {
 		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
 	},
@@ -1054,6 +1055,9 @@ local AnimationSounds = {
 	["71157109677249"] = {
 		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
 	},
+	["13721687618"] = {
+		["Mary Louise"] = { Sound = "101738888339389", Volume = 2.5, DelayTime = 0 }, -- Super Punch
+	},
 	["16794479576"] = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
 	},
@@ -1070,8 +1074,9 @@ local AnimationSounds = {
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
-	["10512733733"] = {
+	["80761083713462"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Bonnie Bennett"] = { Sound = "80761083713462", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 2.5, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
@@ -1087,7 +1092,7 @@ local AnimationSounds = {
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-    ["136980766359708"] = { Sound = "129676323948552", Volume = 2.5, DelayTime = 1, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -1100,10 +1105,12 @@ local AnimationSounds = {
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Mary Louise"] = { Sound = "72478658775676", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Mary Louise"] = { Sound = "79352381719423", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1138,7 +1145,7 @@ local AnimationSounds = {
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Mary Louise"] = { Sound = "76991721803834", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Mary Louise"] = { Sound = "105517213066097", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
