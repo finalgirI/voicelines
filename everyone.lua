@@ -315,6 +315,7 @@ local SoundReplacements = {
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = "13441892676", -- Harae
+	["14043844852"] = "13904360117", -- Heretic Joint Spell
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
 
@@ -1154,16 +1155,6 @@ local AnimationSounds = {
 	    ["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
 	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
-	["14004031633"] = {
-		GroupCooldown = 10, -- shared 10s cooldown across ALL characters to prevent echo
-		["Valerie Tulle"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Mary Louise"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Nora Hildegard"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Dark Josie"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Oscar"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Malcolm"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-		["Beau"] = { Sound = "13904360117", Volume = 2.5, DelayTime = 1.3, KeepPlayingSound = true }, -- HereticJointSpell holdMiddle
-	},
 	["12955990988"] = {
 		["Qetsiyah"] = { Sound = "105550543421825", Volume = 2.5, DelayTime = 0 }, -- Brain Fry casterStartBehind
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
