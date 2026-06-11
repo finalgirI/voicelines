@@ -1099,6 +1099,7 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
 	},
+	["13302728573"] = { Sound = "13203446447", Volume = 2.5, DelayTime = 0 }, -- Autem
 	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
 	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	-- Vampire Abilities :
