@@ -1802,6 +1802,326 @@ local function tryPlayParticleSound(particle)
 	end
 end
 
+-- [[ ANIMATION + SOUND COMBO DETECTION SYSTEM ]]
+-- Detects when a specific animation AND a specific sound play together on the same character
+-- within a short time window, then plays an additional voiceline sound.
+-- This is useful when you only want a voiceline to play if BOTH the animation and sound
+-- fire together (e.g. to avoid false triggers from animation-only or sound-only events).
+--
+-- Format:
+--   ["combo_key"] = {
+--       AnimationId = "animation_id",
+--       SoundId = "sound_id",
+--       Sound = "voiceline_id",
+--       Volume = 2.5,
+--       DelayTime = 0,
+--       KeepPlayingSound = false,
+--       CutOffWithAnimation = false,
+--       CharacterRequired = "Character Name",  -- optional: only trigger for this character
+--       WindowTime = 0.5,  -- max seconds between animation and sound to count as a combo (default 0.5)
+--   }
+--   Per-character format (string ID):
+--   ["combo_key"] = {
+--       AnimationId = "animation_id",
+--       SoundId = "sound_id",
+--       ["Hope Mikaelson"] = "id1",
+--       ["Mary Louise"] = "id2",
+--   }
+--   Per-character format (table with options):
+--   ["combo_key"] = {
+--       AnimationId = "animation_id",
+--       SoundId = "sound_id",
+--       ["Hope Mikaelson"] = { Sound = "id1", Volume = 2.5 },
+--   }
+
+local AnimationSoundCombos = {
+	-- Example entries (uncomment and customize):
+	 ["Somnus"] = {
+		AnimationId = "6713148336",
+		SoundId = "89539286902417",
+		["Davina Claire"] = "95823566800088",
+	 	Volume = 9,
+        KeepPlayingSound = true,
+	 	DelayTime = 0,
+	 	WindowTime = 0.5,
+	 },
+}
+
+local ComboKnownKeys = {
+	AnimationId = true,
+	SoundId = true,
+	Sound = true,
+	Volume = true,
+	DelayTime = true,
+	KeepPlayingSound = true,
+	CutOffWithAnimation = true,
+	CharacterRequired = true,
+	WindowTime = true,
+}
+
+local function hasComboCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not ComboKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+-- Track recent animation plays per character: [character] = { [animId] = { time = tick(), track = track } }
+local RecentAnimPlays = {}
+-- Track recent sound plays per character: [character] = { [soundId] = { time = tick(), sound = soundInstance } }
+local RecentSoundPlays = {}
+
+local ComboCooldowns = {}
+local COMBO_COOLDOWN = 1 -- seconds between same combo triggering
+
+local function playComboSound(comboEntry, character, charName, track)
+	-- Resolve which sound info to use (per-character or simple)
+	local soundInfo
+	if hasComboCharOverrides(comboEntry) then
+		if charName and comboEntry[charName] then
+			soundInfo = comboEntry[charName]
+		else
+			return -- No matching character override
+		end
+	else
+		soundInfo = comboEntry
+	end
+
+	-- Support string format: ["Hope Mikaelson"] = "id" (convert to table)
+	if type(soundInfo) == "string" then
+		soundInfo = { Sound = soundInfo }
+	end
+
+	-- Merge top-level defaults (Volume, KeepPlayingSound, DelayTime, etc.) into character overrides
+	-- so you don't have to repeat them inside every character sub-table
+	if soundInfo ~= comboEntry then
+		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
+			if soundInfo[key] == nil and comboEntry[key] ~= nil then
+				soundInfo[key] = comboEntry[key]
+			end
+		end
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	-- CharacterRequired check
+	if soundInfo.CharacterRequired then
+		if charName ~= soundInfo.CharacterRequired then return end
+	end
+
+	-- Cooldown check
+	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.SoundId or "") .. "_" .. (charName or "unknown")
+	if ComboCooldowns[cooldownKey] then return end
+	ComboCooldowns[cooldownKey] = true
+	task.delay(COMBO_COOLDOWN, function()
+		ComboCooldowns[cooldownKey] = nil
+	end)
+
+	local function doPlay()
+		-- If CutOffWithAnimation is on, don't play if the animation already ended
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			ComboCooldowns[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundToBody(sound, character)
+
+		sound:Play()
+
+		-- CutOffWithAnimation: fade out when the animation track ends
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+			-- KeepPlayingSound: sound continues even after animation/sound end
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		end
+
+		-- Safety: auto-reset cooldown after timeout
+		task.delay(COOLDOWN_TIMEOUT, function()
+			ComboCooldowns[cooldownKey] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local function checkCombosForAnimation(animId, character, charName, track)
+	-- Record this animation play
+	if not RecentAnimPlays[character] then
+		RecentAnimPlays[character] = {}
+	end
+	RecentAnimPlays[character][animId] = { time = tick(), track = track }
+
+	-- Check all combos for this animation ID
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.AnimationId) == animId then
+			local soundId = normalize(comboEntry.SoundId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			-- Check if the matching sound was recently played on this character
+			local soundPlays = RecentSoundPlays[character]
+			if soundPlays and soundPlays[soundId] then
+				local elapsed = tick() - soundPlays[soundId].time
+				if elapsed <= windowTime then
+					-- Combo detected! Play the combo sound
+					playComboSound(comboEntry, character, charName, track)
+				end
+			end
+		end
+	end
+end
+
+local function checkCombosForSound(soundId, character, charName, soundInstance)
+	-- Record this sound play
+	if not RecentSoundPlays[character] then
+		RecentSoundPlays[character] = {}
+	end
+	RecentSoundPlays[character][soundId] = { time = tick(), sound = soundInstance }
+
+	-- Check all combos for this sound ID
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.SoundId) == soundId then
+			local animId = normalize(comboEntry.AnimationId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			-- Check if the matching animation was recently played on this character
+			local animPlays = RecentAnimPlays[character]
+			if animPlays and animPlays[animId] then
+				local elapsed = tick() - animPlays[animId].time
+				if elapsed <= windowTime then
+					-- Combo detected! Play the combo sound
+					playComboSound(comboEntry, character, charName, animPlays[animId].track)
+				end
+			end
+		end
+	end
+end
+
+-- Clean up stale entries periodically to prevent memory leaks
+task.spawn(function()
+	while true do
+		task.wait(5)
+		local now = tick()
+		for char, anims in pairs(RecentAnimPlays) do
+			if not char or not char.Parent then
+				RecentAnimPlays[char] = nil
+			else
+				for animId, data in pairs(anims) do
+					if now - data.time > 3 then
+						anims[animId] = nil
+					end
+				end
+			end
+		end
+		for char, sounds in pairs(RecentSoundPlays) do
+			if not char or not char.Parent then
+				RecentSoundPlays[char] = nil
+			else
+				for soundId, data in pairs(sounds) do
+					if now - data.time > 3 then
+						sounds[soundId] = nil
+					end
+				end
+			end
+		end
+	end
+end)
+
+-- Hook into the existing animation detection to also check combos
+-- We wrap the existing hookAnimator to also call checkCombosForAnimation
+local originalHookAnimator = hookAnimator
+hookAnimator = function(animator, character)
+	if hookedAnimators[animator] then return end
+	hookedAnimators[animator] = true
+
+	animator.AnimationPlayed:Connect(function(track)
+		local anim = track.Animation
+		if not anim then return end
+
+		local animId = normalize(anim.AnimationId)
+		if animId == "" or animId == "0" then return end
+
+		-- For local player: skip if local voicelines are disabled
+		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
+			return
+		end
+
+		local charName = getAnimCharName(character)
+
+		-- Play animation-based sounds (existing system)
+		playAnimSound(animId, character, charName, track)
+
+		-- Check animation+sound combos (new system)
+		checkCombosForAnimation(animId, character, charName, track)
+	end)
+
+	-- Clean up tracking when animator is destroyed
+	animator.Destroying:Connect(function()
+		hookedAnimators[animator] = nil
+	end)
+end
+
+-- Hook into sound detection to also check combos
+-- We wrap the existing tryOverlaySound to also call checkCombosForSound
+local originalTryOverlaySound = tryOverlaySound
+tryOverlaySound = function(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	-- Call original overlay logic
+	originalTryOverlaySound(sound)
+
+	-- Check animation+sound combos
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	if id == "" then return end
+
+	-- Find which character this sound belongs to
+	local character = nil
+	local current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					character = current
+					break
+				end
+			end
+			if character then break end
+		end
+		current = current.Parent
+	end
+
+	if character then
+		local charName = getAnimCharName(character)
+		checkCombosForSound(id, character, charName, sound)
+	end
+end
+
+-- [[ END ANIMATION + SOUND COMBO DETECTION SYSTEM ]]
+
 -- Scan existing particles
 for _, desc in game:GetDescendants() do
 	tryReplaceSound(desc)
