@@ -1912,6 +1912,96 @@ end
 
 TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
+-- [[ MASS COMPUSSION SOUND SYSTEM ]]
+-- Detects Mass Compulsion actions via ReplicatedAbilityEffect and plays the corresponding sound.
+-- The compulsion commands don't go through real chat, so we hook into the ability replication event.
+-- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
+
+local MassCompulsionSounds = {
+	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint" },
+	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
+	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
+	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
+}
+
+local MassCompulsionCooldown = {}
+local LastMassCompulsionCaster = nil -- tracked from the 'effect' event
+
+local function onMassCompulsionAction(casterPlayer, actionName)
+	if not actionName then return end
+	if not casterPlayer then return end
+
+	local soundInfo = MassCompulsionSounds[actionName]
+	if not soundInfo then return end
+
+	local cooldownKey = tostring(casterPlayer.UserId) .. "_" .. actionName
+	if MassCompulsionCooldown[cooldownKey] then return end
+	MassCompulsionCooldown[cooldownKey] = true
+	task.delay(5, function() MassCompulsionCooldown[cooldownKey] = nil end)
+
+	local character = casterPlayer.Character
+	if not character then return end
+
+	-- Show a fake chat bubble from the caster so nearby players see the command
+	-- Only show the bubble if this is NOT the local player (caster already knows their command)
+	if soundInfo.ChatText and casterPlayer ~= Players.LocalPlayer then
+		game:GetService("Chat"):Chat(character, soundInfo.ChatText, Enum.ChatColor.White)
+	end
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. soundInfo.Sound
+	sound.Volume = soundInfo.Volume or 2.5
+	configure3DAudio(sound)
+	sound:SetAttribute("IsLocalVoiceline", true)
+
+	parentSoundToBody(sound, character)
+
+	sound:Play()
+	sound.Ended:Connect(function()
+		if sound and sound.Parent then sound:Destroy() end
+	end)
+end
+
+local ReplicatedAbilityEffect = ReplicatedStorage:FindFirstChild("Remotes")
+	and ReplicatedStorage.Remotes:FindFirstChild("AbilityService")
+	and ReplicatedStorage.Remotes.AbilityService:FindFirstChild("ToClient")
+	and ReplicatedStorage.Remotes.AbilityService.ToClient:FindFirstChild("ReplicatedAbilityEffect")
+
+if ReplicatedAbilityEffect then
+	ReplicatedAbilityEffect.OnClientEvent:Connect(function(abilityName, methodName, ...)
+		if abilityName ~= "Mass Compulsion" then return end
+
+		if methodName == "effect" then
+			-- effect(p1, casterPlayer, victimList) — track the caster
+			local _, casterPlayer = ...
+			if casterPlayer and casterPlayer:IsA("Player") then
+				LastMassCompulsionCaster = casterPlayer
+			end
+		elseif methodName == "applyAction" then
+			-- applyAction(actionName, subMethod, arg)
+			local actionName = ...
+			local caster = LastMassCompulsionCaster
+
+			-- Fallback: if we didn't track the caster from effect, search for CasterAttachment
+			if not caster then
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local head = player.Character:FindFirstChild("Head")
+						if head and head:FindFirstChild("CasterAttachment") then
+							caster = player
+							break
+					end
+					end
+				end
+			end
+
+			if caster then
+				onMassCompulsionAction(caster, actionName)
+			end
+		end
+	end)
+end
+
 -- [[ PARTICLE DETECTION SOUND SYSTEM ]]
 -- Detects specific ParticleEmitters on characters and plays a sound from their position.
 -- When the particle is removed, the sound fades out.
@@ -1932,7 +2022,7 @@ local ParticleSounds = {
 
 	-- AdSomnum (Sleep) particle
 	["AdSomnumSleep"] = {
-		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 2.5, DelayTime = 0 },
+		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 3, DelayTime = 1, KeepPlayingSound = true },
 	},
 
 	-- Immobilus (Stun) spiral on victim
