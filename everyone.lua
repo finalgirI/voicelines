@@ -660,7 +660,7 @@ local SoundOverlays = {
 	["13008144854"] = {
 		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
 		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
-		["Mary Louise"] = { Sound = "79541636928372", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+		["Mary Louise"] = { Sound = "79541636928372", Volume = 6, DelayTime = 0 }, -- Strangulo Ventus
 	},
 	-- Witch Abilities :
 	["89539286902417"] = {
@@ -1003,7 +1003,7 @@ end
 local AnimationSounds = {
 	-- All characters hear the same overlay when this animation plays:
 	["13570229994"] = {
-		["Mary Louise"] = { Sound = "88600853616027", Volume = 2.5, DelayTime = 0 }, -- Vido
+		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
 	["18534997521"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
@@ -1056,7 +1056,7 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
 	},
 	["13721687618"] = {
-		["Mary Louise"] = { Sound = "101738888339389", Volume = 2.5, DelayTime = 0 }, -- Super Punch
+		["Mary Louise"] = { Sound = "101738888339389", Volume = 5, DelayTime = 0 }, -- Super Punch
 	},
 	["16794479576"] = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
@@ -1105,12 +1105,12 @@ local AnimationSounds = {
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Mary Louise"] = { Sound = "72478658775676", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Mary Louise"] = { Sound = "72478658775676", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Mary Louise"] = { Sound = "79352381719423", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1126,6 +1126,7 @@ local AnimationSounds = {
 	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
+		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
     ["95988116850782"] = {
 	   ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
@@ -1145,7 +1146,7 @@ local AnimationSounds = {
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Mary Louise"] = { Sound = "105517213066097", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Mary Louise"] = { Sound = "105517213066097", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
@@ -1531,10 +1532,10 @@ TextChatService.MessageReceived:Connect(onChatMessageReceived)
 -- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
 
 local MassCompulsionSounds = {
-	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint" },
-	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
-	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
-	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
+	["Faint"] = { Sound = "17560602849", Volume = 3, ChatText = "Everybody faint" },
+	["Suffer"] = { Sound = "17560604010", Volume = 3, ChatText = "Suffer" },
+	["Attack"] = { Sound = "17560606672", Volume = 3, ChatText = "Attack" },
+	["Freeze"] = { Sound = "17560600778", Volume = 3, ChatText = "Nobody move" },
 }
 
 local MassCompulsionCooldown = {}
@@ -1555,11 +1556,7 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local character = casterPlayer.Character
 	if not character then return end
 
-	-- Show a fake chat bubble from the caster so nearby players see the command
-	-- Only show the bubble if this is NOT the local player (caster already knows their command)
-	if soundInfo.ChatText and casterPlayer ~= Players.LocalPlayer then
-		game:GetService("Chat"):Chat(character, soundInfo.ChatText, Enum.ChatColor.White)
-	end
+	-- Only the local player (caster) already knows their command; no chat bubble needed
 
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. soundInfo.Sound
