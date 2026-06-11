@@ -567,7 +567,6 @@ local SoundOverlays = {
 	["15980142966"] = {
 		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
-	["129498686293958"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["135718833680425"] = {
 		Overlays = {
 			{ Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
@@ -847,7 +846,7 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
-	["18534997521"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
+	["18534994939"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
@@ -856,9 +855,10 @@ local AnimationSounds = {
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
+	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["87439615254048"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Soul Bind
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
-	["15619485183"] = { Sound = "95435320218587", Volume = 3.2, DelayTime = 0 }, -- Building On Fire
+	["15619485183"] = { Sound = "95435320218587", Volume = 5, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
@@ -1339,26 +1339,11 @@ end
 TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
 local MassCompulsionSounds = {
-	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint",
-		["Silas"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["The Trickster"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-	},
-	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer",
-		["Silas"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["The Trickster"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-	},
-	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack",
-		["Silas"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["The Trickster"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-	},
-	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move",
-		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["The Trickster"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-	},
-	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move",
-		["Silas"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["The Trickster"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-	},
+	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint" },
+	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
+	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
+	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
+	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move" },
 }
 
 local MassCompulsionCooldown = {}
