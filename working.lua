@@ -47,12 +47,6 @@ local Data = {
 		Icon = "18630281578"
 	},
 
-	Somnus = {
-		Sound = "95823566800088",
-		Icon = "109870855790839",
-		Volume = 9,
-	},
-
 	Incendia = {
 		Icon = "18630085138",
 		["Bonnie Bennett"] = "74863711273747",
@@ -60,6 +54,12 @@ local Data = {
 		["Hope Mikaelson"] = "88254920355046",
 		["Valerie Tulle"] = "134446708409005",
 	},
+
+	--Somnus = {
+	--	Sound = "95823566800088",
+	--	Icon = "109870855790839",
+	--	Volume = 9,
+	--},
 
 	--Harae = {
 	--	Sound = "70767045237007",
