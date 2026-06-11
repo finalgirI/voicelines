@@ -1465,10 +1465,18 @@ end
 -- Uses TextChatService.MessageReceived for reliable detection (no UI scraping).
 
 local ChatVoicelineSounds = {
-	["Suffer"] = { Sound = "17560604010", CharacterRequired = "Silas" },
-	["Attack"] = { Sound = "17560606672", CharacterRequired = "Silas" },
-	["Everybody faint"] = { Sound = "17560602849", CharacterRequired = "Silas" },
-	["Nobody move"] = { Sound = "17560600778", CharacterRequired = "Silas" },
+	["Suffer"] = {
+		["Silas"] = "17560604010",
+	},
+	["Attack"] = {
+		["Silas"] = "17560606672",
+	},
+	["Everybody faint"] = {
+		["Silas"] = "17560602849",
+	},
+	["Nobody move"] = {
+		["Silas"] = "17560600778",
+	},
 }
 
 local ChatVoicelineCooldown = {}
@@ -1491,23 +1499,25 @@ local function onChatMessageReceived(textChatMessage)
 	local chatEntry = nil
 	for key, entry in pairs(ChatVoicelineSounds) do
 		if msg:sub(1, #key):lower() == key:lower() then
-			if type(entry) == "string" then
-				soundId = entry
-			else
-				soundId = entry.Sound
-			end
 			matchedKey = key
 			chatEntry = entry
 			break
 		end
 	end
-	if not soundId then return end
+	if not chatEntry then return end
 
-	-- CharacterRequired check
-	if type(chatEntry) == "table" and chatEntry.CharacterRequired then
-		local charName = player:GetAttribute("CharacterName")
-		if charName ~= chatEntry.CharacterRequired then return end
+	-- Resolve sound ID: per-character format or simple string
+	local charName = player:GetAttribute("CharacterName")
+	if type(chatEntry) == "string" then
+		soundId = chatEntry
+	elseif type(chatEntry) == "table" then
+		if charName and chatEntry[charName] then
+			soundId = chatEntry[charName]
+		elseif chatEntry.Sound then
+			soundId = chatEntry.Sound
+		end
 	end
+	if not soundId then return end
 
 	local cooldownKey = textSource.UserId .. "_" .. matchedKey
 	if ChatVoicelineCooldown[cooldownKey] then return end
@@ -1539,18 +1549,6 @@ TextChatService.MessageReceived:Connect(onChatMessageReceived)
 -- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
 
 local MassCompulsionSounds = {
-	["Faint"] = { 
-		["Silas"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Everybody faint" },
-	},
-	["Suffer"] = {
-		["Silas"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Suffer" },
-	},
-	["Attack"] = { 
-		["Silas"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Attack", },
-	},
-	["Freeze"] = {
-		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Nobody move", },
-	},
 }
 
 local MassCompulsionCooldown = {}
@@ -1850,7 +1848,7 @@ local AnimationSoundCombos = {
 	-- Example entries (uncomment and customize):
 	 ["Somnus"] = {
 		AnimationId = "6713148336",
-		SoundId = "89539286902417",
+		SoundId = "13154602444",
 		["Davina Claire"] = "95823566800088",
 	 	Volume = 9,
         KeepPlayingSound = true,
