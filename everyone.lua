@@ -846,7 +846,6 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
-	["18534994939"] = { Sound = "18535307514", Volume = 2.5, DelayTime = 0.5 }, -- Vamp Reversal
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
@@ -1588,6 +1587,15 @@ local AnimationSoundCombos = {
 	 	DelayTime = 0,
 	 	WindowTime = 0.5,
 	 },
+	["VampirisnReversalEsther"] = {
+		AnimationId = "18534994939",
+		SoundId = "18535374166",
+		Sound = "18535307514",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0.5,
+		WindowTime = 0.5,
+	},
 }
 
 local ComboKnownKeys = {
