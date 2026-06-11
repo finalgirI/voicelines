@@ -314,7 +314,6 @@ local SoundReplacements = {
 	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
-	["116235007511881"] = "13203446447", -- Autem
 	["105998583954931"] = "13441892676", -- Harae
 	-- Character-specific format (only replaces when Nora Hildegard plays it):
 	-- ["original_sound_id"] = { Replacement = "replacement_id", CharacterRequired = "Nora Hildegard" },
@@ -1095,7 +1094,6 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
 		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
 	},
-	["13302728573"] = { Sound = "13203446447", Volume = 2.5, DelayTime = 0 }, -- Autem
 	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
 	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	-- Vampire Abilities :
@@ -1529,17 +1527,17 @@ TextChatService.MessageReceived:Connect(onChatMessageReceived)
 -- We track the caster when the 'effect' method fires, then play the sound when 'applyAction' fires.
 
 local MassCompulsionSounds = {
-	["Faint"] = { Sound = "17560602849", Volume = 3, ChatText = "Everybody faint",
-		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	["Faint"] = { 
+		["Silas"] = { Sound = "17560602849", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Everybody faint" },
 	},
-	["Suffer"] = { Sound = "17560604010", Volume = 3, ChatText = "Suffer",
-		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	["Suffer"] = {
+		["Silas"] = { Sound = "17560604010", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Suffer" },
 	},
-	["Attack"] = { Sound = "17560606672", Volume = 3, ChatText = "Attack",
-		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	["Attack"] = { 
+		["Silas"] = { Sound = "17560606672", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Attack", },
 	},
-	["Freeze"] = { Sound = "17560600778", Volume = 3, ChatText = "Nobody move",
-		["Silas"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	["Freeze"] = {
+		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, ChatText = "Nobody move", },
 	},
 }
 
