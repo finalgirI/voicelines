@@ -1355,6 +1355,10 @@ local MassCompulsionSounds = {
 		["Silas"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 		["The Trickster"] = { Sound = "17560600778", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
 	},
+	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move",
+		["Silas"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["The Trickster"] = { Sound = "98703979367465", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+	},
 }
 
 local MassCompulsionCooldown = {}
