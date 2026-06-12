@@ -1016,7 +1016,6 @@ local AnimationSounds = {
 	},
 	["12189974108"] = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Ashley"] = { Sound = "99153543628823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Qetsiyah"] = { Sound = "105035246772721", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
