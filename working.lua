@@ -34,7 +34,7 @@ local Data = {
 		["Bonnie Bennett"] = "114093297475680",
 		["Nora Hildegard"] = "131259403209726",
 		["Davina Claire"] = "109348032177998",
-		["Ashley"] = "109348032177998",
+		["Ashley"] = "99153543628823",
 	},
 
 	PhasmatosIncendia = {
