@@ -931,7 +931,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-	["80991149841796"] = { Sound = "135953039500242", Volume = 60, DelayTime = 0.2 }, -- Freya Resurrection
+	["80991149841796"] = { Sound = "135953039500242", Volume = 500, DelayTime = 0.2 }, -- Freya Resurrection
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
