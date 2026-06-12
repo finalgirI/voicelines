@@ -880,12 +880,14 @@ local AnimationSounds = {
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Bonnie Bennett"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Ashley"] = { Sound = "131218412550848", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 	},
 	["6713148336"] = {
 		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 2.5, DelayTime = 0 }, -- Errox Femus
 	},
 	["131550349409770"] = {
 		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2, DelayTime = 0 }, -- Aquamalia
+		["Ashley"] = { Sound = "132028193214591", Volume = 2.5, DelayTime = 0 }, -- Aquamalia
 	},
 	["14065674638"] = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
@@ -908,7 +910,11 @@ local AnimationSounds = {
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+		["Ashley"] = { Sound = "99652497072467", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
 	},
+	["103809123106748"] = {
+		["Ashley"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
+	}
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
@@ -1012,6 +1018,10 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+		["Ashley"] = { Sound = "99153543628823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+	},
+	["6900156131"] = {
+		["Ashley"] = { Sound = "114492626902946", Volume = 4.3, DelayTime = 0 }, -- Ictus
 	},
 	["14427195564"] = {
 		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
@@ -1174,6 +1184,9 @@ end
 
 local hookedAnimators = {} -- Track which Animators we've already hooked
 
+local checkCombosForAnimation -- forward declaration (defined later)
+local checkCompulsionProtectionForAnimation -- forward declaration (defined later)
+
 local function hookAnimator(animator, character)
 	if hookedAnimators[animator] then return end
 	hookedAnimators[animator] = true
@@ -1191,6 +1204,13 @@ local function hookAnimator(animator, character)
 
 		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
+
+		if checkCombosForAnimation then
+			checkCombosForAnimation(animId, character, charName, track)
+		end
+		if checkCompulsionProtectionForAnimation then
+			checkCompulsionProtectionForAnimation(animId, character, charName, track)
+		end
 	end)
 
 	animator.Destroying:Connect(function()
@@ -1712,7 +1732,7 @@ local function playComboSound(comboEntry, character, charName, track)
 	end
 end
 
-local function checkCombosForAnimation(animId, character, charName, track)
+checkCombosForAnimation = function(animId, character, charName, track)
 	if not RecentAnimPlays[character] then
 		RecentAnimPlays[character] = {}
 	end
@@ -1921,7 +1941,7 @@ local function playCompulsionProtectionSound(comboEntry, character, charName, tr
 	end
 end
 
-local function checkCompulsionProtectionForAnimation(animId, character, charName, track)
+checkCompulsionProtectionForAnimation = function(animId, character, charName, track)
 	for _, comboEntry in pairs(CompulsionProtectionCombos) do
 		if normalize(comboEntry.AnimationId) == animId then
 			local windowTime = comboEntry.WindowTime or 2
@@ -1998,34 +2018,7 @@ task.spawn(function()
 	end
 end)
 
-local originalHookAnimator = hookAnimator
-hookAnimator = function(animator, character)
-	if hookedAnimators[animator] then return end
-	hookedAnimators[animator] = true
-
-	animator.AnimationPlayed:Connect(function(track)
-		local anim = track.Animation
-		if not anim then return end
-
-		local animId = normalize(anim.AnimationId)
-		if animId == "" or animId == "0" then return end
-
-		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
-			return
-		end
-
-		local charName = getAnimCharName(character)
-
-		playAnimSound(animId, character, charName, track)
-
-		checkCombosForAnimation(animId, character, charName, track)
-		checkCompulsionProtectionForAnimation(animId, character, charName, track)
-	end)
-
-	animator.Destroying:Connect(function()
-		hookedAnimators[animator] = nil
-	end)
-end
+-- hookAnimator override removed: combo and protection checks are now in the original hookAnimator via forward declarations
 
 local originalTryOverlaySound = tryOverlaySound
 tryOverlaySound = function(sound)
