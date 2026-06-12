@@ -971,8 +971,8 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
     ["95988116850782"] = {
-	   ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-	   ["Dark Josie"] = { fSound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	    ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	    ["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
 		["Caroline Forbes"] = { Sound = "82935740630457", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
     },
 	["72224780755559"] = {
