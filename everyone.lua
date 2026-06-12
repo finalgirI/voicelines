@@ -914,7 +914,7 @@ local AnimationSounds = {
 	},
 	["103809123106748"] = {
 		["Ashley"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
-	}
+	},
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
