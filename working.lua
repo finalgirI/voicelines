@@ -40,6 +40,7 @@ local Data = {
 		["Bonnie Bennett"] = "114093297475680",
 		["Nora Hildegard"] = "131259403209726",
 		["Davina Claire"] = "109348032177998",
+		["Ashley"] = "99153543628823",
 	},
 
 	PhasmatosIncendia = {
@@ -268,7 +269,7 @@ local Data = {
 	--	Icon = "18630090139",
 	--	DelayTime = 15,
 	--},
-	
+
 	--TelekAttack = {
 	--	Sound = "94965672679001",
 	--	Icon = "135639275617447",
@@ -277,7 +278,7 @@ local Data = {
 	--LocatorSpell = {
 	--	Icon = "87004194847894",
 	--	["Freya Mikaelson"] = "107779666764444",
- --       DelayTime = 5.4,
+	--       DelayTime = 5.4,
 	--},
 
 	--TelekSubmission = {
