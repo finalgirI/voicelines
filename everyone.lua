@@ -1791,7 +1791,7 @@ end
 -- the protection animation, a character-specific voiceline plays from the witch.
 -- The chat comes from the COMPULSION CASTER, the animation plays on the PROTECTOR.
 local CompulsionProtectionCombos = {
-	 ["CompulsionProtectionBonnie"] = {
+	["CompulsionProtectionBonnie"] = {
 		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
 	 	ChatText = "Listen,",
 	 	WindowTime = 2, -- max seconds between chat and animation
@@ -1799,7 +1799,7 @@ local CompulsionProtectionCombos = {
 	 	Volume = 2.5,
 	 	KeepPlayingSound = true,
 		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5 }, -- TODO: fill in sound ID
-	 },
+	},
 	["CompulsionProtectionQetsiyah"] = {
 		AnimationId = "12189974108", -- TODO: fill in the protection animation ID
 		ChatText = "Listen,",
