@@ -275,6 +275,7 @@ local SoundReplacements = {
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
+local fadeOutOverlaySound -- forward declaration (defined later)
 
 local function getSoundCharacterName(sound)
 
@@ -1275,6 +1276,7 @@ local ChatVoicelineSounds = {
 }
 
 local ChatVoicelineCooldown = {}
+local recordCompulsionChat -- forward declaration (defined later)
 
 local function onChatMessageReceived(textChatMessage)
 	if not textChatMessage then return end
