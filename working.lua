@@ -23,12 +23,6 @@ local Data = {
 		CharacterRequired = "Bastianna Natale",
 	},
 
-	HandOfGlory = {
-		["Davina Claire"] = "128323150668520",
-		Icon = "138635686089866",
-		FadeOut = true,
-	},
-
 	Invisique = {
 		Icon = "18630085006",
 		["Valerie Tulle"] = "116763647482749",
@@ -40,7 +34,7 @@ local Data = {
 		["Bonnie Bennett"] = "114093297475680",
 		["Nora Hildegard"] = "131259403209726",
 		["Davina Claire"] = "109348032177998",
-		["Ashley"] = "99153543628823",
+		["Ashley"] = "109348032177998",
 	},
 
 	PhasmatosIncendia = {
