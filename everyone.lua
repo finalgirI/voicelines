@@ -1019,6 +1019,7 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Ashley"] = { Sound = "99153543628823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+		["Qetsiyah"] = { Sound = "105035246772721", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
 	},
 	["6900156131"] = {
 		["Ashley"] = { Sound = "114492626902946", Volume = 4.3, DelayTime = 0 }, -- Ictus
@@ -1031,6 +1032,16 @@ local AnimationSounds = {
 	},
 	["6713148336"] = {
 		["Sheila Bennett"] = { Sound = "139747284454633", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Errox Femus Sheila
+	},
+   -- compulsion protection
+	["6900156131"] = {
+		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
+		["Cleo Sowande"] = { Sound = "81915770841744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
+	},
+	["128623651867501"] = {
+		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
+		["Esther Mikaelson"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
 	},
 }
 
