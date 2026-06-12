@@ -271,6 +271,7 @@ local SoundReplacements = {
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = "13441892676", -- Harae
 	["14043844852"] = "13904360117", -- Heretic Joint Spell
+	["74468391415531"] = "16326825053", -- Spiritual Cleanse
 
 }
 
@@ -856,7 +857,6 @@ local AnimationSounds = {
 	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
-	["87439615254048"] = { Sound = "109441100680596", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Soul Bind
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15619485183"] = { Sound = "95435320218587", Volume = 5, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
@@ -864,8 +864,6 @@ local AnimationSounds = {
 	},
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
-	["132001244832758"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
-	["120098338547414"] = { Sound = "16326825053", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Spiritual Cleanse
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
@@ -1018,7 +1016,6 @@ local AnimationSounds = {
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 		["Ashley"] = { Sound = "99153543628823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-		["Qetsiyah"] = { Sound = "105035246772721", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
 	},
 	["6900156131"] = {
 		["Ashley"] = { Sound = "114492626902946", Volume = 4.3, DelayTime = 0 }, -- Ictus
@@ -1031,16 +1028,6 @@ local AnimationSounds = {
 	},
 	["6713148336"] = {
 		["Sheila Bennett"] = { Sound = "139747284454633", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Errox Femus Sheila
-	},
-   -- compulsion protection
-	["6900156131"] = {
-		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
-		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
-		["Cleo Sowande"] = { Sound = "81915770841744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
-	},
-	["128623651867501"] = {
-		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
-		["Esther Mikaelson"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Compulsion Protection
 	},
 }
 
@@ -1297,13 +1284,14 @@ for _, player in Players:GetPlayers() do
 	end
 end
 
-local ChatVoicelineSounds = {
-	["Suffer"] = "17560604010",
-	["Attack"] = "17560606672",
-	["Everybody faint"] = "17560602849",
-	["Nobody move"] = "17560600778",
-	["Forget to breathe"] = "98703979367465",
-}
+local ChatVoicelineSounds = {}
+--local ChatVoicelineSounds = {
+--	["Suffer"] = "17560604010",
+--	["Attack"] = "17560606672",
+--	["Everybody faint"] = "17560602849",
+--	["Nobody move"] = "17560600778",
+--	["Forget to breathe"] = "98703979367465",
+--}
 
 local ChatVoicelineCooldown = {}
 local recordCompulsionChat -- forward declaration (defined later)
@@ -1373,11 +1361,11 @@ end
 TextChatService.MessageReceived:Connect(onChatMessageReceived)
 
 local MassCompulsionSounds = {
-	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint", ["Silas"] = { Sound = "17560602849", Volume = 3 } },
-	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer", ["Silas"] = { Sound = "17560604010", Volume = 3 } },
-	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack", ["Silas"] = { Sound = "17560606672", Volume = 3 } },
-	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move", ["Silas"] = { Sound = "17560600778", Volume = 3 } },
-	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move", ["Silas"] = { Sound = "98703979367465", Volume = 3 } },
+	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint" },
+	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
+	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
+	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
+	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move" },
 }
 
 local MassCompulsionCooldown = {}
@@ -1631,6 +1619,15 @@ local AnimationSoundCombos = {
 		DelayTime = 0.5,
 		WindowTime = 0.5,
 	},
+	["SoulBind"] = {
+		AnimationId = "91593895077311",
+		SoundId = "106982949473166",
+		Sound = "109441100680596",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0.5,
+		WindowTime = 0.5,
+	}
 }
 
 local ComboKnownKeys = {
