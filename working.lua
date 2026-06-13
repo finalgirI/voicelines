@@ -1,3 +1,1417 @@
---Version 195
-_G.credit=[[Obfucator NTT - https://nttobf.com]]
-local mz=string local zr=math local kk=table local so=bit32 local el=mz.char local on=mz.byte local ne=mz.sub local dn=mz.upper local dy=mz.lower local fd=mz.find local ya=mz.len local gh=zr.floor local wx=zr.sqrt local qk=kk.insert local av=kk.remove local vj=kk.concat local pl=so.bxor local yx=so.band local gk=so.bor local tr=so.rshift local ma=so.lshift local ef=so.rrotate local o=so.bnot local nf=so.lrotate local ho=rawset local nh=rawget local zh=tostring local ff=tonumber local a=(function(ai,aj,ak,al,am,an,ao,ap,aq,ar,as,au)local az=bit32.bxor(152,27)local ba=bit32.bxor(168,87)local bb=bit32.bxor(65421,114)local bd=(bit32.bxor(93,92)+65536)local be=(bit32.lshift(1,8))local bf=bit32.bxor(32,117)local quw_kbgl=(function()local _qdih={}local _vxyu=30 local _jpgx={178,198,149,81,52,152,151,227,182,170,153,53,56,124,155,71,186,14,157,153,60,32,159,43,190,242,225,125,0,132,227,143,130,83,229,78,15,123,134,115,143,84,168,205,120,166,158,160,147,226,161,124,108,175,249,246,243,65,233,205,31,121,232,88,217,105,156,242,69,173,142,189,139,150,247,87,126,22,137,212,202,31,240,238,127,103,155,27,222,128,170,93,96,228,148,144,226,164,199,123,16,66,192,73,138,83,215,158,13,36,199,65,146,150,203,15,40,213,219,213,189,179,133,79,112,112,211,127,242,6,213,145,116,216,215,35,246,234,217,117,120,188,219,135,250,78,221,217,124,96,223,107,254,50,33,189,64,196,35,207,194,150,37,97,68,168,39,179,198,122,41,197,72,12,43,23,202,222,45,169,76,240,47,251,206,130,49,13,80,84,51,95,210,102,53,241,84,56,55,3,214,202,57,85,88,156,59,231,218,174,61,57,92,64,63,75,222,18,1,157,160,36,3,47,34,246,5,65,164,136,7,147,38,90,9,37,168,108,11,119,42,62,13,137,172,208,15,219,46,226,17,109,176,180,19,191}for _mst=1,256 do _vxyu=(_vxyu*167+_mst)%256 _qdih[_mst]=string.char(bit32.bxor(_jpgx[_mst],_vxyu))end return table.concat(_qdih)end)()local function ay(lfk_cvyz)local ofl_zxj=ar local function fqn_thbz(fau_dcamb)local qxd_una=ofl_zxj(quw_kbgl,ofl_zxj(lfk_cvyz,fau_dcamb)+1)or 33 local mhl_xfeb=qxd_una-33 return mhl_xfeb>0 and mhl_xfeb-1 or 0 end local yvc_mcaz=fqn_thbz(1)+fqn_thbz(2)*bf local atz_vo=fqn_thbz(3)local vfe_cjer={}for fhi_ni=4,#lfk_cvyz-4,5 do local yzo_hikuk=0 for jlq_nar=0,4 do yzo_hikuk=yzo_hikuk*bf+fqn_thbz(fhi_ni+jlq_nar)end vfe_cjer[#vfe_cjer+1]=aj(ap(yzo_hikuk,24),ba);vfe_cjer[#vfe_cjer+1]=aj(ap(yzo_hikuk,16),ba)vfe_cjer[#vfe_cjer+1]=aj(ap(yzo_hikuk,8),ba);vfe_cjer[#vfe_cjer+1]=aj(yzo_hikuk,ba)end for tam_grql=1,atz_vo do vfe_cjer[#vfe_cjer]=nil end return vfe_cjer end local at=ao(aq,ak(108,111,97,100,115,116,114,105,110,103))or ao(aq,ak(108,111,97,100))local function aw(wcv_qkmcn,ziy_fwe,vmv_jxdc)local wyh_svgo=wcv_qkmcn[ziy_fwe]or 0 return aj(ai(wyh_svgo,aj(vmv_jxdc*az+ziy_fwe,ba)),ba)end local function ax(wmo_hrn,rhn_tvkk)local wxj_sjs=ay(wmo_hrn)local hgj_tfx=wxj_sjs[1]local mul_ovuzn=2 local xop_teom=aw(wxj_sjs,mul_ovuzn,hgj_tfx);mul_ovuzn=mul_ovuzn+1 local isk_vdhzk=aj(ai(aw(wxj_sjs,mul_ovuzn,hgj_tfx),xop_teom),ba);mul_ovuzn=mul_ovuzn+1 local vxv_mo={}for gku_sev=1,isk_vdhzk do vxv_mo[gku_sev]=ak(aj(ai(aw(wxj_sjs,mul_ovuzn,hgj_tfx),xop_teom),ba));mul_ovuzn=mul_ovuzn+1 end local rmc_yutsu=al(vxv_mo)local fcy_fysun={}for gku_sev=1,6 do fcy_fysun[gku_sev]=aj(ai(aw(wxj_sjs,mul_ovuzn,hgj_tfx),xop_teom),ba);mul_ovuzn=mul_ovuzn+1 end local dub_sqhw=fcy_fysun[3]local wlq_djzy=fcy_fysun[4]local cbr_bgzhk=fcy_fysun[6]local cmu_zlyms=fcy_fysun[1]local ckd_czelw=fcy_fysun[2]local sae_he=fcy_fysun[5]local fyf_km=cbr_bgzhk+cmu_zlyms*be local xmm_znph={}for gku_sev=1,ckd_czelw do xmm_znph[gku_sev]=aj(ai(aw(wxj_sjs,mul_ovuzn,hgj_tfx),xop_teom),ba);mul_ovuzn=mul_ovuzn+1 end local function ccr_pteq()local rpw_anmhl=dub_sqhw local tef_rupdc={}for gku_sev=1,ckd_czelw do tef_rupdc[gku_sev]=ak(aj(ai(xmm_znph[gku_sev],rpw_anmhl),ba))rpw_anmhl=aj(rpw_anmhl*wlq_djzy+gku_sev,ba)end return al(tef_rupdc)end local bh=function(agh_mwo)local tqf_eijik=0 if am(agh_mwo)=="table"then for _,aba_nlkl in ipairs(agh_mwo)do tqf_eijik=(tqf_eijik+aba_nlkl)%bd end end if(tqf_eijik+rhn_tvkk)%bd~=fyf_km then return nil end return aq[ccr_pteq()]end local bj=function(agh_mwo)local tqf_eijik=0 if am(agh_mwo)=="table"then for _,aba_nlkl in ipairs(agh_mwo)do tqf_eijik=(tqf_eijik+aba_nlkl)%bd end end if(tqf_eijik+rhn_tvkk)%bd~=fyf_km then return nil end local ggf_yq=ccr_pteq()local ney_otpzr=at(ggf_yq)if not ney_otpzr then return nil end return ney_otpzr()end local kgi_leib=nil local bk=function(agh_mwo)if kgi_leib~=nil then return kgi_leib end local tqf_eijik=0 if am(agh_mwo)=="table"then for _,aba_nlkl in ipairs(agh_mwo)do tqf_eijik=(tqf_eijik+aba_nlkl)%bd end end if(tqf_eijik+rhn_tvkk)%bd~=fyf_km then return nil end kgi_leib=ccr_pteq()return kgi_leib end local ybj_kox=ccr_pteq()local bi if ybj_kox~=nil and ybj_kox~=""then bi=function(xuj_nzkzb,...)if xuj_nzkzb==nil then return end local cfu_oaoef=xuj_nzkzb[ybj_kox]if am(cfu_oaoef)~="function"then return end return cfu_oaoef(xuj_nzkzb,...)end end local bg={[bit32.bxor(209,208)]=bh,[bit32.bxor(159,157)]=bi,[bit32.bxor(85,86)]=bj}an(aq,rmc_yutsu,(bg[sae_he]or bk))local ulh_iolkn=rhn_tvkk for gku_sev=1,#rmc_yutsu do ulh_iolkn=(aj(ulh_iolkn*31,bb)+ar(rmc_yutsu,gku_sev)+gku_sev)%bd end return ulh_iolkn end return function(zlr_vbko)local lhr_idnbs=0 local fau_dcamb=1 local gha_dunc=#zlr_vbko local lyn_je="~`]~~"local zkm_cdl=#lyn_je while fau_dcamb<=gha_dunc do local ety_jjj,vhd_wb=au(zlr_vbko,lyn_je,fau_dcamb,true)local keo_zly if ety_jjj then keo_zly=as(zlr_vbko,fau_dcamb,ety_jjj-1)fau_dcamb=vhd_wb+1 else keo_zly=as(zlr_vbko,fau_dcamb)fau_dcamb=gha_dunc+1 end if#keo_zly>0 then lhr_idnbs=ax(keo_zly,lhr_idnbs)end end end end)(bit32.bxor,bit32.band,string.char,table.concat,type,rawset,rawget,bit32.rshift,(getfenv and getfenv(1))or _ENV or _G,string.byte,string.sub,string.find)a("v9br7B?,%BDtE<yi*<D-Lc<k-sO(~`]~~49bUV(f*S9{D%J%=$1Nzr#<!4DVl2@OHDB1c6TqRlek~`]~~>99l9vsJuqKKmtRncUqK/J2Q,Py:H9=4&~`]~~S99nVxUOP1a^e2a6oETENG>)>bJm~`]~~v9blWK9+<6)QpWxabO#nT6qYnOuF~`]~~:9bZxjyy@:Vq-M&dy#5<071XP&1pc}Fx8~`]~~v9br)@(T:,eXb6wG&$ANd36A_7LL~`]~~49bBT*f3$_hi5(_X^O7(qG(muhvvd>x(7e@6_:ga@Xm~`]~~>99rrtgEdxNbqG4W?:m5Sbg2d?}W+1N5d~`]~~j9}Ia66gn/)QoWkikH_@,Z@!V*FK>g1p,!<YE+IIeb9~`]~~H9!{kV9w*.B&yk4cr)%o2-Z#0A{MeztqGAe2b:~`]~~I9b%4K(P#)b/!NpYV$l9Um.yXBn-Yt$zyA8c)T~`]~~v9bWWGtsj}&:{I&MffNv{Z7afnI{~`]~~V9bV6(+isfWqI+78ro:f3of%tSM9T6bMs_QA$M1ZMd61M$.*~`]~~S99JHUu6we?UMDD!f4&lD*_d-4+{~`]~~>993!)u=Twv:&L:6nMFEng.rGKo!lEre-~`]~~I9bIZ=$x99bHtrgrNTxy=7*jGxQchC0mGU/gGB~`]~~S99LG?^fR93)Uey?kR2^!fG67$&Q~`]~~09!q@Qmz-xlfKOKY-y$zNif#OM(1FzS0a~`]~~v9bI+^#B+P#yVCt{f1!tl5vD^-&p~`]~~09!<Pi&tv8W?&+ZvrA929mtdrhF-QUgZr~`]~~&9!3/nAA)ypXz,NfW-(UmoR74R=&IKMKf}hZNnF4fcB~`]~~69}an<o9W-LvDR*MgbDiJ_O:cR)cy<!k#~`]~~>99(<.=mj8JLYaKALvQ(,Q/c/q>t:x_lF~`]~~T99fE#w$r?c^Rb5.06_MD+X&aeE*hstDY(KsyT=}cx6~`]~~69}$!Mj*-oWKNQG8v*!@*Y}bWmap1B^/W~`]~~I9bTNT/iREZ0dy@cEWOFfFdQ?0xmXM&wy/<@Y}~`]~~09!>Pm1$A<#MtwBfzMW>$Kx&Pw6vNQ.gH~`]~~v9b<78:vVyozm-#}&*!7}YBx6.X.~`]~~S99$4<MALe%TzZFnU}MD7cYl@=4Y~`]~~a9}jIbFa00V!@&I_H#XrJ0{#^F+p~`]~~599bSaj(/wMOk86oD<b@cYF2&06GP5CpvYi_g7~`]~~v9by<uyYUnwY2LiHT>2QzS>:^1eo~`]~~g9}v&k*E:7I2b0?sWZkz>2V)oBLe$hWFNx!l{P~`]~~69}m+4Rw$_gip(WgZDG3UZp2)KsgojP.Y~`]~~H9!q.4W->+syeHp&66G<$<{x,C3&-{FKWdjgh<~`]~~69}j=z{EkuEQMcgY3EI,?vIvI^!5_$oia~`]~~S99I)YA,u<j-!C=@QVrTSGZTG1Dc~`]~~T99Wq+u=&I++,:}L^F2Nts*n*.MzT1%/Q>*_=L{0(vS~`]~~39!{*m+o)=gfex%C*$3Wr(#ZY!$K~`]~~09!vq^rsMS-!Owu7Q.0npZ.b^/#QrAj::~`]~~T99bGnmNn/Il)JVw#J_@UQag=vp#&@CBTM2mZ,<JznC~`]~~g9}IXXe)yWk6Gy,s4UN0}*Lb{WUAXSjx14=6{J~`]~~v9bnIw4c6g<!KSK>SLOOPXkBO!HF~`]~~v9bZC6(V80K50:lDpdw@L2?OA8Mw~`]~~T99LuVv#wLv^xAoybF0z-7YYO51_h6)S(a+9*btSvvj~`]~~69}WHb9Yxk-z$D.?i/Rnt57_n)NN%_Nh/~`]~~69}l$.Rf4gx@)lO{vzcS3-Q4,P,+99999~`]~~>99Tl{!g8lH09_RV@&ByM%IiGb<@YQ!2E~`]~~:9b>^b>8*.k=7CjG37e#_iOJNGdpJRvCi~`]~~S99JdW0YJSmYGyp>c5D)P%c>eWa@~`]~~09!BSxx7LXic}ZyEwd?Jt1tIEx.A%vW(f~`]~~>99$aQgTAqY9CDow>1yzI52vhFGv,Ii41~`]~~T99:l2%iF)%^0Okc.X>(.G^n3/jI61b%d_pcc9a3s}h~`]~~>99mt(2L6/jIhIa+U$O6HDhSwR*jSKHwr~`]~~5994E@1$9IBJ_9U9CFK84OH-p}0kl?5E}rgcs?~`]~~v9bayqz4r-6@W!:l8#N/4d!e20m4~`]~~09!r)Ye{:v8.EHS2g_oK$O<#(7)TInoCg~`]~~39!<E=xmn/)O%*PB$Z6$.@KxNu?J~`]~~>99gqiJWj&uV&&r(,-Ff$J5%e3{yoz,f1~`]~~69}Vkp6G=gddmQZ7Fyl4!8C-JO0O?BDNh~`]~~v9bRmyvEnPX8oy!!ze12&,E*^Yhy~`]~~v9b6MMUTl@aiKljW#osu)@pAdAhR~`]~~T99ZNqQuS-uh:?QqotIM:OqPY+9Y,iic#o0U<b0f/vY~`]~~S99LFH>W4gHOQT-^%<2vlJW4&IuL~`]~~v9b3kF6VV?oE+U!Wl%wy$37Yiw(y~`]~~j9}f5IQRbPOg7}GKi^..(wWv/s?WA,4mrD+C/1ir#eO~`]~~>99nIZxo0N+7zS1#Cgs<u9Gcp<+a$+d6$~`]~~g9}eEC.P>+sB}:(Ea+AOTw&S39>5j0zeHFF3!9~`]~~v9b05PI7E:/ia2wEKcjXOUDvzh0L~`]~~v9b{-*#>>%Cb)S6v5x17(VFXvIz@~`]~~S99UnPmaf%CMymxvY#DNjC7-}r3u~`]~~I9ban6?r%B_t^%pw^4Y(lO*2{^#IwsVL6@W4iO~`]~~69}b+*lC*:S3+u^2o%nt>-qB*VAKa&3GF~`]~~S99bzx{RIeL_5:)-e3?-A:3@G+vb~`]~~S99RHSq<l@aiDlsokUiUyBNWUI3v~`]~~69}g3mZC!Dj>}9>.JLXRV6=H*$%vH&<8E~`]~~69}SuhPgs}EI3C-kD%{H-?/K0e<vCDVVT~`]~~v9bZxbDW7){7CPUS.7HQ%,P4qs34~`]~~a9}:l^v+FaK@6)#ur:jQR6Eu@5fB~`]~~H9!0^FyExjr1$A*jzkWpxiy7lI+F*{b4ZUoWH3~`]~~v9b01cCSibSX:CzGeclAq)p(X{YM~`]~~v9b(CR,Kq})k(Zz1:^,N(*l7i.Su~`]~~69}qk<wy$_hQj$g9yY1:9F)iiAnGV^_7I~`]~~69}HG)7xj&u_+F:^@}%j6?yP.T37wuyp@~`]~~S99%9foV_z=sRkvDY2($cqzVZ?.M~`]~~g9}T<U}l4/#_,LENP{Qo$s}T0yKQH5P*w*!Qq:~`]~~69}0)90/4o?1FBU9TYKx3xD<PWLJnOZsU~`]~~S99g75{bYxzQjEr7j/{:Ezx776VG~`]~~09!r2+i_yixSC<pwdp.h#Tq8AbKaghQS(~`]~~S99-9,9u(nen3mEO./h%0-GP+j<H~`]~~09!$79$AAZ?X@Dibc3H3tsTD=$:fgAm?k~`]~~g9}V7aN4wX?Cn@KQ(/jVF41*@7DWr2Z@G+jt)/~`]~~599(85?=*xL#$tl</>IQwW^{kcKLC43FaLbW%.~`]~~j9}:M,DM%B(,%yw04,kzXB!I-E6YX#n?FdC/cTo^O?z~`]~~j9}jOzvlB8CFDT&BYT+VnOlD=/?5W1cpfJrAd=wuyp@~`]~~09!ya>f+g=gA2gD^zB,>wKuR1rT?WuGSD~`]~~g9}W7KV3(LcY{}H,gCYXskbXv@m:B14dNW$zz,~`]~~:9bL@$%A8_cm3owWGW}Z%Gn%^)s-VOu?:~`]~~L9}0qEyY.o5j:)hd.jfqc>j@lIA(Vv9j@.CC.WS8LuCZU_-0&)g(R~`]~~%99jKfHd@x/i?xm?W*nnMW+~`]~~%99HF<*M,$O^V#9n_vYcmby~`]~~%99R>apcBr%&rqk9qX1t.AD~`]~~%99{6rjjf#iT7}q)4M/_YFO~`]~~%99qT4f3P}gqWD9vH_&_vTK~`]~~%99jqzUXX.=pwK#PH$:fM+s~`]~~%99S0$>UbF_Wrb,1U*hQB2_~`]~~%99fH($Nrtisj}l^OVX</rx~`]~~%99:Qurw}SRcu!EeZLXu4t%~`]~~%99L{*^O(KIH{md*eotYyn2~`]~~%99L^mEQ69f-X0JI>1d<De@~`]~~%99W/?NaAJ.6k7s:7{%0b^!~`]~~%99Z!3ABP8<XvPMJhNMet{7~`]~~%99B:VILl)VMNZm>grAy^8,~`]~~%99V,3DLtC8>Ei*t,&HN4:.~`]~~%99$K34&%LMRxJo#U)75XKr~`]~~%99lWRvinE$,Ca&}YyE((!%~`]~~%99Tty>ZLl-3+V1Uor+-EcX~`]~~%99nDZ1=VW:<oBhNH7t+oaj~`]~~%99!mxd?wX.I2MBsmVv%{nX~`]~~%99:6Dl8J7x:#rfqag_Mc}Q~`]~~%99TxkibPjL)w@BCKV!v)#7~`]~~%99y+yBU5lnc:&6mt:c>B5<~`]~~%99VSC.8iYyG6+$H.WJmbK@~`]~~%99BcfQ9np$-in?qcjY*&W)~`]~~%990_FF3i9{=hKa:^{TkWID~`]~~%99r3$A_gy78xjC8>h=-**f~`]~~%99>K-0GTx9&+q*%.q_LB:3~`]~~%99jZ+>!uJavm*W9WWH0aCz~`]~~%995-o*WtXVLJKYF=XWb4cw~`]~~%99R/.XDBrl=3U6w/6dq>SO~`]~~%99RP?XDqk}<9qgThRdKoZ7~`]~~%99-bgeQrZlq5rGByHkT!+R~`]~~%99%{wmAUK_r,:K,Jl==jRm~`]~~%99I(Cb%ut+(AKznVrUQB0^~`]~~%99bx*o74EmJ){HcoLDtmmw~`]~~%99vt#I$@xiEKOmf(%>G0.K~`]~~%99&$QL:?(ftBEbPHa<m{tu~`]~~%99$R}+gy@UKp3NxSoGyi8*~`]~~%99WH&$0uZo<PspTJxJGMpN~`]~~%99%UZFXl3bFn6NIMOsqQY&~`]~~%99q0(+(IVJCU0a4,BE9w2a~`]~~%99Sm0Kz}^W}w{jQ7DF9kjB~`]~~%99:9=.T7Mcl=xktySZ1&y9~`]~~%99R1RMUv9,Qz<*EZP,jXiq~`]~~%99eD253Qiswj81**Zv7qyV~`]~~%99!A/){>asZMIL1a2,xEy,~`]~~%99I6$to:OW%Mg+H7Oo$nPm~`]~~%99JX(<9cXd*%p}LtDW&PdT~`]~~%99gvf4e!w=}I}Hv75C$HnK~`]~~%99eT_d#0Pif<Tq):!_R>+W~`]~~%99TxBXxwUye7YlVsW>*,j!~`]~~%99<-0vsF75vMoLT7T5z=kP~`]~~%99nX4FNMDIqiM:jn$}mw(#~`]~~%99$^PvGZ/2jxZY7YHF1?WS~`]~~%99:=:/zg?Sz>gKL$,NQqiY~`]~~%99T4y1tiHeL3s2vfA01L#{~`]~~%99$Nqsz*HL#(*M.<>fV.49~`]~~%99R8-h&vpl8zW,C5oon_Cg~`]~~%99Lm:kGmlPXxn&?T/o<+HO~`]~~%990)MeLHC7K<I033,Fj%gU~`]~~a9}W?7QX>@koJ5_u#fqhm+*0sF#+~`]~~I9b9,6b^XwPbatC3@*34lx:Lt*!CbhXU6QN?#6~`]~~v9be1:tg&&svtUte{/!S>9}&_-fK~`]~~09!>h#az3cD%7y+!Rq%by^?B.176!*X6k~`]~~S99a{U_XlM-uPU<mGCGPE+3)3.lD~`]~~:9bW^xa<_HmG7kBwx,Hs#S.R:3Ht8!Gl)~`]~~5990mPvh?r+pWCaScMpI5-02+JdNOG8c$!ipc=~`]~~T99mK0%3jz:AaH<NWh8rO}:s^tHY7T^T2&fUQ#{8ja!~`]~~S99a.&FkuZ+N6tKN}70:>uF$wI_m~`]~~N9}Z4}y@M:0W2fil9ZG>aJyinIX_C6-O#%I0KQ+stO>F#OrwAj$qBF,*H.50X*pK24*V~`]~~a9}{,+#2$c*A4Bl-^wgPhpKUYc%&~`]~~a9}&CB8FE6rbz2so!Y*X3yQO@Zet~`]~~39!!<zoXGzJqbizn)gUBg3wU!1@p~`]~~a9}36spq_g7.b1fj,t/#?LOh_4Vd~`]~~U99Rc*?@0/{+WHZ$JepAfU:*n>P$GGFS-7E/dW}VKz!-!qcC~`]~~09!J>Dzjt$uJrX0nPrVyc-8Iis3M6,>T9~`]~~K9}RJDZq?(fpnCvH@WH8WjLW.7*yH^*yiK>TTce4Y8spr:afAtN/6XSlfD#IsppD!CYd$4%>sAGMAB7%fJZ:nYo@~`]~~S99S%?a+o:#^ZC7_C2N=d4=FoexA~`]~~g9}ICso{(e/Wff@N2BkZrUUt4hCK:HX{i@Y{rc~`]~~S99JIW-lYdaBP2a&Q}Ulnl&$M-yX~`]~~09!:T@U{8{q9uNj^p7VU4t8&n@5qnExkv~`]~~S99L7KsXkZ{JEc*KN@w@7O6-:5hL~`]~~v9bSnKp<igFI,81x{z1uGu<s8#:=~`]~~v9b{4j#Zk<Emx1z/h=9I-wklS9^0~`]~~H9!&$R5Ss&C&vxYS.kj{}Rtb/*a+(#Lwt@%>D=~`]~~S990#6Vd49v?XqE2vcbauhj$q!BJ~`]~~S99!!1VdRjE3*SILPaK)3lfd5omU~`]~~v9b(s0/BSc+@}&p54JN-Txx@>)n^~`]~~v9bS<minszF{)8_A)PIrF/TvZt!C~`]~~39!HW}i2f#i6y$(0R#Ypp_h.=?R0~`]~~v9bj(5MbbIri((nzHJPzg!c,e0}+~`]~~39!ROm7GFQfHu8_Eru(BsRu45T%o~`]~~39!fOOCF>aWKr6x%u3RWZJ8LGK5)~`]~~v9b&i^J&_ohtApJ/D1=A%L!wDAke~`]~~S99>pHf_Kiz*eipT&c%WPsoHD30M~`]~~39!{joswG:43xF#91JSARTdq5&M.~`]~~>99fw>7uJ,*rivc<rIoF/YdhV%Ok&im)j~`]~~>99J{PaJvIzZ7JM,sxDI+m3=6c(CQ<bR0~`]~~09!ZG}>W*{_CZyh5x}}%/BMBVKHj@@YZX~`]~~09!n47I?r<El!ez7YJa2l2v:XA(YbN^q2~`]~~j9}-mqjUj53Ze>h<^oeD1B=00LWthKZN!Ws3-N{$+D3~`]~~T99j,wHsQ<tr3QL^XpwMgUPo?wJv0#!}68{mf.%Z-QE~`]~~69}g4fH(N4iZlO4_Hv)e<(0DNqi1,S7N*~`]~~}b94JE$,-5IN%d:FDF3qRs/>@-ziW/h}7>{R^{s/n@%C=0diGH@0Eg)m)8,=3&!Bc*nu<F9^qlq,1DjP^M+4.=bO5Tba}g@{_q$ktel2h+,tOj!sC~`]~~v9bq$fgOu?fvvscI=2RXCE04XfR$~`]~~09!Z9haF!>jI<r<p#jG((lb?vM>4JqiC3~`]~~B9!(sJtL0Pifa5TZ8eX6h=ChLg9$OV:hM8FlD7F_7X(g,S?>5DT5!~`]~~09!W1B6Ek<X??c$a6GbeI9Gq<3FK27(3z~`]~~>990Vt(I8_c(xF,RK>A0SUZ)MZU>l3DPc~`]~~599Jp&hG},CA<e9Y9GJGv!uZV:$s(==Nla9A,^~`]~~599a^MJxBr%&yq9zomB$0v,yPN2m9D(B,GDN%T~`]~~{9}n!gu_vp%8@J,SZ$WdDI4TAkM=iZAJ!8:QyQxyvZYJW(j-~`]~~g9}g,KnnM.86wD(D?-.WRv_CVuE4#*-l1+!ZUd~`]~~j9}g2ljbYdV.tMSVj4rZEOrdo.jeqIw}t$+6=:@FrYk~`]~~L9}V:3GIKhjknX,t:%r-%o$>(YVSc{Np_DB@w_pT:u+pf0ONKOfol~`]~~:9bUlIrj3}:wuyiPuA.{2:VKiy%lI6Y$d~`]~~B9!RgyOYZxH,s4g8Z2qU8#?WfV^go3#u8MWrBsPmW()qBYuz!ff&%~`]~~49bBSHWn#7<D0O(1(joZ_f!#*a7I8AeP3:}E.t!z?Vf~`]~~O99mC%0Y5rb}L5GBzs7CMACkdg&14zgjCn9@rj!%oF,.0uB>l3ot#>:!a,qXx1D~`]~~&9!%Nb}P7,zgzC+P<6@B,I??BD_mgmQj!Y4itENo$/!~`]~~T99fEViE$&#c(}M/)t=Puh#*+:DR6j2vU0RP3%4^IsA~`]~~g9}:{=a1G.N<FQttU7HuY1Nm$>*<Ke0igGr.<S~`]~~I9bB}?{0y)plx%qc8CW90+(brP_NRIi@vYu?.q~`]~~j9}TGTO}_HmG7oSY8^$<v,U%.zh{=XM^OAWgNvPrB(A~`]~~49bLq#P:+DS3WC@eoB6Y_ERUV2zd0f_B)>{}:yH<_l?~`]~~&9!5L,=v!.-{tbPKU)?4s&fOUTj4G(7x3!*O7F5>-/m~`]~~&9!>#:$eamDi@ngw5l8lWl$#Wd-V!5mFNh!:mP$=Bsp~`]~~>99jp*bWv9jlAy)Yd#52C)P(B-%B#WM47~`]~~I9b4B_*Q/gOT@8rSB3W%M::$Zf04pAZfBV{DaG~`]~~&9!mn4GVSco:^&g_X<a3dlblB0T0<4iG9{G)kAZYz*7~`]~~&9!5PRwjBfKa24b%shMWDjju7Fa+lm)}HwZ@.#BwGSk~`]~~49bf,Dz5SzjDigh&CT.oyIw+}do9LY:k_c^G=8o)lOO~`]~~&9!!gh_KImx8n6Iyt,3)3z&b{lMnnTD?qRnTta=5o}*~`]~~&9!%sZ{*e5bH$}Odv*Z87b9%3:*eB874}PQehrT!Dk%~`]~~&9!ePY>Nd5h!icmsx$_0yl?Q:S*Uaa>:}dLs7vWzt,?~`]~~49bT3Y8Zyat-i38R^gY0R2QCF%zTF?/HXlXpWL(b}t}~`]~~69}Ly!V-s}HHaP^5XWYFT>@GQY)Jh{fH.~`]~~I9br(Y73//^B78{vSA}!1Q6v,Rn$m.n#u$brA.~`]~~49bn=0FYc$)Hi14i1-8imLO#q>UG5QPSF7u_M<J7y06~`]~~49b&$CE=+:.PWDGCj^3m{vSbX#QMVMWG+(3*I2#yS{o~`]~~j9}$A<6KszAhmGYTZ5y<*_hIa2g_71@3b:%?gv8s&lJ~`]~~49bV5Z%_=/s9<)-^sF2^ajIt:pmAjSBB6SaM?Fv3x8{~`]~~69}>foZzo0o*78mgred2y.{Ma{E2GTw66~`]~~I9by^^Rxi!$rVtR(?1O}/JdFg7}fRnOxYMkHY9~`]~~09!RC?#o9!N0!r-)IRD1vWjc<G5>b2dL_~`]~~I9b%6tEY7vA6wPo*6Qcv9k9h8vt=kk0=,TBg(V~`]~~09!I}e9JQu<DR-H^VN75vXZk?-^rX(p#$~`]~~I9b97SBCX.>?n?TGp=+s,7o2LYrQRp,(H{ghM8~`]~~09!REwL}Im*Qm0>mXELS=rrWwFQcGc!vw~`]~~I9bJPcLTJSHn?W=Bg^,Q*qtGyaNJ?,i@Jndh1f~`]~~j9}%<?HN%Rp57n:-5UV0z&3$+2kbdo&?Hnid?sdUbY2~`]~~v9b%Bm%)58jFrU<Dre2B5/=*tNU*~`]~~j9}32:+ykuC4@dYb/$KG01>#K22.CJvs,G%Rz%PTKWw~`]~~B9!:!)O3ioXpnKa>M?5r,:SbK<gHk8*obrA7me4#*m@FDJ1IwglF&~`]~~g9}4<8eI.HR:9=Py*<<DhW)qkopSJ,zwhUI!z5~`]~~S99$w9ef*gtsms8!nXk5QV7it/fn~`]~~599fQ3:KH<J%a54sHqCZS}q#J>y1rK(jx*$}u?~`]~~T99Syk4vcJZE@s8(S@ayP9vZP-aSVQXF+%DQ4{@tt5A~`]~~I9bTR{$d=xSFy)%4{IJibGlTQtj{2n+Y5D9>1V~`]~~H9!g3mLi99kRt!DPcirm,H=69pX<MC9JYMa*3!~`]~~j9}jPhQ*g?Sz}q!989{1CoG%2XP15<?Ghj3{c>fW<TJ~`]~~69}04WS%M:0W2xFVLF&8?{YazT/u<3R!B~`]~~j9}S/?&_&/_}r0dX,IM,+B0pZ6X_pnsnQ/vcn}FF3!9~`]~~j9}vC%Y_9^@A$l3I?G8u4*gx9%L*Yd0/RiktAS}@i:<~`]~~g9}J:ITt*g?SmtL5D$:v(AXf&Tb.Hx5$fts>4-~`]~~T99IzSLlUK1u+4/xBmfs8Q/>5Ur7vAPaG_E=CGtqpwV~`]~~U99m2CZ5xY<W!DlCa8sef3yOZGo<>B4qiP&y+Wxk!S-p8Ad5~`]~~H9!BvzUM=dXJ9.56Sq/iIbRwXm/mj=@lTtZ}^0~`]~~H9!jB0K%?_AtWu<%AIV(b@ZbdF#S_sr&TRxLkN~`]~~49bra6bV0/W1v&5}yF)D)>VGlsV{PNR<:},0Jr5<.N{~`]~~69}>v*c>rZlWf!w9-Bhj}s5i+Cu+YHcsz~`]~~&9!la0k2$}*2$!wrfz?8d3QcLZ*_xUS.MJ_ASxBo=W^~`]~~=9!4$i9/ku5vxFaqd{=R!2kXuT0%BT*vYiG3,XkLrf=5yhg:HiixOGH/(,~`]~~49b<>R%w:AqRvHqt9GT._O:F:#,85$IM@rR6wCGJ?Vm~`]~~T99Lacb2kuRv?N}doDud+%bhv!Tlj2psg+=8yB{uji<~`]~~V9b}nL=.)Wh9<.IO#<jb?dwa14gbpY0S!%Vbs?Fjb4qB8UIJ~`]~~49b9Yow?)sG<<.Ybc/7EQV0iKM6+aJ+N!5kVcZ3OmZ+~`]~~599fbCWbY:^TMAno6:#h/^=C,Nw1p0@KJjV+Do~`]~~49b0bl}2A?b{wYxV.V9{qL%I@p#(h@7vHhxP0EHNJnj~`]~~09!n!%c1vIKZiy%J:ABJ/8OvNU7QMz&_0~`]~~g9}vB_}1P&G#w7ve(p9rRgb>bT4ZsdcLMYYI}9~`]~~v9ben=l<$_gi{}f^XItdk+Nb0$d8~`]~~09!vGoT&REZ0N:hBXM.=dmrv@KI^auszc~`]~~69}(@?(G<w!)cygP^SD@wZl}7Y1peI6(j~`]~~09!a@3mXYHjlWw1g=M(x8Kd)jOIpXN7JM~`]~~j9}%n/i_gJdH!So$^BK6wMNx/V$^hxgkm=8P8$:q:*M~`]~~I9bf%Ik?B(6sr45sZIXjeBYS*e9Qvy{PSc^+^T~`]~~j9}}Zt#eF3%^td#9GoJBkQwIat%W!tP_P3QxK8v>n&_~`]~~q9bmNl_OMS1!/2v{T/vL?QyG2Mb-G*ssf+3%@?xVY^Exa=XUxm86E~`]~~g9}>B-%=4/#_.{-gaJ8sc7<V^tpGxeCex(UTRS~`]~~09!{PkbQ,e3HvNq)2V5Si!,f=gA:t?U?{~`]~~39!:.aqNn>AlN<@4I{F$</$c3mmn~`]~~:9b!uL&#s16ImM??4$T9^:=B).=#<,H5I~`]~~g9}fS{1a>#{y!HlE}UNv@{l{OYSU6Nj#31uHG%~`]~~v9b0/>%V<0{{k%_lSHG#{b$W)GN&~`]~~v9bvRV1_9FM7s(C-@E.daL3%p4>B~`]~~I9bZ#e{%{PcrK#}Y-kf<WF-Sr,pxF{.x&*O7dM~`]~~v9bTwS{7ezGlHftN+Hx41u*iVR)$~`]~~I9be_jX->2M>hV_rcodU(wq2GMg?D$s-(Ca_,<~`]~~09!{lbOh.zI_==MG{<3hY}elCjcBkm<=,~`]~~v9b(Y4.cs1}yIX<TgmmdoT!)a+lJ~`]~~v9bj<k)pKW>a}+?{*.moXl0*I.(}~`]~~v9b3<{6h9E/lC}(yumNxQ+gJxp7l~`]~~I9ba@Eqw2hHCMwyA.eLB6e@@{E,vJNX%3j!%4*~`]~~a9}SVrt})=l}WQCOAC!S&-Oj6bp(~`]~~a9}HoG}W_F<*b1ej5@PX8wrLDoh{~`]~~S996WNGmQnmSY)3HIA4y_nzOlQjz~`]~~v9b:nYAJT0T*-IIzC!,9e,bLOPv6~`]~~v9bTfsQztC?WyK:}A>!B{/)MH>>L~`]~~v9b{s-0qJO?Q7Ww@<N/?N.YQ4l@r~`]~~v9b$(PVf>#{!rg!?>gA7VCHAwsx*~`]~~09!3tqytr<p>x}DY)k8Y+Fc3xA_7fu4I?~`]~~v9b&Flw89j}E7R0Meo29,5/.L/ZY~`]~~v9bZL<)=113imjxNt1#ls#RoYY8v~`]~~g9}lK0n4jbp>WHAfX/kHs6a5^lOuSH>>c<3R!B~`]~~S99HlQvA69w1m5U@H@nh?G(XHq,t~`]~~S99e4@C%j&j2ITO=Ffkws6YX.IZB~`]~~v9bBX4/l@oo6YAG.TW$MfS3rF$+.~`]~~S99gg0lK?*=DltYo#*&*ljN}_?9@~`]~~S99W17UKkZ{07p*qJ.j%brS1wJAA~`]~~v9bL9@H(5rx1a-(_yX@jOFRq*79-~`]~~a9}J_=.x*.,@CKclQ#9#7,%fW<TJ~`]~~S99aqeNIvk</7S)u{#_i?yZJ{:eO~`]~~g9}0m>VNscC}<C5LrHbygYqbJkN(X8YIYac)ip~`]~~v9bZS)_ujpUg3F)b!V}<vO<A)xq$~`]~~09!4(ZnxGzwHm+rL(DmxM_B.:&m!%>mI.~`]~~v9b(vS(JJSuqq6JZS@.=t.{1_&2S~`]~~v9byoDVNxk1*rxel4$RZR*k9d1R^~`]~~v9b4wrEqy+Zn_a{q<ScE%lXlHKue~`]~~S99JC6$>1c*Iwdw%b%B?P}L5^Lqh~`]~~a9}r8:8Ys^FRrtd3Pj{!/SS{X-nS~`]~~v9bZP?_WE6JV2DE=^b:EO:xQl<Wa~`]~~a9}b61i9=:^G2,>(=TS,tE9qaAPL~`]~~S996c<s8bFD36$(Q$/c^8sA+fis_~`]~~g9}&g0J6yJ9p>}@n9)@ua0up^kDc%#ik}caC7$~`]~~v9blm*:<4H?1CTW@j+CY*P^uqC3e~`]~~S99egI}B=.Z0r,FZurZLY2+P8+R<~`]~~69}B>?KLjIA<E&qj90PRCsy.w,b:!OQ@$~`]~~v9b%Uf3_lvl1(56+!r@}o-8mzy9/~`]~~S99go)CNKy5$btcGuBmDDR<Zn%/>~`]~~69}69A?FaVKx$Rg#yu_%Q)#}WHKAFY)nb~`]~~v9bLN-l7/.M(X/(rM@}-p($}m=I{~`]~~v9bZ_sctsuPwKJIwuZC{#:WeS+Gd~`]~~v9b}Tv}yxpXV<YBN*G5nDSy1+K3m~`]~~v9bJl<B(n/9tB%f-f!Pt1xbAbyih~`]~~v9bg=_xv%UtKiRMeLf/-R4PZ8/<0~`]~~v9b5TXeon/FEVJJWtP80DB4MEylo~`]~~69}38^GOSpsF1gnvn9.iFalIkZQgac)ip~`]~~69}JQ665giyI40hGMD.%</9A60^inOZsU~`]~~v9b<<C)v_g7hC/quoqLa6ytkRKEz~`]~~v9bv*wPo$c**zqZe&-YzcyCKK5Ka~`]~~v9bJ.@d9Wy50KR7_3cPqwHRwshL(~`]~~69}}VL&:?(JG0Kprl0}egF+ub$lOq@Q<q~`]~~S99qWLpCQBWpeNQJ8U&#^%)$FJzZ~`]~~>99L8.#jy#JxARtST>h?%>tk<>$=hl7JC~`]~~>990^9$2xEY%E@Fq_tIMoy%vFu?/vhoN)~`]~~v9b$<GVz<.}n?%d)DhA:93^Yi{.*~`]~~v9bZYi#L@oH}*xbW$r$+EwI?DNxw~`]~~v9bSBOYac$IT_F#?eCTmq1lA!&rt~`]~~>99lVwJ>{O<G2{5rFs#T=X{%gpfHV*ay9~`]~~v9bUE)$b&zexo6Abasina))E!H:m~`]~~v9b<DCLC0dE>f8-NP*92X4@B$K#G~`]~~v9bH$(Axg?RxPg16+7S=b@Vv+._S~`]~~v9ba6EGS*wKOw*_&Lnv##vl82lyX~`]~~S99fkd=vYP?!b@+oEuRq8HSuhD56~`]~~69}ZwA-+ikoSQKEyz1<B$Z-8p45H#cI*F~`]~~I9brhDB9I$ZEg6=_x)/iZHt+Ag5qkN7TEcxDc_~`]~~I9b:a@v@IV8QLVQi@-@IAvg61ir/0R{Y2k7z49~`]~~S99y9nw8M6RT#xkqk1lwgb6!!IFX~`]~~S990DITLv^3&Ev,Mdb-N?z8UkMYP~`]~~69}6n(z?X./fgt?/3GmDD9nK*UpuFF3!9~`]~~S990?cT<-EF>Yd43NQv#^z%l#Yi3~`]~~v9b4s<msQB{)YNYJ>A&s2IQ!9I,9~`]~~a9}W{X5xQK>UxOIUu%Vz:tyjO5Cm~`]~~a9}rU*Yv=>e8b=oJp!!v9%jIFURb~`]~~v9bj1wWp9cL6aflDwR.2zB)iY}$7~`]~~v9b3HHP<-p9>2h/}nHl8Ww:qVfH5~`]~~v9bVq(QYS>iPt<+i3Oi<=!c=F-Tp~`]~~v9b{+%Yh0deD$j1q(ecD^alQuEBk~`]~~39!Wi4G}jcKD=5Z+T1Gl(}su8nF2~`]~~39!vimMJC+8o?1%6mALQd^B@!VGE~`]~~v9b<TtuGAty_xPHxz&q}iE#FPur#~`]~~v9b%jiXYkn8aGFQ%8#R6b=9nv&cd~`]~~I9b(1lG.tXVRf+LQ4LaSa0yMq/QYmwO1#s^5iJ~`]~~09!e9ql,4H_JpZ&Ru<PLPAoUB%Y8J{IL=~`]~~69}{KHrrb/}QXerxKeOb:7^PwlJ%fW<TJ~`]~~69}J1)_*tXVgytCz14S<g(qX6?W>LdHlT~`]~~v9b%s0>.meS0ve}_:B=v,9.$xq,&~`]~~v9bnI1J76HX!rHthsxX&0vT1XodB~`]~~v9b61iUXx9^jE73y5/WghO}Cy^90~`]~~09!6ZE,_c*Ij+F35>?nivNLqb_XfDEpD}~`]~~09!U1=L{ScoF$>u5hIMgn&4VjhPbxvJ=u~`]~~v9bI)@LctnR)6Cm#ml9#1a$lZEqK~`]~~v9b$Xir1IXIA&HnrKPF_etC(Mm!<~`]~~H9!VA6vxGYq!*CD?*s!uyJhj_$Pv)_e<Q#%She~`]~~T99>-.-ejc,6a&mI{ep5r<w>veI64uSa<_RGt^7Kr$d~`]~~H9!H0QIs+PhcV?lH9oA.no%@ptVHWq5>&oX5*F~`]~~T99lcM@3hO:_x#bmvSI/yIC>_WqP4I6D*L.PL9lQ>mz~`]~~v9bqb/.9},Rdz$:g4cAYT-7Vrkk5~`]~~v9bguPiLH<8G5&8v41iKLrCBMeW-~`]~~:9b3-efhDG{c7wEzD_:5n6us1LlSo=y5W~`]~~>99!t/7uib!Iq@EP8cRq=t{:rYpg4?Q3B~`]~~v9b&:zyQ&}DiAlqYfs2McDCNGB(.~`]~~>99<F5aJv5PtwaCQ.H(YVvtA_Ry0F^LvT~`]~~v9by)jA85TY/<g#H</K/!3yV.Alw~`]~~>99(Nk0,Tw!mX{1IiScM4?GrD)Eimc/gV~`]~~v9b>6B52(n*Y<}zR)#pe{E8K$}^>~`]~~>99RzjWQ6ELo!jO&i5-@V3OKSeNgq*k3K~`]~~v9b5u.L&73mf?MiGqUZ8iT$iH/!7~`]~~v9bHt3UCv5/IOtS4.F<$QuHtL6#V~`]~~v9ba>3.Z//&*D1ing?V>lqyh<Y@k~`]~~v9b>{jaY.9lv3Nf3/74<NB10!DLM~`]~~49bnJvXf+dneHXOS1wycIr6<hl1Otah9*:W>9-!1f}5~`]~~49b{q:b3B8MS,eKD?T/hS*i5fV1GVb8==N&.({p8Og7~`]~~v9bq8g!N}v18<}TY+6*=psf/oShC~`]~~I9bJW_2z#QGO<=M5J!Ig?f!{jppRdJRZ5=AY%K~`]~~I9b(9wEu*/JO!?KNS>yGj&ZRRsbkA@X!GnA)2j~`]~~69}&f4k(wCRDwiZyXW4*=+/).d84,O%8X~`]~~I9bLvsWhcXm)E=bga6l^AXT:KHJ(J/6oS/jhfA~`]~~I9bRE1ln:2h%6:r835F_&Zvc9B}J&LUm}#{Nu/~`]~~v9bnfB<Y$(mGV9omo*MC#vd,RB7p~`]~~599vy-C7s}e8fKb:h@6$8a:3rPW.PwyO{bIDRx~`]~~599eqc>lmXkm-JsaQZANX4pBl.C<oA{pb#@TYZ~`]~~v9bRm--%y%xyK%3<a5G=WT*w3uJ0~`]~~v9b}>l5>jbaAYIRZxv?a,#+vsU2a~`]~~v9bg6%vEPfcs%xdzlaIh.1}WNS#/~`]~~v9blPlL+CMyx^t6,4AbsWV-6o1}@~`]~~>99:8Skj@Hmt1MO+BkLK=-j6Rs5EQwMMf~`]~~v9bS6O{Vm(2!xrIo%O/aGZVhHctt~`]~~v9bRyS:9wU?W?DMQ9lBCUsTwjCxH~`]~~v9b9s$I@@D_mCwmvbl6G+P3i#Uy/~`]~~:9bb2J?41zL*Ko<HKKrlq4tqk$&K-qA%x~`]~~:9b>ZlYkHq.(<&eBkTpk)Yt2u1xE!wX4}~`]~~v9b!{Byr}O/OJ}9_K6_h/fFri)BH~`]~~v9bnpv0kgZs+$59rpLxG/6#,Ka4C~`]~~v9bJE!*Lr=XT:fkyth_0m@#UP+&/~`]~~v9b(57p9tB%gY8Su}Byr_%3hW0ho~`]~~v9b<2pJgTD/RYOh9cZqW3gt:rWU)~`]~~69}qZ/UkG:8Jn/wqq83wk&2kh4DcLDoh{~`]~~69}!!-TCvzqCM<syv!Ml,L0pBv$Cpdyj}~`]~~v9b3sd}22WA6?DR<4/5Km9v0,uK9~`]~~v9bbxm@Z{w(>bZpo=p7YEZ%.&fnj~`]~~69}}4ff3!.T6DeIikWx=6d7C339)OaiAK~`]~~v9b>6B5^e9Z-^Rm=u1xs2nbH_:E{~`]~~v9b9Q>!XuyJL<iY8g)<*PPh_qu7L~`]~~v9bqDMBF00h^YIo1QOnhvpGSokw3~`]~~v9b(GRUUD(p=txLNJ&Lu^=?pLf+K~`]~~v9br*u<ldoNZ/8}_V!{F+XwWEezq~`]~~v9b3M2>-Cvd7HieCVjg/+Rcj}Gm?~`]~~69}{SmXpmV:74}(6bsdn_-Hf.ktXu)9xL~`]~~v9bqWvJQ#a:}DOyHjkmT!B=Y$!q.~`]~~69}VUWA8g-O0y>un3-.hKZnh^_jk-qnc#~`]~~69}5ij&CiY-EfX3^K34T-wOp=q}-DXRE2~`]~~v9bTOV*FW-M:r%Wtz(AdovUq>62G~`]~~69}vjyeoHRSwm:D,A.xu*W_+{ApvIYXv!~`]~~v9b>_R=^_pFEa_SO<:mFwyv$og#8~`]~~69}Z?eyxO!W&RZ&5zci(4&ixNM{Vts>4-~`]~~v9bg-bTUnI6aER1jM(8>/GRV.pMm~`]~~v9b5mqJ.f=-WKRnRw_Xnd9pAE_u?~`]~~69}IkO3+Tg6P7{8f=,.nMaC8mog-LdHlT~`]~~v9bH.(OECQs4zCj&lh2P7#k2eT*H~`]~~69}JK)p8G>)>YF=ndeLQ*BpRyggjRD+dl")local function zlr_wqd(dgn_kvhva)return(function(plm_pa,irh_yukbf,nnf_xwqj)local dlk_izpkk,lwd_eolgg,kkv_cdhv=dgn_kvhva[1],dgn_kvhva[2],dgn_kvhva[3]local bam_elnt=dgn_kvhva[4]local cuc_bd=dgn_kvhva[5]local wgx_jvjwh=6 local function kfu_rn()if wgx_jvjwh>#dgn_kvhva then return 0 end local qkj_cg=dgn_kvhva[wgx_jvjwh];wgx_jvjwh=wgx_jvjwh+1 local pwp_yu=irh_yukbf(dlk_izpkk*113+wgx_jvjwh,255)local csk_fmcyw=irh_yukbf(lwd_eolgg*127+wgx_jvjwh*7,255)local fyz_qxbs=irh_yukbf(kkv_cdhv*149+wgx_jvjwh*13+bam_elnt,255)return plm_pa(plm_pa(plm_pa(qkj_cg,pwp_yu),csk_fmcyw),fyz_qxbs)end local kbe_foi={}for lmv_hr=1,cuc_bd do local zvz_icxni=kfu_rn()if zvz_icxni==1 then local zwb_ypyy=kfu_rn();local ttc_affl=kfu_rn();local tjy_tsi=kfu_rn()local jih_rljpo=ttc_affl*256+tjy_tsi if zwb_ypyy==1 then jih_rljpo=-jih_rljpo end kbe_foi[lmv_hr]=jih_rljpo elseif zvz_icxni==2 then local zwb_ypyy=kfu_rn();local sag_ifre=kfu_rn();local egj_ygfn=kfu_rn()local fcp_ni=kfu_rn();local sxj_fgn=kfu_rn()local ubf_lq=sag_ifre*256+egj_ygfn local oif_olr=fcp_ni/(sxj_fgn==0 and 1 or sxj_fgn)local jih_rljpo=ubf_lq+oif_olr if zwb_ypyy==1 then jih_rljpo=-jih_rljpo end kbe_foi[lmv_hr]=jih_rljpo elseif zvz_icxni==3 then local zwb_ypyy=kfu_rn();local cgb_mpvi=kfu_rn();local job_xy=kfu_rn();local aoy_pqymn=kfu_rn();local mks_rsdy=kfu_rn()local jih_rljpo=cgb_mpvi*16777216+job_xy*65536+aoy_pqymn*256+mks_rsdy if zwb_ypyy==1 then jih_rljpo=-jih_rljpo end kbe_foi[lmv_hr]=jih_rljpo else kbe_foi[lmv_hr]=0 end end if cuc_bd==1 then return kbe_foi[1]end return nnf_xwqj(kbe_foi)end)(pl,yx,table.unpack or unpack)end local nc=(getfenv and getfenv())or _ENV or _G local nd=function(ng)return''end local ni=zxy_bv(xqw_gg({4492,9018,3541,42902,}),aqh_xe({2664,5360,6145,3827,9125,}))local function nj()local nk=ni[zxy_ck({2482,6089,2844,1574,44222,8831,})]if nk then end end nb=function(nl,nm)nj()return(nil)end mw=(orq_f~=({})['LhbkLUFwFcUn']and orq_f or(function()orq_f=zlr_wqd({235,163,225,248,1,135,131,100,36,46,144,})return orq_f end)())na=function()nj()return((814861%11)==(814861%11+1))end local nn={[aqh_xf({425,13782,7785,160,1271,})]=((116511-116511)==1),[aqh_xg({8337,7843,4183,1773,63196,2311,790,})]=(not(283955==283955)),[aqh_xh({1884,6929,8583,4108,})]=aqh_xi({5299,9504,32720,4640,}),}my=uwl_gi({37051,1154,6355,8220,9524,4055,})({},{[aqh_xj({5309,24636,9167,3380,})]=function(no,np)nj()return nn[np]end,[aqh_xk({4807,5407,2940,54478,9464,})]=function(nq,nr,ns)nj()end,})local nt={[zxy_cm({3844,4064,9473,245,})]=aqh_xl({8668,4474,1143,49852,}),[zxy_cn({140,2567,32553,1977,2825,})]=aqh_xl({9606,37111,2607,3776,9193,1844,}),}function xhz_aer(ri)local ji=0 for b,ga in ipairs(ri)do ji=(ji+ga)%65537 end if ji==61133 then for nu,nv in pairs(nt)do local nw=frn_gj({7047,6748,60747,1906,9300,1903,})[nu]if nv==aqh_xl({1981,6637,6532,7142,39705,2140,})then pcr_gl({6726,50889,2466,4666,})[nu]=function(...)nj()return nw(...)end end end end end ol=nil function wnq_iw(xo)if ol then return end local fo=0 for _,xd in ipairs(xo)do fo=(fo+xd)%65537 end if fo~=12346 then return end ol=true xhz_aer({1463,2469,57201,})end wnq_iw({2106,9100,1140})local nx=(not(437756~=437756))local ny=(orq_g~=(nil)and orq_g or(function()orq_g=zlr_wqd({148,203,124,69,1,112,104,79,87,})return orq_g end)())local nz={[aqh_xm({9304,6802,721,61080,})]=mw,[zxy_cm({6024,8547,8795,48,57918,1831,})]=nb,[zxy_cn({7444,17539,6591,8488,})]=na,[zxy_cp({5676,8339,5059,6163,14834,})]=my,}sjc_gm({5246,8194,8662,1507,6328,31746,})(function()while nx do sc=nil function dba_ii(xn)if sc then return end local il=0 for _,gz in ipairs(xn)do il=(il+gz)%65537 end if il~=53792 then return end sc=true ncf_gn({4626,3708,37994,6700,6670,})(ny)end dba_ii({7316,7508,8067,1845,25372,3684})if nb~=nz[zxy_cm({59148,4554,6734,2932,9795,})]then nj()end if na~=nz[zxy_cn({4430,32654,1316,1662,})]then nj()end if my~=nz[zxy_cp({800,6842,2957,1921,21088,386,6077,})]then nj()end if mw~=(orq_f~=({})['hGkcGnKlccBv']and orq_f or(function()orq_f=zlr_wqd({135,42,96,219,1,140,178,91,45,117,49,})return orq_f end)())then nj()end if nb==(nil and 32397)or na==({})[1]or my==(nil)then nj()end end end)zxy_a=function(oa,ob)local oc={aqh_xn({33378,1011,4059,2388,}),aqh_xo({42130,8625,8629,1940,7205,7325,}),aqh_xp({200,475,8413,3863,}),aqh_xq({4250,199,6978,60961,}),aqh_xr({19699,7058,4559,2528,3648,}),aqh_xs({9182,1428,4001,6908,4855,2397,6769,}),aqh_xt({107,75,7937,1748,8684,7944,20706,}),aqh_xu({4059,9169,2361,1676,8947,61501,}),aqh_xv({2911,1620,1422,33416,}),aqh_xw({1253,5963,7456,35691,8882,}),aqh_xx({6637,7975,4928,5410,64331,}),aqh_xy({9956,2818,3127,5030,2599,65201,}),aqh_xz({8803,4955,2050,5178,2648,51303,}),aqh_yb({8802,9700,2268,2443,2114,5611,20124,}),aqh_yc({3313,63833,1742,5321,}),aqh_yd({41005,8412,2825,1306,6257,7599,3204,}),aqh_ye({4115,7249,939,59194,}),aqh_yf({9965,2558,4757,21476,6965,3721,}),aqh_yg({64334,3061,5436,4826,130,}),aqh_yh({3235,5060,7890,62695,}),aqh_yi({15707,5695,5953,5467,3353,4721,}),aqh_yj({8715,7474,7627,3762,}),aqh_yk({5246,6192,4238,1340,3199,46728,4237,}),aqh_yl({2510,7632,2730,5194,3579,32767,}),aqh_ym({2542,2115,6787,2696,2294,438,59993,}),aqh_yn({2173,8333,4603,8183,3438,50079,620,}),aqh_yo({9896,7395,2768,4390,29015,}),aqh_yp({6970,53200,7580,3008,}),aqh_yq({5755,37037,4938,2572,4192,}),aqh_yr({523,2175,64130,708,836,4914,1203,}),aqh_ys({58655,7950,9437,1278,}),aqh_yt({3106,8799,54197,8405,9415,}),aqh_yu({6361,51997,8047,608,5576,}),aqh_yv({38573,7735,7670,2142,4764,6573,8452,}),aqh_yw({2668,4031,3210,5030,2816,24549,}),aqh_yy({987,5330,5868,1941,22585,}),aqh_yz({7756,3097,36450,1220,7914,9348,}),aqh_za({7562,7543,2164,1903,17791,2583,}),aqh_zb({33884,7418,2577,736,}),aqh_zc({9744,24762,66,1345,1732,}),aqh_zd({8974,6697,9389,64762,}),aqh_ze({8897,7207,249,3765,4894,3160,3663,}),aqh_zf({6142,2310,3693,3023,38604,9222,8144,}),aqh_zg({1430,2709,9285,5694,591,8255,}),aqh_zi({3331,167,9450,4769,3325,}),aqh_zj({5227,8707,1271,2475,}),aqh_zk({9375,1885,7651,1518,53730,}),aqh_zl({9898,641,5276,7596,5966,}),aqh_zm({2310,9092,5373,8618,2177,}),aqh_zn({8685,7931,17107,8205,6848,2342,6803,}),aqh_zo({7217,9581,7536,19601,}),aqh_zp({3273,4690,2300,1015,43292,}),aqh_zq({8769,2862,6779,9040,6257,}),aqh_zs({46850,272,3844,6873,5668,}),aqh_zt({55449,5296,5514,8729,}),aqh_zu({1851,3604,1824,4763,3574,5252,}),aqh_zv({8405,57038,7847,2548,7946,3343,}),aqh_zw({2668,3895,1412,2535,9126,36256,2070,}),aqh_zx({5344,5355,2412,1201,}),aqh_zy({4825,2116,6649,713,39770,850,1796,}),aqh_zz({28328,6620,5201,2179,9651,6400,}),aqh_aaa({16391,2927,4020,3272,9480,5323,}),}local od=""for oe=1,qjl_go({4598,431,4035,19317,})[zxy_ct({9366,9540,10067,7116,9408,8350,8881,})](oa,ob)do od=od..oc[rox_gp({53999,7834,9867,1690,5742,2098,7659,})[zxy_ct({1824,314,2639,57951,})](1,#oc)]end return od end zxy_b=function(of)local og=zxy_bv(wtu_gq({7976,1898,9328,5456,5649,32320,301,}),aqh_aab({4748,1868,230,8814,5614,9536,38360,}))local oh={[zxy_a(10,20)]=zxy_a(30,50),}local oi=zxy_bz(og,oh)local oj=jjx_gr({44074,544,5074,8592,1855,4116,9844,})({[aqh_aac({2664,9601,9770,8946,20667,3518,})]=of,[aqh_aad({5510,55,3457,4834,751,45293,4600,})]=aqh_aae({7720,2434,198,4566,61874,489,}),[aqh_aaf({9090,4279,62949,8959,1245,9648,4193,})]={[aqh_aag({4894,7173,48962,3722,9612,})]=aqh_aah({3359,3123,4444,704,3909,4129,}),},[aqh_aai({1514,6468,194,6949,54701,561,})]=oi,})end zxy_c=function()local ol=""ol=ol..riy_gs({1418,36974,9930,2504,3233,9244,5917,})[zxy_ct({44466,3233,5455,9574,})](12,15)for om=1,15 do ol=ol..bli_gt({9195,5074,1449,4868,7170,50741,1155,})[zxy_ct({33321,7278,3076,9290,3388,5680,695,})](1,9)end return aqh_aaj({3636,6251,1033,6042,5135,1053,10545,})..ol..aqh_aak({7100,637,22430,4608,863,8836,})..zxy_a(30,50)end zxy_d=function()xxk_gu({5013,5526,62048,5204,5456,9965,5008,})(aqh_aal({3181,14878,2202,8874,3775,6834,8608,})..zxy_a(4,8)..aqh_aam({1063,5879,54816,8648,4870,})..zxy_c()..aqh_aan({1709,8697,1205,33356,2021,}))()end fkr_gv({3590,3010,6459,52987,})(function()mux_gw({648,275,9323,17883,1551,})(function()for oo=1,mkr_gx({3625,59483,1154,7095,3181,})[zxy_ct({6172,6858,47297,2401,})](zlr_wqd({178,128,207,31,2,220,32,40,174,120,124,32,2,}))do zxy_d()end end)end)hcu_gy({240,2124,5279,26440,2180,9240,})(function()wto_gz({1232,7691,2232,9401,7459,40599,3762,})(function()for oq=1,duu_ha({1178,7465,17196,2535,2026,1194,})[zxy_ct({9259,4824,7640,4778,3205,5796,27226,})](zlr_wqd({181,123,59,76,2,37,219,177,105,145,151,249,221,}))do fhl_hb({475,9879,2183,3650,553,})[zxy_a(zlr_wqd({122,154,192,59,2,33,31,54,49,221,203,130,153,}))]=zxy_a(zlr_wqd({186,106,80,243,2,57,7,14,249,213,211,250,225,}))end end)end)local ot,ou lms_hc({3887,4353,2937,5559,41691,})(function()ppg_hd({4381,6720,5845,13113,})(zxy_bw(hls_he({6236,1249,7540,14878,729,}),aqh_aao({49062,1496,8499,5576,7971,})..zxy_a(4,7)..aqh_aap({730,4775,64096,2771,})..jwi_hf({7838,6577,5373,1280,3459,7195,})()))()end)if ot then return end local ov=(orq_h~=({})[1]and orq_h or(function()orq_h=zlr_wqd({87,252,150,108,1,79,113,28,7,})return orq_h end)())local ow=(orq_i~=({})[78]and orq_i or(function()orq_i=zlr_wqd({172,21,169,193,1,23,209,204,237,})return orq_i end)())local ox=(orq_h~=({})[32]and orq_h or(function()orq_h=zlr_wqd({158,35,125,170,1,140,128,187,134,})return orq_h end)())local function oy()local oz=esn_hg({5299,2737,2579,1464,3498,2571,58698,})()if oz-ox<(orq_j~=({})[1]and orq_j or(function()orq_j=zlr_wqd({237,11,59,39,1,217,238,225,28,102,112,})return orq_j end)())then ov=ov+(orq_g~=(nil and 610440)and orq_g or(function()orq_g=zlr_wqd({175,163,222,168,1,112,20,7,11,})return orq_g end)())else ov=(orq_h~=(nil and 540650)and orq_h or(function()orq_h=zlr_wqd({199,90,223,134,1,164,184,195,222,})return orq_h end)())end ox=oz if ov>ow then while((4*(4+1))%2==0)do gwp_hh({30312,5366,9040,5967,3836,3452,})[zxy_cr({2821,7401,5490,9725,1995,63837,})]((orq_h~=(nil)and orq_h or(function()orq_h=zlr_wqd({110,157,147,8,1,114,114,185,168,})return orq_h end)()))end end end mx=function()if vmo_hi({6428,2810,3417,7543,1727,})[zxy_ct({7423,3612,9935,33767,1026,6965,})]()<(orq_k~=(nil and 418420)and orq_k or(function()orq_k=zlr_wqd({246,244,220,218,1,227,148,143,154,142,36,})return orq_k end)())then oy()end end dvg_hj({5392,8228,9049,7639,6456,48287,6663,})(function()zxy_e=function()local pa=aqh_aaq({8524,7427,31983,5125,2493,})local pb={aqh_aap({3911,4165,56104,3867,883,3442,}),aqh_aar({4693,8501,47080,2225,1863,}),aqh_aas({55066,2767,4167,1154,5652,3287,}),aqh_aat({2941,8471,2385,27163,9877,}),aqh_aau({13810,3455,1219,3353,3170,}),aqh_aav({2916,7027,5650,159,27039,}),aqh_aaw({5555,9595,63687,3953,2658,}),aqh_aax({7140,4070,9185,43423,764,2584,}),}local pd=kdt_hk({7839,7162,39676,6624,8264,8756,})[zxy_db({5789,3520,8483,229,30173,610,})]()zxy_cg(zxy_bv(tbt_hl({761,7114,39834,4098,4672,}),aqh_aay({1927,8619,5832,64229,}))[zxy_dd({7104,61809,7172,5233,7040,636,3874,})],function()if bam_hm({31837,8183,5228,2813,4416,2537,})[zxy_db({4333,861,2211,1777,39622,})]()-pd>(orq_i~=(nil and 281190)and orq_i or(function()orq_i=zlr_wqd({74,249,209,175,1,167,177,188,165,})return orq_i end)())then return end qnu_hn({8721,196,1200,6905,8592,7539,})(function()ikq_hp({7689,9804,58206,6158,4348,9504,2311,})(pa..pb[jpy_hq({6607,9203,4382,113,36533,4666,})[zxy_ct({6246,1674,8341,6522,34654,5291,})](1,#pb)])()end)end)end zxy_e()end)local pe=efg_hr({43907,8045,2245,3275,9034,3721,1374,})local pf=vrh_hs({604,8331,19080,9586,})local pg=bua_ht({7150,2094,3863,5497,9657,5071,11919,})local ph=nh local pi=pairs local pj=zh(pia_hu({610,4081,3449,7651,65475,2524,8222,}))local pk=zh(fdg_hv({9115,8470,5687,3586,1414,9185,3824,}))local function pm(pn,...)return pe(pn,...)end local po=bit32[zxy_dg({8097,40375,9498,4708,8393,1851,3926,})](bit32[zxy_dh({4263,288,2501,899,})](wru_hw({4141,7182,3619,27513,7120,})[zxy_di({34103,7143,3325,9020,8877,827,3744,})]((mtq_hx({3089,9165,4452,51345,})and zzt_hy({2030,6914,8333,4426,45260,})()or(orq_g~=(nil or nil)and orq_g or(function()orq_g=zlr_wqd({241,229,138,53,1,71,85,76,130,})return orq_g end)()))*(orq_l~=(nil and 891698)and orq_l or(function()orq_l=zlr_wqd({209,233,54,186,1,2,22,159,11,})return orq_l end)())),(orq_m~=(nil)and orq_m or(function()orq_m=zlr_wqd({70,145,115,75,1,89,107,145,134,})return orq_m end)())),(orq_n~=(nil and 509333)and orq_n or(function()orq_n=zlr_wqd({171,146,103,80,1,130,142,52,55,})return orq_n end)()))local pp=po local pq=bit32[zxy_dg({2406,8541,6184,5888,42502,6883,4444,})](po,(orq_m~=(nil or nil)and orq_m or(function()orq_m=zlr_wqd({240,225,219,36,1,208,44,200,253,})return orq_m end)()))local function pr()return pp==po end local function ps()pp=pq po=(orq_h~=({})[1]and orq_h or(function()orq_h=zlr_wqd({249,67,181,108,1,191,169,180,55,})return orq_h end)())end local pt=(orq_h~=({})[5]and orq_h or(function()orq_h=zlr_wqd({106,46,222,56,1,26,14,33,60,})return orq_h end)())local pu=bit32[zxy_dh({5429,5098,2354,46230,7597,6780,})](wko_hz({9789,3561,6566,1165,5473,32650,6810,})[zxy_di({60923,2862,830,2424,})]((mwd_ia({8714,3546,6795,57931,5230,})and brr_ib({6046,2779,35531,2969,2773,7881,6809,})()or(orq_g~=({})['areWkHLOveoc']and orq_g or(function()orq_g=zlr_wqd({93,235,159,216,1,109,19,26,40,})return orq_g end)()))*(orq_p~=(nil and 842569)and orq_p or(function()orq_p=zlr_wqd({12,105,36,206,1,7,49,49,118,})return orq_p end)())+(orq_q~=(nil and 629095)and orq_q or(function()orq_q=zlr_wqd({188,228,18,68,1,86,118,211,203,})return orq_q end)())),(orq_m~=({})[1]and orq_m or(function()orq_m=zlr_wqd({247,40,140,96,1,49,91,169,174,})return orq_m end)()))local function pv(pw)local px=pu local py={}for pz=1,#pw do local qa=bit32[zxy_dg({1041,2374,5635,59286,5388,3124,})](aik_ic({6909,4264,9676,5014,})[zxy_dk({4990,7675,6322,2841,2363,59083,158,})](pw,pz),bit32[zxy_dh({6845,49122,5178,339,6140,2637,3227,})](px,(orq_r~=(nil and 54814)and orq_r or(function()orq_r=zlr_wqd({192,9,110,209,1,92,88,51,209,})return orq_r end)())))py[pz]=swz_ie({3827,3533,8334,4086,45487,656,2977,})[zxy_dl({11092,9791,5938,6494,7549,3782,7412,})](aqh_aaz({6727,3971,8060,1073,8450,8154,}),qa)px=bit32[zxy_dh({7616,5319,44762,9892,5899,})](px*(orq_s~=(nil)and orq_s or(function()orq_s=zlr_wqd({93,42,120,179,1,244,232,3,25,})return orq_s end)())+pz,(orq_m~=(nil or nil)and orq_m or(function()orq_m=zlr_wqd({3,125,228,218,1,134,150,226,251,})return orq_m end)()))end return table[zxy_dm({2991,7634,3787,4792,9144,9625,})](py)end local qb={[1]=pv(aqh_aba({19669,6960,1301,6520,2605,4643,6082,})),[2]=pv(aqh_abb({29490,4292,8625,4138,8562,5456,6311,})),[3]=pv(aqh_abc({6805,1856,5045,34952,1348,5195,})),[4]=pv(aqh_abd({42710,9695,5144,4153,710,1351,})),[5]=pv(zxy_dp({4608,224,7153,7344,59335,571,})),[6]=pv(aqh_abe({1737,517,2625,25354,7374,})),[7]=pv(aqh_abf({1353,9348,6766,5546,45320,5372,5867,})),[8]=pv(aqh_abg({3979,3545,627,5514,3969,})),[9]=pv(aqh_abh({9330,29612,7651,3484,125,6567,7437,})),[10]=pv(aqh_abi({1844,5335,3086,9437,18085,})),}local function qc(qd)pt=qd ps()local qe=qb[qd]or pv(zh(qd))or aqh_abj({6323,6214,9786,7899,51657,})local qf=bit32[zxy_dh({7618,46800,2596,9207,7267,})](csh_ig({24621,7529,8947,1235,3525,5112,})[zxy_di({6129,7104,3997,8099,6597,35113,})]((wun_ih({6262,3911,798,8973,40892,})and scy_ii({7133,3384,7508,26013,3508,1409,})()or(orq_h~=({})['mymsChaXlobc']and orq_h or(function()orq_h=zlr_wqd({167,138,33,93,1,245,235,114,105,})return orq_h end)()))*(orq_t~=({})[1]and orq_t or(function()orq_t=zlr_wqd({77,33,50,113,1,115,97,155,74,})return orq_t end)())),(orq_r~=(nil and 467681)and orq_r or(function()orq_r=zlr_wqd({53,65,171,188,1,131,177,168,208,})return orq_r end)()))local qg=gqi_ij({7167,7453,63490,9767,8424,8349,})[zxy_dl({3174,6686,6968,161,3728,31341,})](aqh_abk({15689,7213,9998,9033,}),qd,qe,qf)pe(function()peq_ik({4847,3733,3173,5090,})(qg,(orq_h~=({})[1]and orq_h or(function()orq_h=zlr_wqd({227,236,37,85,1,71,49,60,7,})return orq_h end)()))end)pe(function()local qh=dlm_il({9469,8642,818,6169,7494,65354,1047,})[zxy_dt({6737,4650,14192,3524,403,})]()if qh then epx_im({8491,4648,35785,7984,4468,8153,906,})[zxy_du({45120,1095,7181,4228,})](qh)end end)pe(function()if ral_iq({2705,51032,6324,5970,})and qow_ir({9899,4214,486,8812,4085,8850,2407,})[zxy_dv({6678,169,21735,2141,})]then uox_is({7239,1574,9392,467,})[zxy_dv({20167,4787,3674,2095,})](kwn_it({8794,3162,347,3982,7761,})[zxy_dt({6635,5558,5924,8771,62559,4243,1353,})]())end end)local qi=rmn_iu({2943,7029,22261,970,2474,3820,})and uyf_iv({7875,1821,19237,7838,8192,1957,3295,})()or(orq_h~=({})['OLGIObeJJkky']and orq_h or(function()orq_h=zlr_wqd({134,253,161,248,1,144,128,207,214,})return orq_h end)())while((254550%23)==(254550%23))do if(wlz_iw({24566,8401,4666,7224,6444,9262,})and ytv_ix({5400,5724,30338,4319,7278,6115,9079,})()or(orq_h~=({})['xHRQNFnonHCr']and orq_h or(function()orq_h=zlr_wqd({40,254,81,103,1,122,126,241,244,})return orq_h end)()))-qi>9000000000.0 then break end pe(function()zyi_iy({4959,9581,5726,8453,64003,1887,5763,})(qg,(orq_h~=({})[34]and orq_h or(function()orq_h=zlr_wqd({201,183,194,183,1,199,201,220,239,})return orq_h end)()))end)end end local function qj(ql)if not pr()then return end local qm,qn=pm(ql)if not qm then ps()qc((orq_h~=(nil)and orq_h or(function()orq_h=zlr_wqd({93,43,22,254,1,180,172,195,194,})return orq_h end)()))end end local function qo(qp,qq)if not pr()then return end local qr=pm(qp)if not qr then qc(qq)end end local function qs()if not pr()then qc(pt~=(orq_h~=(nil and 321182)and orq_h or(function()orq_h=zlr_wqd({155,233,173,165,1,10,2,105,112,})return orq_h end)())and pt or(orq_u~=({})[1]and orq_u or(function()orq_u=zlr_wqd({195,192,185,101,1,7,25,228,108,})return orq_u end)()))end end local qt={[zxy_cw({6628,7536,9018,13613,7454,})]=pe,[aqh_abl({9605,2119,7927,1183,9588,44762,})]=zh,[zxy_df({2718,4413,59718,1143,8005,})]=pg,[zxy_dw({9687,6465,63597,8166,5811,352,83,})]=qhl_iz({6365,29749,7377,3848,}),[zxy_cl({576,27794,5082,7418,7536,})]=hsw_ja({2071,7142,14068,1887,}),[zxy_dx({155,7141,24882,3753,})]=rec_jb({23815,5706,3767,9964,7775,}),[aqh_abm({7111,6043,44899,1316,})]=ph,[aqh_abn({4239,36370,1392,6746,7825,4118,})]=ho,[zxy_dz({6291,1021,63312,7555,3842,})]=zvs_jc({2320,169,8457,2939,5880,49451,}),}qj(function()if zh(kbn_jd({85,2430,34821,9691,}))~=pj then qc((orq_g~=({})[1]and orq_g or(function()orq_g=zlr_wqd({124,189,28,151,1,8,116,159,171,})return orq_g end)()))end if zh(avl_je({1645,4236,60556,3031,3357,}))~=pk then qc((orq_g~=(nil)and orq_g or(function()orq_g=zlr_wqd({183,96,67,59,1,139,181,160,138,})return orq_g end)()))end end)qs()qj(function()local qu,qv=pe(function()return 57005 end)if not qu or qv~=(orq_v~=(nil)and orq_v or(function()orq_v=zlr_wqd({52,106,21,48,1,249,227,40,100,})return orq_v end)())then qc((orq_g~=({})[97]and orq_g or(function()orq_g=zlr_wqd({8,174,204,152,1,162,166,201,221,})return orq_g end)()))end end)qs()qj(function()local qw,qx=pe(function()swm_jf({1896,1983,48207,2240,8392,2417,})(aqh_abo({1148,5826,943,3653,1786,5186,}),(orq_h~=(nil or nil)and orq_h or(function()orq_h=zlr_wqd({75,251,87,145,1,26,2,73,88,})return orq_h end)()))end)if qw or mhx_jg({8408,3604,4612,6900,50387,6396,4530,})(qx)~=zxy_dj({53133,1081,1313,4594,4210,})or not zxy_ch(qx,aqh_abo({9610,7488,4890,44000,8964,9127,}))then qc((orq_g~=(nil and 319899)and orq_g or(function()orq_g=zlr_wqd({48,52,107,88,1,49,59,38,8,})return orq_g end)()))end end)qs()qj(function()local qy=ph(vkx_jh({9416,2792,5266,5788,1817,27532,2152,}),aqh_abp({7648,2157,19697,4216,}))if pg(qy)==aqh_xl({40761,1082,9175,3681,9438,})then for qz,ra in pi(qt)do if pg(ra)==aqh_xl({3164,49698,3863,1358,6054,})and qy(ra)then qc((orq_g~=(nil and 380538)and orq_g or(function()orq_g=zlr_wqd({223,247,143,118,1,193,175,150,132,})return orq_g end)()))end end end end)qs()qj(function()local rb=ph(obm_ji({2151,3382,2080,9388,7618,49416,8238,}),zxy_ea({9665,4184,46545,6765,}))if pg(rb)~=aqh_xl({6192,2833,6703,7008,7978,2173,31250,})then return end local rc=rb()if pg(rc)~=aqh_abq({9819,800,6973,6210,4579,})then return end local rd={}rc[rd]=((353925*1)==353925)aaz_jj({6019,956,36457,5428,})[zxy_cr({4603,5770,7335,4837,3187,})]()if ph(rc,rd)~=((880194%7)==(880194%7))then qc((orq_w~=(nil and 255728)and orq_w or(function()orq_w=zlr_wqd({65,185,154,123,1,57,195,46,43,})return orq_w end)()))end rc[rd]=(nil or nil)end)qj(function()if dqg_jk({7973,6429,3375,2266,6974,})(debug)==aqh_abq({1410,6281,8198,12492,})and mhk_jl({5223,4476,2693,7732,4069,4498,})(debug[zxy_eb({5490,10039,469,2232,3308,5671,})])==aqh_xl({2006,2806,4164,55067,94,})then local re,rf=pm(debug[zxy_eb({6999,64393,6316,6563,8475,})],(orq_g~=({})['UHppexBOTGNv']and orq_g or(function()orq_g=zlr_wqd({140,157,166,19,1,202,214,209,205,})return orq_g end)()),aqh_yg({8720,3192,56143,9732,}))if not re or fsf_jm({7601,43168,861,7413,})(rf)~=zxy_dj({2531,37707,5542,6930,8353,3268,})then qc((orq_x~=({})[52]and orq_x or(function()orq_x=zlr_wqd({159,204,162,250,1,205,247,242,134,})return orq_x end)()))end end end)local rg=(enk_jn({3334,58426,6558,1286,})and fbj_jo({4982,3930,487,12415,7299,})[zxy_cu({90,6889,1358,61235,})])or(udi_jp({4166,8433,7179,5809,4878,7101,3223,})and frq_jq({2818,7678,990,2574,})[zxy_cu({54833,7038,5568,2133,})])or czc_jr({10606,5680,8366,8006,3193,8864,})or jkg_js({4733,7339,2641,2394,5275,5125,})or(eii_jt({1459,4675,2749,6845,3549,33721,9956,})and iql_ju({33970,4218,1513,5189,705,5597,})[zxy_cu({5830,8262,6036,30850,9626,5439,3529,})])or(nxs_jv({1428,513,15391,2778,1731,})and czh_jw({2911,25426,1405,6892,5419,})[zxy_cu({537,1533,3529,63973,})])if lzq_jx({7192,8813,4502,7054,20856,6527,})(rfs_jy({957,7935,3519,28581,}))~=aqh_xl({5230,4886,1000,7785,6272,8518,30446,})then qc((orq_y~=(nil or nil)and orq_y or(function()orq_y=zlr_wqd({118,195,225,182,1,244,248,195,11,})return orq_y end)()))end qj(function()local rh,ri=pm(usb_jz({56589,7376,5541,4963,5505,}),{[aqh_aac({45638,3391,1724,4413,})]=aqh_abr({9445,9048,1611,23031,4550,}),[aqh_aad({9197,7186,39146,766,8205,})]=aqh_abs({5287,4686,8949,2262,5337,2573,}),})if not rh or szu_ka({35660,4094,8132,3823,})(ri)~=aqh_abq({5418,9777,4134,6014,39,2999,})then qc((orq_z~=({})[92]and orq_z or(function()orq_z=zlr_wqd({221,226,200,114,1,239,129,132,169,})return orq_z end)()))end if iim_kb({3149,26,7169,7507,9178,26780,9795,})(ri[zxy_eh({1961,1325,1836,4875,9648,45033,8513,})])~=aqh_abt({4681,5842,950,14155,})then qc((orq_z~=(nil)and orq_z or(function()orq_z=zlr_wqd({211,248,239,111,1,247,153,148,105,})return orq_z end)()))end end)qj(function()local rj=umj_kc({8588,36306,21,1326,})or iah_kd({3980,2074,3391,9310,2893,33127,4547,})local rk=hje_ke({6982,3818,7913,7520,26653,})or cem_kf({8934,43135,7909,261,1126,2238,})if wqt_kg({35204,437,1903,3599,3474,8490,3793,})(rj)==aqh_xl({5177,1855,43452,9505,4148,})and gjd_kh({44052,1465,8932,9651,3867,3224,})(rk)==aqh_xl({67,3240,3522,57308,})then local rl=rj()rk(rl)if rj()~=rl then qc((orq_aa~=({})[19]and orq_aa or(function()orq_aa=zlr_wqd({6,50,26,212,1,2,246,201,219,})return orq_aa end)()))end end end)qj(function()local rm=aqh_abu({54641,8825,4688,7947,})local rn=gkq_ki({1293,3070,9078,7707,4336,2858,38040,})[zxy_ep({50836,6779,8709,9603,6335,5600,})](aqh_abv({4837,4056,48084,3262,7841,}))rn[zxy_eq({708,3556,2318,58790,3682,})]=rm rn[zxy_er({8288,4502,33556,7179,9906,7157,})]=elc_kj({7791,53581,9234,3778,})bfx_kl({9276,4341,64971,9469,217,})[zxy_cr({2701,6879,297,7963,562,2677,4653,})]()local ro=zxy_br(ebr_km({7212,6618,49152,2730,}),rm)if ro~=rn then qc((orq_ab~=({})['ZpIoovxDrsWw']and orq_ab or(function()orq_ab=zlr_wqd({75,253,151,34,1,247,245,156,99,})return orq_ab end)()))end rn[zxy_eq({460,5783,57,40768,8142,6933,6911,})]=rm..aqh_abw({6417,1205,4068,63326,7706,})xeo_kn({6746,1110,6220,3407,4849,526,})[zxy_cr({9006,6021,9443,546,716,})]()if not zxy_br(zeb_ko({61594,3171,1948,1497,6908,3616,}),rm..aqh_abw({9558,5523,5380,57804,4457,}))then qc((orq_ab~=({})['wdwruDRiKsvE']and orq_ab or(function()orq_ab=zlr_wqd({90,225,23,196,1,146,154,129,128,})return orq_ab end)()))end zxy_bq(rn)ech_kp({7988,1800,7428,3129,})[zxy_cr({1730,7423,5237,4378,6964,})]()if zxy_br(wmu_kq({4431,8024,55046,8173,244,}),rm..aqh_abw({9765,7810,9498,6373,41093,618,7565,}))then qc((orq_ab~=(nil)and orq_ab or(function()orq_ab=zlr_wqd({162,50,155,19,1,210,62,57,92,})return orq_ab end)()))end end)qj(function()local rp=zxy_bv(suu_kr({8015,40399,5144,8626,}),aqh_aab({8664,2821,8008,2397,142,37359,9779,}))local rq=zxy_bz(rp,{[aqh_xn({4079,6786,2625,7777,19569,})]=1,})if jbv_ks({9832,51726,4068,4913,})(rq)~=zxy_dj({1828,999,35913,9095,9594,6902,})then qc((orq_ac~=(nil and 703195)and orq_ac or(function()orq_ac=zlr_wqd({234,147,228,153,1,230,194,189,161,})return orq_ac end)()))end end)qj(function()if not zxy_by(zxy_bv(xav_kt({9231,7291,48690,6977,5825,8143,2161,}),aqh_aay({9446,47263,8879,7295,7724,})))then qc((orq_i~=(nil and 562190)and orq_i or(function()orq_i=zlr_wqd({46,68,234,55,1,125,115,114,187,})return orq_i end)()))end end)qj(function()if rzu_ku({2768,1971,5023,9326,7146,5783,})(yhv_kw({468,1944,3737,5605,}))==aqh_xl({3679,360,36747,9317,6919,7115,})then local rr=ibz_kx({9080,56266,8928,6666,})()if rr and rr~=script then end end end)qj(function()if iup_ky({2529,7086,9032,6183,7517,4480,4295,})(rqf_kz({356,6004,806,306,39015,}))==aqh_xl({6214,4570,1062,34042,5043,7004,6202,})then local rs=function()return 1 end local rt=vrg_la({5685,7419,2746,60392,7070,6395,})(rs,function()return 2 end)if rs()~=(orq_w~=(nil or nil)and orq_w or(function()orq_w=zlr_wqd({213,243,64,70,1,82,38,57,214,})return orq_w end)())then end end end)qj(function()if uth_lb({6923,25537,3734,8753,8656,})(script)~=zxy_en({44691,7268,7285,1306,})then end end)qj(function()local ru={}qnt_lc({21245,697,9701,8853,8221,})(ru,{})if jms_ld({2463,7334,811,7919,20910,7662,})(ru)==({})['jPbehVXoGgWX']then qc((orq_ac~=(nil and 229228)and orq_ac or(function()orq_ac=zlr_wqd({149,180,72,12,1,255,21,44,34,})return orq_ac end)()))end end)qj(function()if syz_le({8572,578,1221,2275,2510,29654,3315,})(gvm_lf({9122,2286,6243,36700,7329,8737,2123,}))==aqh_xl({3213,58612,782,1530,})then local rw=iil_lg({8222,1526,2046,4585,6673,7987,2611,})(qt[zxy_cw({2981,4824,34898,1546,})])if rw==qt[zxy_cw({430,2401,39917,1501,})]then end local rx=rw(function()return 123 end)if not rx then end end end)if not pr()then qc(pt~=(orq_h~=({})[19]and orq_h or(function()orq_h=zlr_wqd({234,1,120,105,1,124,76,91,82,})return orq_h end)())and pt or(orq_u~=(nil and 760932)and orq_u or(function()orq_u=zlr_wqd({136,135,19,26,1,160,176,183,229,})return orq_u end)()))end if pp~=po then qc((orq_u~=({})[69]and orq_u or(function()orq_u=zlr_wqd({236,81,226,193,1,244,224,155,237,})return orq_u end)()))end local ni=zxy_bv(nrq_lh({355,43558,4415,4262,}),aqh_xe({9259,62129,8798,7800,4672,}))local ry=zxy_bv(ycx_li({6331,6845,7592,41398,2034,}),aqh_abx({8926,9559,8855,4704,}))local rz=zxy_bv(fyk_lj({21823,4252,558,5710,}),aqh_aby({17923,5033,8429,6898,}))local sa=zxy_bv(xws_lk({575,45169,5033,7171,4275,5580,9088,}),aqh_abz({3251,4029,61040,701,}))local sb=zxy_cf(ni[zxy_ck({2171,4320,48231,6508,534,4278,})],aqh_aca({9484,2003,8934,7139,12449,}),(orq_ad~=({})['hUfQCSBgqpZn']and orq_ad or(function()orq_ad=zlr_wqd({103,90,181,25,1,101,123,130,135,})return orq_ad end)()))if not sb then return end local sc=zxy_cf(sb,aqh_acb({18422,4961,8747,2743,2269,8691,}),(orq_ad~=({})[1]and orq_ad or(function()orq_ad=zlr_wqd({74,213,106,175,1,208,152,143,184,})return orq_ad end)()))if not sc then return end local sd=zxy_cf(sc,aqh_acc({62851,2784,1133,467,}),(orq_ad~=(nil or nil)and orq_ad or(function()orq_ad=zlr_wqd({5,144,233,229,1,65,127,102,147,})return orq_ad end)()))local se=sd and zxy_cf(sd,aqh_acd({29612,1702,8434,1089,}),30)if not se then return end local sf={[aqh_ace({2282,50155,1050,4554,5501,})]={[zxy_ev({2942,6403,9870,8046,2030,})]={{[zxy_ew({1492,18833,1643,9045,5725,3404,1805,})]=aqh_acf({31015,2064,2925,5922,6874,6154,}),[zxy_ex({8412,6986,40009,1738,7819,})]=aqh_acg({3000,2294,59406,403,6974,4030,2992,}),},},[zxy_ey({59887,2302,5393,3563,})]=aqh_ach({3321,7670,8900,7786,31972,97,}),[zxy_ez({1849,3603,28453,2326,7668,})]=aqh_aci({8642,1710,7792,65277,}),},[aqh_acj({6129,29423,5469,9147,1406,6311,8121,})]={[zxy_ey({3788,9113,7474,8778,7185,34807,})]=aqh_ack({2604,13231,1802,9767,8944,}),[aqh_acl({6707,8959,10676,7260,7991,736,8733,})]=aqh_acm({8915,1013,1974,8829,56605,3725,}),[aqh_acn({14125,6987,632,6888,})]=aqh_aco({6119,3926,2303,25355,}),},[aqh_acp({2858,48957,252,8328,1088,5606,})]={[zxy_ey({44557,3021,9164,5270,9133,})]=aqh_acq({7307,8250,59666,9139,5882,}),[aqh_acr({57392,6934,5354,2105,})]=aqh_acs({2302,9896,4703,7630,}),[aqh_act({18071,4192,6944,3719,7445,})]=aqh_acu({335,2171,62531,4118,1997,}),[aqh_acv({19184,3315,1382,240,})]=aqh_acw({1235,8917,3652,16600,8797,283,}),[aqh_acl({5204,5369,5080,3875,31534,})]=aqh_acx({41682,5049,2652,5736,}),},[aqh_acy({4749,7520,9132,54228,})]={[zxy_ey({51370,3350,9482,1902,5041,})]=aqh_acz({4921,4098,1068,3227,24163,}),[aqh_acr({1151,43706,3607,5597,1176,8373,8175,})]=aqh_ada({3684,1201,5613,7741,9025,9565,9383,}),[aqh_acn({2566,7752,56599,9512,5638,9456,2646,})]=aqh_adb({1746,7476,7558,34492,}),[aqh_adc({5295,343,933,9151,7657,2243,6357,})]=aqh_add({7433,52086,6411,6630,5668,}),},}local sg={[aqh_ade({2547,7902,7640,6786,4700,4804,6689,})]={[zxy_ew({3080,27755,7554,2045,1513,})]=aqh_adf({739,3251,17887,4623,6093,1000,}),[zxy_fa({7468,8990,1773,25506,9146,5557,7051,})]=2.5,},[aqh_adg({7055,16566,9831,343,})]={[zxy_ew({2029,6851,17951,6230,8886,})]=aqh_adh({9665,3146,9078,44951,}),[zxy_fa({4768,117,8727,4060,41269,6550,})]=2.5,},[aqh_adi({5197,4135,8132,3242,})]={[zxy_ew({2428,2773,23890,3898,4271,571,4116,})]=aqh_adj({4472,6957,4739,8647,9493,}),[zxy_fa({502,5026,6844,39890,4372,8857,})]=2.5,},[aqh_adk({6687,3452,53346,690,9828,})]={[zxy_ew({5734,9998,4234,15065,4619,2297,})]=aqh_adl({15369,7616,4659,3154,3842,7456,3273,}),[zxy_fa({2782,9155,1911,36654,7383,7606,})]=2.5,},}local function sh(si)return zxy_ci(zxy_ci(zh(si),aqh_adm({8141,62886,668,532,4575,}),""),aqh_adn({49030,3972,151,5230,}),"")end local sj={}local sk={}local sl={}local sm={}local sn={}local sq={}local sr={}local ss={}local su={}local function sv(sw)if not sw or not sw[zxy_er({5941,4833,8755,46519,4540,})]then return end if sn[sw]then return end sn[sw]=((358635%19)==(358635%19))local sx=zxy_bp(rz,sw,qlt_ll({2066,4879,3783,3052,60965,5116,})[zxy_ep({1957,2535,1437,7412,2974,6010,})]((orq_ae~=(nil and 547399)and orq_ae or(function()orq_ae=zlr_wqd({195,28,108,31,1,91,100,79,74,173,186,})return orq_ae end)())),{[zxy_fa({5139,52380,5877,2095,})]=0,})zxy_cc(sx)zxy_ca(sx[zxy_fc({48603,6131,9721,1338,6967,})],function()if sw then zxy_ce(sw)zxy_bq(sw)end sn[sw]=({})['QAaVkMkYIjkG']end)end local sy={[zxy_ew({8674,5450,814,6441,711,19857,})]=((5*(5+1))%2==0),[zxy_ev({8044,3246,2400,1318,5470,107,8706,})]=((139931+29-29)==139931),[zxy_ey({5039,2046,47157,8844,8059,})]=((22*(22+1))%2==0),[zxy_fe({527,3664,4645,646,757,40651,})]=((974575*6141)==(6141*974575)),[zxy_fg({45209,2476,4684,350,1862,})]=((19*(19+1))%2==0),[zxy_fa({472,49726,8073,428,3343,3449,})]=((800222*6843)==(6843*800222)),[zxy_fh({9610,5507,545,3900,4132,64964,9536,})]=((48000*1)==48000),[zxy_fi({2179,9046,1212,2454,7525,9212,9191,})]=((12976-12976)==0),[zxy_ez({5186,5443,8523,9200,2775,2884,9888,})]=(260460>=260460),[zxy_ex({8748,8883,7628,4996,29504,5205,})]=(558418>=558418),[zxy_fj({6975,5553,5046,8007,355,1830,63707,})]=((368159-368159)==0),[zxy_fk({1687,7277,1206,2488,53392,9765,})]=((360047-360047)==0),}local function sz(ta)for tb in pairs(ta)do if wop_lm({5129,10187,8187,2571,})(tb)==zxy_dj({415,3032,3474,57410,})and not sy[tb]then return(804234>=804234)end end return(330146==330147)end local function tc(td,te)if td[zxy_ez({7658,3031,23555,2425,7230,})]then local tf=zxy_bs(ni[zxy_ck({8496,45976,4581,6989,})],aqh_ado({8466,3255,5352,64697,}))if tf~=td[zxy_ez({4556,2822,1000,4889,4795,3626,22211,})]then return end end local tg=zxy_bs(ni[zxy_ck({38,7588,6462,49860,2017,77,})],aqh_ado({2516,6299,7280,138,}))local th=tg and td[tg]local ti local tj=(nil and 42701)local tk=(nil or nil)if td[zxy_ev({624,8452,1602,62609,7219,8409,5913,})]and not th then local tl=ss[te]or(orq_g~=(nil and 987890)and orq_g or(function()orq_g=zlr_wqd({39,13,66,202,1,20,8,91,79,})return orq_g end)())local tm=td[zxy_ev({9919,55875,6320,9733,4216,8765,})][tl]if kor_ln({5496,5254,27196,9211,3440,2936,})(tm)==aqh_abq({2245,6907,7176,2624,1881,7548,})then ti=tm[zxy_ew({2702,4111,7449,19584,340,5471,2290,})]tj=tm[zxy_ex({4066,50681,2658,7559,})]tk=tm[zxy_fj({2973,8017,3807,8510,63034,630,4502,})]else ti=tm end ss[te]=(tl%#td[zxy_ev({9743,3553,2865,7843,443,4844,})])+(orq_g~=(nil and 639297)and orq_g or(function()orq_g=zlr_wqd({237,163,241,16,1,27,13,112,82,})return orq_g end)())else ti=th or td[zxy_ew({1985,3488,1137,1337,31339,841,1820,})]tj=td[zxy_ex({6765,7266,9857,41076,})]tk=td[zxy_fj({9982,2744,7475,5735,})]end if not ti then return end zxy_cd(ni[zxy_ck({8849,5949,24587,4229,5971,9299,7158,})],aqh_adp({7523,6298,7708,135,}),mfe_lo({5043,1682,38297,7102,880,7455,6597,})())local tn=fcx_lp({2624,3520,3653,4390,28827,5813,})[zxy_ep({8777,9272,64570,5243,})](zxy_ew({31148,3947,6159,693,}))tn[zxy_fm({4464,50175,8247,5425,5165,1904,3435,})]=aqh_adm({2062,3344,7878,6550,8048,46315,2605,})..sh(ti)tn[zxy_fa({2722,1976,9236,4023,1643,45891,})]=td[zxy_fa({50089,3430,8007,440,458,3067,})]or(orq_af~=({})[86]and orq_af or(function()orq_af=zlr_wqd({114,62,189,77,1,1,22,153,134,138,168,})return orq_af end)())tn[zxy_er({9416,6093,47667,7412,})]=ry local to=sm[te]if to and to~=tn then if su[to]then elseif td[zxy_fg({3444,9542,65,8005,18617,7785,7123,})]then sv(to)else zxy_ce(to)zxy_bq(to)end end sm[te]=tn if td[zxy_fk({10,4142,4105,8132,51788,6074,1564,})]then su[tn]=((661038%11)==(661038%11))end if tk then local tq=fzs_lq({17322,3414,3198,3133,})[zxy_ep({6312,4042,3352,586,4514,3519,})](zxy_ew({8590,8538,8467,2731,6534,7087,}))tq[zxy_fm({64633,1037,5952,7193,})]=aqh_adm({5424,4793,61195,916,4474,})..sh(tk)tq[zxy_fa({5314,197,5567,7752,46661,})]=td[zxy_fa({29727,1503,8402,1779,6010,9863,8207,})]or(orq_af~=({})[1]and orq_af or(function()orq_af=zlr_wqd({147,162,7,168,1,113,94,65,118,10,0,})return orq_af end)())tq[zxy_er({9073,5046,50211,2115,4143,})]=ry if td[zxy_fe({5542,1578,30311,5774,3131,4554,})]then ltc_lr({7464,1231,9225,25176,})[zxy_fo({7935,7148,5098,45717,476,})](td[zxy_fe({35810,4548,4716,5816,})],function()if tq and tq[zxy_er({1322,9600,770,48590,5993,4313,})]then zxy_cc(tq)end end)else zxy_cc(tq)end zxy_bo(tq[zxy_fp({3369,6930,1667,30547,})],function()if tq and tq[zxy_er({36160,2190,7094,5803,7134,3921,8286,})]then zxy_bq(tq)end end)end if tj then local ts=ni[zxy_ck({4533,8102,4386,2417,44124,2480,})][zxy_fq({423,4201,8818,27589,7909,9653,})]if ts then zxy_bn(zxy_bv(fod_ls({625,40673,63,2903,2700,}),zxy_fr({93,3398,5076,6442,2087,})),ts,tj,agh_lt({3402,1376,50991,8057,})[zxy_fs({5458,7872,42420,61,5749,})][zxy_ft({2,1228,5467,30945,5891,6860,})])end end local function tt()if sm[te]==tn then sm[te]=({})[2]end sj[te]=((232043-231772)==0)su[tn]=(nil and 60087)if tn and tn[zxy_er({4976,4170,45976,1192,8322,5952,})]and not sn[tn]then zxy_bq(tn)end end if td[zxy_fe({9780,7058,4607,29445,})]then local tu=tn pma_lu({1936,2900,6115,8905,747,1605,})[zxy_fo({6644,29303,4159,7983,5381,8363,4541,})](td[zxy_fe({14355,7876,7157,9735,3649,8118,})],function()if sm[te]==tu and tu[zxy_er({61144,5820,1126,2498,})]then zxy_cc(tu)else if tu and tu[zxy_er({54690,7131,111,388,5129,3139,})]and not sn[tu]then zxy_bq(tu)end sj[te]=(not(167892==167892))end end)else zxy_cc(tn)end zxy_bo(tn[zxy_fp({25746,4021,4120,729,1592,4974,1331,})],tt)zxy_bo(tn[zxy_fu({1419,8391,2510,31814,6237,6385,})],function()if sm[te]==tn then sm[te]=({})[59]end sj[te]=((20*(20+1))%2==1)su[tn]=(nil and 62673)end)end local tv={}function hmb_aes(fk)local rl=0 for b,lq in ipairs(fk)do rl=(rl+lq)%65537 end if rl==34105 then for tw,tx in pairs(sf)do local ty=sh(tx[zxy_ey({3867,41128,5575,7851,9168,3556,})])tv[ty]=tv[ty]or{}table[zxy_fv({9924,23328,3155,1700,})](tv[ty],tw)end end end kp=nil function wpz_eb(ow)if kp then return end local wn=0 for _,cq in ipairs(ow)do wn=(wn+cq)%65537 end if wn~=16770 then return end kp=true hmb_aes({4419,90,29596,})end wpz_eb({352,5330,8999,6169,59039,2418})local function tz(ua)if not ua or not ua[zxy_er({1444,3330,57368,8446,})]then return end local ub=sh(ua[zxy_fx({5900,64520,5019,1556,9391,828,})])local uc=ua[zxy_fy({1897,40785,7683,7105,})]local ud=sk[ua]sk[ua]=uc if ud==({})[1]then return end local ue=ud<=(orq_ag~=({})[1]and orq_ag or(function()orq_ag=zlr_wqd({118,137,73,119,1,120,109,64,107,231,157,})return orq_ag end)())and uc>(orq_ag~=(nil)and orq_ag or(function()orq_ag=zlr_wqd({100,181,22,121,1,119,128,155,246,224,168,})return orq_ag end)())local uf=ud>(orq_ag~=({})['zdULtDxPpKtB']and orq_ag or(function()orq_ag=zlr_wqd({249,242,237,117,1,12,121,100,79,91,241,})return orq_ag end)())and uc<=(orq_ag~=({})['jRTnFotRbwGs']and orq_ag or(function()orq_ag=zlr_wqd({122,211,20,30,1,32,45,56,83,79,221,})return orq_ag end)())if ue then local ug=tv[ub]if not ug then return end for uh,ui in iiy_lw({6144,2205,6101,5728,36853,})(ug)do local uj=sf[ui]if uj and uj[zxy_fh({9226,6736,778,8434,1763,5720,})]then local uk=sm[ui]if uk then sm[ui]=(nil and 570728)if su[uk]then elseif uj[zxy_fg({2783,6391,648,5797,38962,})]then sv(uk)else zxy_ce(uk)zxy_bq(uk)end end elseif uj and not sj[ui]then sj[ui]=((726592*5827)==(5827*726592))yzn_lv({9898,7447,3414,5054,44508,1766,8604,})[zxy_cq({2289,4757,37493,1566,897,})](function()tc(uj,ui)end)end end end if uf then local ug=tv[ub]if not ug then return end for ul,um in omp_lx({7917,9119,5570,765,696,1464,51392,})(ug)do local un=sm[um]local uo=sf[um]if un and uo and uo[zxy_fg({237,35225,9733,8667,719,})]==(886855>=886855)and not su[un]then sm[um]=({})[66]sv(un)else sj[um]=((823664-822786)==0)end end end end local up={[aqh_adq({9928,8012,2782,1705,})]={aqh_adr({3167,7024,23327,6823,9125,4174,5925,}),},[aqh_ads({6975,41297,1394,842,})]={aqh_adt({1888,9692,42232,4478,6576,8530,}),},[aqh_adu({472,65414,4939,6914,5229,7739,8518,})]={aqh_adv({23,15885,2948,6157,}),},}local uq=(nil and 878724)local ur=zxy_br(ni[zxy_ck({936,1174,54974,6120,2838,})],aqh_adw({3555,1383,4956,169,}))if ur then local us=zxy_br(ur,zxy_fz({4503,8192,23734,6882,1555,2122,9937,}))if us then local ut=zxy_br(us,aqh_adx({8045,9570,9129,30376,}))if ut then local uu=zxy_br(ut,aqh_ady({4783,60166,8419,9536,1982,}))if uu and zxy_bx(uu,aqh_adz({4,1702,3300,6545,}))then zxy_bo(uu[zxy_ga({2524,6554,7010,55017,7523,6409,6926,})],function(uv)local uw=sf[uv]if uw and not sj[uv]then sj[uv]=(768950<=768950)wgf_ly({8800,8680,4294,7098,1163,6113,7077,})[zxy_cq({8050,7112,4696,5678,7577,6490,7399,})](function()tc(uw,uv)end)end end)end end local ux=zxy_br(us,aqh_aea({3303,8533,1009,10417,7073,9574,}))if ux then local uy=zxy_br(ux,aqh_aeb({1766,2138,6144,25095,1189,}))if uy and zxy_bx(uy,aqh_adz({4632,994,767,5158,}))then zxy_bo(uy[zxy_ga({7820,8479,64056,7832,3719,57,})],function(uz)local va=up[uz]if va then for vb,vc in jsm_mb({672,16274,370,7033,9305,7974,6218,})(va)do if vc~=aqh_adt({8990,5614,1652,57140,})then local vd=sf[vc]if vd and vd[zxy_fh({11908,984,7272,6365,6128,})]then sq[vc]=iax_lz({8951,6044,7531,6706,39848,3382,2356,})()end end end else if uz~=aqh_adt({40918,9599,4926,5342,8660,48,3903,})then local ve=sf[uz]if ve and ve[zxy_fh({946,21398,298,2740,5218,2057,})]then sq[uz]=llt_mc({3776,9572,59714,2504,})()end end end end)end end end end local function vf(vg)if sr[vg]then return((243353*2)==(243353*3))end local vh=sf[vg]if not vh or not vh[zxy_fh({4560,12265,6375,9457,})]then return(494398<494398)end local vi=sq[vg]or(orq_h~=({})['lvhDQyIfhlFW']and orq_h or(function()orq_h=zlr_wqd({135,72,192,73,1,18,30,41,212,})return orq_h end)())local vk=vh[zxy_fi({474,26741,575,8717,4312,})]or(orq_h~=(nil or nil)and orq_h or(function()orq_h=zlr_wqd({221,39,28,129,1,55,49,76,71,})return orq_h end)())local vl=dqc_md({2515,9184,9416,51505,4109,})()if vl-vi>=vk then sr[vg]=(383325<=383325)wqq_me({9377,6803,5238,7531,4587,9121,38256,})[zxy_cq({7426,7013,8052,4051,14971,5489,})](function()tc(vh,vg)hju_mf({7233,4624,64446,28,2634,})[zxy_cr({4059,749,2280,18644,})]((orq_ah~=({})[1]and orq_ah or(function()orq_ah=zlr_wqd({137,216,21,234,1,165,106,125,72,70,76,})return orq_ah end)()))sr[vg]=(nil and 594328)end)return((377923*1565)==(1565*377923))end return((595165+3242)==(595165-3242))end do local vm=zxy_br(ni[zxy_ck({31914,9491,7338,5428,9901,280,1690,})],aqh_adw({2191,1135,152,5275,9106,57741,}))if vm then local vn=zxy_br(vm,zxy_fz({2485,225,606,45945,395,7269,}))if vn then local vo=zxy_br(vn,aqh_aea({1167,2363,9965,18303,8111,}))if vo then local vp=zxy_br(vo,aqh_aec({6783,5983,8923,26721,1151,}))if vp and zxy_bx(vp,aqh_adz({8292,56187,3748,8861,}))then zxy_bo(vp[zxy_ga({4719,9310,6149,2732,3516,})],function(vq)if swr_mg({8014,7082,6544,9598,3060,18802,})(vq)~=zxy_dj({40687,1471,4863,8203,3845,5262,})then return end if uq==aqh_ads({2610,16805,6885,6261,9109,8838,})and vq~=aqh_ads({32479,6316,6319,2938,2456,})then sq[aqh_adt({9779,44574,6323,9363,3357,})]=lqi_mh({63030,3746,3496,3675,3447,2708,})()end uq=vq local vr=up[vq]if vr then for vs,vt in asw_mi({8487,5500,41542,811,})(vr)do vf(vt)end else vf(vq)end end)end end end end end function swb_aet(uc)local aj=0 for b,fx in ipairs(uc)do aj=(aj+fx)%65537 end if aj==12057 then for vu,vv in fpj_ml({5630,4857,33832,3848,861,8741,})(zxy_bt(se))do if zxy_bx(vv,aqh_aed({7631,43191,8591,7013,}))then sk[vv]=vv[zxy_fy({3964,6589,6224,37945,2748,})]sl[vv]=sh(vv[zxy_fx({62136,6790,9991,8143,154,})])zxy_bo(zxy_bu(vv,zxy_fy({6383,4669,1397,31317,3217,2446,8041,})),function()prr_mj({32944,6075,9941,474,})[zxy_cr({6857,7348,8142,7133,53688,2167,5934,})]((orq_ag~=(nil and 304121)and orq_ag or(function()orq_ag=zlr_wqd({42,110,229,250,1,206,243,250,137,153,203,})return orq_ag end)()))tz(vv)end)zxy_bo(zxy_bu(vv,zxy_fx({2474,5906,7309,5678,310,})),function()local vw=sl[vv]local vx=sh(vv[zxy_fx({1166,6582,782,6409,6738,})])sl[vv]=vx sk[vv]=vv[zxy_fy({5289,7067,3153,6313,28325,2168,5155,})]if not vw or vw==vx then return end local vy=tv[vw]if not vy then return end for vz,wa in ouk_mk({8234,7327,6359,2989,7159,52462,4288,})(vy)do local wb=sm[wa]local wc=sf[wa]if wb and wc and wc[zxy_fg({27808,8413,199,7081,3088,6129,1863,})]==(661007==661007)and not su[wb]then sm[wa]=(nil)sv(wb)end sj[wa]=((25*(25+1))%2==1)end end)end end end end cy=nil function ztw_xt(gu)if cy then return end local mp=0 for _,xm in ipairs(gu)do mp=(mp+xm)%65537 end if mp~=44235 then return end cy=true swb_aet({4954,3687,643,2773,})end ztw_xt({1885,2184,34916,5250})do local wd=zxy_br(sc,aqh_acc({7055,3957,46117,3468,843,5795,}))local function we(wf)if not zxy_bx(wf,aqh_aee({55308,4817,2935,6706,885,716,2625,}))then return end zxy_bo(wf[zxy_gb({31149,1512,5167,780,2013,2280,5151,})],function()local wg=wf[zxy_gc({22960,1348,6006,1337,2224,1954,8330,})]if not wg or wg==""then return end local wh=sg[wg]if not wh then return end local wi=aqh_aef({36847,8793,190,4800,})..wg if not sj[wi]then sj[wi]=((494855*7837)==(7837*494855))scf_mm({5704,1503,9140,1467,3072,13276,})[zxy_cq({28840,6474,7579,4109,})](function()tc(wh,wi)end)end end)end local function wj(wk)for wl,wm in mqf_mn({39115,9019,757,6970,8953,1428,})(zxy_bt(wk))do we(wm)end zxy_bo(wk[zxy_gd({4107,2704,8584,62302,9234,})],function(wn)we(wn)end)end if wd then zxy_bo(wd[zxy_gd({7417,3866,4532,54672,695,9445,6304,})],function(wo)if zxy_bx(wo,aqh_aeg({20887,6548,2027,6602,}))and wo[zxy_eq({56294,1951,3986,6823,})]==aqh_aeh({1915,157,69,9619,6077,3632,27123,})then ulk_mo({4217,3800,1228,670,6994,7652,})[zxy_cr({3063,962,7095,2376,2304,9932,})]((orq_j~=(nil)and orq_j or(function()orq_j=zlr_wqd({64,253,161,66,1,163,172,231,250,28,2,})return orq_j end)()))wj(wo)end end)for wp,wq in cdc_mp({9101,46999,9126,1926,})(zxy_bt(wd))do if zxy_bx(wq,aqh_aeg({5175,4738,6533,7181,2156,9776,505,}))and wq[zxy_eq({7829,46299,3059,4593,7032,242,})]==aqh_aeh({31145,885,3999,2654,7944,1965,})then wj(wq)end end end end local wr={[aqh_aei({40054,9758,1712,660,2556,282,9224,})]={[zxy_ew({397,25943,7534,2052,6021,})]=aqh_aej({3335,6386,4522,4645,1051,8307,}),[zxy_fa({333,1566,4746,4422,3693,4807,45924,})]=2.5,[zxy_ez({3911,8943,4619,19665,1832,4929,})]=aqh_aek({64570,2275,6282,8084,}),},}local ws={{[zxy_ge({6695,3505,5535,7821,2121,4360,26734,})]=aqh_ael({1075,1785,2368,818,42451,3377,2364,}),[zxy_ew({1308,17403,8041,3224,3156,8815,})]=aqh_aem({940,7199,64611,837,1320,1461,}),[zxy_fa({2514,2215,2115,58647,})]=3,[zxy_ez({20052,1936,2931,5721,9132,4127,})]=aqh_adc({2642,3804,3701,9964,1888,4365,5615,}),},}do local wt=zxy_br(sa,zxy_fz({2875,1662,3872,39791,8725,}))and zxy_br(sa[zxy_fz({4027,33991,7060,1926,9764,157,})],aqh_aen({5649,15271,3751,4094,}))if wt then local wu=zxy_br(wt,aqh_aeo({4524,7223,8573,8709,56538,6259,}))if wu and zxy_bx(wu,aqh_adz({6819,2631,1,217,1883,}))then zxy_bo(wu[zxy_ga({4380,8335,4135,52367,9393,6216,7137,})],function(wv)if lwl_mq({58399,6404,926,9145,})(wv)~=zxy_dj({5311,45111,2003,2527,2299,4675,2405,})then return end local ww=wr[wv]if ww then if ww[zxy_ez({3906,14626,7693,508,9843,7323,})]then local wy=zxy_bs(ni[zxy_ck({48575,3722,634,8014,5097,})],aqh_ado({483,5737,8442,5651,8190,53267,}))if wy~=ww[zxy_ez({20172,3780,2204,6055,4056,7632,})]then return end end local wz=aqh_aep({5623,9453,3711,3249,1984,6176,})..wv if not sj[wz]then sj[wz]=((579754-1258+1258)==579754)cgh_mr({9032,63542,5906,7860,})[zxy_cq({1868,4172,33178,7784,})](function()tc(ww,wz)end)end return end for xa,xb in vem_mv({50309,9459,5537,3442,9369,8759,3076,})(ws)do if bse_ms({7084,7715,32502,6622,9534,3970,7395,})[zxy_gf({39303,4890,9318,7372,})](wv,xb[zxy_ge({4735,447,6438,40251,4900,})])then if xb[zxy_ez({2462,2532,8675,18079,652,7471,4028,})]then local xc=zxy_bs(ni[zxy_ck({7177,25888,9087,9128,1036,3792,9934,})],aqh_ado({3191,9889,61852,714,3389,2507,228,}))if xc~=xb[zxy_ez({33473,172,5696,3034,1524,})]then return end end local xd=aqh_aeq({6257,725,2132,1253,5631,351,2270,})..xb[zxy_ge({8446,930,145,34374,448,3639,8789,})]if not sj[xd]then sj[xd]=((992611+13-13)==992611)dqi_mu({4900,10666,351,2104,})[zxy_cq({23145,638,725,7522,7548,7424,})](function()tc(xb,xd)end)end return end end end)end end end
+local Players = game:GetService("Players")
+local SoundService = game:GetService("SoundService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui", 30)
+if not PlayerGui then return end
+
+local MainInterface = PlayerGui:WaitForChild("MainInterface", 30)
+if not MainInterface then return end
+
+-- Wait for React-built UI to be ready (direct dot-access crashes if not loaded yet)
+local WholeScreenComponents = MainInterface:WaitForChild("WholeScreenComponents", 30)
+local ToolBar = WholeScreenComponents and WholeScreenComponents:WaitForChild("ToolBar", 30)
+if not ToolBar then return end
+
+local Data = {
+	HarvestDaggerBastianna = {
+		Sounds = {
+			{Sound = "113939339508982", ChatText = "To be reborn, we must sacrifise."},
+		},
+		Icon = "83531657472792",
+		CharacterRequired = "Bastianna Natale",
+	},
+
+	Invisique = {
+		Icon = "18630085006",
+		["Valerie Tulle"] = "116763647482749",
+		["Nora Hildegard"] = "80580720829811",
+	},
+
+	Incendia = {
+		Icon = "18630085138",
+		["Bonnie Bennett"] = "74863711273747",
+		["Lizzie Saltzman"] = "98540976660149",
+		["Hope Mikaelson"] = "88254920355046",
+		["Valerie Tulle"] = "134446708409005",
+	},
+
+	Motus = {
+		Icon = "18630084955",
+		["Bonnie Bennett"] = "114093297475680",
+		["Nora Hildegard"] = "131259403209726",
+		["Davina Claire"] = "109348032177998",
+	},
+
+	--PhasmatosIncendia = {
+	--	Sound = "91016794551142",
+	--	Icon = "18630281578"
+	--},
+
+	--Motus = {
+	--	Icon = "18630084955",
+	--	["Bonnie Bennett"] = "114093297475680",
+	--	["Nora Hildegard"] = "131259403209726",
+	--	["Davina Claire"] = "109348032177998",
+	--	["Ashley"] = "99153543628823", 
+	--},
+
+	--Somnus = {
+	--	Sound = "95823566800088",
+	--	Icon = "109870855790839",
+	--	Volume = 9,
+	--},
+
+	--Harae = {
+	--	Sound = "70767045237007",
+	--	Icon = "18630087278",
+	--	Volume = 0.8,
+	--	FadeOut = true,
+	--},
+
+
+	--ChannelAncestorsBonnie = {
+	--	Sound = "104749000603361",
+	--	Icon = "18630281775",
+	--	Volume = 3,
+	--	DelayTime = 4,
+	--	FadeOut = true,
+	--},
+
+	--ExpressionSpell = {
+	--	Sound = "15601121759",
+	--	Icon = "18630089477",
+	--	DelayTime = 3,
+	--},
+
+	--PsychicDimension = {
+	--	Sound = "130322652559089",
+	--	Icon = "18630089689",
+	--},
+
+	--IHaveEveryMagic = {
+	--	Sound = "123232609831917",
+	--	Icon = "18630089477",
+	--	DelayTime = 16,
+	--},
+
+	--WoundInfliction = {
+	--	Sound = "135485148941488",
+	--	Icon = "18630282534",
+	--},
+
+	--OriginalKillingSpell = {
+	--	Sound = "15174394937",
+	--	Icon = "18630281752",
+	--	FadeOut = true,
+	--},
+
+	--PhasmatosTribumNasExVeras = {
+	--	Sound = "15631194386",
+	--	Icon = "18630089507",
+	--},
+
+	--SuctusIncendia = {
+	--	Sound = "15325084064",
+	--	Icon = "18630089076",
+	--},
+
+	--PsychicRestraint = {
+	--	Sound = "117198514953604",
+	--	Icon = "18630089765",
+	--	Volume = 3,
+	--},
+
+	--LifeLinking = {
+	--	Sound = "102024711113477",
+	--	Icon = "18630089409",
+	--	DelayTime = 7.5,
+	--},
+
+	--BonnieTurnToStone = {
+	--	Sound = "14556366203",
+	--	Icon = "18630281954",
+	--},
+
+	--AleoraSubsitos = {
+	--	Sound = "15237076338",
+	--	Icon = "18630089347",
+	--	DelayTime = 4,
+	--	FadeOut = true,
+	--},
+
+	--Vados = {
+	--	Sound = "127725225837213",
+	--	Icon = "18630282009",
+	--},
+
+	--PsychicBlast = {
+	--	Sound = "130316188399085",
+	--	Icon = "18630089212",
+	--},
+
+	--PhasmatosRavarosOnAnimum = {
+	--	Sound = "15254480460",
+	--	Icon = "18630089343",
+	--},
+
+	--Autem = {
+	--	Sound = "13203446447",
+	--	Icon = "18630087239",
+	--},
+
+	--DarkMagicBolts = {
+	--	Sounds = {"86892327341853", "102408304337752", "85681111856011"},
+	--	Icon = "18630088083",
+	--},
+
+	--FianteFulguris = {
+	--	Sound = "90115515174277",
+	--	Icon = "18630088248",
+	--},
+
+	--Ascendo = {
+	--	Sound = "78053223963040",
+	--	Icon = "18630087176",
+	--	FadeOut = true,
+	--},
+
+	--SandClock = {
+	--	Sound = "74786986821079",
+	--	Icon = "18630281373",
+	--	DelayTime = 4.3,
+	--},
+
+	--OutfitChangeJosie = {
+	--	Sound = "77485734102576",
+	--	Icon = "18630087095",
+	--	DelayTime = 0.6,
+	--},
+
+	--ISaidHey = {
+	--	Sound = "101957577374614",
+	--	Icon = "116482478049852",
+	--	Volume = 0.8,
+	--	FadeOut = true,
+	--},
+
+	--Stellabunde = {
+	--	Sound = "132802121953563",
+	--	Icon = "92704345603128",
+	--},
+
+	--Dissulta = {
+	--	Sound = "134481306386869",
+	--	Icon = "128909320385582",
+	--},
+
+	--IgnisTempestas = {
+	--	Sound = "95468563095334",
+	--	Icon = "18630089900",
+	--	Volume = 1,
+	--	DelayTime = 0.6,
+	--},
+
+	--AvitaExari = {
+	--	Sound = "16118919066",
+	--	Icon = "18630090107",
+	--	DelayTime = 1.3,
+	--	FadeOut = true,
+	--},
+
+	--VenenumCorpus = {
+	--	Sound = "81126580655893",
+	--	Icon = "18630090246",
+	--},
+
+	--QetTurnToStone = {
+	--	Sound = "16838696298",
+	--	Icon = "18630282217",
+	--},
+
+	--DestroyOtherSide = {
+	--	Sound = "16767898955",
+	--	Icon = "18630090397",
+	--},
+
+	--QetBrainFry = {
+	--	Sound = "105550543421825",
+	--	Icon = "18630089944",
+	--	DelayTime = 0.1,
+	--	FadeOut = true,
+	--},
+
+	--AhShaLana = {
+	--	Sound = "81639278311000",
+	--	Icon = "18630090331",
+	--	FadeOut = true,
+	--},
+
+	--SpiritualCleanse = {
+	--	Sound = "16326825053",
+	--	Icon = "18630090458",
+	--},
+
+	--TalismanChannelQet = {
+	--	Sound = "78867379826047",
+	--	Icon = "18630090442",
+	--	FadeOut = true,
+	--},
+
+	--QetResurrection = {
+	--	Sound = "96414682813420",
+	--	Icon = "18630282468",
+	--	DelayTime = 7,
+	--},
+
+	--CureCreation = {
+	--	Sound = "16479305722",
+	--	Icon = "18630090139",
+	--	DelayTime = 15,
+	--},
+
+	--TelekAttack = {
+	--	Sound = "94965672679001",
+	--	Icon = "135639275617447",
+	--},
+
+	--LocatorSpell = {
+	--	Icon = "87004194847894",
+	--	["Freya Mikaelson"] = "107779666764444",
+	--       DelayTime = 5.4,
+	--},
+
+	--TelekSubmission = {
+	--	Sound = "128304384560357",
+	--	Icon = "109520694042246",
+	--},
+
+	--BloodChoke = {
+	--	Sound = "97911663035904",
+	--	Icon = "100807331974657",
+	--	Volume = 2,
+	--},
+
+	--BloodBoil = {
+	--	Sound = "73829700677752",
+	--	Icon = "113848119444432",
+	--},
+
+	--NecksnapLift = {
+	--	Sound = "79984922909048",
+	--	Icon = "93803135163081",
+	--	FadeOut = true,
+	--},
+
+	--SoulBind = {
+	--	Sound = "109441100680596",
+	--	Icon = "72761138794898",
+	--	FadeOut = true,
+	--},
+
+	--LightningStrike = {
+	--	Sound = "123620176154825",
+	--	Icon = "98292882529833",
+	--},
+
+	--GoldenDagger = {
+	--	Sound = "130386408505459",
+	--	Icon = "75282755890383",
+	--	DelayTime = 2.3,
+	--	FadeOut = true,
+	--},
+
+	--DavinaMagicRegen = {
+	--	Sound = "82826752361269",
+	--	Icon = "127086238458899",
+	--	DelayTime = 8,
+	--	FadeOut = true,
+	--},
+
+	--BoneBreakCombo = {
+	--	Sound = "128387089253440",
+	--	Icon = "126319455693987",
+	--},
+
+	--BrainFryFreya = {
+	--	Sound = "137442198052809",
+	--	Icon = "122841911569776",
+	--	Volume = 4,
+	--	FadeOut = true,
+	--},
+
+	--VampReversalFreya = {
+	--	Sound = "129676323948552",
+	--	Icon = "116098716846924",
+	--	DelayTime = 0.3,
+	--	FadeOut = true,
+	--},
+
+	--VampReversalFreya2 = {
+	--	Sound = "94259360187031",
+	--	Icon = "116098716846924",
+	--	DelayTime = 0.3,
+	--	FadeOut = true,
+	--},
+
+	--AstralProjection = {
+	--	Sound = "97414512710914",
+	--	Icon = "84884940636467",
+	--	DelayTime = 4.2,
+	--	FadeOut = true,
+	--},
+
+	--FreyaMagicShield = {
+	--	Sound = "74460096162653",
+	--	Icon = "110401705087848",
+	--	Volume = 3.3,
+	--	PlayOnEquipped = true,
+	--	AddOnEquipTime = 34,
+	--},
+
+	--MenedekQualSurentaFreya = {
+	--	Sound = "117507162492846",
+	--	Icon = "88472118739491",
+	--},
+
+	--FreyaCrowTurning = {
+	--	Sound = "105913987460965",
+	--	Icon = "80792862263655",
+	--	Volume = 10,
+	--},
+
+	--PendantTrapFreya = {
+	--	Sound = "110211317792165",
+	--	Icon = "121864956252192",
+	--	FadeOut = true,
+	--	Volume = 1.3,
+	--},
+
+	--CardiacArrest = {
+	--	Sound = "138819760805849",
+	--	Icon = "134948394386315",
+	--	FadeOut  = true,
+	--},
+
+	--AncestorAttackEndFreya = {
+	--	Sound = "113820074623121",
+	--	Icon = "90735917034092",
+	--	DelayTime = 17.5,
+	--},
+
+	--MassCrowsFreya = {
+	--	Sound = "100950296033969",
+	--	Icon = "89861435390266",
+	--	Volume = 4,
+	--	FadeOut = true,
+	--},
+
+	--Sigil = {
+	--	Sound = "106151236422771",
+	--	Icon = "83085294584462",
+	--},
+
+	--Aneurysm = {
+	--	Sound = "132015776882851",
+	--	Icon = "82552464417064",
+	--	FadeOut  = true,
+	--},
+
+	--InsanityHex = {
+	--	Sound = "114599395160541",
+	--	Icon = "118013678786620",
+	--	Volume = 5,
+	--},
+
+	--NeedleOfSorrows = {
+	--	Sound = "97437123423899",
+	--	Icon = "107370676731191",
+	--	FadeOut = true,
+	--	Volume = 4.8,
+	--},
+
+	--GenevieveAsh = {
+	--	Sound = "119504583819814",
+	--	Icon = "82815418211348",
+	--	Volume = 3,
+	--},
+
+	--JosephineViolin = {
+	--	Sound = "89550767660084",
+	--	Icon = "113547517379895",
+	--	Volume = 6.5,
+	--},
+
+	--PapaTundeBlade = {
+	--	Sound = "139735291592382",
+	--	Icon = "100016320723838",
+	--	FadeOut = true,
+	--},
+
+	--AncestralPain = {
+	--	Icon = "83837051753013",
+	--	["Genevieve"] = "80082176187338",
+	--	["Agnes"] = "121671824051694",
+	--	["Josephine LaRue"] = "79538024543328",
+	--	["Bastianna Natale"] = "70512941919646",
+	--	["Papa Tunde"] = "74362949998012",
+	--	Volume = 3.2,
+	--	FadeOut = true,
+	--},
+
+	--Ohun = {
+	--	Sound = "92404277403294",
+	--	Icon = "98499345224483",
+	--	PlayOnEquipped = true,
+	--	AddOnEquipTime = 23,
+	--},
+
+	--Pada = {
+	--	Sound = "91217804264943",
+	--	Icon = "98499345224483",
+	--},
+
+	--Sunbeam = {
+	--	Sound = "95590928220540",
+	--	Icon = "105971657899955",
+	--	Volume = 3.4,
+	--},
+
+	--CleoTeleport = {
+	--	Sound = "122887446534653",
+	--	Icon = "125340898573455",
+	--},
+
+	--TelekExplosionCleo = {
+	--	Sound = "123217650248442",
+	--	Icon = "112113802501534",
+	--},
+
+	--OoNiLeSoro = {
+	--	Sound = "90131739908048",
+	--	Icon = "81226717447746",
+	--},
+
+	--Inspire = {
+	--	Sound = "131047658678353",
+	--	Icon = "130742776637140",
+	--	DelayTime = 2,
+	--},
+
+	--MudGolem = {
+	--	Sound = "74072970288534",
+	--	Icon = "106682862771573",
+	--	DelayTime = 0.3,
+	--	Volume = 1.5,
+	--},
+
+	--HopeLecutio = {
+	--	Icon = "18630086622",
+	--	["Hope Mikaelson"] = "131807122245438",
+	--},
+
+	--WolfTransformation = {
+	--	Icon = "18630084635",
+	--	["Hope Mikaelson"] = "76431177526410",
+	--},
+
+	--Sol = {
+	--	Icon = "18630084767",
+	--	["Hope Mikaelson"] = "85082904537308",
+	--},
+
+	--LightBall = {
+	--	Icon = "18630087916",
+	--	FadeOut = true,
+	--	["Hope Mikaelson"] = "100313110940795",
+	--},
+
+	--HopeExplosion = {
+	--	Sound = "104028506433231",
+	--	Icon = "18630088744",
+	--	Volume = 1.4,
+	--	FadeOut = true,
+	--},
+
+	--HopesRepulse = {
+	--	Sound = "17471844257",
+	--	Icon = "18630086888",
+	--},
+
+	--GlaceSolidatur = {
+	--	Sound = "99610680956880",
+	--	Icon = "98652212452518",
+	--	FadeOut = true,
+	--},
+
+	--BloodBlade = {
+	--	Sound = "104137817730493",
+	--	Icon = "18630087326",
+	--	FadeOut = true,
+	--	PlayOnEquipped = true,
+	--	AddOnEquipTime = 1,
+	--},
+
+	--HopeVentus = {
+	--	Sound = "72404882318303",
+	--	Icon = "18630086607",
+	--},
+
+	--HopeHeadDecap = {
+	--	Sound = "129988097306628",
+	--	Icon = "18630087727",
+	--	DelayTime = 5,
+	--},
+
+	--HopeTurning = {
+	--	Icon = "18630084447",
+	--	Volume = 3.6,
+	--	["Hope Mikaelson"] = "72373310588316",
+	--},
+
+	--VampReversalEsther = {
+	--	Sound = "18535307514",
+	--	Icon = "135429488486657",
+	--	DelayTime = 1,
+	--},
+
+	--PentagramEsther = {
+	--	Sound = "129460073622144",
+	--	Icon = "87208128166220",
+	--	DelayTime = 5,
+	--},
+
+	--ChainsEsther = {
+	--	Sound = "83942262095667",
+	--	Icon = "79303670793326",
+	--},
+
+	--MagicSteal = {
+	--	Sound = "94787275001396",
+	--	Icon = "75230896040263",
+	--	FadeOut = true,
+	--},
+
+	--BloodSteal = {
+	--	Sound = "74050761219524",
+	--	Icon = "18894843205",
+	--	FadeOut = true,
+	--},
+
+	--EstherWhiteOakSpell = {
+	--	Sound = "139418993300939",
+	--	Icon = "81666997829225",
+	--},
+
+	--TheUltimateWeaponEsther = {
+	--	Sound = "118918239866614",
+	--	Icon = "81666997829225",
+	--	DelayTime = 17,
+	--},
+
+	--EstherOriginalSerum = {
+	--	Sound = "91204949642033",
+	--	Icon = "134112373642550",
+	--	DelayTime = 14,
+	--},
+
+	--StranguloVentus = {
+	--	Icon = "18630087547",
+	--	FadeOut = true,
+	--	["Valerie Tulle"] = "88573986552740",
+	--	["Nora Hildegard"] = "118508173111903",
+	--},
+
+	--HereticJointSpell = {
+	--	Icon = "18630088044",
+	--	DelayTime = 3,
+	--	FadeOut = true,
+	--	["Valerie Tulle"] = "13904360117",
+	--	["Nora Hildegard"] = "13904360117",
+	--	["Mary Louise"] = "13904360117",
+	--},
+
+	--Vido = {
+	--	Icon = "18630281415",
+	--	Volume = 4,
+	--	["Mary Louise"] = "88600853616027",
+	--},
+
+	--IllusionAttack = {
+	--	Icon = "18630090954",
+	--	Sound = "88189755078068",
+	--},
+
+	--OrganLiquify = {
+	--	Icon = "18630090630",
+	--	Sound = "85818992177233",
+	--},
+
+	--DelfanEotenCor = {
+	--	Icon = "18630087815",
+	--	["Qetsiyah"] = "132701227107666",
+	--	["Bonnie Bennett"] = "93410039917419",
+	--	["Freya Mikaelson"] = "129158847870610",
+	--},
+
+	--AdSomnum = {
+	--	Icon = "18630085451",
+	--	Volume = 3.5,
+	--	["Dark Josie"] = "81204185561575",
+	--	["Josie Saltzman"] = "81204185561575",
+	--	["Freya Mikaelson"] = "94633917213364",
+	--	["Hope Mikaelson"] = "131198089743550",
+	--},
+
+	--VisSeraPortus = {
+	--	Icon = "18630084722",
+	--	["Bonnie Bennett"] = "73245313373983",
+	--	Volume = 3.5,
+	--},
+
+	--Imobiluse = {
+	--	Icon = "18630087000",
+	--	["Dark Josie"] = "105680172999340",
+	--	["Josie Saltzman"] = "105680172999340",
+	--},
+
+	--Aquamalia = {
+	--	Icon = "18630088717",
+	--	Volume = 2.5,
+	--	["Hope Mikaelson"] = "127841579933142",
+	--},
+
+	--ErroxFemus = {
+	--	Icon = "18630085245",
+	--	["Bonnie Bennett"] = "81342092829364",
+	--},
+
+	--Ossox = {
+	--	Icon = "18630281131",
+	--	["Dark Josie"] = "71429766864674",
+	--	["Freya Mikaelson"] = "110410203919763",
+	--},
+
+	--Menedek = {
+	--	Icon = "18630084930",
+	--	["Bonnie Bennett"] = "84898218174575",
+	--	["Davina Claire"] = "109615919605410",
+
+	--},
+
+	--HeadSiphon = {
+	--	Icon = "18630087581",
+	--	["Malcolm"] = "100864025080028",
+	--	["Dark Josie"] = "139164497000480",
+	--	["Josie Saltzman"] = "139164497000480",
+	--	Volume = 1.4,
+	--	FadeOut = true,
+	--},
+
+	--Ictus = {
+	--	Icon = "18630281256",
+	--	["Davina Claire"] = "76239424251739",
+	--	["Freya Mikaelson"] = "83319807623114",
+	--	["Hope Mikaelson"] = "91081771194142",
+	--},
+
+	--SpineBreak = {
+	--	Icon = "18630085580",
+	--	["Katherine Pierce"] = "14841026112",
+	--	["Aurora De Martel"] = "97908940377337",
+	--},
+
+	--ThroatRip = {
+	--	Icon = "18630281055",
+	--	["Katherine Pierce"] = "14841026112",
+	--	["Aurora De Martel"] = "91514318555989",
+	--},
+
+	--HeartRip = {
+	--	Icon = "18630084285",
+	--	["Aurora De Martel"] = "71870170081183",
+	--	["Hope Mikaelson"] = "108349443247039",
+	--	["Rebekah Mikaelson"] = "89688396603399",
+	--	["Marcel Gerard"] = "110381933492775",
+	--},
+
+	--HeadRip = {
+	--	Icon = "18630084315",
+	--	["Klaus Mikaelson"] = "122787771744632",
+	--	["Elijah Mikaelson"] = "112316220234662",
+	--},
+
+	--SuperPunch = {
+	--	Icon = "18630087742",
+	--	["Elijah Mikaelson"] = "89245420291267",
+	--},
+
+	--SuperSlap = {
+	--	Icon = "73276360094899",
+	--	["Hope Mikaelson"] = "125011735974039",
+	--	["Rebekah Mikaelson"] = "73616559992744", 
+	--},
+
+	--SuperKick = {
+	--	Icon = "117025696388944",
+	--	["Rebekah Mikaelson"] = "134363458393409",
+	--	["Hope Mikaelson"] = "117071643793823", 
+	--	Volume = 3.5,
+	--},
+
+	--Choke = {
+	--	Icon = "18630084520",
+	--	["Rebekah Mikaelson"] = "135260624293276",
+	--	["Mary Louise"] = "76991721803834",
+	--	["Hope Mikaelson"] = "88024240964591",
+	--},
+
+	--ChokeOut = {
+	--	Icon = "136852406200956",
+	--	["Rebekah Mikaelson"] = "103359391224128",
+	--	["Klaus Mikaelson"] = "110962212419680",
+	--},
+
+	--HeelStomp = {
+	--	Icon = "109498239929193",
+	--	Volume = 1.8,
+	--	["Josie Saltzman"] = "91130808414020",
+	--	["Dark Josie"] = "91130808414020",
+	--	["Hope Mikaelson"] = "114218115884187",
+	--},
+
+	--ArmBreak = {
+	--	Icon = "71180787516661",
+	--	["Aurora De Martel"] = "111039547177303",
+	--	["Hope Mikaelson"] = "112336295176021",
+	--	["Rebekah Mikaelson"] = "95161950033776",
+	--},
+
+	--SnapNeck = {
+	--	Icon = "18630087942",
+	--	["Hope Mikaelson"] = "126809683102566",
+	--	["Elijah Mikaelson"] = "99500998724165",
+	--	["Kol Mikaelson"] = "130612995488285",
+	--},
+}
+
+-- Mass Compulsion action-specific sounds
+-- Each action (Faint, Attack, Suffer, Freeze) gets its own sound
+-- Replace the "0" placeholders with actual sound IDs
+local CompulsionActionSounds = {
+	["Faint"] = {
+		Sound = "17560602849",
+		Volume = 2.5,
+	},
+	["Attack"] = {
+		Sound = "17560606672",
+		Volume = 2.5,
+	},
+	["Suffer"] = {
+		Sound = "17560604010",
+		Volume = 2.5,
+	},
+	["Freeze"] = {
+		Sound = "17560600778",
+		Volume = 2.5,
+	},
+}
+
+local function normalize(id)
+	return tostring(id)
+		:gsub("rbxassetid://", "")
+		:gsub("%s+", "")
+end
+
+local Cooldowns = {}
+local LastTransparency = {}
+local LastIcon = {}
+local ActiveSounds = {}
+local FadingSounds = {}
+local LastEquipPlayTime = {}
+local EquipPlayLock = {}
+local SoundCycleIndex = {}  -- Tracks which sound to play next for abilities with multiple sounds
+local KeepPlayingSounds = {} -- Tracks sounds that should keep playing even when replaced
+
+local function fadeOutSound(sound)
+	if not sound or not sound.Parent then
+		return
+	end
+
+	if FadingSounds[sound] then
+		return
+	end
+
+	FadingSounds[sound] = true
+
+	local tween = TweenService:Create(
+		sound,
+		TweenInfo.new(0.8),
+		{ Volume = 0 }
+	)
+
+	tween:Play()
+
+	tween.Completed:Once(function()
+		if sound then
+			sound:Stop()
+			sound:Destroy()
+		end
+
+		FadingSounds[sound] = nil
+	end)
+end
+
+-- Known property keys that are NOT character overrides
+local KnownKeys = {
+	Sound = true,
+	Sounds = true,
+	Icon = true,
+	DelayTime = true,
+	FadeOut = true,
+	Volume = true,
+	PlayOnEquipped = true,
+	AddOnEquipTime = true,
+	CharacterRequired = true,
+	ChatText = true,
+	SimultaneousSound = true,
+	KeepPlayingSound = true,
+}
+
+local function hasCharacterOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not KnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+-- FIXED FUNCTION
+local function playAbilitySound(info, abilityName)
+
+	-- CharacterRequired check: skip if the player's character doesn't match
+	if info.CharacterRequired then
+		local charName = Players.LocalPlayer:GetAttribute("CharacterName")
+		if charName ~= info.CharacterRequired then return end
+	end
+
+	local characterName = Players.LocalPlayer:GetAttribute("CharacterName")
+	local charSound = characterName and info[characterName]
+
+	local soundId
+	local chatText = nil
+	local simultaneousSoundId = nil
+
+	-- Cycling sounds support: if info.Sounds is a table, cycle through them
+	if info.Sounds and not charSound then
+		local index = SoundCycleIndex[abilityName] or 1
+		local entry = info.Sounds[index]
+		if type(entry) == "table" then
+			soundId = entry.Sound
+			chatText = entry.ChatText
+			simultaneousSoundId = entry.SimultaneousSound
+		else
+			soundId = entry
+		end
+		-- Advance to next sound, wrap around after the last one
+		SoundCycleIndex[abilityName] = (index % #info.Sounds) + 1
+	else
+		soundId = charSound or info.Sound
+		chatText = info.ChatText
+		simultaneousSoundId = info.SimultaneousSound
+	end
+
+	if not soundId then return end  -- no character match and no default, skip
+
+	-- Record play time so VoicelinesForEveryone can skip overlays/replacements for local player
+	-- Only set this AFTER all validation passes, so it only stamps when a sound actually plays
+	Players.LocalPlayer:SetAttribute("VoicelinesLastPlayTime", tick())
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. normalize(soundId)
+	sound.Volume = info.Volume or 2.5
+
+	sound.Parent = SoundService
+
+	local oldSound = ActiveSounds[abilityName]
+	if oldSound and oldSound ~= sound then
+		if KeepPlayingSounds[oldSound] then
+			-- Don't stop KeepPlayingSound sounds, let them finish naturally
+		elseif info.FadeOut then
+			fadeOutSound(oldSound)
+		else
+			oldSound:Stop()
+			oldSound:Destroy()
+		end
+	end
+
+	ActiveSounds[abilityName] = sound
+
+	if info.KeepPlayingSound then
+		KeepPlayingSounds[sound] = true
+	end
+
+	-- Play simultaneous sound if provided
+	if simultaneousSoundId then
+		local simSound = Instance.new("Sound")
+		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
+		simSound.Volume = info.Volume or 2.5
+		simSound.Parent = SoundService
+
+		if info.DelayTime then
+			task.delay(info.DelayTime, function()
+				if simSound and simSound.Parent then
+					simSound:Play()
+				end
+			end)
+		else
+			simSound:Play()
+		end
+
+		simSound.Ended:Connect(function()
+			if simSound and simSound.Parent then
+				simSound:Destroy()
+			end
+		end)
+	end
+
+	-- Show chat bubble if ChatText is provided
+	if chatText then
+		local character = Players.LocalPlayer.Character
+		if character then
+			game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
+		end
+	end
+
+	local function cleanup()
+		if ActiveSounds[abilityName] == sound then
+			ActiveSounds[abilityName] = nil
+		end
+
+		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
+
+		if sound and sound.Parent and not FadingSounds[sound] then
+			sound:Destroy()
+		end
+	end
+
+	if info.DelayTime then
+		-- Capture the sound reference for the closure to avoid variable capture issues
+		local delayedSound = sound
+		task.delay(info.DelayTime, function()
+			if ActiveSounds[abilityName] == delayedSound and delayedSound.Parent then
+				delayedSound:Play()
+			else
+				-- Clean up the delayed sound if it's no longer active
+				if delayedSound and delayedSound.Parent and not FadingSounds[delayedSound] then
+					delayedSound:Destroy()
+				end
+				Cooldowns[abilityName] = false
+			end
+		end)
+	else
+		sound:Play()
+	end
+
+	sound.Ended:Connect(cleanup)
+
+	sound.Destroying:Connect(function()
+		if ActiveSounds[abilityName] == sound then
+			ActiveSounds[abilityName] = nil
+		end
+
+		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
+	end)
+end
+
+local IconMap = {}
+
+for abilityName, info in pairs(Data) do
+	local icon = normalize(info.Icon)
+
+	IconMap[icon] = IconMap[icon] or {}
+	table.insert(IconMap[icon], abilityName)
+end
+
+local function checkAbility(child)
+	if not child or not child.Parent then
+		return
+	end
+
+	local currentImage = normalize(child.Image)
+	local transparency = child.ImageTransparency
+
+	local previousTransparency = LastTransparency[child]
+	LastTransparency[child] = transparency
+
+	if previousTransparency == nil then
+		return
+	end
+
+	local becameActive =
+		previousTransparency <= 0.01
+		and transparency > 0.01
+
+	local becameInactive =
+		previousTransparency > 0.01
+		and transparency <= 0.01
+
+	if becameActive then
+		local abilities = IconMap[currentImage]
+		if not abilities then return end
+
+		for _, abilityName in ipairs(abilities) do
+			local info = Data[abilityName]
+
+			-- For PlayOnEquipped abilities: stop sound when used (cooldown is set in playEquipSoundIfReady)
+			if info and info.PlayOnEquipped then
+				-- Stop the sound if it's playing
+				local sound = ActiveSounds[abilityName]
+				if sound then
+					ActiveSounds[abilityName] = nil
+					if KeepPlayingSounds[sound] then
+						-- Don't stop KeepPlayingSound sounds
+					elseif info.FadeOut then
+						fadeOutSound(sound)
+					else
+						sound:Stop()
+						sound:Destroy()
+					end
+				end
+			elseif info and not Cooldowns[abilityName] then
+				Cooldowns[abilityName] = true
+
+				task.spawn(function()
+					playAbilitySound(info, abilityName)
+				end)
+			end
+		end
+	end
+
+	-- When ability becomes inactive (icon becomes visible again)
+	if becameInactive then
+		local abilities = IconMap[currentImage]
+		if not abilities then return end
+
+		for _, abilityName in ipairs(abilities) do
+			local sound = ActiveSounds[abilityName]
+			local info = Data[abilityName]
+
+			-- Note: Magic Shield cooldown is now handled in MainAbilitiesChanged
+			-- when switching away from the ability
+
+			if sound and info and info.FadeOut == true and not KeepPlayingSounds[sound] then
+				ActiveSounds[abilityName] = nil
+				fadeOutSound(sound)
+			else
+				Cooldowns[abilityName] = false
+			end
+		end
+	end
+end
+
+-- PlayOnEquipped: Play sound when ability is equipped/selected
+-- Maps ability enum names to Data entries that should play on equip
+-- MUST be defined before the event listeners below
+local EquipSoundMap = {
+	["Ohun Pada"] = {"Ohun"},
+	["Magic Shield"] = {"FreyaMagicShield"},
+	["Blood Blade"] = {"BloodBlade"},
+}
+
+-- Track current ability to detect when switching away from Magic Shield
+local CurrentAbility = nil
+
+-- Also detect tool-based ability activations via bindable event
+local _playerScripts = Players.LocalPlayer:FindFirstChild("PlayerScripts")
+if _playerScripts then
+	local _bindables = _playerScripts:FindFirstChild("Bindables")
+	if _bindables then
+		local _tools = _bindables:FindFirstChild("Tools")
+		if _tools then
+			local _toolActivated = _tools:FindFirstChild("ToolActivated")
+			if _toolActivated and _toolActivated:IsA("BindableEvent") then
+				_toolActivated.Event:Connect(function(abilityName)
+					local info = Data[abilityName]
+					if info and not Cooldowns[abilityName] then
+						Cooldowns[abilityName] = true
+						task.spawn(function()
+							playAbilitySound(info, abilityName)
+						end)
+					end
+				end)
+			end
+		end
+
+		-- Listen for AbilityActivated to set cooldown for PlayOnEquipped abilities
+		-- NOTE: Magic Shield is handled separately in becameInactive
+		local _abilities = _bindables:FindFirstChild("Abilities")
+		if _abilities then
+			local _abilityActivated = _abilities:FindFirstChild("AbilityActivated")
+			if _abilityActivated and _abilityActivated:IsA("BindableEvent") then
+				_abilityActivated.Event:Connect(function(abilityName)
+					-- Map ability names to Data keys if needed
+					local entries = EquipSoundMap[abilityName]
+					if entries then
+						for _, name in ipairs(entries) do
+							-- Skip Magic Shield - its cooldown is set in becameInactive
+							if name ~= "FreyaMagicShield" then
+								local info = Data[name]
+								if info and info.PlayOnEquipped then
+									LastEquipPlayTime[name] = tick()
+								end
+							end
+						end
+					else
+						-- Skip Magic Shield - its cooldown is set in becameInactive
+						if abilityName ~= "FreyaMagicShield" then
+							local info = Data[abilityName]
+							if info and info.PlayOnEquipped then
+								LastEquipPlayTime[abilityName] = tick()
+							end
+						end
+					end
+				end)
+			end
+		end
+	end
+end
+
+-- Helper function to check cooldown and play sound for PlayOnEquipped abilities
+local function playEquipSoundIfReady(dataKey)
+	-- Prevent multiple calls in quick succession
+	if EquipPlayLock[dataKey] then
+		return false
+	end
+
+	local info = Data[dataKey]
+	if not info or not info.PlayOnEquipped then
+		return false
+	end
+
+	local lastPlay = LastEquipPlayTime[dataKey] or 0
+	local cooldownTime = info.AddOnEquipTime or 0
+	local currentTime = tick()
+
+	-- Check if enough time has passed since last use
+	if currentTime - lastPlay >= cooldownTime then
+		EquipPlayLock[dataKey] = true
+		-- Don't set cooldown here for Magic Shield - it's set when switching away (becameInactive)
+		-- Ohun's cooldown is set via AbilityActivated
+
+		task.spawn(function()
+			playAbilitySound(info, dataKey)
+			task.wait(0.5)
+			EquipPlayLock[dataKey] = nil
+		end)
+		return true
+	end
+
+	return false
+end
+
+do
+	local _playerScripts = Players.LocalPlayer:FindFirstChild("PlayerScripts")
+	if _playerScripts then
+		local _bindables = _playerScripts:FindFirstChild("Bindables")
+		if _bindables then
+			local _abilities = _bindables:FindFirstChild("Abilities")
+			if _abilities then
+				local _mainChanged = _abilities:FindFirstChild("MainAbilitiesChanged")
+				if _mainChanged and _mainChanged:IsA("BindableEvent") then
+					_mainChanged.Event:Connect(function(abilityName)
+						if type(abilityName) ~= "string" then return end
+
+						-- MAGIC SHIELD: Set cooldown when SWITCHING AWAY from it
+						-- This is the critical fix - detect when we're leaving Magic Shield
+						if CurrentAbility == "Magic Shield" and abilityName ~= "Magic Shield" then
+							LastEquipPlayTime["FreyaMagicShield"] = tick()
+						end
+
+						-- Update current ability tracking
+						CurrentAbility = abilityName
+
+						-- Check EquipSoundMap first
+						local entries = EquipSoundMap[abilityName]
+						if entries then
+							for _, name in ipairs(entries) do
+								playEquipSoundIfReady(name)
+							end
+						else
+							-- Direct match in Data table
+							playEquipSoundIfReady(abilityName)
+						end
+					end)
+				end
+			end
+		end
+	end
+end
+
+
+
+for _, child in ipairs(ToolBar:GetDescendants()) do
+	if child:IsA("ImageLabel") then
+
+		LastTransparency[child] = child.ImageTransparency
+		LastIcon[child] = normalize(child.Image)
+
+		child:GetPropertyChangedSignal("ImageTransparency"):Connect(function()
+			task.wait(0.01)
+			checkAbility(child)
+		end)
+
+		child:GetPropertyChangedSignal("Image"):Connect(function()
+			local oldIcon = LastIcon[child]
+			local newIcon = normalize(child.Image)
+
+			LastIcon[child] = newIcon
+			LastTransparency[child] = child.ImageTransparency
+
+			if not oldIcon or oldIcon == newIcon then
+				return
+			end
+
+			local abilities = IconMap[oldIcon]
+			if not abilities then return end
+
+			for _, abilityName in ipairs(abilities) do
+				local sound = ActiveSounds[abilityName]
+				local info = Data[abilityName]
+
+				if sound and info and info.FadeOut == true and not KeepPlayingSounds[sound] then
+					ActiveSounds[abilityName] = nil
+					fadeOutSound(sound)
+				end
+
+				Cooldowns[abilityName] = false
+			end
+		end)
+	end
+end
+
+-- Mass Compulsion: Detect action selection from CompulsionList UI
+-- Watches for the compulsionList frame and hooks into its action buttons
+-- Plays the matching sound from CompulsionActionSounds when an action is selected
+do
+	local WholeScreenComp = MainInterface:FindFirstChild("WholeScreenComponents")
+
+	local function hookCompulsionButton(button)
+		if not button:IsA("TextButton") then return end
+
+		button.Activated:Connect(function()
+			local actionName = button.Text
+			if not actionName or actionName == "" then return end
+
+			local actionInfo = CompulsionActionSounds[actionName]
+			if not actionInfo then return end
+
+			local key = "MassCompulsion_" .. actionName
+			if not Cooldowns[key] then
+				Cooldowns[key] = true
+				task.spawn(function()
+					playAbilitySound(actionInfo, key)
+				end)
+			end
+		end)
+	end
+
+	local function hookCompulsionList(frame)
+		for _, desc in ipairs(frame:GetDescendants()) do
+			hookCompulsionButton(desc)
+		end
+		frame.DescendantAdded:Connect(function(desc)
+			hookCompulsionButton(desc)
+		end)
+	end
+
+	if WholeScreenComp then
+		WholeScreenComp.DescendantAdded:Connect(function(desc)
+			if desc:IsA("Frame") and desc.Name == "compulsionList" then
+				task.wait(0.1)
+				hookCompulsionList(desc)
+			end
+		end)
+
+		for _, desc in ipairs(WholeScreenComp:GetDescendants()) do
+			if desc:IsA("Frame") and desc.Name == "compulsionList" then
+				hookCompulsionList(desc)
+			end
+		end
+	end
+end
+
+-- Notification-based sounds
+-- Plays a sound when specific notification messages appear
+-- Only triggers for the required character (if specified)
+local NotificationSounds = {
+	["You're no longer channeled"] = {
+		Sound = "138445942157113",
+		Volume = 2.5,
+		CharacterRequired = "Esther Mikaelson",
+	},
+}
+
+-- Pattern-based notification sounds
+-- For messages with variable parts (e.g. "Klaus Mikaelson is tracking you..")
+-- Uses Lua string patterns to match
+local NotificationPatternSounds = {
+	{ Pattern = "is tracking you%.%.", Sound = "128623140442224", Volume = 3, CharacterRequired = "Davina Claire" },
+}
+
+
+
+do
+	local FusionStatesFolder = ReplicatedStorage:FindFirstChild("Bindables")
+		and ReplicatedStorage.Bindables:FindFirstChild("FusionStates")
+
+	if FusionStatesFolder then
+		local SetNotification = FusionStatesFolder:FindFirstChild("SetNotification")
+		if SetNotification and SetNotification:IsA("BindableEvent") then
+			SetNotification.Event:Connect(function(message)
+				if type(message) ~= "string" then return end
+
+				-- Exact match
+				local notifInfo = NotificationSounds[message]
+				if notifInfo then
+					if notifInfo.CharacterRequired then
+						local charName = Players.LocalPlayer:GetAttribute("CharacterName")
+						if charName ~= notifInfo.CharacterRequired then return end
+					end
+
+					local key = "Notif_" .. message
+					if not Cooldowns[key] then
+						Cooldowns[key] = true
+						task.spawn(function()
+							playAbilitySound(notifInfo, key)
+						end)
+					end
+					return
+				end
+
+				-- Pattern match
+				for _, patternInfo in ipairs(NotificationPatternSounds) do
+					if string.match(message, patternInfo.Pattern) then
+						if patternInfo.CharacterRequired then
+							local charName = Players.LocalPlayer:GetAttribute("CharacterName")
+							if charName ~= patternInfo.CharacterRequired then return end
+						end
+
+						local key = "NotifPat_" .. patternInfo.Pattern
+						if not Cooldowns[key] then
+							Cooldowns[key] = true
+							task.spawn(function()
+								playAbilitySound(patternInfo, key)
+							end)
+						end
+						return
+					end
+				end
+			end)
+		end
+	end
+end
