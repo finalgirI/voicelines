@@ -1,3 +1,2091 @@
---Version 195
-_G.credit=[[Obfucator NTT - https://nttobf.com]]
-local ld=string local np=math local xp=table local mi=bit32 local ie=ld.char local eo=ld.byte local vt=ld.sub local zg=ld.upper local lf=ld.lower local zm=ld.find local qf=ld.len local zo=np.floor local el=np.sqrt local mv=xp.insert local so=xp.remove local uf=xp.concat local jf=mi.bxor local bt=mi.band local uy=mi.bor local fe=mi.rshift local qd=mi.lshift local ff=mi.rrotate local yq=mi.bnot local iz=mi.lrotate local dh=rawset local an=rawget local bb=tostring local qs=tonumber local a=(function(ak,al,am,ao,ap,aq,ar,as,at,au,av,ax)local bd=bit32.bxor(144,19)local be=bit32.bxor(134,121)local bf=bit32.bxor(65495,40)local bg=(bit32.bxor(8,9)+65536)local bh=(bit32.lshift(1,8))local bi=bit32.bxor(27,78)local kjb_uif=(function()local _rsge={}local _lqtp=63 local _iitl={153,91,108,24,167,157,130,98,197,47,168,124,243,81,222,166,113,195,36,224,127,69,186,42,221,215,224,68,11,185,86,238,201,11,156,45,14,38,251,242,89,150,222,65,194,132,138,57,187,213,3,141,64,253,219,212,28,153,14,84,174,179,58,7,95,122,123,11,164,109,215,15,54,131,75,84,83,126,172,157,246,225,143,211,233,105,69,117,6,190,240,164,171,25,38,159,105,136,206,37,207,137,57,206,95,77,229,235,151,70,224,19,143,101,16,152,37,96,94,130,186,37,68,254,27,171,102,94,89,155,44,88,103,221,66,162,133,111,104,188,179,145,158,230,49,3,228,32,63,133,122,106,157,23,160,132,203,249,22,46,137,171,92,168,215,109,114,50,245,63,152,140,99,33,142,118,97,211,20,48,239,213,106,250,205,39,208,148,187,9,6,190,249,123,204,184,135,189,98,130,37,207,8,156,211,113,190,198,81,227,132,0,95,101,26,74,61,247,64,228,107,89,54,14,41,11,124,136,119,205,18,18,21,159,184,236,131,129,174,86,129,179,52,16,15,181,10,218,109,135,240,244,219,233,38,158}for _wug=1,256 do _lqtp=(_lqtp*137+_wug)%256 _rsge[_wug]=string.char(bit32.bxor(_iitl[_wug],_lqtp))end return table.concat(_rsge)end)()local function ba(bpm_pguow)local vup_bpp=au local function oav_gio(nez_pta)local ezw_uvy=vup_bpp(kjb_uif,vup_bpp(bpm_pguow,nez_pta)+1)or 33 local duc_jts=ezw_uvy-33 return duc_jts>0 and duc_jts-1 or 0 end local gcw_fs=oav_gio(1)+oav_gio(2)*bi local qpg_fnirr=oav_gio(3)local zli_www={}for pry_ke=4,#bpm_pguow-4,5 do local nym_beeb=0 for nxp_ymyk=0,4 do nym_beeb=nym_beeb*bi+oav_gio(pry_ke+nxp_ymyk)end zli_www[#zli_www+1]=al(as(nym_beeb,24),be);zli_www[#zli_www+1]=al(as(nym_beeb,16),be)zli_www[#zli_www+1]=al(as(nym_beeb,8),be);zli_www[#zli_www+1]=al(nym_beeb,be)end for vya_et=1,qpg_fnirr do zli_www[#zli_www]=nil end return zli_www end local aw=ar(at,am(108,111,97,100,115,116,114,105,110,103))or ar(at,am(108,111,97,100))local function ay(ljq_dxkqk,ggf_ps,odz_akfuu)local lun_ofpzx=ljq_dxkqk[ggf_ps]or 0 return al(ak(lun_ofpzx,al(odz_akfuu*bd+ggf_ps,be)),be)end local function az(vwy_tthx,ego_uhzm)local utl_mmsi=ba(vwy_tthx)local jvt_ty=utl_mmsi[1]local gyv_jkfu=2 local wzv_gwb=ay(utl_mmsi,gyv_jkfu,jvt_ty);gyv_jkfu=gyv_jkfu+1 local mrj_dgi=al(ak(ay(utl_mmsi,gyv_jkfu,jvt_ty),wzv_gwb),be);gyv_jkfu=gyv_jkfu+1 local rbf_top={}for tky_gspw=1,mrj_dgi do rbf_top[tky_gspw]=am(al(ak(ay(utl_mmsi,gyv_jkfu,jvt_ty),wzv_gwb),be));gyv_jkfu=gyv_jkfu+1 end local mhy_dystv=ao(rbf_top)local jeq_bxit={}for tky_gspw=1,6 do jeq_bxit[tky_gspw]=al(ak(ay(utl_mmsi,gyv_jkfu,jvt_ty),wzv_gwb),be);gyv_jkfu=gyv_jkfu+1 end local vwx_wka=jeq_bxit[3]local hge_fw=jeq_bxit[5]local kzy_pacbb=jeq_bxit[2]local xoa_djtam=jeq_bxit[4]local mzk_wdhcu=jeq_bxit[1]local egs_tcx=jeq_bxit[6]local ali_jnatd=kzy_pacbb+xoa_djtam*bh local vgl_yu={}for tky_gspw=1,mzk_wdhcu do vgl_yu[tky_gspw]=al(ak(ay(utl_mmsi,gyv_jkfu,jvt_ty),wzv_gwb),be);gyv_jkfu=gyv_jkfu+1 end local function dgk_nthxw()local bpi_ycxz=vwx_wka local lki_zzz={}for tky_gspw=1,mzk_wdhcu do lki_zzz[tky_gspw]=am(al(ak(vgl_yu[tky_gspw],bpi_ycxz),be))bpi_ycxz=al(bpi_ycxz*hge_fw+tky_gspw,be)end return ao(lki_zzz)end local bk=function(pwl_qnq)local ymq_oo=0 if ap(pwl_qnq)=="table"then for _,wfn_aiz in ipairs(pwl_qnq)do ymq_oo=(ymq_oo+wfn_aiz)%bg end end if(ymq_oo+ego_uhzm)%bg~=ali_jnatd then return nil end return at[dgk_nthxw()]end local bm=function(pwl_qnq)local ymq_oo=0 if ap(pwl_qnq)=="table"then for _,wfn_aiz in ipairs(pwl_qnq)do ymq_oo=(ymq_oo+wfn_aiz)%bg end end if(ymq_oo+ego_uhzm)%bg~=ali_jnatd then return nil end local knc_swppn=dgk_nthxw()local ifv_sooj=aw(knc_swppn)if not ifv_sooj then return nil end return ifv_sooj()end local ivy_kblu=nil local bn=function(pwl_qnq)if ivy_kblu~=nil then return ivy_kblu end local ymq_oo=0 if ap(pwl_qnq)=="table"then for _,wfn_aiz in ipairs(pwl_qnq)do ymq_oo=(ymq_oo+wfn_aiz)%bg end end if(ymq_oo+ego_uhzm)%bg~=ali_jnatd then return nil end ivy_kblu=dgk_nthxw()return ivy_kblu end local yjb_le=dgk_nthxw()local bl if yjb_le~=nil and yjb_le~=""then bl=function(qdu_uqfc,...)if qdu_uqfc==nil then return end local xpc_eu=qdu_uqfc[yjb_le]if ap(xpc_eu)~="function"then return end return xpc_eu(qdu_uqfc,...)end end local bj={[bit32.bxor(11,10)]=bk,[bit32.bxor(142,140)]=bl,[bit32.bxor(83,80)]=bm}aq(at,mhy_dystv,(bj[egs_tcx]or bn))local pxa_habo=ego_uhzm for tky_gspw=1,#mhy_dystv do pxa_habo=(al(pxa_habo*31,bf)+au(mhy_dystv,tky_gspw)+tky_gspw)%bg end return pxa_habo end return function(bmi_ihxt)local tby_bf=0 local nez_pta=1 local doo_rvlm=#bmi_ihxt local whw_xxrz="~]~`~"local upb_sfatb=#whw_xxrz while nez_pta<=doo_rvlm do local vqk_vgr,ome_uh=ax(bmi_ihxt,whw_xxrz,nez_pta,true)local mhq_rtkk if vqk_vgr then mhq_rtkk=av(bmi_ihxt,nez_pta,vqk_vgr-1)nez_pta=ome_uh+1 else mhq_rtkk=av(bmi_ihxt,nez_pta)nez_pta=doo_rvlm+1 end if#mhq_rtkk>0 then tby_bf=az(mhq_rtkk,tby_bf)end end end end)(bit32.bxor,bit32.band,string.char,table.concat,type,rawset,rawget,bit32.rshift,(getfenv and getfenv(1))or _ENV or _G,string.byte,string.sub,string.find)a("jJo,P9g?QZcc?_^RzhEnN>s?0Wjy&L<bWr^8SW~]~`~vJ}D!wAG#+<K<&wd!cgyC_T=8$j0~]~`~vJ}E>)O>>!e^<9JNrN)JvDp_uBI7~]~`~jJowCW$-JXmhse:X)_O-5.863Pt%uXFavMT?}%~]~`~:Jerh9C7I0{W#x,y/y(OQIkip{{lrPq@4C1YXaA2c#j~]~`~qJePTceAF?WpD4::%4P#8>8e(Lv)uN1q>~]~`~gJ}w3ZQcMQ239MdZl*3Nf*AT{%dN^Zvs6mVUSp~]~`~,Jo,rV0(LHb0!p?Qdv_8R0h:yYhm$#y938lF$LU*:=-~]~`~VJJ}zF9C!T_vBr,BOsI&/9{3feM*oQ}DpBvZ#W~]~`~$JoonK>d1!t^$s$TwSeqXKUfLefphR_:D~]~`~uJorwdyYzN<Ud>K@s<roR,xbNwOI~]~`~jJom1M4=5=TWermLy*F27PNvXGqx)1n1VOvm=J~]~`~:Je0!>mwCm=c}b/n*YQV(97ND&:$trI.N9WV/pSy$-z~]~`~iJemU:G00/RsGxTrYE,k=<=XC+XY~]~`~vJ}8eUZh.)@YDQtnOjiaJQxp(vxq~]~`~OJJ@}z+-O(rPpDEqeb@F,1d9LW,=6DQup~]~`~OJJEA+{<6.Nt-4V,EW7YnoI{VYOLApxXq~]~`~xJJ@y4_GJVTepYvLQPZAa/hhW0yV~]~`~jJoxY0UB*b>3TfEZ5^dsd_bR^K,sM?AHfaSrg6~]~`~qJe,gE_zSYO,-o>WvnIR7$^Jo:</PN=S,~]~`~,JomQ1av9Og^J>Yj@yR-rxEZlb+:)N02loOUe$$%zYh~]~`~xJJ/Zn8n5,r?Kfi2mb?%jBvg^z-:~]~`~OJJ:hZq:p)Sy*HR<d$S%UXwjPqkhVL5,<~]~`~DJJ*!89&.Q{O@Q#!nijSe*p+6*9bPCaK!E%FZr(fo=#~]~`~uJoPjO5&be@rv4d2L.A55Zfw2T.{~]~`~xJJS9<.agP6Ej,Fc/vwN:Fu_!M8D~]~`~,JoJQo3=}BM5ph/z3fk3BJK3a7A>=zdPXIIswh)f!t6~]~`~yJe0)6)owvbs2q_X7Vk3er$5YCbguNZ{,ATp+d-.%_R57ve)~]~`~OJJSW.s(:eohg0Q27!^GK4b>f%Wh,mNYT~]~`~xJJ)3Z8+J}-lm*HY2K}sy*HbYI.&~]~`~gJ}$XC5pRFL:B{@t*Tf&J}-UiOte%vBqOL0Y?%~]~`~gJ}o5d#TLU>}^koxs.%Af3sIj)vN8-){$X1v5=~]~`~xJJ5Q/Rn13_C!.946Pbw=>0_Pc.!~]~`~!J}oM(c3:=xq!:H?jqdaNvutWT!X!>3Z{<nB06ARKIk~]~`~qJe}5t,Y^Dg%hHR5byq3lFnW,VBaQU!Ar~]~`~qJe*kxv{-S-vWD_(xK:QI<u+6i&185:Q7~]~`~xJJgU4HRzHfaBB?yux&PV{o(v+A0~]~`~-JoYJk^k1*IW,LFYYC.VYV=(awwV@>b}5%S,Ey!(_&644jhi~]~`~gJ}-I$>jVY1zj:?xZ3{+YgZmt#5pJ.OwzhHQ&J~]~`~vJ}i/dyEuD^lJScB,E}/,(@w>P<W~]~`~OJJj!d}B-S-v>r=!#Xr.?hxYcjRUB.!e9~]~`~vJ}j9<0lwvFWc>9RJOolNNYq<Nfa~]~`~$JoV:%KJ0fOio0Q?2^0l!r(hkLj3YyO*M~]~`~vJ}}gwD/DwI!=@zg(!jHrVPZaGD5~]~`~$Jo-lepEWVhOH9:KnhU,(V6H+0:{pDX)n~]~`~vJ}wlNEwLMV@H#P,Wq6ad@LfJQXs~]~`~jJoxDHg7@a,W}!Rb5j@5bTR#P_yoLm$Cgj^:0y~]~`~gJ}Kxn:,Rw7wFG-!HC@+Oj#%Z@ZyV+&+QtpUkw~]~`~wJ}hF1:)9O7!KZ6+6h):MZz-&>PQK>ahp~]~`~vJ}$oeO6NH}%Y{.Z8+XMqc8G.O!4~]~`~$JoV4iwL&<ZOe#KsU(xj1n}wYy4=bx}3D~]~`~qJe:^(Fo$FnlH@?h0kTpdE^}D@1!kIzfc~]~`~jJomY/tQA^w%}QI!(A1x8S,WNQvYJ?idSW+Qx@~]~`~,JoolnYrhXyXSh/ub@Y!SL46^jvM47OMr(9aD{7n4eE~]~`~DJJrHNVrTCoNd=nqcRDO=,>o*(qJS?/h_8GP+KuC_IT~]~`~VJJ+z%KRFJcQ$ZUjlFy{Su$%x}paqh@-yFd}$T~]~`~0JevfiI&NH}%h{#G^k^n<LKf0XnZdQN1{RjLRd~]~`~vJ}yJDQ1k-Pbv&B<*7!1<WT*KFZl~]~`~xJJqH(/+E&os*I=4XdH}kqLQg*O,~]~`~VJJDWLEmd8KUT=/0+(*/yG2H^iNRe_HU5!04hA~]~`~$JonHgenJVse2}%buIqWIsbkAbj2Y%i)I~]~`~0Je)m}2e}BeBse}f5f6q->I#N=XFp?oVx8/oX4~]~`~yJei!OpxrtN?.y@HsQSCh!4FF6)d!3DuWz>JDpOWd11m1#FE~]~`~!J}0X?QJzNlo#We{oU$q>.7&xx1B%ItNefw0L}$J^=&~]~`~DJJnt?{_!T_v?)$RJop%@N+H/k}KpjAD1Rc>vu_J?a!~]~`~vJ}o%>PSM.t1GpTuD%B1}pmk>O7x~]~`~0Je0q(pI^,E1L{a>&:XV@!aM/>:3^HraXSWb(B~]~`~,JoilCMJb,{Qy6p!XA6e4?s5T5QTq%zc^IB!$KyDJ$Q~]~`~OJJjzbS{dt4%>d,}}Nh1r_JW+HTR?{ciE~]~`~0Jefdqr-hHnQ!_pWaX{>AK+NM.N+fdNM:GZlFA~]~`~VJJSCbb#M).5=LGm,D{gs7:bh>q_H/2zL)Hl(:~]~`~$Jo$%q{!>!eH*9oK80?3qS,R{zNhNMS?@~]~`~vJ}$za}yv,de/vynFVax0Azf-4?P~]~`~$Jo/1acT4i*c2t@*ds1z=^G4ywmG+SA@Z~]~`~qJevJotZ52s_JPX/*xwmJSab=V::pI7@&~]~`~xJJ$ePU/U1CBAUWI2he?4GXt.!O=~]~`~wJ}$ibmz5,rc}D1I}wn+*{x5p^aRn>*eR~]~`~iJee6qU>DFZnW)$,P_c!-BkZU(.a~]~`~qJeS/f=1V>Naj:CaA%/r-c*^vVaG{zow>~]~`~0Jer(C{$%!tXE%1S#iM)s23/zxJigOD)3PN=S,~]~`~DJJeZgH1@h^Pe,{4(!y^w>VSAeOv:BPUJ*9b_s-GCAm~]~`~qJeuohY!@a/>lf&9jM9w%e_NcRu)^DQEp~]~`~0Je@rZA-S#=mm/JphXEdGuzr)W1.):n8X-y+:$~]~`~VJJun2HW{CX6^H7i!}6^n$tvOBU5$x5q}/U<3*~]~`~qJefH+NnHVAU/{nu%y/eo%oLokH0Nj=1l~]~`~wJ}*dDf)<$}oJ^C9Akb(mppxl>y*VTlJO~]~`~OJJryy9+5XCs2!(k8yq@3D$Tq:QGV,c<7~]~`~xJJ/kMK7=+#0+X&l)A&UhX_4+1,W~]~`~$JoqR.(K5o2Pmry:vbYWW2*pEJ8)46{kt~]~`~OJJjSh?_K%>X:mVZO?z1>SsbYmx0OH8ZZ~]~`~rJ}PW=yc,?(zDOIy7v:15llW.v1&>=u&b,8VGC}O<rzSc$N.~]~`~vJ}+8)f1N^.1}GP<*oT1kV10%}Nb~]~`~wJ}Y1m9:0&3<O:N*2ZpB?R!SC_R+#6!pH~]~`~qJeJzN@x7n>bJFLsg&79N?b%c8onwINTR~]~`~vJ}n!/SQe{8yN%td>4KDrx(KE>,7~]~`~PJJ5,<2,h=oHj}rg0&3%f$&v4i^QA}l,6_u08j3k0zD{72>&~]~`~wJ})0@s-xXUR}$Gu}_(:+WlZendDCuIwS~]~`~jJo-F.R>aiMkU1TTk^bg5}s,qXRAA6%+-fOC36~]~`~0Jeef,1odnGU99J8bcy8M.IEmnPx_&IQUi,u9?~]~`~jJoue*N)f?fp#@H}Fk4glr<MwMW.UX-9w4ofDF~]~`~vJ}qN/,miLA-m8UFhafY.Yw=mB3n~]~`~DJJ%&M*OhXykuJQc>(cT%ekSO5PSDfebkXRI<rp{#-(~]~`~$JoY*ANyczubYcH@IBXOzzcBCsb2dB)SE~]~`~qJe0<bS1X+HxzBjSjg1L10tJ3VaP31,-n~]~`~:JeO6S&6i%U+euav0pn3R_7}scuwTf+Lxfs._H{zow>~]~`~vJ}xpVgPDFZbL-YSyyvt?s7pd+Ze~]~`~qJef}MvyM#i&A_FPt,9OAMd#fGLiQxA4y~]~`~wJ}uS/,eH}j4#UmMqpa=)unoD*POYhJba~]~`~vJ}-P}S*5ei2+PoupoHU&:#AJ7NX~]~`~qJeoy}8U}0fqGK(b{:q&$M$^PkM((*Aib~]~`~qJeKFe#T^D%1oM2U)+rPdY%=psq$zL:*M~]~`~xJJhC2av?4XUdCsrfX8iMIlFlq8i~]~`~OJJ}lrum08,+mwSZsc=9i#hQ%r,-Zv2rl~]~`~:Je-kn:.+:}cW+D61Sh$>:t+MX4MLDm6>D6lvCi2R^X~]~`~wJ}Yoj4aWjre^XEVBU+ss@}@_h>J4dZUU~]~`~jJoDFIy6%=?**}NsuZb6I6X(d_(1/jE}YNM(Rf~]~`~:Je5y<=9Mfw,R^2MUxuW&=w:%8j(HGKgyb^jD$cPK2Z~]~`~,JoIhp:3Mfw,RH}W(*kJSi^=(9J9}gXvSW94a?@DL%V~]~`~,Jo@sxgyaxo>S&gnEZREX!&bc{s7GH-2c1wte$hUFh=~]~`~wJ}:Rvxy?u4:sWN_a.Ceg_n#qE7(j#f_,~]~`~jJo!?INkY@,?*JVaPGoo49f,I%jQ6E9s&4Hk0v~]~`~OJJ%APdj0kCKY0n/zS(!i%a&#*yjcb5B=~]~`~)Jo5Qq_-Lp&+S13qPJYq7l,XbYzd+Noq?TPPpwv2m*B?*v$y8&9Z2~]~`~iJevOGpKP+Ng&D_*}ri!e9qj=5.l~]~`~iJe,p{zV0Eiv$0&5hE&baeyToBtH~]~`~iJeVC*VpzwYH56k%wSzfJ8}#7JH@~]~`~iJef8g#*7c&yKFJgcs9r2DDs=h?T~]~`~iJeJQ){rh?pTnozD/d3IzwBk)_b(~]~`~iJeEi)XInZTj1v,U<=?k!##aw#i,~]~`~iJen>Pn%{F,.R_%VlrkD=R231,-n~]~`~iJej%&3PORQH8:,?kEY:}Q}f1c5c~]~`~iJeu21xs!glf&fl*%TV#c)JOPxmM~]~`~iJeiyJCA!g:mAf<Ne$%RhZaroaZO~]~`~iJe8RxVW0tIkYx<3m9ZKi60_L+<U~]~`~iJe}fXpyN_LmHG{6YE5c:g&*#Apu~]~`~iJe-JVX2a{zZ%sHZzWMU:.I(*Aib~]~`~iJe:sp*DdEbQ^WH{ExznSW)_L+<U~]~`~iJe/le?&h<6kYpL#PgpcL!y6_Zf9~]~`~iJef=yqt_aRX.%3K,w59&B6oqvLK~]~`~iJempWAbE86npu,Ad8:nj{>E%llZ~]~`~iJeeU&S8-7gE_f0h#YhzCwU-y+:$~]~`~iJeh}PqQ5J{U&r1=I{(dHQbpI7@&~]~`~iJe!dh:-}J8dnY#KEdC4D&V{_:DW~]~`~iJevmLhpiAqJpnxa(m9^O-&az%j!~]~`~iJemxExYj@2KY:X.q-%lcSf!8^O/~]~`~iJeKaH}8V*h.$V>S0_*nlCN-y+:$~]~`~iJef_LANk*A+%Lb(Z-+fP)S:CVaK~]~`~iJemR)-d5lCA_-(!XC}TzIs)C$9r~]~`~iJeuEc7HMf>caR_Uw/#u2-?>I=(8~]~`~iJej2#U&t<1sbrnP=MiGYf45iM^@~]~`~iJeiQ2^Ru3o@18(+-*RI/FDT:^FN~]~`~iJeiX/(%4v-qEC-p}vQ-OzFZCS3L~]~`~iJe/N@*m8R6E>AOW+o(3O4##7JH@~]~`~iJeVvC/DzXo#s>mOcz?<1e(UiBka~]~`~iJef:h$v^2-iRKrT)by8G5s85:Q7~]~`~iJeyFTEo^2S*JC9$3Pq}sA,euS*+~]~`~iJef@51BX/{S^x<=HNHt+IK9*F/x~]~`~iJeh%z.J/OsFpEk2U7y4U13IU._@~]~`~iJeK?@X*X#PpsTG4CG4gQRILN5%:~]~`~iJeKe+j%bVL%K(vFa2%>).8OPxmM~]~`~iJejw-If3y:B^Bw5%R@zpJ1vz)59~]~`~iJeJWi=S0t2K8V!vXI>Mh10_%ta{~]~`~iJe*+_vc6#eyK($f$oMQ&(HBW0D^~]~`~iJe8>>&cAHVI%Qs*=0H69z?>)2BE~]~`~iJegWN7c$zvxYV3l!5b84^pkIzfc~]~`~iJemc=#r5esUh)msGwc6vJ=1LiJZ~]~`~iJeEt+k7j)ivYORuikDr+dgeuS*+~]~`~iJe):-9zu3o@1849tcEyj4I)C$9r~]~`~iJe5UaI5yU5a&fBP_G8AV+Gf8{qf~]~`~iJefZNUTON6jBB0tC!ERs:{yP8ov~]~`~iJeS<6vS47QqEF?ug.}Y/5yjo&bN~]~`~iJeqQYX3LFB6SQS?XQ5$1_u+z4cy~]~`~iJe:bAYb5V(j_rSjAw7l*2G.1O!t~]~`~iJewmem19l3R%.+{qQZQ(fJaz%j!~]~`~iJeq>E&cNO%*H_AXOKSkOc1!cqyn~]~`~iJeoh:8PUR+.e_rVp%/Nhm%ICf1P~]~`~iJe8Ro$AwZ@Klx2*pi3m=mN4o34B~]~`~iJevZF><d(upsWd50+4(24,WrH^u~]~`~iJefBC{_%=bAF_%)I8so4D3R?*NX~]~`~iJe%3M/MP)Dz&yGmvptHHJ*4,JTT~]~`~iJem}ufVexxYn%yP<k44YLYW%T&i~]~`~iJeu,_p,$BO48gLS^NRX>dZ#RVm)~]~`~iJe%g9mit<R6KZhZ2w>gKbl4=gA?~]~`~iJe5WJ9P^3eQHphI4!sG=CA%=z{g~]~`~iJe8r8&QXfOV^9TmH4w%QEK5iM^@~]~`~gJ}+3>a)irobp/$ih.B@oAOpebNMb6>%M>2+R^~]~`~vJ}+_s)/47ZhKb37^+mH.2&,glrt~]~`~$Jo:6-&V6)&=K(US$6.&9yBBjvIAJ^W&.~]~`~xJJ@9*uO/OT)pv<6mBTUkY!U#4z?~]~`~wJ}f8<(a5lCF_ZA1Ok6yC8_k:Lvo#bL5K~]~`~VJJ@n_j@&NfrS_WH3jt-G5l#Lj,CGf.?zmo)!y~]~`~DJJ+9>)qnZT)1u3!+d6uX^,U(ntMBA0y8i=E=7=3TKn~]~`~xJJEu0HeS+gG1IJ8SD-(r#L8W9+H~]~`~bJe0ZI*SGZ?,H^3:fkna(HC$3Z*w:4n)uM>HyRc,?!j$iN#o*F#*4{G?b@Q0/PX6zx!W~]~`~iJe@cTF$UE2^RHj!bo%HctnEPjKC~]~`~iJej$<PMa{zZ%12KwR3y_uUMtMvk~]~`~uJoDq?VAvVK{18u,+@qD6jk5Tv:V~]~`~iJeSG&F:ATVwS.AN&%y2TS*w#FsG~]~`~PJJJNjG&tlt&EZ+i+obeFO@_zGMC7BDY5vyo_@aw9b?H69*O~]~`~$Jo!aP8H3*cVsT$+L2yQK3ojDvOmw*Ih%~]~`~QJe@-FUyI?281iho@bX6Bd4QXel+:(!VsC#C5eMu$R8Cd#ul(vxqWKU0V#nEX,A7^+SJSg/h_SO^VEC@38O@w20!~]~`~xJJgMD&&3>cfsX)zh2{i/8l9aYOJ~]~`~0JeiqafV#nj+SkrnD8**zBhPzvrUgY)4c57ve)~]~`~xJJfjLM/*.9c*H<_&3M&cD97yDx=~]~`~$JoEjxNiLwy>SkA.zacteC09-t6-H.zB+~]~`~xJJKDmua(pSqE6.2PHzfgQo.AP.2~]~`~vJ}EFv2ONz%TH{ZUJVj(4N?JjKfw~]~`~vJ}Dn81&-7gE_5!qZ4%J5T_@8zE!~]~`~jJoES*Rm/zsFpirDcYw2BE$hgSGkrxtsd5n%Lp~]~`~xJJ5ulY<P)F5&,l1GAhlIbWxI1VX~]~`~xJJ:p.R{yU=M&xdqsro}fU/!CC?>~]~`~vJ}fUoOf3WZM^TUm4Vp_nB@Z73Zl~]~`~vJ}j0Vm*Tp!T^39VQIc0A_Q{nvY1~]~`~uJon9=4E#.4$SsByvQFX^HtNs_k<~]~`~vJ}5b(0$grf^8O4.J-EWvo+BqGU3~]~`~uJoojpX6x3n=Yj+^l6kRWPIWuXfj~]~`~uJo89?}Bd&dm^BHv>!)5CwjhD!5p~]~`~vJ}V0U,{rckL&yq{N.>t{,/LsgTj~]~`~xJJuI</Bm4^?*oO!?vx8d!EVndlC~]~`~uJo$JJt?Y@##*}?sV>EyTG$YArDh~]~`~OJJ)!X4}*f(u*Jo&S^%cV*5vi706KBrOt~]~`~OJJ*3*nz&TP&%QE.:EeiFQN5Jx9W{38F,~]~`~$JowXj(t&ju&%Q4ze^S:JQ($eR8{{zow>~]~`~$Jo,%@!u&TP&%_*Ut=mjwGi@xd>/1omf1~]~`~:JemrOv%A0M2%aZ7HkMk/dzWltw&I>(<c1H9D%JNNge~]~`~DJJ59Y#&USidR_r6F_9TOw7n(qgv/TsUj)bwP!%5l$f~]~`~qJexCei<HjB*RU16xGDHA.NKjMsbroaZO~]~`~e}Jv:pU2qJn=Yj.@B.fLtL9*pxwX.GOCIFxW-l:P4n:yD,T8mu@ogKHNlf+D4p7wY/3?qH4FKF@m1<N9oG0muv}1Q5pym/1i8jnwLn1_&yDd_s{4p~]~`~vJ}g3wGB,Txc$$$1I)oP8vE:k**=~]~`~$Jo}j%)#)*(j_DwA<}6Asc8HNu)1HBXWf~]~`~)JooSKr{3mdmLX+d/i(,7b6{R.5c8/G)SB{^Kz!/B{pFfa:TIfM.F~]~`~$Jomi^0wy$he_r8YjsW^/D0^3F7CT?!.d~]~`~OJJIL!=ZMntcRNHLK+uu,ZB!pLwL8mZ4H~]~`~VJJ8B4<1}<}^ne{&L-5GP*LIq^p(3=hm94B1A:~]~`~VJJP#=!goFk.*%yA4<rmjf2v>RMp>(WUp-BVWy~]~`~yJeSbv$}GG}:RAF7G:bG,(^L)scxUHrca9hbIP8s_{IeuS*+~]~`~!J}}xjtVTpDB^d1_Ut-NnaPS1pT8pFMZQx(?a36vzeQ~]~`~:JevK%@lhgp:noqpXhfHeT$PFTB%=fT=bGE45=-*kxq~]~`~vJ}h=INf!pK#$wZ97@QPk8!R_wwa~]~`~xJJ$vYur:gMdYqJ#JBj^&M=/R/bq~]~`~DJJoElj&3!{mLXfPIIZF8euRq1$6%}1A{)+3@S4F@48~]~`~jJoS3JHzbd^+KX#=,)cLTHg&{bRzpBJRhNGw!v~]~`~qJee><7JHT1_RRjDb8=*&:2H$VW.)C$9r~]~`~OJJVV:._V*h.$:<^W#MX1}Pz)/f^-G?tM~]~`~jJowGsN8i-1bpIT?Jw_JeXu>hFaF-PaM4fhARp~]~`~xJJw=DRgMn>?HN_WBEIN.WCyL/<V~]~`~,Jox9niAoFDdn*.?5OQb0$XtyJ#YVRInm+G5ly^XxLc~]~`~,Jo%Y9(l$BO48gYNC)rsJ3*nbiv@W/K6)vNjKH={=^$~]~`~:Je+}n>!rEDz_fHW7aqXN>:}6JTRvbivi!@wqg{wW83~]~`~DJJ)QK,KRH^.XGUqUz$O^}TJm0q719Z_1qDP&,:V0FU~]~`~)Jou@xUcvJxb1/MHNLLw&wTC:0g.Cau:CBJK2erSvPeeY1kka}M>H~]~`~!J}j+{>0v<A/p8cM^)*hUaJudgs?$oab68MP3HBk}Gp~]~`~gJ}r9bQzqgb1Yj/=S#=ex}Wcc#$oJ6$_3x,ufV~]~`~!J}ELHXU)*08_Dzm13VkdF/-p{:x%JBiLWn>GS$}mI<~]~`~gJ}V{X3I3y:B^TCfX,,bmlX-/JyuvX5uP#4qRn~]~`~,JoIQ--aHj-*RUtb45E1BF,mmJXf_apkPnX,SAd:EQB~]~`~gJ},M/MQ,0z,$$w:hKd^?Y*cw},e!:w/f0xTmu~]~`~!J}O@A:V5J{U&-i6gtCNBdOdBP$4Ud.yR^x(XLxa4y(~]~`~gJ}@%2-$m4W.nI^){?G/1sI&Xdmnx1yvHB0y.^~]~`~,Jo$Pao=3WZa^d1OFf_YK4,^Yh43)CGRmNX.f+5Z/jX~]~`~gJ}Ezr}=_YV_RUEaB+#0YZKAUbZK?=jRV$h(k_~]~`~!J}g{1OA#tn6Ok909nVLGfF@4.6Wa%D(@cl8Hw=,7r7~]~`~gJ}EkVA@V3f(YwG-zuL>JZN_8-kCU+N:Ogb/9I~]~`~!J}x6<WH^3etH{C%i&8*rbyhG2Yc,<?@iVZ!6oc51.L~]~`~gJ}DD=O^T$A:s39@cuH+SAOQQZfi&hYEY93H.u~]~`~gJ}rC^FoQc1>%9l:D&CH^:6Te3<0$$gSk.oT=0~]~`~gJ}VE1PRaxosSky:}MC1wvyBjEtx1_)>2#jm95~]~`~,Jo+R4E{=%dmsBj}5hR{uaz.Dy9G})w1UfTw4V:tS}0~]~`~gJ}g,JenD^Me_f0+J,^,w&l&rM4mQSmL/i7<9v~]~`~!J}rA<},j+QkYqg).V%u{p-8r7%D.I<23Ccx&tVq@R8~]~`~gJ}$r,!#AHVI%1XQ):H.6eV^:Gucb9cn9m_vr4~]~`~!J}Ig!G1$^((8O7utW:sel)!SQDt:6LU6c<FH7of*9X~]~`~OJJrSbPKNO%QH^3vSW6o*Fa.6=!Cy7GJH~]~`~gJ}0O-F,1e{hOsOP>Cb<CMmT6&4!y>EbsLvH2)~]~`~$JoP<js=5d(j&0khQqLf}$$b:U!n1o$Bs~]~`~qJemWU>C1!YhO&<u/dc8gH5A7hJn:Ud{%~]~`~OJJ!KurGa6ErSQs1k9Cg!bGAXo7ehp9>p~]~`~OJJ*n*GA)*(j&Pa_-e5:wv9@rOl<yM5)j~]~`~:JeSJkmy>lZas3>Tm07j22F#&G3*c@5Y,.7k:xioMBT~]~`~!J}:tk$49FfE^WgO}IKWepN%dS4pb/Rta+$PSs6U{^s~]~`~gJ}th.l^yC5a&DwRIR%>mPDEKj?2ZCs37BMnlW~]~`~!J}8MrBP+VnM7SaZG_e7B*2ic!i!}<3Xy=qKL9bmSlM~]~`~gJ}wR_SDx3!1YO7ve$CM&P!dWDO+XM)<7R@*Fa~]~`~,Jo5xnh$rcDz_!?LVXpQSR=3MxZ7rtqT8g8Gk&,Lajn~]~`~,Jo-BH}SLwylS9l,ng!jq3>ql1$aIMWw$NwV&1q7f8k~]~`~!J}nW8UFsw*<%.rT>pTRZXMZJ-pob$Q-7?9c<Aa3Qd<~]~`~,Jowz1}.EfMG1vVuVfe_M2cxcH4iLa=hOm:KXvojUtW~]~`~!J}@rIZfE8anpIgzj2EYA0<%p=.p4eQ$NS+=UpEPjVd~]~`~!J}e:{Z.KKu*n%!SI2o/xd6S41d%6.3e%V@LFxqh4$/~]~`~gJ}gOhK#D0qa&yCdpzR99zM1Ir*bF!LUPCf6M_~]~`~,Joj^<h2Xf*fP:Vy#?qsIMb)mh{4R40/-FIn/l8sM:+~]~`~!J}f.=PBCocP0!0&,2by5EJBM_^BOwr&,!:{B9Jt#a0~]~`~gJ}fEYBLfHiA_4R$8Oi^)+HeqVc>z4)ERD:/n+~]~`~gJ}/!BST}Tgu<Jg..+T5txe-PiEwazg=Q6Kj1m~]~`~gJ}-&(vonxi81I^#1B9,ZT{4HRUw*iH=$:b<$Y~]~`~!J}0+!k&jIsv8$$cr.B8A+FzDt!mhov^q$n($1CnwD%~]~`~,Joh///g}?Fd*op4Sdw&12G)m*,!/EBxAU}<E6XUvT*~]~`~gJ}nYB8n#.HDuve)2g9A+v)Nbz,#wABYO6t.@h~]~`~,JoSD-Ve7ESqKt!7-jZ%-dnz1sU:SBTMQ&+oi)-_m+u~]~`~,Joj?5GMb}L%KZ3QPUvf?1eJhUALz0Jv(yc4O#R/lAI~]~`~!J}}yt:4E.MA1v=:T@@h#Qv$>#:(}d&w=r1@8*t.Z,z~]~`~!J}ICF/<DHhE_-SDKCw9}bT5<bU>.4$^w?SKCGqk+&E~]~`~gJ}PQz)**k,#n+oe_}./O9^{Q?+K.i9+Y.qDh!~]~`~gJ}OfK1?jQrv8,jj&zY!,8h/cZy_phk7WXvmj(~]~`~:JeerJ3LGxuuHUsqLbbZ,<s&!wF<Ns-cHD_ib5.8dn5~]~`~!J}/.O7+>X:fs3mcqS/ZVWs*kgib4S3ZJGx9gjVf80b~]~`~!J}/Ib=l9Ffg^WJYIYR$tV=84:R+}{r-o+_-gMzV2E-~]~`~,JoogaH)wx{xY$w{,taxJd%_ccBuiu>B$md=66w9b4g~]~`~!J}jI(VZIdijpnq9QH>@V}+7:N9}J}35hp}G)iK,J6:~]~`~!J}D=7o=1eu&SkY}NR%+n*pgv.(f7fEZRGjvp+OrlS?~]~`~,Joh_CSwFmacsX/5zM+EcG:8J^I^W>5CNL=+%zZ,pvs~]~`~,JoJG=8m9lM2%#IMe_004SgPd@N,M(,E*r%%Xa.Zsn+~]~`~,JoIiSsQzl)_sdt<))*@_s:8TBzdfG,Z4Qj#(<{/^oc~]~`~!J}Sk^bBopFd*}g%(lqhqjl@(B5rA$94vXjLx/8(_#>~]~`~,Jo0.MLJu3xAJxO7jLgj#d*6PB^6Z}@t.,dms4#@aI?~]~`~gJ}e&qWIbdH1Kz$CmG:VcnN)}.clo1bKEy#wR8~]~`~gJ})ZK&%td?$K7EP5F3.MlGci:e(ho@rIi6%r#~]~`~,JonuYS7bVL%KZaKP50X9Pa5^(1Bre,)PvDt%hg:oOu~]~`~gJ}eJ^.^%=?**K%({dg@ArE,RsRv-=s4pySac7~]~`~!J}j%Sm8$^c48wG0Rdb%{qQdGLYFTF*Qtr=C,nL$Jex~]~`~,Joi3W9NfB2G_@%T#/D:mhLVtGU10GG-x*Ksn:pA6q)~]~`~!J}gSzcL%,?inKrS@)5Ye,{Oc-#jtW3_mS,UqH!X*-<~]~`~!J}o>>%AK-RiT+<&Zn9n+i1c/alN@8aeDG#rf:%3e_T~]~`~,JohtOn8N_4pHQc3cC+3_IVYc$Usa,+oQb$)}Q:hD^.~]~`~gJ}/Ze)p5V0o&)yJnab12SdXIU+=/%W=5TU+s!~]~`~jJo5e613hJ>tn*cI$24-CjdQhli8YcF!n{+!Vu~]~`~,Jo/I/l-AHVI%LMjw{.q**)%yFg6Jk1G.+4yp7c?+H6~]~`~gJ}u:7q5@Kkz&f?Z.(gF$/t,lJ+>G#izvRjxT0~]~`~,Jon1zvSc^>3K4{6$RIIQk0hlzdVwa{GG.1BsFCdc{_~]~`~!J}!4cZlrcDz_,25I3D-bd1j+^0xiCSo$D=+I@E&J:F~]~`~,JoeqElSyqMe_yMS71%v*T9nA)*7B_nVXJ8?4_pK!3!~]~`~!J}5}00aJ,hv*mRy$mcWS.n=ntrM/rxo1Sh95=f=oR=~]~`~!J}e)@K+Lpz>Sa6mZ(VIn&*!3o_x13y1By@cNvyv<mo~]~`~,Jo!*^P6kyb6J.L*jnz5Q:QcCyHwmd/ec44}qBm,S:1~]~`~!J}$6^*Q0._dlgA)ol*VjR+h:1SOW*Ifqi=orJ>@-$x~]~`~,JoqE$Yd6)&7KFHCe21eIEhUTQ%u6+kX8Bn9VQgR5YJ~]~`~,Jo!u/:u-7he&DB))<Yfg)=nS,FxNd4&)X>cwv**>)t~]~`~!J}P%Ob{E8a8JnxZ}LBinwtXxpkVNGab@U6t-$gO$7&~]~`~,Jo,NEU=E8a8JnxX+aLX$:2{*NDg-cjp${D4#IDx7VI~]~`~,JoKF3H71,P<S12(WPf!rv>xMfRVi6d^AP>$h9EY?P0~]~`~!J}KTf/+a{zr%av.,mdx,-(FGZQceY^o>&@=/-?sgI1~]~`~!J},6FQUwCYxY$^!1O0Ef,B5Wwox)kcdz$Q!mE:GPf@~]~`~,JoSR,lLnxi81/b4l<Ogp$<)zPa8,=7C)P4?.W&qi(0~]~`~gJ}xzs-,,B1,$VWUHEv7loQ*==Oa>#W,6B{vEQ~]~`~,JoOvHU!%,r?*he*?GsQPYZ7-mx%g,^sb=3,lzZ,F}k~]~`~!J}V?*qE5lCF_P#4?=&m6xvM*x)R5Q3iRUvkNmK0lbk~]~`~:JeDei2Xk*9s%LZzwku&RSP!%f?(:vo9M#vLW=xU9UQ~]~`~,Jo/C{&Egrfd8:!oHr#<(TjUN0KOy{u+0{dpq65wXaY~]~`~gJ}$0^J8%=?**h:Rrk5+90po1p}SVJneKJmHMa~]~`~,Jo8{T2zu9u9S8S<<KC24vRBdI=Szvx40zslY:M$f,X~]~`~,Jonw{iY1,P&S&J=.N$%hYK)bjeW:j2U9YH,KWCzxe)~]~`~!J}81QMdDpIS?P/NeWiSv.J@R$xNRRvCX@(:9cqw)l(~]~`~!J}wi?i%wUcX)fJx>b)Wsa)$rX=Qsb9(dem@/BmMpZD~]~`~VJJO2lZW3y:B^BO?zP0)QrsJocJ0z#Tl68{Xh>~]~`~,Joh_xFAT(2dw6QLvyRXXQA1IlpFV=48dA_%AlwDX,I~]~`~gJ}:((<KXfYm^?v-tZO)!?1qJmyzSY^qggVR@O~]~`~qJey,Fi.9w$5^=%:n}3oeUzp>XZ}zL:*M~]~`~,JonthjJ)*08_5ogR8xZ7pOJsVnvj,djPZr83Y#RVm)~]~`~!J}eAhdWGxP?HRBN=4$rO(py3-&/Q*ZdpkHeL+%35eO~]~`~!J}esdK?4uV6K7&_3P(lvP@TVF1!edzlH&>Oy0x(t5{~]~`~!J}0-$Abr1kL_!J?57pjqRBLg.CTwmZ<+UeTD8e_L4x~]~`~gJ}%NO:QzXe*sTp->Z,4)2gjpV@w^Q99?yg1X>~]~`~,JoD5?Jy5}Ko&fT*TsdAoWLG<*d9i:1dUo}Q5hgdw3h~]~`~OJJy5t+,!JZErK-XuJ8UW%MORydg7oitw~]~`~gJ}P^7+Z65e7Kz:E*n}CBE@E.dI20,}XxF=rtQ~]~`~,Jo!b<q5S)E0pv,3e=TT!:ObalZjYT4EAP0>P1.cOf(~]~`~gJ}-smoAY@##*%3Ed4MgUUM1d5Os(AX<dUHY4r~]~`~,JoV+5+U^eB:HH?@$?c=quV>rgSV&AnDR7i^O838EsY~]~`~gJ}DGI/SvV4JpveCn{E3EiPfjv(P0zrHp8LwxW~]~`~,Joq<JxjEf3A1xgA:I5_S!90Z($9,$FZgNL,<uwxYJL~]~`~gJ}EqTvDYh^,*hoNALh_/hM8myUOVjU3?r2g/+~]~`~,Jo*5rC<tVuq2(Zx)s5-,.ZxPx?56Ds@Vdcx0U.^iHb~]~`~!J}w=DRgMn>?H{xURCU^ZR#11,_u{g{-yc5#BiddB<a~]~`~!J}gr5n$S@6}1S#mQ(F}kp/3#(?J=nVytR9HZ7!-9+C~]~`~,JofGOhd?7H:sTZjTk6u*qH=F1_O%CODS73&SRpjMT4~]~`~,JoqlE3r}?Fd*evTn%0Q0M7r:nd_%Q0t>tynK%dly>F~]~`~,Jo/{c#a)3dMt6Ihu#VKPP)-k{1jt@/>_Nnxkd6u$4Y~]~`~,Jon(CW*PID5&f<46AqOO1KPB?C@vLFvCFn!qEi*5jp~]~`~,JoO(H_*x0nOpEc42W5srl_$CGcfck_tIQq5_e_rF9R~]~`~,Jo0>up8CDNDEFNi14J$R<Qv3W#k4^S5>i5HN4P#S^d~]~`~,JonNyIq*n0c**/Mm(HvZCb.T}.KVKggv1G5LwVr>eg~]~`~,JoDtZpl-7he&-65UTPqmXsSHr2K,!g/6^+1_zJH5gG~]~`~gJ}5B&bZu3on1u>hbCJ}jo2Q_KNYXc?zpc@X^o~]~`~gJ}YJ8+B1,u&SsM%ebqu1^I):GZ&*J8cM!xxnR~]~`~gJ}IqF/W5}Ye&yM(,rkw6MpG<(VhV+^Io,+C<$~]~`~,JoSv}g1J,gv*o^Rjj(,fT#W,/6D7gc2vBLm?9M+sdD~]~`~gJ}yI4j*-{8z_DOsLY+P@z}Yst.}0y^ytz3EG-~]~`~!J}Jkxtx}jN(*eG!}!n3fQT+E:I1w:.<G46mqL_0ih5~]~`~gJ}E#jJW-{85_D0oi46WKYRT}+C^^(ib.i3GN6~]~`~!J}VYwyT8ip}pI?>vB(8gHK=6,$.*bqjIn6zIzUgNC7~]~`~gJ}fK/y09lfR%a6!6Oc<E%<Xs6pWDk{<QAOfW$~]~`~gJ}+9>)qnZT)1IJYYl+A&mEYf.NlKXm&3aA#>i~]~`~gJ}hxy*$a6Er%9l5POm:=h#u$D!>D}Ji7Qt6F#~]~`~gJ}fgEzfm49cnN_D9Ni=:HoeCZFXMfK9OJz=Ub~]~`~gJ}nS5zJ(M+<KtjhNd:PJvUrrO{hCD23tR}@2c~]~`~!J}Ptcih_Y+#RHXU+,sEAx1G{O&cR6P(Z^AE^VhVl}I~]~`~gJ}YKvl:C*%1KFL5j7Bm&f+Zdf-t-62Q>Hwm$z~]~`~!J}Y1p7L$^c48$MzVSR{:}n#a{*twV!RN=)EMuz)3T/~]~`~gJ}wBov1S+V}1uW1{1()V,)=(Rys+_0G/cm<E*~]~`~gJ}*YNGw?{ntsBwe/}R$E@wkzoU!=!-hL7pw6T~]~`~gJ}IisBgblk4EZPIvazrdEj?^3NS%#7TBst)aA~]~`~,Joy8sF-OR#K8$$zXHfVB7bSB99e4-q8,az0L#RLI<X~]~`~,Jog5P!Jm49cnmc&pV009m)DLR:zbb+Q</05)n)ZH(D~]~`~!J}mQOm$XI.ps9OG.ku,R69}!y),pij-@$NA(lslWT:~]~`~!J}V})B.V3f!Yj/U%U?%73=FbY9UhQce4>0/vTD<!1)~]~`~,Jo).a{+a{yrJ13e$1bPkuNdD,8UcS4,-zV^I<WgsZg~]~`~,Jo@mtHbSQBPp}T=/LOpHw5eY0L4$<+0GO)z1bLjO7$~]~`~,Jo)XSddiKz0pITLF94Z^%c9$gaSReXb9!OJ(Q7}#qU~]~`~,JoEGlF$h<VTnKY>9jr1i@?:9<2D9$pZ&/nKWiYHZ-h~]~`~jJoDJPx6USuuRHJJ!szXRarb6.es%A7XU{*C/3~]~`~,Jo:qlB6@rG)_@A02}PQA}K)H4Z8kO5ATRdBD%9ltQ&~]~`~!J}O$%}Y}<o,nowr4eMF{Y2AW9kzB}f(b^7}g_NNA__~]~`~!J}S-dkuPIE8&qJ=dgB#<2IbEMRNnA)h3YUD/*nGwvv~]~`~gJ}:Ap@}<xNmH^,!fRd/:1=zJ:7*ep?Ki0o3r2~]~`~!J}ojn:G:gM(Yj)$RE<YicyaN}!i{dKJrshp*i$g3).~]~`~,JoeIhpK^2-iRpajuNMMyM8s}9IUhU,,NHqcpWRB/3)~]~`~!J}%W^84!dSB&!<WgCq2%h!wWASBNT<@&r>5K?v<OV^~]~`~gJ}:3Kt&8i3A1I<)fHt8{:X3,>U>ZDOwPGmsvm~]~`~!J}85=xsfB2A_r1UG:Z%tYwXZI,M5zOuTIJ.r@+IU#G~]~`~gJ}i31se5}YU&PI/eSEE,Ez%,&2s,iw+tnCrkB~]~`~,Joi-B0zj@#KYj#IEHcALG?zsJdmF?=bg7^l,N6jnLH~]~`~gJ}qo-grKW2_**tz%!K+6U9I@*hy)#?Z.tO/Q6~]~`~!J}S(+Ec+=Ab1*8c%s9C6fUce/#C&VR#yE(x5TpCqjm~]~`~gJ}t%4wUD0fe_r8KhvV$%+L!T6XkjX@mj-^pU^~]~`~!J}}+Zk!J=VY*YII0S-rdhRg&V!qa@(UYO0v1h=j+BK~]~`~gJ}Yxr$1K-d*XDp78?V0L6GD4y!l9-J{kZX&gV~]~`~!J}PnRRhHNqceHX)1JSjqklx5k-nP,9l!Wj6$GpczfA~]~`~!J}SblJ$RT7:R.h_KzOW3SHoo+Bo3_s2s9f_V?jYXyI~]~`~,Jo8mg}gQE1w%QcmYXc}QLGTWeyK%^2H5xa8_W=j07e~]~`~!J}I>TYnmR/?n}^_L(ERXLS}b5eAVn}@EADqpBWz50N~]~`~xJJ$X#CbNOjQHNBUmqmCUr(@KEFv~]~`~,Jox66{EU&?YRRT8W0gbZJ:ykP:g(/3p^gY32WV3%U.~]~`~,JouRcvIkY!6S1l<H^Vf<WxDn:cyMaoq,/HeiE>N/6&~]~`~!J}SX0q.?{8Msbo(uw>0}stcUNOov^-4y:}m{26HbOQ~]~`~,Jo+GGk#XfYS^T$IOLvyxxmJ0&s7!2l-k@J^U#9&$J!~]~`~!J}S-l+grE-}_,T4X2q_Na,5IHbCcb%_YA368#hZb+h~]~`~!J}VV2JHj+Zk8qT_aZicxUAe9_SI5nn4e?)gss3v}2F~]~`~,Jo5MzlEj+ZkY:V&JODyfyGVs13yM.HiC$,jlqyl{?t~]~`~!J}Er@^^Z%q7Kb}lIGUWXC$stzm:!_vDNG:kT!-&zm}~]~`~,Jo57JLS($:hE7Sya:3,GfN4h@h$m/fWOOUXnZv+!xS~]~`~!J}!,e/E^2-iR_YAPd@:djMxp5j$f2i5(ch?}LDhV3n~]~`~,JouEz?lMntcaNpNfHp>>}7QKp/<&NVH@5(sfF6Yi4L~]~`~!J}+j:5u-7gS}yU@>X(Q,mVT8tMU+^:$W#G^D_u=O<d~]~`~gJ}!YbiR#fA-OQ&L<oBYgYD6xgt_dQFC^n/O3p~]~`~!J}q7,G(cBt3K71J}64YxV5WXcX(}kGY#7dh.MI50Xy~]~`~wJ}EPsZG5V(g})3Amrq/:hPEchUo?*>QN~]~`~!J},xdR$!bG#$018GG5jWjf$^lvGit81x0(URYWb$7H~]~`~,Jo-kft)vVK{1irbla#w6?apHwWkP(v8YN11$yONpg^~]~`~!J}wSIC(V!m!A-i@bx}ss%FuiXeN4?JZ?B^7G2H0JaU~]~`~,Jox4JJWk*A+%&}Rs:N8lz.#F/Cy,MhSleHVnBd%tmV~]~`~!J}S%sq9!JlV&-E%2@JW*^Qipw31=hnNO:131)^>RjO~]~`~,Joomsq-hV+tnh2kXOgDjJ>0pxCk^x(=qZpEVsYh8Kx~]~`~!J}ue1k::JM.)wvla1%(SY</Lq2qBe(OAmKf-G{!,O6~]~`~,JoJ-W0JEfMG1uWW4_>/&wz4k#Z,/3U@pCksp#X5FJI~]~`~!J}0.bZMvd0{pxj)dOIv9THphC-hLtewLU@7l/0{&<<~]~`~!J}I.6k2kW.6%s^>-D(vj<G=T!t$>uHA_a-nu5RlhnE~]~`~!J}J7gh@swWqS1!Mj.UJGbP&.az)Dj<q5HB1-9=$wz(~]~`~,JoKxft}NOjQH<qQPBE9^5ZYRe>#=WQlm5+G,jfi%A9~]~`~,Jo+4)rPATVw%A0C$=}Q(Mo8GPZeC:oSIvod61ollVJ~]~`~,Jo,v!Od)o7g?$Oif>HAm>+#Dh:=V)uH$RR=,.7BMI4~]~`~gJ}uRzV8.an6S120J5:_p,{y=7NI?rh9ny3VM*~]~`~!J}fG_E@>oQM^W?WfS#KM>DHJcR=4N+}aZmaZ0>QnPZ~]~`~,JouWD#{O4_XY$^n7j*VFH)8WUh4w<UP%1RCS+Eh4VB~]~`~!J}O{AhQ+2_U1E.Y/!rF01GjQE8)t5XAej%Tzy/!%?U~]~`~!J}%8u^2eU0,nowH<Qjf!$RyIbPAL!S{qO/_P)9a_2N~]~`~!J}*?%4ONO%QH^=bB86?/6QB2#UtSy%Gxjv8Bb{**rc~]~`~!J}jKdvRV!$(YjQp{#yQuks:3MAVVlf)NGZ#5!,mUtA~]~`~,JoIPp:WMkIiHNF?w!OullTf6>@d=KZClJBS^3A8E8Z~]~`~gJ}fyycU.h%+%IgO*oU6r16k2#ph-,3RwtI$@{~]~`~DJJx3p$Khg>:nhd!eiZV-KDLm>/$PSM&us(8(Fvt&E)~]~`~gJ}DPN7-7c&yK($tm0-&3QtV>ZL3*oChE$u/Ky~]~`~DJJIDK7{%=TY*oF-Q.^LMK.3@t?6_ZgtH76v,A+!Vc3~]~`~,Joh*YOF$^WX8O(HI}DBHi{VcU/{d}0a>XSne:@Z=2l~]~`~,JoOu:0?I<rAp/q=6:#R7#iHaFOjP9?+S<o$5M)HWu2~]~`~gJ}jc,{po_}.*JNn0(RUL$J1rw&%D8oBo+2Q*C~]~`~,Jo/4bmM7Se7E6I?F+CYzj&0LCh<A=EUvX>LK6}E4TK~]~`~!J}8vL43x0nOpS#n<YEL9Yq)*&/VSPQ&8*74jaPtZIh~]~`~!J}SH(,dNz%TR^!{7-WZOCQ4:1g^fl_25M5HHzA,?f8~]~`~,Jo%Y&VGqJ!1YwG(&NSdA!,JK_ez/1ZSnQanK7BCIgF~]~`~gJ}%1cdK*.9?**t8A,UTMV=Gv_6to<xOb^kxqJ~]~`~!J}j3gXr@L+0P(x:B%y3YgcgCT%*UDsuua6Nva6&inG~]~`~,JojwY7^a6yZ%A^odAv{sDPJ4m_/Otd/N3e1e,@8W/:~]~`~yJeV*?gL/OTFp8cpI:6DrRDL_n@bkC>kJhc1TIw}+7Qt#)#7~]~`~,Jo5U@%)-RNg&yC:KJq9ThyP+-A^P<T=EuLVl!WadND~]~`~!J}J:oN&DB=M_!gNTIr#ixMVHK.X^s?$yR13hGWkB1v~]~`~!J}I2n*>S@6}1x0*HqGh6bAn2mg&50Cl(KMF)pee4-S~]~`~!J}*WRiJWNmE^>Xbf0g,{_)!nx&$ZB$lY5-d^au%#@(~]~`~,Jom>W1!&:-NfLp>JVFJkPnXm5kz/{SYvW-Wz,Ye&6d~]~`~!J}*xx>cS@an1xOL95^0yqfWS^ZoiA0G34a0Va6tcXU~]~`~,Joy-2+ptd?$KcH}Y{OJH/-)t09qU%)By0U}n5v{6hn~]~`~:Jexk6>QAH6w%#kCeEO8cT7%Dc2iSsx)X7M&4LnEY:t~]~`~!J}Eu-fLvd4/pu!bxfh:<LI/pDnvCUxYjS/x7MjjpA=~]~`~!J}DAoi$?uAtsB^papAiAfc70#$kANGTGo+oNl-pFu0~]~`~,JoDScq8O7:kYwqD}r/&WFt%-PFf6LS<y)qxP/_aAe*~]~`~!J}$UN4K082v8wMA>WFQ-DO?/s{#SV^@px.:rrLd,TL~]~`~,Jo$r.Y,9Ffg^=AlG*out>%}J0ZtYtb4(jCtl5U5yxn~]~`~,JoJ^D7pF0FDKbeep%IFJ_6K.hBq-PNo/exGAVLl*n4~]~`~,JoS4BXSK-B.nnM$+Qd<R^PZH)0(X>sj}5%qS#NCQ5r~]~`~!J}D.1oW)!@U&5=zB2?BzQSF1:@?$oLD8W%}^F>vE(J~]~`~!J}+ip%ctd?$Kc_Coi@UqhRxsflsaQ0Hb)yH+mMx<H,~]~`~!J}:{(.nFj}4Kbee#!-qj1z,#?j-EH8S}Oy(A.>c^Tr~]~`~!J}@:x9R)*(j_P.!2s?ZXT0FOrQQ12R.PXnw#bqV>^b~]~`~gJ}-26CwCy8DEZ+-dlP=$3-wm<AA9^6t-$biQE~]~`~,JoY?nZOzlo#sTxN}4!h^-ZjkN!OSDh#DVV+SYL=G5L~]~`~,JoqpzUkwZ{xYO&-LjP)+I{OUy+kP<jA%X)xL4m9x^x~]~`~!J}*b1xBY@2_n*E:-DW?F})4gbSDDB0IpK(:l:qZc-2~]~`~gJ}ELK9$cH+124i4Y-Mg?7&RYPrhxw.vIu$Yp{~]~`~!J}%k?.k%,r?*K%-ZeAAHE&#4EiMK(,VRCT!GtEn^R0~]~`~,Jo/3Sm>J=gv*}^(m*mlbhmS@%p4JCb5)$QtO0(2w$x~]~`~!J}+pGt&c0*6K($keUfUE^dO}z@j@!f:DQCRqFRV*c9~]~`~!J}Eh7D)!JQS&DBQaJfEOOWwP8Z&Z@d1%dDR/iLodnK~]~`~,Jo0iV>B*8,?nmSM^TZ{fK6zAwFVvD:m59D)1GnMgHx~]~`~!J}E70HnnUmzJ/O+_+HZzRH^zkm%}SET_}}E9G^J*/R~]~`~DJJyr4KW7E&=E4u6F4!f/v0/37p%62uo3tu6z*57j0X~]~`~,Jo0:VBgzT>YZWHNN}}+j,jilU70ziN)pe9d<??Fm$6~]~`~!J}r4a)-_KB,ep+7yk.b,yMZ?YKY0HU41iNHD&hL%Tv~]~`~,Jo-Qm%Y:dL^YV>-j!WC0Zy6+bFpK,GoOAgzU9xX4nd~]~`~0Je,_c1,wxdx8$Oi,6v,P,#ySt}d17ywy!8^O/~]~`~,Jo/D.1Z_*p#R<q)9Os2AGkI=gVmfYY:3*?zQ{4jF!q~]~`~jJon3=sI{wC^HGxSTdS5,)!ySBtg6GO$)*h72p~]~`~,Joq>&5XHT1,RG6XJq9jr<N(mLGqKOhCkm^nNAj*E/u~]~`~!J}i0(EQX/{S^BBt#7L#J=sU9$fgeAwhYIh{^c$33gd~]~`~!J}!p*^xvJvF1/wwfE582ZO$+<yd{d$*5prv)V0&n=w~]~`~!J}rTJSVd1ntLXQDRk9dNTYt.E$mmaI0+,krSC4Reus~]~`~gJ}qGY7t-uhE_rkSeorO_$%Vj&YwCqw+xg+kzJ~]~`~,JoOcG@wwZ{xYO(shrs&aJKUMLpwV{Wj#V)/M*N-e>.~]~`~!J})8jv<WJmVo>my>0Ix=5x*m4,v+O+^,{:xZSpj#ho~]~`~,JoY1kPaq<{D8w6:6RNCa(L1Xe*{T{kI@OTRxv&Ym5T~]~`~!J}:Fp7*r&}L_-StDI5!a{e0PC2K!:b>uXO6PseE9!c~]~`~!J}@IxXj^eTSHa4G=P*U_(bEj}Hb6=!a9q=T<i)C4vZ~]~`~,Jo5pe3v:<N^YVyeUko:QPCud}op)MZ+!3(,,IkfH_A~]~`~gJ}+1H?Q12J3%&<L!yI1Pg.*60A{$)D<pcC#T>~]~`~,Jo@$t.a7E1&E=hr%a/je%uYo8uwImWUdIOjo0SGxC+~]~`~gJ}EftovV!m!8gP0PEJCjHUe2q3k-aa4@$/nDt~]~`~!J}fFuykE>I@j#IMdz&:Cp9G(3X@MIxgD7Lym?JbqiN~]~`~gJ}/>eVzex}.*eUvfm3#rn9cI8dcOp$C-B=7J#~]~`~,JowywC->V_fL($b&k1FTRQUMVKy>p5yo%FcV}#s3TD~]~`~,Jo)Vx+?EkhA1iAFfSr(1opu@5s*{4zFt4Wh=WEt?Tn~]~`~!J}wm:k6#nj$SQ(rYhV#qa5-k.O<+v/+(8AEX=u-oA/~]~`~qJePNx&+tV?-K(w42<x7%{.:uv96h?CE,~]~`~$JoOWx*{CWDDE6#tM}ee9nFj)Ly{%T)%{~]~`~wJ}huMJ/L_osS9l2R)?PNkW15JYm6581S~]~`~OJJ)daHru,zj%/zx*Tt9ae.Q9_0_wMHM>~]~`~VJJjF&r6>2ie^W4(@I&#d$F(Oe_t*R6Y>yUF#z~]~`~qJe/}BckKW2_*KYkTYBgchyK2c^00W(fH~]~`~gJ}r/(!S/OT)pumn@kysml&gI7Eu#X>9/)2q9%~]~`~!J}Sk^bBopFd*mRzWMLMHk7(>Svo4vE+eXP*ut/m3_C~]~`~$JoP7UseLFzZSA^25>&@gs{7Y9^noQKk_~]~`~gJ}mxyADO7ZH8j@Ap6(caveW*q.0HnU!lwJ0@L~]~`~$Joq6<WPPQFE&-{q9aoPpMYwl{Mkxxxhd~]~`~gJ}ww?IC*.^?T8S}X-,zX1h!AD-5re<1(!fZL5~]~`~$Jo8#ZBqc0*6KFdwDWDmR5inuwuU_hQBJ~]~`~gJ}u$o9cX#up^XIEHTuK$W,}pVHZcK.ejf2Cxa~]~`~gJ}j2#U&t<1sb52_a>U^>X2d^A1h(8vvU&@QxW~]~`~yJerYY9y!dSf&52&o=y4>nJI/Iu$vKQr@K(za+*m-LTnEY:t~]~`~,JonY&xI#nKN+Sf}V8kPuw.R@=6N_MM=r$pah1NOvSW~]~`~5J}rN-r=cH:hEcO}GiK^f_c0V}skesMTDrOg^A6}!$Er%38WrQ_zl~]~`~!J}j,b*Sf^2A_5*4qwV.(cu*ndw=9@RzV?g79--hHKY~]~`~$JoY/kA1,0:%X+glYMVvCQ0x%{.p9qp<e~]~`~gJ}i/{,5+,cL18s-OyrD8vvY$NfuHwcNI0Tkm6~]~`~DJJO.(N4V!$(Y$b_%l:O9-wY?!(a(9rZ&ssOMkB#F}d~]~`~:Je%Au@SgA>YiqBPv6F}W#2G*}m@he6_@E69KAToBtH~]~`~!J}Er+BG6#eym78M$*8Ud&M%RY1}p7-SdWdFX2@=fG4~]~`~!J}u@CtK}gF./%*.XH3E/%)^l8fqIMmOoM(G_OGM1e,~]~`~-JoICpEl!<BBUf?2y^ApNiQCX(AQ).rT9{g5g1Z!rJ:37)Z4~]~`~!J}x%),sp<,ryC9m6I+/SbPqT3>7S2>b5.(fJYs$+b/~]~`~$Jow+#A7td?$mFV$PBC^:_O#QsG:y!/>=~]~`~,Jo$RP}=r1kL^P#RzL/Oy./%k5sU/CDtc)/G6TXXG5e~]~`~yJefZP#AOJV)>X)Y?!s,e{ocYL*un,Pz3{kwy:{QhdXe7(8I~]~`~jJo!C=>z$^O4I:}^XFVWj36DZEc6Kr=bKaN^LQ~]~`~gJ}0/-3-$b4XGqT1D6!,SKv:1qKOZkX0&nM83s~]~`~5J}5w!PXwqYDhgrXwyI(dpePb}FM-<ZMFk5K=w{P_ojcO-@E3)9y6~]~`~gJ}iaypLiK1bG/M?Y7vPqgdop=o_A6pJW7:P/+~]~`~gJ}*Qx6>cT+<8b,3xzH}tcd#e?9&GyT$yHEJif~]~`~gJ}K_hHr&NOhr&}J!RQKR{J^bpiPVdaGd(Cl{:~]~`~OJJ%%Vh(VmMdEw{<_AN#fR=?c!$Wzo_5b~]~`~,Jor4u?e<wYQSH?<@S!Sxp_gO@uND-3H1%jc(j&VCyh~]~`~!J}EPjj.fHrGl-u9}1:MFXE0leY8khJ.R@bNJ,8&^I&~]~`~!J})PpaJRj0!sNBxAY%@n)>EOF{yR8pYBBqmweTny=/~]~`~DJJyVG(l#f4-vkm{aXS{06pP:NV953O5{B@*=UuQ_}I~]~`~!J}u$CyQdEbQkXni,&sbu^q{naSQ3a+yJpN2,eng{lB~]~`~gJ}O_lTxMfp?pGUee#3bJ5P4ka=7hY:<ijt$1#~]~`~,Jo$dcZKJoqHJYawlS0tD8{O}tSQ}GHY@Jv=kE:dpQ_~]~`~qJe@>x-3iAxb_+24aUPbu?vhX%/q=7Ylh~]~`~cJo+!t6-vJ)9<8Rq?Fe{quKj_I>!pm9:r5.mmyHK+OsFyGD$E3*O!C/z@S~]~`~jJofOOLgI<rjG9l)3<6m-S#3rMS*EXM:}dZhdF~]~`~wJ}$gLkQex}^%h<f}O^pCAU(2-)<@wbLM~]~`~,Jo@cTF$UE2^{^>SYHX#WMF7}7$2W2DDx70b{YJ(JcL~]~`~4JJ0.3X^vVK{Hn6k-r*qms2X4oD9E0>SyVYBD5AoB/&PxlxAAR$!lolYo,~]~`~gJ}5Qq_-Lp&+v.hz7fjkQZsF2P$kKNbNMQIO6#~]~`~!J}J:/*{D05Mp5!q7AqZQ91@lG{efkt}A@T0L&D19M6~]~`~cJoy>H-Fzlo#Hai:z.K!xX$VT9}#k47X9P5_aoqZHbLKvu#q7ZQ2$=6,&q~]~`~!J}vU)-BFT@X/H2isETBf4NFK<?8w.PyU/=B4pG2Le/~]~`~DJJ*eP!{Q(oZhk90!N{NFRWTsKT7n!N/QrpdbMgKRwS~]~`~fJJ,6tXk082vi0&xub?8&&0MU41}nR/YrGPQ7wrqa^9z=IuFiu%r3~]~`~,JoEap:*5}Ko.yxfNPqXs,Of&FVr^9ds,P<{2jh:*w6~]~`~cJoyzmU$_9SmRZhl4b$y1k1eqz?.P9.Nc4bg5dqH(aQLy5X.e?/YPY-UIY~]~`~!J}$gPtWopk.oh2DpYR3izRpY3Hny3D:xR$@:_jjr1a~]~`~tJe!,U25Rj0(sN^Q#gCGJQWsRUCsG@2^V6m+6@6TFGntjN-NpjSwVOLZnp~]~`~$Jo/00E>/bcPXv>?K>t/L65H$TOo^@/Ky~]~`~qJe81:9:fjPIJ@O&e/,+^.UqHn5>ioMBT~]~`~$JouzznGFN_sO7N/^:^(?GHpa6(ken*XZ~]~`~0JeVHS{W-S-vd5{Rd3wXqo>4Br}2SBO==BDlw_~]~`~:JeY^dMc^>goYUyycTP*<D.8INMA!jFs&$S-7p+OiyD~]~`~PJJ$ZqIRwGd62g>G{78:dvLotS%smvNcxnyN<geG<!d%F5}q~]~`~@JeP4yDaa7hG<kmD<sK.}Y8IGb39UxG5y=gGeu8h-gfk^VD*5iM^@~]~`~gJ}r_&:E=@2ve?w/J$tGV?g9vwua.PG=rb>d^Y~]~`~:Je@/jaFp)Rv%.Dv86GBuI<1sT.pbt_36kiyhnZU(.a~]~`~DJJ,6FkQgL<hOgea3:D:4@kuu%ycfz$C?OuW5sDN,Pj~]~`~0Jei&Yc(hlzFw+hBD{I1dy^5>RV4Y{VKxzL:*M~]~`~5J}+KkGYv:bmYvmgp+OzN6Okv6Q5.KU?%nyyg}!B1!N:MOs2%h+TH~]~`~0Je,^qF0,jGyO0#N(xid7xs!ANHY^ZIGqr,YX0~]~`~$JoqDY<.G6ne#R&QS9FqignmIY$GSrOL&~]~`~uJoI$QOYrnqnWP:u}JQ/?uknEY:t~]~`~wJ}f&2m/C9@Q0F).Zo.q!fu?D$T30mgJJ~]~`~0JerG{p9&}I,,keSEU/TBR$5{2m-rH:vA8#XG6~]~`~vJ}os>mv>!e^:4gKj@5,p>hy1/m_~]~`~vJ}rZd*Q9<Tjl.KoN/-7=lokhrIT~]~`~gJ}YZs7e@+/We5UHxeM:jM!WcoUVxyC4+KA}!L~]~`~vJ}g.WqJKLVHgh#7wU=Lk/70DB}6~]~`~$JoeHh5V8EZ#>+>6v.n-RD!vf.TU-vUCk~]~`~vJ}:T$fn$FDIJw&0r(k%jEQd&4}+~]~`~vJ}/EdL344wO_6Udaqf$LZ+*^73y~]~`~xJJKtb0X/bWRdih#=hT<f3:1{qDL~]~`~xJJu.o5C*cJ8vJ/1uwFoS4U)!<74~]~`~uJoE/NAf,TGEO05&o&)ZuGapTeN-~]~`~vJ}qSa1%bmEH0CRPO+@W.Qmb5:6{~]~`~gJ}Jd*By@-F?UrmZrKB_Qtzh@=am=@W,y9hZUD~]~`~iJeK2<>yZ@W$5Csk_CwF>Ocmc5t8~]~`~iJene^mkH2}>yhIT:j-eO,/r=yQj~]~`~xJJf114I(Cty^4=gj0!NKFeY:Ljw~]~`~vJ}oMsobjaZihqw._f>d)a&08kFe~]~`~vJ}xUBF66Q_MK(!BCwv%a>$uWa*0~]~`~vJ},M5<_jI%(8:0OB6A6r<x_l8U?~]~`~vJ}$^*TvI<jXlI=5c{8L&9N0eB^y~]~`~$Jo,FLmK)>(x15{G3Ny2E_:-iUVf)I:q:~]~`~vJ}fmCk1Gi<Hk{/KtfWD!Vb7mPUk~]~`~vJ}8RZf4:3jtg0Q/W#wJXDFIOC@B~]~`~0Je+kX39s_xh%.m>eEpwXM/(}fQHxkB}1b8.uk~]~`~xJJ!ng_(Fg&Sgt#82E3Gf3@hh2Iv~]~`~xJJrXdqMCW*)O(,qI5WE)XviU9ej~]~`~vJ}Y$:un%WNSoy%pj1B^-6TQ*Jbt~]~`~xJJ:$AyzyxB+X5qJ5SrT5,>TVI81~]~`~xJJ:oFy@/z4tHS(jwmZ+oLY.vuhp~]~`~vJ}hc5YB{pbP#sM/CG^Ypx3ecC9j~]~`~iJe@Qoi/NOjU*R8$ib!Cy)Uy%s_u~]~`~xJJj?,k{c_u-}722PUIPJTOA1ujZ~]~`~0Je!&?z6!V4el)F_?e/sDSRM}h<AhTa/(s2PL?~]~`~vJ},N&IfS5xkoE{Of<MesS(%U.c4~]~`~$Jogs)#c^!2_/NcIVJ$qevXblmP(FfowN~]~`~vJ}}zDS?4Rx,SC18j6@l?e,exwqN~]~`~vJ}fFahYuzYrtsxG+JT-88W8plSA~]~`~vJ}O^H6(^,_#{_$L8OCMbzxhG(*h~]~`~xJJgm1XN?GdZ+z3(jdKyRt/^hWdk~]~`~iJe*}kBcp@),o_$.evo*_Z)WrH^u~]~`~vJ}Ot$k<qjrN*jy_$$f1%w?OZdH$~]~`~iJehVP,<5VE=9$xOw4E,#ji>I=(8~]~`~xJJP)*AQYIhj%Ki,gj%2L>T.6T+Q~]~`~0Je/hl*uk9aJ!AMK)L$BJ(76B4>6yXyo/ToBtH~]~`~vJ}%zcBN3*zdNz=X<b<}r75OC=O^~]~`~xJJe=y_}eCKNO}-#N$bkrE0=?!+A~]~`~qJemWxNtQt?rs&0Sf0R/ifvJ%Q7%g?P+}~]~`~vJ}f>N&9#_rvav9h<^w>ton#W+!p~]~`~xJJ,RB@6!Vry1r!f5W3rh/vbafAf~]~`~qJe-Ed<GS5Q^NvDlF9+$Pe,sxacjIqnWr~]~`~vJ}**+<Ma{Bmi#Aj#1wkmGw7X{8P~]~`~vJ}86NI4v}i$mi.gfNB<gh?*#:zn~]~`~vJ}iygW=)m+qM)FI6MOY#UAnJ)MN~]~`~vJ},N(o&+,OLaS(c*Eu^9vKDO4id~]~`~vJ}EX}MVs0&U!sM,8Cop+Iz!T6{*~]~`~vJ}ea5H9QkRtsk>%MI*v?)cembhl~]~`~qJeu}qvI5X##u)Fg0r:U)VAbNv}07?Om=~]~`~qJego,9-7&m*S7O$_at$mdX!E?Y(*/%>S~]~`~vJ}IKVkt*t2#+e},l)jUhHSPGx#W~]~`~vJ}*X2IZAF#oW&_8,RImWuU@q324~]~`~vJ}iO@KzBFdh(=).(u9.#D@^2an/~]~`~qJew#zhyD_HuM@04qW.3071f5KI&r2WGg~]~`~xJJ/s!8hC-+Zv6wsUsQQxo>#c.1#~]~`~OJJgX=q{PQf<Ar>TDWa5CWnVcPhTpcsxm~]~`~OJJS^gGCH<i7IRs}L){%&#{F&X>lbpdMl~]~`~vJ},Dd9ERM3x(Aq{HD/O1+*(}Q)Q~]~`~vJ}Ed8mgk97&SApV}%3B=l++XOQN~]~`~vJ}@pG^/476CN4}@XT)dH5!U2s3H~]~`~OJJgyN2I/FUF{Sfvor!XMR4dz47C,_-6}~]~`~vJ}!$dh!+=-xR+!(4{G@xk+ZEOBo~]~`~vJ}P==/DP+s3>5q3kvTXs=HMnYhO~]~`~vJ}DftUkDOAY9D#TLP,A33$IH!f)~]~`~vJ}rb,QmA0pTJ#LeI&F/I)?tP6e$~]~`~xJJnzYxhuyn-8S(IrW_oZhSc-vds~]~`~qJeP>zfFj#M&,0A/x)clmbUp/m@$.8dn5~]~`~gJ},A+}nk9<?!AUgfQ6%io*P>7Z!8T:VHPPo{0~]~`~gJ}yZ4yhhJma,)_k2l.mH4{/rmK+_{H5Cfjq}k~]~`~xJJ$,PkpNT6>$pVjeABL=EN8!7&6~]~`~xJJPq/D$d&<B_?C}3/+hov}#2>+2~]~`~qJe)kKC!.@mJHak<)2jrV^kT?$L_VO*Ve~]~`~xJJDtxR8@r}qH@NGiK}pRlRb=qky~]~`~vJ}x8:vgBllm>.Ao&5H={(U61N{I~]~`~iJeoyvN*h22BVK6){k0,Q%ENj=1l~]~`~iJe)N32Qwx}xm0@omHO0n-K#7JH@~]~`~vJ}:&A/iB__,F?p{wSBLFddx8=f9~]~`~vJ}EUH(d%>6Die>%HsZ#.@MjZgVB~]~`~vJ}%j{86>V_6^3%$ygSSp?nmSgd)~]~`~vJ}n*<PmLCm-8IeK:?n%z%RMg7(t~]~`~uJo/$^W0V*a=,g365B*7pL!5+hQb~]~`~uJox$TUbeq0zgJ.u)Un+L{o$Ocz{~]~`~vJ}0FJElUk^fA_$ONi:3??.cK>(i~]~`~vJ}OPQc@y$g_M@^=}e=m79GV=PQ&~]~`~gJ}wRWKygKKvH$MSHN-0qJg.H@mc%3!1BfdVNM~]~`~$JoI%HcB_W}c>pgS51OfIa!o!O$mIV%jE~]~`~qJeoDfCtexZ#wJ)ydyq@9qTER_d4SWb(B~]~`~qJe@dwnl$wDwI0+65LB>qv+^m!$MUR$}#~]~`~vJ})aX8&^!I2&Rf<n(G^rIcqNg<Q~]~`~vJ}xsX}N=L1}N>K%hpqVDV<Bs(wg~]~`~vJ}moODHRHsuaU>1Bp^9R?+tXV-{~]~`~$JoYWkgq^3,IM^b-#0X9AQlv(YN:Gbm0R~]~`~$Joq49T,b,{TuC1Q@<8U0Xnf+!tOS<CKe~]~`~vJ}n$e,@QsTS+.A/B:kFjF/8b742~]~`~vJ}SJfQg=A<VNX8}=Xo^*GSiMJ>M~]~`~jJo%.CWKir:)JuhpY$%lm?cGraguNV76yRkn0u~]~`~DJJS)0!.0E-xw57<n0Ye4!rfsk<7MAEUHyv$UwNmO#j~]~`~jJoI+}rWGi{G.NkSvUT.QClm?i7Npgn5cvh(=%~]~`~DJJDzANeoz:O0YxX=IV{ixEe>kq{Vlu0WY+^*#/GQ8u~]~`~vJ}%=cZ#b>eV:4VbJPfp1tc>wu%a~]~`~vJ}glU=R-(zZ(-LJSgdnO)coq.OG~]~`~wJ}!#q@q7tGyhCSE3TwUIDjQA{ba.a?vO~]~`~OJJg2j7k5=N8v!4_gdv7bNcueCl)?D.h4~]~`~vJ}j/$h&EffIkI2Q18e,7!,elT{/~]~`~OJJ}DNit8EGUTxg<^ftmk:=UZ@%FTZqs*~]~`~vJ}rPBeT,?Akbge:N3sgUA!{i-_<~]~`~OJJ0+nQQj/pJ!x?CX0LU-ivdyLkri%B(<~]~`~vJ}S49Aqh2GkFnzWaF^N=L#yS:TN~]~`~OJJx$A_j}NF^8mlV45R1>LF7B_iU^W0)n~]~`~vJ}q^PXKV3$-I,q1mYf:Ew+?r_Gl~]~`~vJ}qaajdkKJ^%#%5EOVrdpybVGix~]~`~vJ}OGn#)}TgaeKGi<vsb>+rN0Vpn~]~`~vJ}mY/tB#)ztmAU*^U^I^h,?Bd{+~]~`~!J}n!CMlYQg:uoycW,E:iEW}-yu?1naLB&VV9k}2m8}~]~`~!J}5G.O-)Dc#R56B5vp5k%DGY.abgcM({VZ>1OA22)/~]~`~vJ}0?j+s=A7%?Wm4C#@TLFwJ:!u&~]~`~gJ}f*aglk9+ewLR94Z6bqy6LJMXxZstI=7#:3u~]~`~gJ}oL6WiMtXT{sM#uC_IXm#n6C<&i@p?6a6:H@~]~`~qJeJ)5g3*#{<}eXtxnJNML}hL7fe_%ta{~]~`~gJ}E)X$(!NGVL@Hbklxfs3p/l^vtzy!fnIPnhZ~]~`~gJ}/}H/jhe/.OmjW%tjHGpUFxYG,4Hty%C?Qm*~]~`~vJ}!CqFtgPPdnj-JMhgtLJ-F<R(T~]~`~VJJmq=34:}Nb8w&pHsC*5<V+h?H7{Ebovnp89J~]~`~VJJrD{6YfjLxm-K)C(x.0&d6l%zyb=aGp3cN3e~]~`~vJ}rLO0ZqJkBl,$?0J-Tr%Y6fItj~]~`~vJ}PmLT+VWEyxg,R}_rBcQ}YywuB~]~`~vJ}Jz?gHFNYkKbnmNF+T6f:8N#Sl~]~`~vJ}@hr.q}gF0}v>7pw^H15*PvLd>~]~`~vJ}md76S*EPGg*wJ)Px-MA0_+Wf4~]~`~OJJuUDpi=hEb_=Qk*p:_AicoOdXUy0Eb1~]~`~vJ}5<yUmiYNk^EiF1h/dJy1u&jUE~]~`~wJ}!R,j/DFXBs5vonGKqwadfD:ga(7++S~]~`~vJ}vsmLCkrE7t3hYU1RIe4.b=L@+~]~`~vJ},f.t<BbFL54<w<!HAf/VXV{q-~]~`~wJ}O,Z)1XImXUz2^6sCoGzIwT>PpdvOOu~]~`~vJ}%H7?g9B8z2W>wskQ!zaj)%2v^~]~`~vJ}5G.OY)>zL&5x?68v,sLo42a}>~]~`~wJ}D<8),HgICa^Uab08w<3V,:18TO9fYh~]~`~vJ}:MSvVr8N^JV21VkTXPqeG/6n(~]~`~vJ}jd?kDCWD)/7XqgiK0Vk8cy#sP~]~`~vJ}Pt_GPNOR:hUD%kHe!O-K5_:3V~]~`~vJ}!XEVnH:DpSMmuE!Zz,:5?ta0f~]~`~wJ}0jQob?R&_=3a?urC=BsV1,*0h!w@cw~]~`~vJ}e/0D{tg.KobkEEHY@GeZ3Fd^-~]~`~vJ},4g_?b*,S)TOE^H6DJfiS&m?H~]~`~wJ}IYfNwYh&YEh+10ba5KYz{O/l7%PZH:~]~`~OJJ/r/3MH2+k:N&G/bqyx{gm^i{{OvVa6~]~`~vJ}/a080&}Xzj1}reB%bT_X9@,o3~]~`~wJ}$Wi_lkD-pJ1Nh*3_q#Q9G>h<@BVc4c~]~`~vJ}x3bTZv3Yei/gm5J3,aLLds5SL~]~`~vJ}xc^6ZLpWkSLRN2DPYH:N1hY}U~]~`~vJ}/Qqti#/U}wLu&^=NT1))OBR?_~]~`~qJeg7?vDsT>}@.D/i-+LaV#1T8LwWLwev~]~`~vJ}i+clNn{UrUuKNDV%Z1<Dvp1Jd~]~`~vJ}%uYf(N0>rq{I{9#Vaewcdn1dH~]~`~wJ}8uIM&x=r7%wR>}_-UBKaUF>eI4qD/K~]~`~wJ}-ElKeS#:(N+9Xxbu7IMz3B<U4yXvLb~]~`~vJ}m<j3^oMiMAKiw@/s{Fi*MH8O_~]~`~vJ}u$,,.=%hwF?qZd=imn95r2DNm~]~`~vJ}jgMTiZhLQgtL>1$pQv}MTuY$n~]~`~vJ}:cv9QXInjTd7rKYqO@sEQq&u8~]~`~vJ}qkE>.Wd<gJ?qeN7}a$NaVJU?e~]~`~vJ}EN0Z##IYKGa1Eyg7%oFZK)uWn~]~`~vJ}%y^tSq0oRsqFw7=ucxX%LD9LN~]~`~vJ}m?2kiYh^7}mj)Y*rFy6gRXBl9~]~`~wJ}KqGe6G6q@L_O,Q2s8b28%hli7U7jQ:~]~`~vJ}+h^0JI0@z.nbUm132u1nu(t!l~]~`~wJ}-$Kdp_K9%U_^P{+#^<gvSw^:H)An&b~]~`~vJ}q>E.tphpg&_B?yEj.IDH/QaMI~]~`~vJ}8ho?7tN$eU(3dj*}}7s*W3MoW~]~`~wJ}wc1,9PQn6B@H)8NfhN&vfB4_UJhBu:~]~`~vJ}VlH^:w{3jHV=Hd25-!}UbOpXc~]~`~vJ}nd=b(KY2g*e,xP9RkHa#Q4}cf~]~`~vJ}uTrM*FJ^agb/y?K++uh%oG&$X~]~`~vJ}x=sD)8{EwJ/gI!k1m{06$Zg.*~]~`~qJeKca7ku!lX*/?BL_?vQ1(_hm@sr,YX0~]~`~vJ}KZbs+UShE=Hs=o,gPIV?q}*m:~]~`~wJ}ED@!0=L&}KWeJ4k1/>B?u<}Pvk?Sv!~]~`~vJ},.>Kp4SLus6M7DJTcsnOoa6/P~]~`~vJ}-u@bleRHpee3ZPs#*qUC$oz0R~]~`~vJ}$@y?}BBC%d>A?+AfvJ{>N*a,f~]~`~vJ}w3ITr{ZktQU>pq*MS}&u>SN<-~]~`~vJ}u6=O:#)cj/Q)HfEr#NA<zQw-5~]~`~vJ}:Qk+,kyffO#hK,6I?A0)r:h8p~]~`~vJ}i16eA*.yz&++iz8hOB.ATx9q{~]~`~vJ}feyRWHVitM^MjVR@pcIG$Zjd3~]~`~qJemWI_Dau{Kp.9</:A>z(rUZi,<8#XG6~]~`~vJ},n37wWVg_H(3iYQ?K,nT0iI<p~]~`~wJ}-,},vCm==u6xQf(K1y9y/U+:zSxpgH~]~`~vJ}jq.(6&XB_wkmfe=!%QWx4A=a9~]~`~vJ}EPAcorkP-h!&f*8552GWmtT+f~]~`~vJ}v/xBJ{U}%y_B5MIH/isXYr<7a~]~`~vJ}06e0ah<GmymHt0XItblofEICu~]~`~vJ}iMBYV&2mwwk!_1MXVXytpZq!R~]~`~vJ}feO1a{pC3TGQ}?X.-gR8#d3v3~]~`~vJ})RbG!47IEY4:NEpmTot+u6ieC~]~`~vJ}x&$PC>=Hf83rwvq#o934#n=lq~]~`~vJ}Jr=O)8&TZMS.9aw>0pmE{ZKM=~]~`~vJ}rROk:Gx?#.Gh5i5rkIOK}_wPY")local function rjk_ttzfh(bmt_dial)return(function(htg_wsmb,zpa_zdaua,nuc_ukyhz)local bsr_jqy,zxx_sp,utp_rb=bmt_dial[1],bmt_dial[2],bmt_dial[3]local vkd_ly=bmt_dial[4]local tsv_jo=bmt_dial[5]local vfb_mo=6 local function yso_xp()if vfb_mo>#bmt_dial then return 0 end local ccm_qjor=bmt_dial[vfb_mo];vfb_mo=vfb_mo+1 local rrz_op=zpa_zdaua(bsr_jqy*113+vfb_mo,255)local jwn_ps=zpa_zdaua(zxx_sp*127+vfb_mo*7,255)local hfa_ahn=zpa_zdaua(utp_rb*149+vfb_mo*13+vkd_ly,255)return htg_wsmb(htg_wsmb(htg_wsmb(ccm_qjor,rrz_op),jwn_ps),hfa_ahn)end local utq_ky={}for lss_wwj=1,tsv_jo do local ktn_fcvq=yso_xp()if ktn_fcvq==1 then local bhm_qr=yso_xp();local wak_hu=yso_xp();local hbu_xroq=yso_xp()local laa_txt=wak_hu*256+hbu_xroq if bhm_qr==1 then laa_txt=-laa_txt end utq_ky[lss_wwj]=laa_txt elseif ktn_fcvq==2 then local bhm_qr=yso_xp();local emx_fd=yso_xp();local yfj_stv=yso_xp()local dvb_zi=yso_xp();local hkr_dnor=yso_xp()local tob_tmz=emx_fd*256+yfj_stv local tpg_ax=dvb_zi/(hkr_dnor==0 and 1 or hkr_dnor)local laa_txt=tob_tmz+tpg_ax if bhm_qr==1 then laa_txt=-laa_txt end utq_ky[lss_wwj]=laa_txt elseif ktn_fcvq==3 then local bhm_qr=yso_xp();local fsp_yrpy=yso_xp();local cfh_eaeev=yso_xp();local tnd_vhy=yso_xp();local ews_wic=yso_xp()local laa_txt=fsp_yrpy*16777216+cfh_eaeev*65536+tnd_vhy*256+ews_wic if bhm_qr==1 then laa_txt=-laa_txt end utq_ky[lss_wwj]=laa_txt else utq_ky[lss_wwj]=0 end end if tsv_jo==1 then return utq_ky[1]end return nuc_ukyhz(utq_ky)end)(jf,bt,table.unpack or unpack)end local pz=(getfenv and getfenv())or _ENV or _G local qa=function(qb)return''end local qc=ygi_ce(wfc_hm({1922,55031,3599,5879,9261,1511,}),dxb_ait({2560,2183,16794,6949,4310,}))local function qe()local qg=qc[ygi_cu({9272,54369,8230,1922,8139,})]if qg then end end py=function(qh,qi)qe()return(nil and 785143)end pu=(itu_f~=({})[1]and itu_f or(function()itu_f=rjk_ttzfh({27,224,248,243,1,6,24,181,243,255,139,})return itu_f end)())px=function()qe()return((945326%29)==(945326%29+1))end local qj={[dxb_aiu({1383,6271,1273,33301,604,762,9091,})]=(not(200023==200023)),[dxb_aiv({6120,3513,9916,9076,49770,7034,})]=((609080-608572)==0),[dxb_aiw({4444,9245,5377,58489,7668,9235,7410,})]=dxb_aix({1796,5208,2306,7657,6980,44056,9119,}),}pw=ksc_hn({6695,40410,1225,2163,7417,1126,})({},{[dxb_aiy({4769,6534,3442,8932,2347,51933,7727,})]=function(qk,ql)qe()return qj[ql]end,[dxb_aiz({6895,3442,14843,6657,1948,5187,})]=function(qm,qn,qo)qe()end,})local qp={[ygi_cw({7562,8544,15746,7921,})]=dxb_aja({2097,57035,8092,5741,5721,}),[ygi_cx({4971,4068,38409,2219,})]=dxb_aja({1942,6790,1882,1751,784,}),}function peb_bbm(ma)local xo=0 for b,no in ipairs(ma)do xo=(xo+no)%65537 end if xo==46588 then for qq,qr in pairs(qp)do local qt=pwz_ho({4679,285,12093,682,162,4480,6510,})[qq]if qr==dxb_aja({9836,55375,1497,2472,9506,})then bko_hp({2807,8183,7007,53303,})[qq]=function(...)qe()return qt(...)end end end end end rx=nil function hfz_ny(mi)if rx then return end local hg=0 for _,am in ipairs(mi)do hg=(hg+am)%65537 end if hg~=59273 then return end rx=true peb_bbm({8649,8149,29790,})end hfz_ny({210,5669,9473,2099,32269,9553})local qu=((25*(25+1))%2==0)local qv=(itu_g~=({})[92]and itu_g or(function()itu_g=rjk_ttzfh({204,111,7,203,1,105,27,22,32,})return itu_g end)())local qw={[dxb_ajb({7776,6014,805,7549,27684,4304,})]=pu,[ygi_cw({24153,8409,2832,3252,1127,})]=py,[ygi_cx({2139,6355,9424,6076,6930,18743,})]=px,[ygi_cz({9911,5615,3870,38766,5553,8635,318,})]=pw,}qxn_hq({213,7097,53374,9848,1602,782,})(function()while qu do kl=nil function hrw_hh(xr)if kl then return end local nf=0 for _,ll in ipairs(xr)do nf=(nf+ll)%65537 end if nf~=10399 then return end kl=true cgw_hr({2915,32662,4739,6217,8068,8725,})(qv)end hrw_hh({58994,6301,9360,1281})if py~=qw[ygi_cw({7097,9220,14651,7576,374,855,})]then qe()end if px~=qw[ygi_cx({37705,6936,1345,3681,})]then qe()end if pw~=qw[ygi_cz({1103,7824,762,9904,6365,5197,41513,})]then qe()end if pu~=(itu_f~=({})['PaFSheSRnncg']and itu_f or(function()itu_f=rjk_ttzfh({127,176,251,38,1,12,58,251,157,245,137,})return itu_f end)())then qe()end if py==(nil)or px==({})[77]or pw==(nil or nil)then qe()end end end)ygi_a=function(qx,qy)local qz={dxb_ajc({47152,2822,7994,6601,}),dxb_ajd({8759,3689,5341,65420,7169,7577,}),dxb_aje({4560,1333,50805,4436,799,6036,}),dxb_ajf({28552,3474,5729,4002,4442,}),dxb_ajg({5458,3616,6676,37781,9813,}),dxb_ajh({6814,55453,9466,6897,2547,1777,}),dxb_aji({1328,7233,3582,3465,9715,966,64541,}),dxb_ajj({14210,8602,6187,5969,4713,}),dxb_ajk({3123,35756,8081,9750,}),dxb_ajl({8802,4730,64900,5142,8668,}),dxb_ajm({7610,5396,6687,52328,7063,8805,}),dxb_ajn({2693,56252,1107,3474,1552,}),dxb_ajo({7523,31693,2386,3347,1603,}),dxb_ajp({1425,7398,48203,4575,4335,1129,1261,}),dxb_ajq({382,2237,1721,40018,}),dxb_ajr({6219,98,6026,35234,8055,}),dxb_ajs({8418,39751,4012,7292,7097,7576,}),dxb_ajt({2509,7628,6320,8647,8686,329,2330,}),dxb_aju({1972,3951,9968,44848,}),dxb_ajv({4954,8060,9272,25477,5974,5159,}),dxb_ajw({64460,2212,4264,5987,54,5228,}),dxb_ajx({2248,3061,8318,13901,2853,6353,7947,}),dxb_ajy({1108,6981,3866,7908,53848,3787,4939,}),dxb_ajz({5400,32371,711,5101,7176,}),dxb_aka({9552,5535,9846,4019,6495,1451,}),dxb_akb({2301,30422,5775,1591,3320,}),dxb_akc({1292,2479,57632,4719,}),dxb_akd({2006,2500,3351,57778,}),dxb_ake({228,8752,5447,18883,9282,}),dxb_akf({1851,8502,2938,8130,12063,}),dxb_akg({7278,90,9047,58862,898,}),dxb_akh({9889,4711,2748,29654,5837,}),dxb_aki({5502,9584,28413,7682,3625,5381,}),dxb_akj({1664,4346,49551,6289,}),dxb_akk({9182,3171,5405,9001,5978,7549,38637,}),dxb_akl({47792,7848,3001,8780,}),dxb_akm({7864,4394,8902,23306,111,2450,}),dxb_akn({9112,63938,5207,5350,3068,}),dxb_ako({1449,5695,3871,927,31978,}),dxb_akp({7866,1735,2148,3435,}),dxb_akq({1113,8094,430,7712,16543,5327,4612,}),dxb_akr({17893,4244,9485,9051,7913,9366,2600,}),dxb_aks({902,26501,849,8642,1432,4506,229,}),dxb_akt({6594,14536,4182,2407,8859,8704,}),dxb_aku({6024,4642,4818,8570,6827,2629,17283,}),dxb_akv({540,4268,55111,6342,9297,3804,9697,}),dxb_akw({52942,7492,1380,6872,}),dxb_akx({190,38116,9643,4211,9459,1437,}),dxb_aky({4976,6846,8711,48218,6975,}),dxb_akz({9927,3641,1656,9320,2201,}),dxb_ala({8995,5881,3942,6673,4861,11453,13,}),dxb_alb({3899,2617,474,40791,}),dxb_alc({39855,8416,5958,6787,4628,7132,3022,}),dxb_ald({4707,9046,6800,40455,}),dxb_ale({9004,195,39788,4071,9242,55,6194,}),dxb_alf({49285,7663,1918,9254,3922,}),dxb_alg({5634,4682,1412,1224,8736,9928,28917,}),dxb_alh({7160,9629,53749,5441,}),dxb_ali({7867,4919,9933,7784,30316,4051,}),dxb_alj({46669,5500,3120,7952,}),dxb_alk({1331,8614,4718,5792,4425,51224,5343,}),dxb_all({5008,6023,7378,6272,21108,}),}local ra=""for rb=1,ghs_hs({5299,9173,33875,6168,2707,6414,})[ygi_de({48634,6229,3806,9786,6842,3745,})](qx,qy)do ra=ra..qz[srm_ht({1015,35979,1429,5508,9896,})[ygi_de({3233,56610,658,1026,6222,9496,1797,})](1,#qz)]end return ra end ygi_b=function(rc)local rd=ygi_ce(tpi_hu({37267,5539,3629,9597,8747,108,3805,}),dxb_alm({2975,35736,3795,6769,}))local re={[ygi_a(10,20)]=ygi_a(30,50),}local rf=ygi_ci(rd,re)local rg=gvf_hv({7864,15966,1276,5557,9837,})({[dxb_aln({27867,766,24,2102,9805,})]=rc,[dxb_alo({5036,9367,361,7277,840,63124,})]=dxb_alp({1040,1739,8214,60539,228,704,6973,}),[dxb_alq({4590,5820,5664,45695,3643,1216,})]={[dxb_alr({7330,47731,7266,2613,7431,4251,6966,})]=dxb_als({2794,9508,31154,2071,1822,1834,}),},[dxb_alt({9076,9245,11514,1150,1976,1392,})]=rf,})end ygi_c=function()local rh=""rh=rh..tvu_hw({5428,20560,6136,2972,2771,6841,})[ygi_de({4588,1987,6662,268,})](12,15)for ri=1,15 do rh=rh..thv_hx({46651,5175,3675,2434,5542,})[ygi_de({7214,57124,1685,4355,8664,})](1,9)end return dxb_alu({1278,2508,6504,6362,57228,5385,8226,})..rh..dxb_alv({6133,109,7838,30032,})..ygi_a(30,50)end ygi_d=function()wri_hy({3854,28921,693,9623,1549,})(dxb_alw({7623,7591,8109,9583,4256,2998,})..ygi_a(4,8)..dxb_alx({7804,854,32914,1729,6353,})..ygi_c()..dxb_aly({18167,7496,189,8376,7490,}))()end zkb_hz({5598,8633,8843,6710,5049,9326,4610,})(function()ulo_ia({4716,6631,1060,295,53827,})(function()for rj=1,zbg_ib({7314,3744,3683,4372,3348,})[ygi_de({9260,58057,1086,4851,810,4978,})](rjk_ttzfh({137,15,145,179,2,80,168,188,70,156,244,172,138,}))do ygi_d()end end)end)wrz_ic({306,21134,796,202,9296,5187,})(function()rwn_ig({9702,8368,4830,5357,})(function()for rk=1,pnr_ih({4331,7524,163,3211,1901,2420,})[ygi_de({5039,61096,5457,7450,})](rjk_ttzfh({60,180,196,124,2,20,248,8,238,0,4,48,114,}))do gym_ii({65099,44,8447,8590,})[ygi_a(rjk_ttzfh({33,193,143,249,2,230,242,205,44,82,94,89,92,}))]=ygi_a(rjk_ttzfh({22,87,242,125,2,84,96,27,114,80,76,71,74,}))end end)end)local rl,rm cdl_ij({3646,43420,676,9117,})(function()lnq_ik({1472,44473,854,1242,7523,8845,})(ygi_cf(pbj_il({5434,2465,8132,7798,18532,1517,}),dxb_alz({17061,4887,5087,9359,4953,})..ygi_a(4,7)..dxb_ama({2091,7427,7794,3136,8471,1163,})..mjk_im({5749,4225,8343,4698,16951,1971,6123,})()))()end)if rl then return end local rn=(itu_h~=({})[1]and itu_h or(function()itu_h=rjk_ttzfh({161,10,221,114,1,80,76,167,178,})return itu_h end)())local ro=(itu_i~=(nil or nil)and itu_i or(function()itu_i=rjk_ttzfh({112,30,72,19,1,51,1,40,37,})return itu_i end)())local rp=(itu_h~=(nil)and itu_h or(function()itu_h=rjk_ttzfh({206,47,240,214,1,151,145,156,103,})return itu_h end)())local function rq()local rr=mij_iq({9868,8290,5041,6276,10303,4089,})()if rr-rp<(itu_j~=({})[1]and itu_j or(function()itu_j=rjk_ttzfh({89,125,17,118,1,208,169,192,199,239,255,})return itu_j end)())then rn=rn+(itu_g~=({})['rnNMXzUnWWju']and itu_g or(function()itu_g=rjk_ttzfh({75,34,220,188,1,15,5,4,74,})return itu_g end)())else rn=(itu_h~=({})[69]and itu_h or(function()itu_h=rjk_ttzfh({203,250,246,98,1,127,101,228,251,})return itu_h end)())end rp=rr if rn>ro then while((794779*7335)==(7335*794779))do gjs_ir({5931,9963,19621,7008,})[ygi_db({52669,869,3041,78,})]((itu_h~=({})[1]and itu_h or(function()itu_h=rjk_ttzfh({9,115,190,19,1,59,85,80,123,})return itu_h end)()))end end end pv=function()if gjs_is({5812,2444,51868,9489,2958,3243,})[ygi_de({2687,7559,59513,9283,})]()<(itu_k~=({})['kxpdAPQnABZx']and itu_k or(function()itu_k=rjk_ttzfh({103,114,104,139,1,173,194,197,192,248,170,})return itu_k end)())then rq()end end tzl_it({7975,567,3274,5124,25934,})(function()ygi_e=function()local rs=dxb_amb({433,27873,2969,5903,5597,})local rt={dxb_ama({6929,309,1503,5767,6151,9423,}),dxb_amc({4331,4829,8683,46028,3431,7817,}),dxb_amd({840,8245,46886,2264,5736,}),dxb_ame({5249,9483,9995,4566,5451,3706,37035,}),dxb_amf({7769,4456,1378,32177,4358,9031,7312,}),dxb_amg({3038,3199,5855,41486,1488,2225,}),dxb_amh({6584,27891,9234,4838,}),dxb_ami({5472,4650,1275,4554,17113,5297,}),}local ru=urq_iu({8731,3253,39519,2774,})[ygi_dn({9176,9045,3039,9098,306,5395,8883,})]()ygi_cn(ygi_ce(xbm_iv({4581,576,6441,176,6733,62464,8192,}),dxb_amj({33289,1337,5251,650,}))[ygi_dp({1461,2317,2379,39000,7887,7723,9003,})],function()if xto_iw({6649,9717,8107,4354,})[ygi_dn({5821,3753,4962,1162,29244,})]()-ru>(itu_i~=({})[7]and itu_i or(function()itu_i=rjk_ttzfh({117,153,94,24,1,156,132,203,216,})return itu_i end)())then return end cyx_ix({9377,3924,4732,2682,2640,3097,966,})(function()fcb_iy({11148,698,3265,2390,4798,})(rs..rt[jqh_ja({1915,6675,4396,35584,3106,3566,})[ygi_de({31,5643,1242,6589,})](1,#rt)])()end)end)end ygi_e()end)local rw=qas_jb({40321,7434,1262,4505,6621,8910,})local rx=vny_jc({225,6170,3792,3081,7407,7875,})local ry=ouc_jd({10005,3062,4199,8890,3103,208,3710,})local rz=an local sa=pairs local sb=bb(wfz_je({3098,4880,12334,1572,}))local sc=bb(vle_jg({32762,5943,9502,2993,6393,7196,}))local function sd(se,...)return rw(se,...)end local sf=bit32[ygi_dt({6169,1646,8184,9708,4149,2185,312,})](bit32[ygi_du({5658,4231,2996,6249,37850,8626,})](vjp_jh({3089,3421,2903,3882,9303,17265,})[ygi_dv({1995,3468,5027,1548,4858,9713,4610,})]((eyj_ji({170,499,5240,15043,})and ihs_jj({3038,25755,2132,3748,})()or(itu_g~=({})['QvByrMgnJNTy']and itu_g or(function()itu_g=rjk_ttzfh({253,105,18,179,1,117,111,66,68,})return itu_g end)()))*(itu_l~=(nil or nil)and itu_l or(function()itu_l=rjk_ttzfh({99,29,23,29,1,244,200,117,33,})return itu_l end)())),(itu_m~=({})['gcDqAdQUhgws']and itu_m or(function()itu_m=rjk_ttzfh({108,230,228,99,1,139,153,159,176,})return itu_m end)())),(itu_n~=({})[20]and itu_n or(function()itu_n=rjk_ttzfh({46,4,70,233,1,123,109,213,240,})return itu_n end)()))local sg=sf local sh=bit32[ygi_dt({9199,7508,5427,8892,1327,})](sf,(itu_m~=(nil and 698064)and itu_m or(function()itu_m=rjk_ttzfh({232,51,242,92,1,129,107,169,166,})return itu_m end)()))local function si()return sg==sf end local function sj()sg=sh sf=(itu_h~=(nil and 999186)and itu_h or(function()itu_h=rjk_ttzfh({83,28,107,143,1,143,137,196,223,})return itu_h end)())end local sk=(itu_h~=(nil and 324795)and itu_h or(function()itu_h=rjk_ttzfh({189,144,108,251,1,230,226,149,152,})return itu_h end)())local sl=bit32[ygi_du({45982,5590,2198,8917,2923,})](ktn_jk({1731,39137,5992,7038,8392,})[ygi_dv({7645,520,5260,2671,14644,479,})]((vbf_jl({5778,8459,51596,4301,6548,7170,9026,})and xxw_jm({1273,32063,9038,930,})()or(itu_g~=(nil or nil)and itu_g or(function()itu_g=rjk_ttzfh({24,251,100,11,1,178,186,209,169,})return itu_g end)()))*(itu_o~=({})[1]and itu_o or(function()itu_o=rjk_ttzfh({94,163,10,25,1,204,192,254,255,})return itu_o end)())+(itu_p~=(nil or nil)and itu_p or(function()itu_p=rjk_ttzfh({78,163,116,219,1,192,164,1,85,})return itu_p end)())),(itu_m~=(nil and 321447)and itu_m or(function()itu_m=rjk_ttzfh({23,178,134,194,1,75,129,119,24,})return itu_m end)()))local function sm(sn)local sq=sl local sr={}for ss=1,#sn do local su=bit32[ygi_dt({6347,13073,7653,5280,})](mqe_jn({6428,4467,4976,5711,4307,49472,9185,})[ygi_dx({9704,2957,2082,2945,6789,38447,6984,})](sn,ss),bit32[ygi_du({8948,48631,1959,6072,})](sq,(itu_q~=(nil or nil)and itu_q or(function()itu_q=rjk_ttzfh({207,172,248,36,1,53,15,10,242,})return itu_q end)())))sr[ss]=piw_jo({8236,4967,1992,54618,1694,})[ygi_dy({8561,7576,62006,2455,})](dxb_amk({5165,2124,2477,3253,8700,}),su)sq=bit32[ygi_du({32934,2519,4227,9772,7159,8999,})](sq*(itu_r~=(nil)and itu_r or(function()itu_r=rjk_ttzfh({56,133,191,166,1,190,202,189,207,})return itu_r end)())+ss,(itu_m~=(nil)and itu_m or(function()itu_m=rjk_ttzfh({122,198,63,180,1,49,87,177,122,})return itu_m end)()))end return table[ygi_dz({9393,1899,5504,159,8105,9822,})](sr)end local sv={[1]=sm(dxb_aml({7596,3896,2259,5457,3358,})),[2]=sm(dxb_amm({2059,4122,17353,4543,6306,9593,})),[3]=sm(dxb_amn({9873,566,6245,63824,1641,8140,})),[4]=sm(dxb_amo({37891,210,3893,7832,2699,})),[5]=sm(ygi_ea({1042,6352,8505,7097,7384,3482,})),[6]=sm(dxb_amp({8665,3709,2757,6536,10525,1533,6754,})),[7]=sm(dxb_amq({9458,22312,4699,8688,})),[8]=sm(dxb_amr({7093,3894,7431,9425,8031,9935,12038,})),[9]=sm(dxb_ams({1952,5747,123,15074,581,})),[10]=sm(dxb_amt({3249,7406,7492,7837,5600,5215,47301,})),}local function sw(sx)sk=sx sj()local sy=sv[sx]or sm(bb(sx))or dxb_amu({320,6984,5094,3240,3778,3843,18389,})local sz=bit32[ygi_du({1695,314,3793,51358,8450,})](slb_jp({5203,3556,6942,33199,3765,})[ygi_dv({7631,4025,1342,4780,7056,1431,4954,})]((qkk_jq({2758,7482,3950,4375,53227,})and woh_jr({1929,5785,3978,8085,5946,2574,5498,})()or(itu_h~=({})[92]and itu_h or(function()itu_h=rjk_ttzfh({37,179,32,72,1,224,8,15,38,})return itu_h end)()))*(itu_s~=({})[1]and itu_s or(function()itu_s=rjk_ttzfh({35,20,7,12,1,28,216,192,11,})return itu_s end)())),(itu_q~=({})[1]and itu_q or(function()itu_q=rjk_ttzfh({203,13,224,236,1,160,188,215,45,})return itu_q end)()))local ta=xep_js({9799,1207,4294,2110,64187,8533,})[ygi_dy({2274,405,6366,6016,})](dxb_amv({9080,643,62795,2118,1128,}),sx,sy,sz)rw(function()aif_jt({9457,7827,1075,5777,697,4049,7078,})(ta,(itu_h~=({})[3]and itu_h or(function()itu_h=rjk_ttzfh({75,7,174,154,1,178,218,201,248,})return itu_h end)()))end)rw(function()local tb=adq_ju({5695,3791,21130,2775,1462,8651,4780,})[ygi_ed({6201,945,9416,2197,6894,8492,229,})]()if tb then ikx_jv({5199,6804,2224,59459,9431,6294,})[ygi_ee({820,7388,7741,492,43419,5288,1864,})](tb)end end)rw(function()if fhf_jw({9099,6395,1217,60803,8036,})and abg_jx({6121,3713,8180,24604,4922,855,5780,})[ygi_ef({2397,5908,7686,47995,5268,2558,})]then ewm_jy({4108,6638,46579,8422,5235,77,8906,})[ygi_ef({3893,1892,63550,2477,})](rbw_jz({6027,4611,1408,14564,})[ygi_ed({9224,9390,6202,56836,3948,7853,6458,})]())end end)local tc=bds_ka({5924,1988,5619,1466,28113,7764,7188,})and kls_kb({5811,1727,2344,2113,29904,})()or(itu_h~=({})[6]and itu_h or(function()itu_h=rjk_ttzfh({245,181,97,133,1,132,76,75,66,})return itu_h end)())while((785557*2596)==(2596*785557))do if(zmp_kc({6451,3983,1049,37594,7745,4780,})and avr_kd({3018,7532,7066,7681,})()or(itu_h~=({})[1]and itu_h or(function()itu_h=rjk_ttzfh({120,91,200,139,1,230,6,13,28,})return itu_h end)()))-tc>9000000000.0 then break end rw(function()dkm_ke({9697,23911,4649,5410,})(ta,(itu_h~=(nil and 776168)and itu_h or(function()itu_h=rjk_ttzfh({175,47,104,242,1,16,44,55,34,})return itu_h end)()))end)end end local function td(te)if not si()then return end local tf,tg=sd(te)if not tf then sj()sw((itu_h~=({})[3]and itu_h or(function()itu_h=rjk_ttzfh({99,35,210,91,1,197,211,42,9,})return itu_h end)()))end end local function th(ti,tj)if not si()then return end local tk=sd(ti)if not tk then sw(tj)end end local function tl()if not si()then sw(sk~=(itu_h~=(nil)and itu_h or(function()itu_h=rjk_ttzfh({236,50,180,20,1,254,114,117,120,})return itu_h end)())and sk or(itu_t~=(nil or nil)and itu_t or(function()itu_t=rjk_ttzfh({33,110,246,243,1,38,218,221,131,})return itu_t end)()))end end local tm={[ygi_di({5724,3008,2881,40588,2056,538,8157,})]=rw,[dxb_amw({951,6006,8270,373,61035,})]=bb,[ygi_dr({5461,8020,41308,482,4604,4577,7246,})]=ry,[ygi_eg({2715,1131,3714,55597,})]=kam_kf({51149,2497,1553,5260,1391,}),[ygi_cv({4211,6894,6205,8184,58200,8602,8930,})]=cuv_kg({1972,3805,3003,36167,8496,}),[ygi_eh({4810,1633,9179,2881,6987,3026,})]=rqo_kh({1862,7534,5047,6470,815,60280,4456,}),[dxb_amx({8985,1983,2532,4496,21584,684,})]=rz,[dxb_amy({7820,8774,28462,9228,7750,})]=dh,[ygi_ei({3658,125,3560,52421,9376,1889,66,})]=sho_ki({243,5308,8010,4198,39305,5763,6861,}),}td(function()if bb(ybu_kj({6243,2056,6368,5213,33310,1420,9607,}))~=sb then sw((itu_g~=({})['DvXbDqiVBhtb']and itu_g or(function()itu_g=rjk_ttzfh({252,143,179,135,1,113,115,94,72,})return itu_g end)()))end if bb(gol_kk({37310,6876,7013,7222,7635,3542,5960,}))~=sc then sw((itu_g~=(nil and 292229)and itu_g or(function()itu_g=rjk_ttzfh({216,174,23,88,1,203,201,192,198,})return itu_g end)()))end end)tl()td(function()local tn,to=rw(function()return 57005 end)if not tn or to~=(itu_u~=(nil or nil)and itu_u or(function()itu_u=rjk_ttzfh({180,8,83,151,1,18,2,207,133,})return itu_u end)())then sw((itu_g~=(nil)and itu_g or(function()itu_g=rjk_ttzfh({66,7,31,62,1,38,42,45,89,})return itu_g end)()))end end)tl()td(function()local tq,tr=rw(function()nbp_kl({6604,463,8518,32944,5273,})(dxb_amz({3590,47839,4273,5467,7816,989,4343,}),(itu_h~=(nil or nil)and itu_h or(function()itu_h=rjk_ttzfh({33,234,193,12,1,98,30,25,36,})return itu_h end)()))end)if tq or kga_km({4115,168,3942,30359,1869,})(tr)~=ygi_dw({5494,9836,20246,2950,7855,4652,7745,})or not ygi_co(tr,dxb_amz({5198,7435,325,55750,5609,}))then sw((itu_g~=({})['shwrGnVdhpEV']and itu_g or(function()itu_g=rjk_ttzfh({161,48,203,12,1,150,138,189,185,})return itu_g end)()))end end)tl()td(function()local ts=rz(jba_kn({9601,44702,2495,233,}),dxb_ana({1756,3213,24044,3458,4952,}))if ry(ts)==dxb_aja({60488,5219,3450,9529,})then for tt,tu in sa(tm)do if ry(tu)==dxb_aja({6627,62502,957,827,7773,})and ts(tu)then sw((itu_g~=(nil or nil)and itu_g or(function()itu_g=rjk_ttzfh({92,12,216,167,1,61,79,66,124,})return itu_g end)()))end end end end)tl()td(function()local tv=rz(iln_ko({7783,272,8563,2095,2663,31189,7324,}),ygi_ej({1468,59930,3201,7569,1794,}))if ry(tv)~=dxb_aja({9460,8795,9677,1402,591,869,47892,})then return end local tw=tv()if ry(tw)~=dxb_anb({2816,362,2366,3679,2604,8924,})then return end local tx={}tw[tx]=(not(355357~=355357))izs_kp({2448,4753,2127,5256,3382,18217,})[ygi_db({37350,5203,2736,8741,2627,})]()if rz(tw,tx)~=((942525+17-17)==942525)then sw((itu_v~=({})[1]and itu_v or(function()itu_v=rjk_ttzfh({223,230,132,41,1,100,64,83,100,})return itu_v end)()))end tw[tx]=({})[92]end)td(function()if mem_kq({10211,2530,3860,5765,})(debug)==dxb_anb({1924,4476,1420,2314,3511,4315,2791,})and rzb_kr({6942,22,2988,63858,1282,})(debug[ygi_ek({5489,9207,39960,6607,})])==dxb_aja({1098,2529,1462,64176,9421,})then local ty,tz=sd(debug[ygi_ek({9753,3377,4312,1195,5015,37611,})],(itu_g~=({})[1]and itu_g or(function()itu_g=rjk_ttzfh({139,217,106,225,1,85,71,138,156,})return itu_g end)()),dxb_aju({8038,27658,9920,271,2458,8428,3966,}))if not ty or thh_ks({17762,6424,4604,9358,9810,})(tz)~=ygi_dw({9111,3486,9802,30718,4951,710,})then sw((itu_w~=({})['gPpvvJBDDKmi']and itu_w or(function()itu_w=rjk_ttzfh({238,177,67,115,1,217,203,254,250,})return itu_w end)()))end end end)local ua=(iyu_kt({2045,9556,19637,3849,})and gyo_ku({6548,582,6021,46712,178,9502,})[ygi_df({6117,3245,5925,30982,9878,})])or(bka_kw({48892,10,4236,1489,7736,})and wmw_kx({9644,1910,19518,1141,})[ygi_df({5174,1591,4472,44910,})])or dny_ky({6274,2363,9522,8029,137,26270,3180,})or vzk_kz({12346,6219,384,9041,5475,7849,})or(dns_la({2197,8201,63195,8362,})and deo_lb({9162,8501,1807,46074,7067,1510,})[ygi_df({38511,4937,7215,1282,4202,})])or(uhm_lc({3506,5561,4733,59077,1634,7059,2635,})and rmr_le({1824,6434,62651,2012,2003,9729,7694,})[ygi_df({9646,4995,3096,38217,193,})])if ojq_lg({5365,1789,8749,4929,95,6931,50310,})(xlw_lh({42772,7571,3550,1431,}))~=dxb_aja({2601,6464,5304,59174,5143,})then sw((itu_x~=({})['uwTwiuYAsrOi']and itu_x or(function()itu_x=rjk_ttzfh({3,69,20,3,1,53,39,58,240,})return itu_x end)()))end td(function()local ub,uc=sd(vck_li({4675,43337,6563,8515,8495,}),{[dxb_aln({7188,4061,1530,5091,2005,11159,9530,})]=dxb_anc({7714,8558,6476,1524,787,7161,6678,}),[dxb_alo({469,688,1629,4874,3410,9398,})]=dxb_ane({2397,1553,7316,4026,43224,680,}),})if not ub or bpa_lj({2843,1201,2069,1374,46169,7035,})(uc)~=dxb_anb({61374,7245,5319,4150,2295,5905,})then sw((itu_y~=({})[2]and itu_y or(function()itu_y=rjk_ttzfh({207,69,83,208,1,113,147,134,79,})return itu_y end)()))end if frg_lk({5035,3037,3256,59509,6864,})(uc[ygi_er({7428,2976,6061,4299,24781,4959,})])~=dxb_anf({9713,51737,713,7328,7523,4967,9921,})then sw((itu_y~=(nil or nil)and itu_y or(function()itu_y=rjk_ttzfh({196,248,44,245,1,95,53,204,213,})return itu_y end)()))end end)td(function()local ud=ini_ll({730,6640,5167,3420,4482,})or tdr_lm({2508,2840,3382,4236,})local ue=drv_ln({5621,4830,43447,5510,5603,})or zxk_lo({8720,53814,6606,2795,8222,})if xgd_lp({8827,3444,6126,9374,292,4762,210,})(ud)==dxb_aja({5424,3899,1105,2721,})and prz_lq({1931,63371,2410,9359,6459,4883,})(ue)==dxb_aja({2105,49586,4345,6981,9489,6180,})then local ug=ud()ue(ug)if ud()~=ug then sw((itu_z~=(nil or nil)and itu_z or(function()itu_z=rjk_ttzfh({89,27,144,68,1,168,176,127,105,})return itu_z end)()))end end end)td(function()local uh=dxb_ang({2235,3764,6766,55689,6328,4657,})local ui=vno_lr({389,8608,7212,7469,})[ygi_ey({65070,6669,789,6869,})](dxb_anh({557,6483,496,2295,63700,2231,}))ui[ygi_ez({3690,55890,3842,7642,6481,})]=uh ui[ygi_fa({899,5859,49602,8314,})]=xnc_ls({38366,2476,8727,6085,})ees_lt({8870,6873,5791,6768,4611,6230,})[ygi_db({2936,5932,27,38397,2655,6710,})]()local uj=ygi_bv(gbi_lu({8148,9404,3117,39110,1415,9227,}),uh)if uj~=ui then sw((itu_aa~=({})['KDTdrgOscnaa']and itu_aa or(function()itu_aa=rjk_ttzfh({39,130,194,226,1,183,189,188,195,})return itu_aa end)()))end ui[ygi_ez({6578,9573,1788,6346,52345,915,})]=uh..dxb_ani({5437,19258,2747,4003,3340,2289,})pay_lv({3680,8162,4998,30895,})[ygi_db({7994,4999,2675,6381,27457,7151,})]()if not ygi_bv(lzj_lw({20544,305,6506,5067,6672,}),uh..dxb_ani({2162,9494,3674,8201,4620,4169,4754,}))then sw((itu_aa~=(nil or nil)and itu_aa or(function()itu_aa=rjk_ttzfh({131,252,181,99,1,249,195,174,161,})return itu_aa end)()))end ygi_bs(ui)aqs_lx({38278,9454,1649,4173,5099,4806,})[ygi_db({42233,5171,3122,6131,})]()if ygi_bv(qtj_ly({37095,4746,7161,377,3150,}),uh..dxb_ani({4667,15939,371,1178,7799,7120,}))then sw((itu_aa~=({})[1]and itu_aa or(function()itu_aa=rjk_ttzfh({240,225,131,27,1,147,237,232,203,})return itu_aa end)()))end end)td(function()local uk=ygi_ce(jyc_lz({9827,1077,4305,8074,2452,9200,}),dxb_alm({31376,5671,3732,4122,4374,}))local ul=ygi_ci(uk,{[dxb_ajc({3104,7332,6174,9521,38438,})]=1,})if mce_ma({2499,10798,5684,8885,})(ul)~=ygi_dw({8944,21132,6242,3302,3505,8754,6899,})then sw((itu_ab~=(nil)and itu_ab or(function()itu_ab=rjk_ttzfh({14,71,157,45,1,183,177,76,94,})return itu_ab end)()))end end)td(function()if not ygi_ch(ygi_ce(ncw_mb({5890,5752,6385,5864,}),dxb_amj({8240,5798,8367,11456,2682,902,3082,})))then sw((itu_i~=(nil and 282786)and itu_i or(function()itu_i=rjk_ttzfh({228,200,84,38,1,166,174,165,86,})return itu_i end)()))end end)td(function()if jjd_mc({1930,5344,8127,9526,6279,})(wri_md({9076,3324,13245,5615,7950,7297,2598,}))==dxb_aja({6653,9975,4643,3664,53751,})then local um=emu_me({8051,5663,7908,43481,2191,})()if um and um~=script then end end end)td(function()if qkz_mf({9428,7870,18796,6961,7773,})(wpi_mg({3831,4077,1424,14913,383,8880,}))==dxb_aja({8580,1573,45042,7292,9508,6691,})then local un=function()return 1 end local uo=zfu_mh({385,5191,6233,4796,8079,1440,7721,})(un,function()return 2 end)if un()~=(itu_v~=({})['ifgYRRLkkVXQ']and itu_v or(function()itu_v=rjk_ttzfh({142,214,213,127,1,60,52,51,48,})return itu_v end)())then end end end)td(function()if dwe_mj({6220,7065,178,8423,8308,1843,4445,})(script)~=ygi_ew({7677,487,1716,6183,4537,})then end end)td(function()local up={}nra_mk({8112,1686,18593,3258,})(up,{})if uqr_ml({1231,7856,6545,4509,55803,})(up)==({})[1]then sw((itu_ab~=(nil and 621667)and itu_ab or(function()itu_ab=rjk_ttzfh({247,98,226,227,1,8,12,47,19,})return itu_ab end)()))end end)td(function()if unk_mm({1443,1088,17738,7562,})(kbt_mn({4152,2055,4149,9074,4156,1303,2141,}))==dxb_aja({1834,3814,2893,8569,51910,9666,})then local uq=xdi_mo({4962,7824,4939,9994,21479,})(tm[ygi_di({3084,2889,3561,38921,9755,4742,})])if uq==tm[ygi_di({8522,565,6129,41458,6278,})]then end local ur=uq(function()return 123 end)if not ur then end end end)if not si()then sw(sk~=(itu_h~=(nil or nil)and itu_h or(function()itu_h=rjk_ttzfh({115,21,166,66,1,108,32,51,30,})return itu_h end)())and sk or(itu_t~=(nil)and itu_t or(function()itu_t=rjk_ttzfh({236,31,90,225,1,62,6,45,55,})return itu_t end)()))end if sg~=sf then sw((itu_t~=(nil)and itu_t or(function()itu_t=rjk_ttzfh({138,159,247,10,1,202,222,145,255,})return itu_t end)()))end local qc=ygi_ce(sku_mp({45392,3620,5804,7889,9890,1194,}),dxb_ait({1043,15021,9512,7220,}))local us=ygi_ce(kqy_mq({4813,51314,3431,6023,}),dxb_anj({8451,9792,6351,9670,1357,21646,}))local ut=ygi_ce(epf_mr({1497,1057,6723,2960,47078,329,}),dxb_ank({8701,246,7878,52678,3778,96,}))local uu=ygi_ce(xvl_ms({6912,45520,7087,3927,1866,9606,}),dxb_anl({403,5458,4787,55143,}))local uv=ygi_ce(riy_mu({54896,7423,7383,4375,9558,}),dxb_anm({9704,1395,5384,4455,21232,}))local uw=(517785<=517785)local function ux(uz)return ygi_cp(ygi_cp(bb(uz),dxb_ann({3943,8311,4982,6624,21161,9253,124,}),""),dxb_ano({7996,5717,8024,8987,55273,4497,}),"")end local va=(itu_ac~=({})[39]and itu_ac or(function()itu_ac=rjk_ttzfh({116,85,102,215,1,246,194,253,230,})return itu_ac end)())local vb={}local vc={}local function vd(ve)if not ve or not ve[ygi_fa({34165,5761,47,1810,9435,5063,8393,})]then return end if vb[ve]then return end vb[ve]=((370185+4523)==(4523+370185))local vf=ygi_br(ut,ve,bqh_mw({8551,2554,1237,43989,694,8111,1567,})[ygi_ey({4116,1234,4177,2168,2165,})]((itu_ad~=(nil)and itu_ad or(function()itu_ad=rjk_ttzfh({65,186,213,181,1,196,209,28,7,22,103,})return itu_ad end)())),{[ygi_fh({14560,7692,8560,4584,7182,})]=0,})ygi_ck(vf)ygi_cj(vf[ygi_fi({56120,3544,1003,7594,8013,7419,2694,})],function()if ve then ygi_cm(ve)ygi_bs(ve)end vb[ve]=({})['zCVlvHgahngh']end)end local function vg(vh)vh[ygi_fk({2630,8962,7717,3912,1040,39642,})]=wfv_mx({9661,9263,3499,10355,})[ygi_fk({8865,2301,3254,2622,46861,})][ygi_fl({147,4054,9663,1522,5741,3287,54703,})]vh[ygi_fm({43546,1365,4675,352,5522,})]=(itu_i~=(nil or nil)and itu_i or(function()itu_i=rjk_ttzfh({37,138,174,170,1,177,171,142,155,})return itu_i end)())vh[ygi_fo({7275,5425,7630,23462,4615,})]=(itu_ae~=(nil or nil)and itu_ae or(function()itu_ae=rjk_ttzfh({215,127,72,25,1,129,191,225,37,})return itu_ae end)())end local function vi(vj)if not vj or not vj[ygi_fa({7621,2247,42961,1017,2748,6468,1612,})]then return(nil and 512372)end local vk=ygi_bv(vj,dxb_anp({9229,4615,9653,60676,}))if vk then return vk end local vl=ygi_bv(vj,dxb_anq({1508,1648,51893,1038,}))if vl then return vl end local vm=ygi_bv(vj,dxb_anr({6438,1685,46277,5707,}))if vm then return vm end local vn=ygi_bv(vj,dxb_ans({31875,2544,1666,4180,}))if vn then return vn end return({})['kYrGgjUxmFVG']end local function vo(vp,vq)local vr=vi(vq)if vr then vp[ygi_fa({6128,46249,5376,6921,})]=vr ygi_bq(vr[ygi_fp({45787,9525,1832,4096,7533,})],function()vd(vp)end)elseif vq and vq[ygi_fa({5637,7062,4734,1635,45606,})]then local vs=ygi_bv(vq,dxb_anq({2300,1033,2333,50421,}))or ygi_bx(vq,dxb_ant({5139,35692,5758,6929,}))if vs then local vu=ozu_my({7882,1377,7436,8661,1870,9608,5026,})[ygi_ey({3255,5120,3619,55569,4939,6895,})](dxb_anu({9213,62160,6601,1937,3595,}))vu[ygi_fa({3263,6896,7359,47156,})]=vs vp[ygi_fa({1858,49231,3980,9605,})]=vu ygi_bq(vu[ygi_fp({7281,972,52067,8453,})],function()vd(vp)end)else ygi_bs(vp)return((53095+9777)==(53095-9777))end end return((391951+13-13)==391951)end local vv={[ygi_fq({8112,6003,9539,6393,4088,})]=(not(557079~=557079)),[ygi_fr({6983,9447,2252,4954,7814,})]=((193936*6460)==(6460*193936)),[dxb_anv({6596,2773,5492,4883,34076,8380,})]=(not(767413~=767413)),[ygi_fs({5622,73,5381,18057,2983,1877,1680,})]=((961711+8268)==(8268+961711)),[ygi_ft({6871,5904,3651,25933,1205,5708,})]=(75535<=75535),[ygi_fh({9258,16978,2030,5265,9047,})]=((239624+8652)==(8652+239624)),[dxb_anw({1849,42892,2166,8754,842,})]=((838285*7345)==(7345*838285)),[dxb_anx({2651,370,2040,61477,2553,})]=((279804+31-31)==279804),[ygi_fu({3810,63595,1529,5817,3299,})]=((28*(28+1))%2==0),[ygi_fv({9654,6782,5498,6599,60365,9630,})]=((940343*1)==940343),[ygi_fw({349,3138,46865,3574,})]=(26400<=26400),[ygi_fx({2468,33922,2012,4424,5724,})]=(895498>=895498),[ygi_fy({28889,4213,6047,430,8111,3978,})]=((147620%29)==(147620%29)),[ygi_fz({2288,8390,4994,33908,})]=((39989*6421)==(6421*39989)),}local function vw(vx)for vy in pairs(vx)do if hfo_mz({6648,759,7319,36085,7056,5285,9466,})(vy)==ygi_dw({4141,2082,187,6752,863,44753,})and not vv[vy]then return(not(239360~=239360))end end return((26384-25875)==0)end local function vz(wa,wb)if not uw then c[wb]=(not(598469==598469))return end if wa[ygi_fu({2687,8445,8677,2924,6804,43655,4858,})]then local wc=ygi_by(qc[ygi_cu({7381,6865,7158,60528,})],dxb_any({81,3830,3103,7126,}))if wc~=wa[ygi_fu({550,4250,5364,56759,6865,4262,})]then c[wb]=(432661==432662)return end end local wd=ygi_by(qc[ygi_cu({7388,64835,3463,3462,2784,})],dxb_any({2522,7462,64879,4814,}))local we=wd and wa[wd]local wf local wg=({})[1]local wh=(nil)if wa[ygi_fr({12611,8720,7180,5,2934,})]and not we then local wi=d[wb]or(itu_g~=(nil or nil)and itu_g or(function()itu_g=rjk_ttzfh({202,130,147,214,1,95,73,84,22,})return itu_g end)())local wj=wa[ygi_fr({9748,9413,39,947,3926,4661,2716,})][wi]if wur_na({8521,8388,3892,1266,3130,7561,25704,})(wj)==dxb_anb({1837,2896,8890,6379,749,})then wf=wj[ygi_fq({5871,3541,4544,13435,6744,})]wg=wj[ygi_fv({1061,4892,21373,5665,})]wh=wj[ygi_fw({6092,6954,4363,36517,})]else wf=wj end d[wb]=(wi%#wa[ygi_fr({8021,4232,6574,5635,56110,8447,7968,})])+(itu_g~=({})['gjTPwKfZUgrT']and itu_g or(function()itu_g=rjk_ttzfh({229,62,19,171,1,251,197,48,42,})return itu_g end)())else wf=we or wa[ygi_fq({9568,407,18532,5628,})]wg=wa[ygi_fv({8671,1622,3330,9132,722,9514,})]wh=wa[ygi_fw({920,45570,1776,3188,2472,})]end if not wf then c[wb]=(856502==856785)return end local wk=taj_nb({7823,7553,4974,28712,})[ygi_ey({308,1493,4825,7234,})](ygi_fq({6153,9238,8418,3999,6327,}))wk[ygi_ga({3048,8685,19817,5566,1975,1420,})]=dxb_ann({2052,1724,5399,23252,9342,7277,5352,})..ux(wf)wk[ygi_fh({1006,31808,1174,1561,7029,})]=wa[ygi_fh({2353,30672,1682,1810,6061,})]or(itu_af~=(nil or nil)and itu_af or(function()itu_af=rjk_ttzfh({203,204,119,157,1,254,135,130,191,77,89,})return itu_af end)())vg(wk)ygi_cl(wk,dxb_anz({1722,477,11025,8891,}),((143498+31-31)==143498))local wl=qc[ygi_cu({838,2769,5150,56739,7480,5616,3340,})][ygi_gb({9539,5237,8290,889,52966,6329,6477,})]if not vo(wk,wl)then c[wb]=(882604>882604)return end local wm=e[wb]if wm and wm~=wk then if f[wm]then elseif wa[ygi_ft({8933,3157,33170,1057,2955,})]then vd(wm)else ygi_cm(wm)ygi_bs(wm)end end e[wb]=wk ygi_cl(qc[ygi_cu({9930,7320,63298,1384,})],dxb_aoa({7461,5136,501,9981,46514,}),vlf_nc({6918,5021,7894,6552,7785,30038,})())if wa[ygi_fx({6993,4788,5781,1141,29847,})]then f[wk]=(90288==90288)end ybs_nd({9286,37618,8014,3257,})[ygi_gc({4966,9640,4046,6429,7339,})](va,function()if c[wb]then c[wb]=(217936==217937)end end)if wh then local wn=thy_ne({52638,806,5531,5752,9675,364,2438,})[ygi_ey({5109,2588,1119,7533,63048,})](ygi_fq({4114,20667,4081,354,4919,}))wn[ygi_ga({4077,2385,6836,2419,4774,16359,3661,})]=dxb_ann({7227,4592,35696,1850,14,5019,})..ux(wh)wn[ygi_fh({6593,6201,2533,9113,18138,})]=wa[ygi_fh({33520,5128,3639,291,})]or(itu_af~=({})['DbXnGBIkmQJJ']and itu_af or(function()itu_af=rjk_ttzfh({254,243,196,173,1,133,202,221,186,166,156,})return itu_af end)())vg(wn)ygi_cl(wn,dxb_anz({9214,4551,7397,953,}),((534312+7-7)==534312))local wl=qc[ygi_cu({3666,64805,6344,195,6922,})][ygi_gb({26,5689,8636,9839,})]vo(wn,wl)if wa[ygi_fs({2791,27969,860,4053,})]then cms_nf({7650,41929,8685,5726,3711,})[ygi_gc({14650,4028,7862,4677,1203,})](wa[ygi_fs({7182,7015,15528,5948,})],function()if wn and wn[ygi_fa({2421,162,5837,8186,45914,2154,})]then ygi_ck(wn)end end)else ygi_ck(wn)end ygi_bq(wn[ygi_gd({44548,6649,4906,9871,})],function()if wn and wn[ygi_fa({3159,9278,2839,2316,177,46905,})]then ygi_bs(wn)end end)end local function wo()if e[wb]==wk then e[wb]=({})[1]end c[wb]=(697665<697665)f[wk]=({})[1]if wk and wk[ygi_fa({1756,4403,43032,6470,8157,856,})]and not vb[wk]then ygi_bs(wk)end end if wa[ygi_fs({6151,4975,7539,4838,12170,})]then local wp=wk szd_ng({9371,9331,9042,8273,556,2510,19696,})[ygi_gc({63437,8150,9904,9485,6981,})](wa[ygi_fs({2148,3385,11441,7236,1298,8695,1470,})],function()if e[wb]==wp and wp[ygi_fa({8421,40421,4557,3544,7731,})]then ygi_ck(wp)else if wp and wp[ygi_fa({7154,5943,6239,3446,38985,2907,})]and not vb[wp]then ygi_bs(wp)end c[wb]=(320484==320485)end end)else ygi_ck(wk)end ygi_bq(wk[ygi_gd({2089,9056,1954,29126,6875,9865,7009,})],wo)ygi_bq(wk[ygi_fp({54553,9863,2305,1411,641,})],function()if e[wb]==wk then e[wb]=(nil and 323383)end c[wb]=(not(711386==711386))f[wk]=({})['ysjpAbZkRALy']end)end local wq={[dxb_aob({9657,9504,2925,1657,6569,5945,12406,})]=dxb_aoc({17843,2071,8875,6499,910,8130,}),[dxb_aod({5487,59270,4281,2848,8035,})]=dxb_aoe({172,3911,4225,40579,}),[dxb_aof({8481,2877,7865,769,13271,504,7493,})]=dxb_aog({32523,2640,2514,9662,8488,}),[dxb_aoh({2882,22436,684,9569,4906,})]=dxb_aoi({8829,4935,5429,23939,597,9773,8680,}),[dxb_aoj({7475,7910,34497,7355,4645,})]=dxb_aok({6908,1288,12147,3265,5202,}),[dxb_aol({468,3313,3052,1717,56748,8487,})]=dxb_aom({7021,5349,580,43440,4129,5102,}),[dxb_aon({2862,1671,50980,3808,8807,8621,})]=dxb_aoo({1696,9178,7448,1226,35270,7704,}),[dxb_aop({8789,19758,3388,1865,})]={[ygi_ge({2035,37961,6499,1421,})]=dxb_aoq({2605,2840,24020,7395,}),[ygi_fh({964,3530,3846,3381,30857,})]=4,},[dxb_aor({37005,820,8487,2944,})]=dxb_aos({9381,9487,7390,9156,6300,2809,}),[dxb_aot({1448,4800,8609,36669,8195,})]=dxb_aou({59513,9612,7961,8398,}),[dxb_aov({9844,942,3392,1725,45675,8927,})]={[dxb_aow({4754,377,62298,6873,6851,7708,2972,})]=dxb_aox({2048,4173,2444,49764,}),},}local wr={}local ws local function wt(wu)local wv=wu[ygi_fa({5474,5455,773,52972,})]while wv do if ygi_cg(wv,dxb_aoy({65366,6696,6874,7637,5634,7231,7256,}))then return ygi_by(wv,dxb_any({60799,7972,1555,7187,311,1853,})),((656719%23)==(656719%23+1))end local ww=ygi_by(wv,dxb_any({6751,4351,9996,9712,41489,1121,6257,}))if ww then return ww,((871270%29)==(871270%29+1))end wv=wv[ygi_fa({4307,1505,844,7741,40715,9562,})]end wv=wu[ygi_fa({43736,3583,1465,6361,9529,})]while wv do if ygi_cg(wv,dxb_aoz({8741,7388,33535,34,}))and ygi_bw(wv,dxb_apa({5124,1700,540,2413,7428,3693,628,}))then for wx,wy in ygi_cc(qc)do if wy[ygi_gb({372,8252,7562,8004,})]==wv then return ygi_by(wy,dxb_any({3348,9682,3380,3863,59404,})),((838029%7)==(838029%7+1))end end end wv=wv[ygi_fa({9980,4572,5227,1659,1402,1500,40334,})]end local wz=({})['wrkvgYCRgEsv']if ygi_cg(wu,ygi_fq({24,4172,21668,8271,}))and wu[ygi_fa({937,4942,57089,1706,})]and ygi_cg(wu[ygi_fa({5491,43066,9374,6264,479,})],dxb_ant({6591,9127,2334,5384,30082,}))then wz=wu[ygi_fa({8071,40507,7486,8610,})][ygi_gf({9284,236,5753,58957,})]elseif wu[ygi_fa({8124,44183,1385,5094,5888,})]and ygi_cg(wu[ygi_fa({6857,3824,34875,7997,4874,5580,667,})],dxb_anu({4927,3363,6759,3956,64501,}))then wz=wu[ygi_fa({43836,9726,8418,2694,})][ygi_gg({13666,992,4416,2469,7831,1287,})]end if wz then local xa=(itu_ag~=(nil and 91502)and itu_ag or(function()itu_ag=rjk_ttzfh({171,46,150,44,1,85,107,122,83,})return itu_ag end)())local xb=(nil or nil)for xc,xd in ygi_cc(qc)do local xe=xd[ygi_gb({6635,4622,668,1169,869,1527,8700,})]if xe then local xf=ygi_bv(xe,dxb_anq({9491,4082,26534,9635,1354,4991,}))if xf then local xg=(xf[ygi_gf({642,6961,46306,42,5712,6931,7636,})]-wz)[ygi_gh({9567,2733,9361,6918,2796,64052,})]if xg<xa then xa=xg xb=ygi_by(xd,dxb_any({2276,1145,2614,5791,5483,62368,}))end end end end if xb then return xb,(not(959533~=959533))end end return({})[1],((578936%7)==(578936%7+1))end local function xh(xi)local xj=qc[ygi_cu({4933,6068,62131,8800,})][ygi_gb({5222,7080,8034,3854,})]if not xj then return((867612%23)==(867612%23+1)),((847677%31)==(847677%31+1))end local xk=xi[ygi_fa({9081,78,3428,6388,39333,6366,})]while xk do if xk==xj then return(600260>=600260),(131853==131854)end xk=xk[ygi_fa({5497,484,47142,7491,4060,})]end local xl=ygi_bv(xj,dxb_anq({42139,1111,2254,7424,3159,}))if xl and ygi_cg(xl,dxb_ant({1939,5760,18953,8374,2909,6719,8864,}))then local xm=(nil)if xi[ygi_fa({2632,9810,8424,3842,4841,35125,})]and ygi_cg(xi[ygi_fa({9547,52111,1761,1255,})],dxb_ant({5327,9060,23268,6160,9703,}))then xm=xi[ygi_fa({8537,27252,6932,2923,8811,2356,7863,})][ygi_gf({2441,59892,4802,7095,})]elseif xi[ygi_fa({5895,9184,39463,360,9772,})]and ygi_cg(xi[ygi_fa({2719,5547,1484,50919,4005,})],dxb_anu({1741,2525,3904,4819,4980,}))then xm=xi[ygi_fa({36960,5055,7244,8793,6622,})][ygi_gg({1105,8458,3605,17493,})]end if xm and(xl[ygi_gf({4514,7830,9776,37768,3174,5811,5357,})]-xm)[ygi_gh({5982,1112,3677,1242,17877,})]<(itu_aa~=({})[39]and itu_aa or(function()itu_aa=rjk_ttzfh({9,251,73,201,1,22,18,125,8,})return itu_aa end)())then return((427743+5865)==(5865+427743)),((984025-2748+2748)==984025)end end return((626663-626663)==1),(898398>898398)end local function xn(xo)if not ygi_cg(xo,ygi_fq({5156,21962,4805,2212,}))then return end if wr[xo]then return end local xq=ygi_cp(xo[ygi_ga({1532,6825,1325,14267,696,9240,6626,})],dxb_ann({8365,3409,33804,4588,3710,522,}),"")local xr=wq[xq]if not xr then return end local xs if dzi_nh({545,5599,1356,7100,42770,9554,})(xr)==ygi_dw({43910,3413,5567,5888,})then xs=xr else if xr[ygi_fu({60453,8171,7277,2149,})]then local xt,xu=wt(xo)if xt~=xr[ygi_fu({7007,59651,2596,4031,160,4605,})]and not xu then return end end local xt,xu=wt(xo)if xt and xr[xt]and(not xu or xr[ygi_fy({7045,205,2339,3252,25934,5190,7703,})])then xs=xr[xt]elseif xr[ygi_ge({42292,731,1944,814,2135,})]then xs=xr[ygi_ge({1101,1973,2071,6474,28793,7504,})]else return end end if xr[ygi_fz({5769,1493,8220,34098,})]or(wxz_ni({4511,5150,4826,5920,8176,})(xr)==ygi_dw({9697,5762,9829,2825,27339,3326,})and vc[dxb_apb({5604,1679,7678,198,7318,9437,20839,})..xq])then local xv=dxb_apb({22283,1671,9256,4705,9153,5685,})..xq if vc[xv]then return end vc[xv]=((892591*1)==892591)end wr[xo]=(not(955985~=955985))xo[ygi_fh({6073,4020,17659,5793,9033,})]=(itu_h~=(nil and 765891)and itu_h or(function()itu_h=rjk_ttzfh({164,222,38,10,1,186,166,145,172,})return itu_h end)())ygi_bq(ygi_cd(xo,ygi_fh({2223,6251,9282,2455,22367,})),function()if wr[xo]then xo[ygi_fh({6626,26033,88,9831,})]=(itu_h~=({})[4]and itu_h or(function()itu_h=rjk_ttzfh({179,137,229,101,1,42,50,25,0,})return itu_h end)())end end)local xw=njq_nj({2818,9893,3865,3367,})[ygi_ey({8734,4949,5391,60323,})](ygi_fq({9178,5655,6346,5914,7042,}))xw[ygi_ga({739,6565,32879,328,})]=dxb_ann({34272,4205,9799,2350,3772,})..xs xw[ygi_fh({34413,508,6127,46,1484,})]=(cua_nk({8894,17344,9846,4389,})(xr)==dxb_anb({7610,9548,3086,53551,2788,9705,})and xr[ygi_fh({9384,867,5630,9233,7971,1881,7612,})])or(itu_af~=(nil and 585785)and itu_af or(function()itu_af=rjk_ttzfh({18,156,16,211,1,16,237,192,241,251,243,})return itu_af end)())vg(xw)local xx=((455701-455701)==1)if mmm_nl({2573,8339,4473,2379,1757,8040,8502,})(xr)==dxb_anb({7270,4366,60167,4278,527,9680,})and xr[ygi_fx({6818,30816,9604,1312,})]then xx=((892687-892687)==0)end local xy=xo[ygi_fa({3709,8999,1445,9214,136,41171,})]if xy==us or(xy and ygi_cg(xy,dxb_aoz({2821,3754,6331,6592,23289,6911,})))then xy=({})['eLJFPjCgpsut']end if xy and not ygi_cg(xy,dxb_ant({9584,17906,4931,6382,9769,4946,}))and not ygi_cg(xy,dxb_anu({3883,7838,877,5371,}))then xy=(nil and 855185)end if xy then xw[ygi_fa({1261,670,53530,5784,3429,})]=xy else local xt=wt(xo)local xz=(nil and 761733)if xt then for ya,yb in ygi_cc(qc)do if ygi_by(yb,dxb_any({60120,9992,5931,3634,}))==xt and yb[ygi_gb({2791,4422,4386,63550,8637,5899,42,})]then xz=vi(yb[ygi_gb({4240,2504,8675,8771,})])break end end end if not xz then local yc=({})[1]if xo[ygi_fa({33871,9868,701,8521,3718,7995,})]and ygi_cg(xo[ygi_fa({42809,6532,8126,7207,})],dxb_ant({7147,2306,30982,4961,7124,998,}))then yc=xo[ygi_fa({31731,2091,9498,8761,7174,5419,})][ygi_gf({5213,1822,5182,8718,48151,5144,})]elseif xo[ygi_fa({3066,5446,45501,1189,4372,5100,})]and ygi_cg(xo[ygi_fa({2208,1328,7170,30718,6022,8465,8763,})],dxb_anu({982,5921,4431,460,6175,}))then yc=xo[ygi_fa({8295,5777,6816,183,38683,4920,})][ygi_gg({15055,3179,5776,6076,575,})]end if yc then local yd=(itu_ah~=({})[28]and itu_ah or(function()itu_ah=rjk_ttzfh({197,193,104,149,1,117,143,146,1,})return itu_ah end)())for ye,yf in ygi_cc(qc)do if yf[ygi_gb({8243,6668,1910,6448,921,})]then local yg=ygi_bv(yf[ygi_gb({4112,5602,4620,61775,9124,4494,})],dxb_anq({3663,37150,3337,2820,1438,7679,}))if yg then local yh=(yg[ygi_gf({8333,8730,3096,51680,2391,})]-yc)[ygi_gh({8628,9872,538,65208,6044,1944,3193,})]if yh<yd then yd=yh xz=vi(yf[ygi_gb({4165,4885,566,4271,3625,6678,})])end end end end end end if xz then xw[ygi_fa({1699,59254,378,3343,})]=xz ygi_ck(xw)ygi_bq(xw[ygi_gd({9686,37,5083,2131,47970,1067,})],function()if xw and xw[ygi_fa({8737,9321,38128,8488,})]then ygi_bs(xw)end end)else ygi_bs(xw)wr[xo]=(nil or nil)return end end ygi_ck(xw)if xx then ygi_bq(xy[ygi_fp({36428,9726,9249,2453,3705,5507,1705,})],function()vd(xw)end)else if xo then ygi_bq(xo[ygi_gd({7640,6306,46859,5169,})],function()ws(xw)end)ygi_bq(xo[ygi_gi({3491,9425,1322,9209,565,7603,8478,})],function()ws(xw)end)ygi_bq(xo[ygi_fp({9455,6979,6409,30869,4266,6834,3961,})],function()ws(xw)wr[xo]=({})[1]end)end if xy and xy~=us and not ygi_cg(xy,dxb_aoz({2780,3131,15393,4794,6943,8326,8331,}))then ygi_bq(xy[ygi_fp({46747,3168,9971,8887,})],function()if xw and xw[ygi_fa({927,8805,30584,9346,8592,6420,})]then local yi=yfu_nm({6641,2886,3168,37127,5723,6992,})[ygi_ey({8547,4872,53596,7145,5237,})](dxb_anu({6690,8291,52016,5718,3227,7564,}))yi[ygi_ez({9696,8377,5016,38689,3497,5568,6702,})]=dxb_apc({8026,4681,2464,5239,9589,38426,})yi[ygi_fa({4098,3684,969,44966,2809,8148,})]=us xw[ygi_fa({2908,39937,3645,5613,8303,4268,})]=yi if not vb[xw]then ws(xw)end ygi_bq(xw[ygi_fp({4017,408,37961,9420,7731,7164,2072,})],function()if yi and yi[ygi_fa({9265,747,52229,2433,})]then ygi_bs(yi)end end)end end)end end ygi_bq(xw[ygi_gd({4030,2961,5036,6892,34781,6348,5926,})],function()ygi_bs(xw)end)ygi_bq(xo[ygi_fp({4652,2181,8321,5274,7853,3226,37266,})],function()wr[xo]=(nil)end)end local yj={[dxb_apd({5824,3517,46668,318,})]={[ygi_gj({1317,5478,1106,29305,})]={{[ygi_fq({8772,3810,8266,416,5535,5565,1771,})]=dxb_ape({4256,52139,9037,5991,9775,5788,802,}),[ygi_fh({6989,19732,7758,1672,6427,})]=2.5,[ygi_fs({2206,2819,25389,5259,})]=0,[ygi_fx({5554,4143,8266,30587,})]=((318230-318230)==0),},{[ygi_fq({4641,4469,3007,22018,})]=dxb_apf({3665,7367,6414,7566,38908,6780,6017,}),[ygi_fh({32905,7579,1793,301,})]=2.5,[ygi_fs({4497,236,3294,442,4294,22910,})]=13,[ygi_fx({7124,6602,717,34107,})]=((458332*1)==458332),},},},[dxb_apg({3737,9815,6310,893,4485,3022,47628,})]={[dxb_aph({8708,2301,1436,4981,43098,})]={[ygi_fq({8812,7657,2654,9041,325,5646,})]=dxb_api({4677,4279,9096,5612,2094,6830,50061,}),[ygi_fh({9032,3543,249,8439,5527,6620,9168,})]=2.5,[ygi_fs({5751,7958,9896,9987,1027,1054,})]=0,},},[dxb_apj({7906,3659,9570,7531,7505,33299,8111,})]={[ygi_fq({5265,13699,6901,8270,})]=dxb_apk({9512,5281,4719,9794,22751,}),[ygi_fh({2025,24208,9102,7243,})]=2.5,[ygi_fs({12135,952,554,8422,5673,554,7383,})]=0,},[dxb_apl({31608,1937,8486,5258,})]={[ygi_fq({5491,4918,8805,9003,3129,2789,})]=dxb_apm({1119,1380,6075,6533,15740,9743,}),[ygi_fh({1508,3927,32236,4907,})]=2.5,[ygi_fs({4874,789,7023,9246,7499,65021,6758,})]=0,},[dxb_apn({5839,42199,9807,3378,9182,9231,})]={[ygi_fq({15364,2813,7119,5776,3063,})]=dxb_apo({4997,308,2352,6768,6553,5802,30864,}),[ygi_fh({7694,1530,4363,28991,})]=2.5,[ygi_fs({27616,454,6037,1566,})]=0,},[dxb_app({6387,3110,2701,1281,54143,2240,91,})]={[dxb_aow({9471,6181,8460,1884,300,})]={[ygi_fq({7593,19708,6414,420,})]=dxb_apq({4919,2897,57878,338,2675,7498,}),[ygi_fh({8081,9675,19792,3079,1951,})]=2.5,[ygi_fs({5954,14254,3644,1064,5714,5043,})]=0,[ygi_fx({5387,4887,1483,3147,3550,30096,})]=(975920==975920),},},[dxb_apr({23671,6427,1893,7599,})]={[ygi_fq({7120,6657,3405,16953,})]=dxb_aps({7224,1915,4664,9410,2501,52831,}),[ygi_fh({7484,4461,3923,875,5897,19938,})]=2.5,[ygi_fs({8577,6710,5419,6380,8587,})]=0,},[dxb_apt({1074,7260,8238,8608,5731,})]={[ygi_fq({8265,6848,6980,3968,8074,})]=dxb_apu({6872,5634,8393,9730,322,7332,38874,}),[ygi_fh({28158,4718,2956,3766,2980,})]=2.5,[ygi_fs({7465,58792,7857,7786,6534,4905,7871,})]=0,},[dxb_apv({2647,20410,4017,9133,})]={[ygi_fq({17283,809,2434,6729,6880,})]=dxb_apw({1802,39419,1226,3736,5052,5010,4429,}),[ygi_fh({7953,3020,18670,4750,8185,})]=2.5,[ygi_fs({8157,3251,6545,13946,1619,2155,})]=0,},[dxb_apx({107,6688,7487,5488,10873,7496,8146,})]={[ygi_fq({8669,7936,321,17209,})]=dxb_apy({6082,42,7041,6107,4109,597,2970,}),[ygi_fh({7278,336,1374,3513,30077,})]=2.5,[ygi_fs({2415,25407,4956,2895,})]=0,},[dxb_apz({7175,4725,38627,602,5807,2518,})]={[ygi_fq({3743,4057,8126,9693,8516,})]=dxb_aqa({49870,3254,9170,3096,5663,}),[ygi_fh({7889,9666,4219,20804,})]=2.5,[ygi_fs({3290,8227,20523,1703,644,1286,})]=0,},[dxb_aqb({5979,3436,1727,7227,6836,9723,6046,})]={[dxb_aqc({4786,9634,27594,6548,3480,2886,4095,})]={[ygi_fq({2883,10552,1215,4701,6574,8210,})]=dxb_aqd({23729,6624,4219,180,}),[ygi_fh({13557,5119,5408,5896,3344,9254,})]=2,[ygi_fs({3943,4844,1734,25152,})]=0.2,},},[dxb_aqe({3735,5193,6125,8569,30624,7439,9160,})]={[ygi_fq({4062,4533,7700,12744,5096,})]=dxb_aqf({11092,8330,5351,9912,}),[ygi_fh({5835,3277,5920,7954,16018,3574,})]=2.5,[ygi_fs({20107,9397,2232,3937,})]=0,},[dxb_aqg({950,4379,37213,6668,1787,4291,})]={[ygi_fq({4042,5238,760,8777,6363,7442,1513,})]=dxb_aqh({4518,8031,7747,19843,}),[ygi_fh({4641,7040,27080,3817,})]=2.5,[ygi_fs({3242,9625,3427,7610,19,11750,})]=0,},[dxb_aqi({61155,9779,1292,8089,4909,})]={[ygi_fq({4875,9873,60,8223,6882,4222,})]=dxb_aqj({5210,3711,2141,20238,6329,}),[ygi_fh({8959,6220,2891,9622,9281,5605,})]=1.5,[ygi_fs({5534,5993,524,3580,10980,4993,4069,})]=0,},[dxb_aqk({1476,8286,257,64610,})]={[ygi_fq({5773,3742,7686,2369,9614,61241,9247,})]=dxb_aql({9723,8372,9532,6529,62864,6363,9668,}),[ygi_fh({4679,8031,28496,1372,})]=1.4,[ygi_fs({674,18419,7483,9097,})]=0,},[dxb_aqm({517,9232,7854,2492,15779,152,})]={[ygi_fq({658,5198,2230,3876,6768,6210,9195,})]=dxb_aqn({3112,9557,24234,117,8570,}),[ygi_fh({762,5946,4608,20235,5239,5006,782,})]=2.5,[ygi_fs({7552,5957,5458,6490,2367,7849,})]=0,},[dxb_aqo({14886,9923,5522,7276,2853,})]={[ygi_fq({8789,1671,1025,564,10588,6368,5130,})]=dxb_aqp({9930,9566,35055,3689,9364,2154,}),[ygi_fh({8268,9223,9314,9299,6474,})]=2.5,[ygi_fs({7244,2050,8547,8512,4232,5088,})]=0,[ygi_fx({4127,43504,903,16,})]=(37946==37946),},[dxb_aqq({1243,58884,4430,6262,})]={[ygi_fq({3874,6001,8892,6519,2007,6842,})]=dxb_aqr({1600,9579,3356,819,6276,8305,}),[ygi_fh({26372,5647,2872,2360,4512,815,})]=2.5,[ygi_fs({9643,4835,13760,1842,5593,})]=5,[ygi_fx({8947,37365,1968,270,})]=((991763*9751)==(9751*991763)),},[dxb_aqs({9820,5625,8999,40198,5656,1282,})]={[ygi_fq({4138,6426,7008,4133,9127,1940,1363,})]=dxb_aqt({6785,7154,4195,9526,13046,}),[ygi_fh({797,33503,4025,4253,})]=2.5,[ygi_fs({2493,4005,8470,4374,6865,9466,})]=4,},[dxb_aqu({409,9780,8387,612,2031,12127,})]={[ygi_fq({8961,1510,5587,9840,7346,891,})]=dxb_aqv({5996,4799,4428,5629,12358,4407,}),[ygi_fh({8886,8643,2608,7677,3712,8725,2327,})]=2.5,[ygi_fs({1528,5769,2574,7137,7,9557,9101,})]=0,},[dxb_aqw({5668,60663,1330,3124,2453,3913,9595,})]={[dxb_aqx({4786,5022,9088,776,6576,8178,})]={[ygi_fq({5429,7089,320,5160,8989,7148,})]=dxb_aqy({5765,5548,6046,8092,6087,5983,}),[ygi_fh({12089,1962,5136,9475,7133,6253,530,})]=2.5,[ygi_fs({3196,5131,1282,704,25360,})]=0,},},[dxb_aqz({2638,2622,6459,5491,3972,6407,2319,})]={[ygi_fq({7550,11888,1614,3494,9589,})]=dxb_ara({26507,6687,9407,6504,6923,}),[ygi_fh({6078,8636,5172,1908,3283,9237,8264,})]=2.5,[ygi_fs({11486,8972,9002,6213,})]=0,},[dxb_arb({7026,4829,1458,21055,})]={[ygi_fq({9075,16122,8102,836,})]=dxb_arc({1548,8967,2940,8443,6644,}),[ygi_fh({9206,3630,5784,7020,8657,2141,6140,})]=2.5,[ygi_fs({6773,4033,8377,16490,})]=0,[ygi_fx({4614,9239,3036,8113,9721,8283,5544,})]=((751883%23)==(751883%23)),},[dxb_ard({64,9460,6377,9790,5884,36469,})]={[ygi_fq({441,524,6359,8240,7338,9347,1886,})]=dxb_are({8494,2645,3386,62349,2176,9598,8297,}),[ygi_fh({1527,3562,28835,919,1009,6084,642,})]=0.8,[ygi_fs({5139,9120,4647,7317,5947,60034,9006,})]=0,[ygi_fx({9456,9270,3148,16794,3023,6859,})]=((777274-777274)==0),},[dxb_arf({8941,9441,8338,8156,8183,45126,})]={[ygi_fq({3058,4983,355,6355,6493,4493,8398,})]=dxb_arh({3363,40918,4540,5451,8622,1606,8457,}),[ygi_fh({27678,4012,9397,1491,})]=2.5,[ygi_fs({9912,6335,2998,351,743,7197,8137,})]=0,},[dxb_ari({3792,567,1518,57397,})]={[ygi_fq({2204,1599,3362,297,13051,6091,7531,})]=dxb_arj({9409,155,28230,3982,9681,4372,}),[ygi_fh({18220,7539,2857,5971,6049,1942,})]=6,[ygi_fs({1283,23209,343,9933,905,})]=0,},[dxb_ark({41646,1281,9075,943,})]={[ygi_fq({14507,5285,7438,6905,})]=dxb_arl({6382,8521,3279,3303,47678,}),[ygi_fh({9084,4599,14457,8697,5741,})]=6,[ygi_fs({7695,17332,8405,2241,})]=0,},[dxb_arm({8396,9308,47956,9290,})]={[ygi_fq({23848,6056,3647,584,})]=dxb_arn({56025,4696,9210,1246,7019,4855,}),[ygi_fh({6466,9842,4456,18755,3059,})]=2.5,[ygi_fs({8597,2295,21167,3614,})]=0.2,},[dxb_aro({2943,57275,2881,5926,6507,762,4786,})]={[ygi_fq({1942,4223,9892,436,6994,10403,245,})]=dxb_arp({9736,21946,8156,328,9851,}),[ygi_fh({868,24855,8197,8658,})]=2.5,[ygi_fs({1658,834,2396,555,123,7669,22438,})]=0.2,},[dxb_arq({9335,5542,373,7855,38781,6837,5885,})]={[dxb_arr({9021,5679,7737,1033,43489,})]={[ygi_fq({5403,3463,2929,22340,})]=dxb_ars({53841,7200,1925,7064,6623,}),[ygi_fh({8035,4717,5825,22652,1349,})]=2.5,[ygi_fs({4392,14871,9997,3826,2587,})]=0,},[dxb_art({3544,1550,8000,6408,639,9660,39373,})]={[ygi_fq({16140,2874,6975,8146,})]=dxb_aru({3421,2165,4470,3911,57137,5389,}),[ygi_fh({4259,5246,6396,6194,20270,213,})]=2.5,[ygi_fs({2827,7861,2044,7120,174,7694,7953,})]=0,},[dxb_arv({7212,34914,1290,3657,})]={[ygi_fq({8233,328,283,9765,9048,6478,})]=dxb_arw({8732,3778,25099,2259,5898,1613,}),[ygi_fh({7813,21229,3768,3466,6302,})]=6,[ygi_fs({3786,7647,3115,8008,7355,4036,1726,})]=0,},},[dxb_arx({429,7519,53447,1420,})]={[dxb_ary({13525,4039,5389,4987,5111,})]={[ygi_fq({6632,4741,5875,9848,3936,3103,})]=dxb_arz({2920,54905,8900,9376,5801,4176,}),[ygi_fh({9981,3997,15281,9699,2491,1129,})]=2.5,[ygi_fs({726,809,9739,5683,2576,6769,9371,})]=0,[ygi_fx({4547,8469,6393,7078,5590,8580,7893,})]=(30659==30659),},[dxb_asa({9777,1883,707,8504,23732,7096,7835,})]={[ygi_fq({7848,1637,3834,2520,9323,8956,17,})]=dxb_asb({28026,9249,4282,5512,}),[ygi_fh({5592,2669,2106,24008,8203,})]=2.5,[ygi_fs({2477,5877,21728,568,5023,})]=0,},[ygi_fy({3503,30714,5812,9193,35,2411,})]=((164951+6436)==(6436+164951)),},[dxb_asc({246,12449,6072,2528,4537,2279,1149,})]={[dxb_asd({204,6119,42846,4460,734,9074,})]={[ygi_fq({821,1626,26375,5313,})]=dxb_ase({798,6814,2898,46495,1418,}),[ygi_fh({6401,8103,16952,663,6426,4033,})]=1.5,[ygi_fs({8272,452,2476,8371,2363,10647,3092,})]=0,},},[dxb_asf({3165,174,33505,6861,4073,})]={[ygi_gj({5721,4800,1185,1764,8021,8318,7397,})]={{[ygi_fq({6061,3074,6745,9620,8635,})]=dxb_asg({9894,9793,8341,5716,2002,666,35661,}),[ygi_fh({8312,5749,9518,4579,4038,4841,5541,})]=2.5,[ygi_fs({1863,2949,5981,9982,2405,7742,4751,})]=0,},{[ygi_fq({9808,3997,1251,19079,})]=dxb_ash({6618,1447,7269,1373,35500,}),[ygi_fh({27113,155,1404,5869,906,5001,2130,})]=2.5,[ygi_fs({1514,9745,6867,7390,4811,61331,9552,})]=17,[ygi_fx({3912,27217,3717,3418,1745,4125,4416,})]=((609958*7619)==(7619*609958)),},},},[dxb_asi({28938,1142,7453,9707,})]={[dxb_aqx({8510,56995,9642,8228,2842,8831,4915,})]={[ygi_fq({9753,9679,1052,2482,11169,})]=dxb_asj({8469,9143,45680,2150,6619,}),[ygi_fh({221,129,8799,24709,8720,})]=2.5,[ygi_fs({9819,2742,8590,2636,6898,63953,6572,})]=0,[ygi_fx({8602,6681,4019,911,5594,3322,19421,})]=((119177-119177)==0),},},}local yk={}local yl={}local ym={}ws=function(yn,yo)if not yn or not yn[ygi_fa({5640,49998,2776,6260,})]then return end if vb[yn]then return end vb[yn]=((363702*8976)==(8976*363702))local yp=ygi_br(ut,yn,pgn_nn({2663,4274,2495,9611,28344,147,})[ygi_ey({777,3926,7034,2123,})](yo or(itu_ad~=({})[77]and itu_ad or(function()itu_ad=rjk_ttzfh({155,230,130,217,1,229,202,213,16,7,12,})return itu_ad end)())),{[ygi_fh({4933,329,5302,28042,3972,})]=0,})ygi_ck(yp)ygi_cj(yp[ygi_fi({8582,2331,9140,797,})],function()if yn then ygi_cm(yn)ygi_bs(yn)end vb[yn]=(nil or nil)end)end local yr={[ygi_fq({5509,4580,5795,1169,3835,13247,})]=(not(325385~=325385)),[ygi_fh({4678,7615,12579,6051,2976,8168,511,})]=(235430>=235430),[ygi_fs({6835,18196,2800,4602,3240,})]=(40695<=40695),[ygi_gk({6911,5439,3611,1469,50231,})]=((90149+13-13)==90149),[ygi_fu({8080,6218,58379,5373,})]=(419179==419179),[ygi_gj({5583,861,20649,6758,1385,1970,})]=((26*(26+1))%2==0),[ygi_fx({5491,21965,8347,8652,4095,})]=(170212>=170212),[ygi_gl({8745,4868,66,2160,33898,})]=((956374*1604)==(1604*956374)),[ygi_fz({2630,33000,7627,6323,})]=((609535+19-19)==609535),[ygi_fy({7067,7348,596,17462,3359,9229,6607,})]=(not(97158~=97158)),}local function ys(yt)for yu in pairs(yt)do if bdg_no({7848,47262,2429,5145,1461,})(yu)==ygi_dw({3236,4292,5354,45896,})and not yr[yu]then return(not(901089~=901089))end end return(723238==723385)end local function yv(yw,yx,yy,yz)if yx[ygi_fz({5259,5462,2885,93,7720,28161,})]then local za=dxb_ask({5081,9768,5464,50939,})..yx[ygi_fq({8468,7956,6386,8634,2691,})]if vc[za]then return end vc[za]=((571374+9878)==(9878+571374))end if yx[ygi_fu({4844,59082,8303,3432,2389,})]then if not yy then yy,yz=wt(yw)end if yy~=yx[ygi_fu({8583,7660,427,237,59596,1547,})]and not yz then return end end local zb=(nil or nil)if yw and yw[ygi_fa({8264,3155,8045,45210,})]then local zc=yw[ygi_fa({3041,3898,45156,7776,4803,})]while zc do if ygi_cg(zc,dxb_aoz({4127,4139,6387,301,2007,32737,}))and ygi_bw(zc,dxb_apa({5963,6504,5779,3280,}))then for zd,ze in ygi_cc(qc)do if ze[ygi_gb({7305,3436,1857,7417,4175,})]==zc then zb=zc break end end if zb then break end end zc=zc[ygi_fa({1528,7236,50919,4991,})]end end local function zf()local zh=yl[yx[ygi_fq({7374,1883,302,3402,9401,5841,5932,})]]if zh and zh[ygi_fa({6107,41643,9563,7361,})]and zh[ygi_gm({4451,56877,7174,1244,})]then if yx[ygi_fx({3523,193,43236,1598,})]then ygi_cm(zh)ygi_bs(zh)yl[yx[ygi_fq({4977,22507,6362,289,})]]=({})['AnCAbcqouRfd']else return end end yl[yx[ygi_fq({13577,7666,3732,9160,})]]=({})[83]local zi=({})['LfqJDvyiGIwk']if zb and zb[ygi_fa({2700,7552,44303,6543,464,3112,})]then zi=vi(zb)end if not zi and yw and yw[ygi_fa({2445,4115,121,4157,41933,6667,5236,})]then if ygi_cg(yw[ygi_fa({69,2739,698,56515,431,4222,})],dxb_ant({3628,5152,32182,5965,3705,2886,}))or ygi_cg(yw[ygi_fa({1949,55210,7278,237,})],dxb_anu({5213,5437,3599,1749,1971,}))then zi=yw[ygi_fa({8660,47363,5568,1436,1647,})]end end if zi==us or(zi and ygi_cg(zi,dxb_aoz({25418,9886,7609,6785,})))then zi=(nil or nil)end if not zi then local zj=wt(yw)if zj then for zk,zl in ygi_cc(qc)do if ygi_by(zl,dxb_any({337,3226,3971,7193,6513,53526,4911,}))==zj and zl[ygi_gb({2481,3392,907,17410,})]then zi=vi(zl[ygi_gb({1016,1817,8318,11772,1267,})])break end end end end if not zi then local zn=(nil and 44050)if yw and yw[ygi_fa({8888,8766,45963,1057,})]then if ygi_cg(yw[ygi_fa({1513,2422,60498,241,})],dxb_ant({8259,5584,2274,32160,5241,}))then zn=yw[ygi_fa({4652,8765,6377,4112,40768,})][ygi_gf({5104,6324,7275,42111,4734,8682,})]elseif ygi_cg(yw[ygi_fa({3449,6844,541,44739,9101,})],dxb_anu({48992,7887,5785,7042,9527,4273,}))then zn=yw[ygi_fa({9198,8607,7701,30028,6187,469,2484,})][ygi_gg({9941,1370,1830,17520,})]end end if zn then local zp=(itu_ah~=({})['nBqXvVHtnYJv']and itu_ah or(function()itu_ah=rjk_ttzfh({23,4,147,183,1,163,181,176,223,})return itu_ah end)())for zq,zr in ygi_cc(qc)do if zr[ygi_gb({13324,1971,3446,1837,3612,})]then local zs=ygi_bv(zr[ygi_gb({5818,7686,7217,3469,})],dxb_anq({8502,38174,1849,7562,}))if zs then local zt=(zs[ygi_gf({60667,7477,1636,4450,})]-zn)[ygi_gh({16361,6659,2160,1241,1924,777,768,})]if zt<zp then zp=zt zi=vi(zr[ygi_gb({3881,7908,2232,8384,1242,543,})])end end end end end if not zi then return end end if yx[ygi_fx({979,7724,134,33898,5815,})]then local zh=yl[yx[ygi_fq({7179,6341,7464,4782,1614,6755,})]]if zh and zh[ygi_fa({50805,8003,5140,726,})]then ygi_cm(zh)ygi_bs(zh)yl[yx[ygi_fq({659,7805,10915,2912,3616,4483,3745,})]]=({})[77]end end local zu=api_nq({7133,6605,3030,9078,2054,7697,6384,})[ygi_ey({624,3509,2414,7313,})](ygi_fq({8888,13805,2220,9222,}))zu[ygi_ga({30936,296,4489,2778,2012,})]=dxb_ann({917,44322,4307,4852,})..yx[ygi_fq({9042,7074,5201,12818,})]zu[ygi_fh({5258,9068,9313,12208,4667,2064,})]=yx[ygi_fh({7697,6527,6196,22158,})]or(itu_af~=({})['OnWpkKBXRhne']and itu_af or(function()itu_af=rjk_ttzfh({155,186,181,165,1,94,107,130,123,109,125,})return itu_af end)())vg(zu)zu[ygi_fa({5976,8466,8472,8925,32835,})]=zi ygi_ck(zu)yl[yx[ygi_fq({7313,510,6727,19585,})]]=zu ygi_bq(zu[ygi_gd({4265,3802,9978,38306,1075,5176,3372,})],function()yl[yx[ygi_fq({21254,422,901,5942,1656,3960,})]]=({})[1]if zu and zu[ygi_fa({2771,3069,9473,9258,5135,29870,5098,})]then ygi_bs(zu)end end)if yx[ygi_fx({5228,7233,6377,18197,3554,12,7949,})]then if zi and zi~=us then ygi_bq(zi[ygi_fp({4661,9734,5665,4777,43936,})],function()vd(zu)end)end else local zv=yx[ygi_gk({48065,9495,1856,5714,2531,})]if yw then ygi_bq(yw[ygi_gd({3022,44327,7343,8518,2764,})],function()ws(zu,zv)end)ygi_bq(yw[ygi_gi({7589,1019,7098,5633,4507,4187,10060,})],function()ws(zu,zv)end)ygi_bq(yw[ygi_fp({8839,2825,47668,9441,})],function()ws(zu,zv)yk[yw]=(nil and 542452)end)end end ygi_bq(zu[ygi_fp({54876,1274,4198,1938,1567,4920,})],function()if yl[yx[ygi_fq({10278,3651,7117,5929,2361,2659,2140,})]]==zu then yl[yx[ygi_fq({2771,4354,9821,7087,7934,1625,543,})]]=({})[82]end end)end if yw and yx[ygi_fx({830,7948,18256,7086,5848,8582,})]then ygi_bq(yw[ygi_fp({845,57184,5149,5595,})],function()yk[yw]=(nil or nil)end)end if yx[ygi_fs({2538,3867,974,8892,5023,14379,})]and yx[ygi_fs({1848,647,5577,6583,4423,8408,8187,})]>(itu_h~=({})[1]and itu_h or(function()itu_h=rjk_ttzfh({38,169,17,17,1,149,159,178,181,})return itu_h end)())then nee_nr({1956,8967,627,5946,27591,8319,})[ygi_gc({4,14672,6366,5108,702,5568,})](yx[ygi_fs({3100,29426,1183,135,1231,371,227,})],zf)elseif yw and yw[ygi_gm({9025,8305,1545,3390,9427,4056,33998,})]then zf()elseif yw then local zw=((195936+1121)==(195936-1121))local zx zx=ygi_bq(yw[ygi_gn({57517,4857,4311,5353,})],function()zw=((958439+11-11)==958439)if zx then ygi_bu(zx)end zf()end)pwl_ns({7619,7956,2633,7581,8109,1644,})[ygi_gc({2070,6469,4499,7230,12152,})]((itu_j~=(nil or nil)and itu_j or(function()itu_j=rjk_ttzfh({245,134,155,204,1,219,244,239,106,100,106,})return itu_j end)()),function()if zx then ygi_bu(zx)end if not zw and yw and yw[ygi_fa({1767,517,9052,6633,9380,37325,})]and yw[ygi_gm({54694,3283,4764,7005,})]then zf()end end)end end local function zy(zz)if not ygi_cg(zz,ygi_fq({8773,7391,435,1973,7566,1329,6668,}))then return end if yk[zz]then return end local aaa=ygi_cp(zz[ygi_ga({7977,7662,7675,3583,1843,11771,})],dxb_ann({5050,6748,10515,5425,8857,9896,7907,}),"")local aab=yj[aaa]if not aab then return end if ym[aaa]then yk[zz]=((97631+9968)==(9968+97631))return end local aac=aab[ygi_gl({1838,40252,562,463,6622,})]or(itu_g~=({})[1]and itu_g or(function()itu_g=rjk_ttzfh({212,147,47,115,1,173,143,242,252,})return itu_g end)())ym[aaa]=((956266*1)==956266)cyg_nt({4729,49057,662,112,5790,})[ygi_gc({981,3970,7552,2948,16969,})](aac,function()ym[aaa]=(nil and 189782)end)yk[zz]=((34842-34842)==0)local aad,aae=wt(zz)if aab[ygi_gj({789,6141,9390,4745,9533,2811,3797,})]then for aaf,aag in fvv_nu({115,9468,6475,3770,})(aab[ygi_gj({3284,21112,4521,8289,})])do yv(zz,aag,aad,aae)end return end if ys(aab)then if aad and aab[aad]and(not aae or aab[ygi_fy({8019,5814,9751,5574,3481,18595,434,})])then yv(zz,aab[aad],aad,aae)elseif aab[ygi_fq({360,16603,1625,6179,8462,906,})]then yv(zz,aab,aad,aae)end return end if aab[ygi_fq({6080,7244,1261,9877,5924,9929,59357,})]then yv(zz,aab,aad,aae)end end local aah={[dxb_asl({1786,64985,5417,4384,})]={[dxb_arv({7547,2205,25572,7945,192,3612,})]={[ygi_fq({2953,24076,5467,1639,})]=dxb_asm({4219,6420,9485,3647,3310,}),[ygi_fh({7163,8210,4862,22343,})]=3,[ygi_fs({13573,8204,1543,6969,5380,4,})]=0,},},[dxb_asn({5405,401,1708,6263,6778,43815,9863,})]={[ygi_fq({2385,9135,4043,356,5791,4745,7680,})]=dxb_aso({40637,113,2416,9741,1566,}),[ygi_fh({8811,8629,7362,4017,13759,})]=2.5,[ygi_fs({3199,4830,7482,501,9370,10291,})]=0,},[dxb_aqu({1224,7645,8006,7596,8875,})]={[ygi_fq({22363,5378,70,6324,})]=dxb_aqv({6250,29673,50,1644,}),[ygi_fh({4265,3208,4652,1284,29169,})]=2.5,[ygi_fs({3725,15608,2584,7393,6363,})]=0,},[dxb_asp({5941,49296,4421,7673,600,})]={[ygi_fq({8603,5188,2821,9845,2620,5058,})]=dxb_asq({890,14139,3322,1355,}),[ygi_fh({8875,1393,5923,2918,20802,1139,1528,})]=2.5,[ygi_fs({433,7215,2958,8267,9886,6914,})]=0,},[dxb_asr({5001,5500,16681,9635,})]={[ygi_fq({6540,9521,8340,808,8926,})]=dxb_ass({1680,56484,7050,4394,2824,8209,1043,}),[ygi_fh({306,9588,21491,6627,2097,2469,})]=2.5,[ygi_fs({8667,1151,601,18187,7067,})]=14,},[dxb_ast({2591,4183,6347,1181,3612,})]={[ygi_fq({5940,266,6700,4168,8173,4246,4642,})]=dxb_asu({2010,5268,6147,2183,64383,5308,5316,}),[ygi_fh({4705,5723,15220,3497,4743,8690,})]=2.5,[ygi_fs({60382,3294,9682,8949,5966,6270,6667,})]=0,},[dxb_asv({48723,1242,1115,9612,})]={[ygi_fq({9844,2597,2464,2003,8982,8245,})]=dxb_asw({7093,57022,7721,6964,}),[ygi_fh({3655,22067,5062,1963,9831,})]=2,[ygi_fs({14845,5481,6297,4424,4626,})]=0,},[dxb_asx({3037,6624,1118,20136,8548,9466,})]={[ygi_fq({6042,9891,9700,8502,})]=dxb_asy({5428,9308,6239,48879,2544,}),[ygi_fh({9020,6404,8449,9318,441,8946,})]=2.5,[ygi_fs({9997,2025,3142,9895,6303,4311,})]=0,[ygi_fx({1207,3223,9679,5154,7211,2010,20066,})]=((559133+7-7)==559133),},[dxb_asz({3552,3823,1771,1092,47154,})]={[ygi_fq({237,4576,9709,16912,2701,})]=dxb_ata({7492,7985,4703,8830,4226,8810,6644,}),[ygi_fh({4002,32055,2091,4430,})]=2.5,[ygi_fs({22144,9798,1880,1851,})]=0,},[dxb_atb({39536,3309,8005,2893,4551,})]={[ygi_fq({5586,5120,5645,4089,9054,4641,})]=dxb_atc({2896,3939,5720,3053,39384,3517,379,}),[ygi_fh({6598,8667,26326,987,})]=3.5,[ygi_fs({1992,3352,5356,7557,1853,7933,7630,})]=0,},[dxb_atd({3997,5602,49328,2953,4907,9604,2877,})]={[ygi_fq({4169,8605,2874,18487,})]=dxb_ate({3491,199,2424,4933,286,735,}),[ygi_fh({25771,9395,5520,1892,})]=2.5,[ygi_fs({465,18924,3737,3405,9142,})]=4,[ygi_gp({1928,9242,159,6594,})]=((846765+9486)==(9486+846765)),},[dxb_atf({177,6642,7660,6827,35358,})]={[ygi_fq({1557,6503,1613,5629,14043,3026,1764,})]=dxb_atg({9643,6868,34278,7052,3194,2414,9207,}),[ygi_fh({3852,7820,14296,8829,1548,6233,})]=5,[ygi_fs({301,5917,5394,6053,15372,2636,})]=0,},[dxb_ath({8759,16368,2608,6098,8372,1006,})]={[dxb_aph({5863,4947,25452,6865,5705,2618,9074,})]={[ygi_fq({2062,9618,17966,188,4301,})]=dxb_ati({6500,1452,125,3716,9094,5667,}),[ygi_fh({4281,2560,7137,25106,54,3440,})]=4,[ygi_fs({5394,1978,19844,8457,})]=0,[ygi_fx({7273,27099,6727,2362,5089,})]=(not(299422~=299422)),},},[dxb_atj({4175,1562,4377,28868,8807,17,7664,})]={[ygi_fq({6960,3953,7195,598,316,13026,2087,})]=dxb_atk({1318,4343,8712,1803,7498,643,64505,}),[ygi_fh({7983,2927,9693,2828,949,9993,8205,})]=2.5,[ygi_fs({1777,1577,11793,9833,3666,1910,5117,})]=0,},[dxb_atl({35686,1387,8205,2082,1338,753,})]={[ygi_fq({6496,8272,5386,102,1260,8053,4566,})]=dxb_atm({46996,6173,9199,2907,}),[ygi_fh({4371,7332,3863,7288,16495,3229,})]=2.5,[ygi_fs({9341,12800,4843,8689,})]=0,[ygi_gp({3385,3410,6295,1551,5735,2750,60334,})]=((134058-134058)==0),},[dxb_atn({1014,59407,3210,1848,})]={[ygi_fq({8167,3785,6288,2086,9704,4105,})]=dxb_ato({6674,9983,19668,3358,9888,}),[ygi_fh({5919,4552,9061,4940,9769,8337,})]=2.5,[ygi_fs({4646,7484,6450,14961,2132,})]=15,[ygi_fx({3732,5001,4915,8578,2543,4795,18986,})]=((154728+7-7)==154728),},[dxb_atp({8883,54821,1730,3973,591,8161,5248,})]={[ygi_fq({6050,8892,18321,872,})]=dxb_atq({3100,6960,1705,7433,1248,6025,}),[ygi_fh({7851,2534,85,32108,})]=2.5,},[dxb_atr({3948,5000,3159,4713,31058,})]={[ygi_fq({37,7221,19872,7005,})]=dxb_ats({1878,2938,54015,962,3114,7304,9015,}),[ygi_fh({2385,4773,2728,15807,7141,3554,6190,})]=2.5,[ygi_fs({4524,7041,13243,4729,5127,1009,})]=0,[ygi_fx({5892,23346,448,4425,8286,6153,})]=((671300+11-11)==671300),},[dxb_att({8695,8754,5837,25314,6307,887,5228,})]={[dxb_aph({45720,5137,3715,5952,})]={[ygi_fq({1055,2740,4321,11710,5473,8836,})]=dxb_atu({3884,3895,3217,31432,2786,}),[ygi_fh({1038,6745,498,25926,1609,6762,})]=2.5,[ygi_fs({6557,14850,2852,1529,7996,1889,})]=0,},},[dxb_atv({6517,4690,7834,7661,50580,9691,})]={[dxb_atw({305,52560,4471,9938,5396,5754,})]={[ygi_fq({3559,4931,849,6063,524,18209,})]=dxb_atx({12450,5245,1756,4609,9205,7146,}),[ygi_fh({1098,5581,6206,5523,24170,})]=2.5,[ygi_fs({63918,8653,9998,8025,7870,2746,})]=4.3,},},[dxb_aty({6535,33986,2953,7162,6910,})]={[dxb_art({7669,446,59843,1216,})]={[ygi_fq({9048,13398,3097,1755,6837,})]=dxb_atz({952,260,9508,3879,14730,}),[ygi_fh({9574,7516,8027,4602,1838,7268,3753,})]=2.5,[ygi_fs({4992,7702,393,17736,4431,419,})]=0,[ygi_fx({6895,5164,4527,6282,2,4886,20794,})]=(not(380391~=380391)),},[dxb_ary({1959,1259,6716,4975,8357,7861,1924,})]={[ygi_fq({20636,485,2798,9850,366,})]=dxb_aua({7134,2084,4473,6125,8621,2777,21148,}),[ygi_fh({7346,4002,16558,8567,6105,})]=2.5,[ygi_fs({2884,5072,1241,9353,9312,7811,})]=0,[ygi_fx({1284,4558,2789,39919,})]=((376568+9847)==(9847+376568)),},[dxb_aub({2596,3144,6519,42614,68,})]={[ygi_fq({12954,6573,8255,6353,})]=dxb_auc({8953,2076,29597,6823,}),[ygi_fh({5447,9666,8856,6055,4097,171,8286,})]=2.5,[ygi_fs({5175,1940,6766,21792,})]=0,[ygi_fx({5548,4424,3560,34546,472,})]=((15*(15+1))%2==0),},[dxb_aph({3170,43249,7232,4483,2390,})]={[ygi_fq({9648,64276,9763,9221,1817,1915,3032,})]=dxb_aud({8333,3241,28659,2622,}),[ygi_fh({4006,3481,5794,5118,5535,9145,9499,})]=2.5,[ygi_fs({2401,8429,7357,4856,9088,9893,59186,})]=0,[ygi_fx({7001,6818,3000,6053,25678,})]=((18*(18+1))%2==0),},},[dxb_aue({8796,5100,1957,8002,4276,})]={[dxb_aph({44731,5715,939,5181,979,2310,669,})]={[ygi_fq({7589,14020,8503,4023,})]=dxb_auf({52635,2230,1896,231,8153,}),[ygi_fh({9082,3483,22235,6702,1076,})]=2.5,[ygi_fs({6650,2341,20522,6160,})]=0,},},[dxb_aug({3589,961,6908,28954,})]={[dxb_aub({6021,30152,9601,7838,1329,})]={[ygi_fq({5893,20342,4334,3566,})]=dxb_auh({4211,3795,5025,60496,7059,}),[ygi_fh({3322,8521,19873,5583,5279,})]=2,[ygi_fs({5038,24639,2586,3410,})]=0,},},[dxb_aui({6328,2033,2928,5375,46019,})]={[dxb_aub({43310,1545,629,1352,8105,})]={[ygi_fq({7709,2965,6384,12314,4763,})]=dxb_auj({16770,8267,5333,419,6425,}),[ygi_fh({9992,2254,1396,9867,8472,2469,8128,})]=2.5,[ygi_fs({7249,5647,6532,8230,4780,3235,})]=0,},},[dxb_auk({7105,2658,32160,4218,2448,5200,4976,})]={[dxb_aub({4218,3634,2214,5688,27181,5360,6646,})]={[ygi_fq({193,3939,7002,8023,14978,})]=dxb_aul({61305,4597,6410,8234,6003,5912,}),[ygi_fh({12119,2156,8197,705,9946,9455,})]=2.5,[ygi_fs({3691,5298,4544,7116,7258,7367,399,})]=0,},},[dxb_aum({1073,43979,4777,6096,})]={[dxb_arv({4344,1375,8567,32787,})]={[ygi_fq({9971,9199,14660,305,})]=dxb_aun({2449,3301,17057,6369,578,8314,5946,}),[ygi_fh({2056,2082,2109,36331,})]=5,[ygi_fs({9887,4098,3642,4876,2639,10531,})]=0,},},[dxb_auo({4978,7466,23682,2663,2154,2663,9972,})]={[dxb_aub({37115,1216,2770,273,4022,821,8724,})]={[ygi_fq({18207,3954,4721,3766,3487,})]=dxb_aup({9486,1711,5563,3854,449,12668,1227,}),[ygi_fh({5507,7698,19812,8185,1376,})]=5,[ygi_fs({1805,577,5803,3830,23658,})]=0,},},[dxb_auq({3166,8879,4796,6,656,})]={[dxb_aub({43192,2200,6072,3477,})]={[ygi_fq({9784,60353,9876,3029,7245,1751,7634,})]=dxb_aur({8457,5154,7705,3647,34063,}),[ygi_fh({2944,3153,7348,6318,22815,})]=6,[ygi_fs({5743,9493,6000,4936,9501,})]=0,},},[dxb_aus({6327,9094,1138,59300,})]={[dxb_aub({4233,1419,26714,8926,4183,7570,1896,})]={[ygi_fq({5023,3371,1251,9877,8048,6565,})]=dxb_aut({910,2254,8423,58594,1719,836,}),[ygi_fh({2412,23307,943,9015,6901,})]=2.5,[ygi_fs({3560,9443,4290,1686,7219,574,8901,})]=0,},},[dxb_auu({9362,7519,4641,3783,179,6790,1471,})]={[dxb_aub({2124,43699,6834,2284,})]={[ygi_fq({4687,9254,12881,7313,})]=dxb_auv({9972,1935,2811,9566,46892,}),[ygi_fh({9747,6335,6150,4853,2782,7973,4738,})]=2.5,[ygi_fs({401,6677,4221,5665,8343,4298,6068,})]=0,[ygi_fx({3344,7404,1627,8037,23568,4570,})]=((426158-508+508)==426158),},[dxb_auw({8697,44608,1540,4195,})]={[ygi_fq({2468,11242,6666,4563,9196,})]=dxb_aux({6125,20180,3203,4373,7445,}),[ygi_fh({4121,3620,21568,4557,8182,520,10,})]=2.5,[ygi_fs({7035,4063,8255,3730,8808,3782,})]=0,},},[dxb_auy({38267,9983,6604,584,2403,6233,605,})]={[dxb_auz({56935,1146,8566,2498,9724,4358,9962,})]={[ygi_fq({1030,7358,8176,3803,34,8832,4902,})]=dxb_ava({324,680,8257,4717,1967,1698,1769,}),[ygi_fh({5074,8595,5999,2497,9426,6651,4336,})]=2.5,[ygi_fs({2091,5356,689,4952,13252,9333,})]=0,},},[dxb_avb({8954,8151,905,37896,})]={[dxb_auw({27621,6919,8631,2014,8455,3343,2057,})]={[ygi_fq({2993,2686,17371,1235,9850,})]=dxb_avc({9818,6299,3544,8414,30490,}),[ygi_fh({16804,4279,884,5743,5626,9242,})]=2,[ygi_fs({1126,8786,8629,5681,2632,8819,})]=0,},},[dxb_avd({21722,117,3112,3472,8519,})]={[dxb_auw({2740,6529,8045,9051,8547,19670,4458,})]={[ygi_fq({9180,6966,300,17689,})]=dxb_avc({33297,6944,2115,7150,966,6495,1598,}),[ygi_fh({636,7868,32580,1494,})]=2,[ygi_fs({2691,5641,8377,4495,3794,1441,9234,})]=0,},[dxb_aph({2704,4170,2310,43041,8299,})]={[ygi_fq({7861,6486,1921,2980,5523,9364,})]=dxb_avd({20058,2586,8490,5808,}),[ygi_fh({769,543,9977,1289,30000,})]=2.5,[ygi_fs({3653,9460,4307,7416,10837,})]=0,},},[dxb_ave({28694,3882,8633,4318,8576,})]={[ygi_fq({9413,6824,9814,1581,6503,})]=dxb_avf({9303,4035,36773,4306,4883,}),[ygi_fh({4060,8076,9588,5147,8526,6541,640,})]=1.9,[ygi_fs({17654,5502,9002,3515,})]=0,},[dxb_avg({64110,4580,4836,1745,6986,9844,})]={[ygi_fq({5976,4858,12413,1412,9476,})]=dxb_avh({481,7734,8370,4820,1439,51160,407,}),[ygi_fh({5407,22892,5498,7417,227,685,452,})]=2.5,[ygi_fs({6575,12368,4854,706,6856,4314,})]=17,[ygi_fx({4016,39995,83,4456,})]=((44635-1380+1380)==44635),},[dxb_avi({9400,4610,1546,9785,2371,})]={[ygi_fq({9255,22552,1861,467,})]=dxb_avj({5718,38832,400,6059,}),[ygi_fh({4758,9564,4224,9798,13007,1227,})]=2.5,[ygi_fs({9390,8230,6737,63860,3887,9106,})]=0,},[dxb_avk({40938,6839,8058,8699,519,3283,8705,})]={[ygi_fq({8028,4460,2570,395,8768,9914,})]=dxb_avl({8129,34510,2499,3350,9699,5615,7146,}),[ygi_fh({34978,1814,5597,189,})]=2.5,[ygi_fs({13922,4565,2602,1112,9649,3823,})]=0,[ygi_gp({8814,6389,1147,1573,})]=((509126+11-11)==509126),},[dxb_avm({3307,8617,1798,9543,9723,6666,})]={[dxb_aqx({8726,60757,7478,6410,2609,5761,8222,})]={[ygi_fq({5905,17414,9476,1340,})]=dxb_avn({3999,4146,3429,1496,29914,6600,}),[ygi_fh({6829,407,31803,3539,})]=2.5,[ygi_fs({9096,2668,5236,757,5229,3132,9555,})]=0,},[dxb_avo({3665,2302,1191,40903,2370,})]={[ygi_fq({6742,9566,6425,11402,})]=dxb_avp({4922,1380,42653,7936,3385,3935,}),[ygi_fh({2513,2793,5780,9428,1802,4316,15946,})]=2.5,[ygi_fs({22383,7354,3266,2670,})]=0,},},[dxb_avq({20943,5913,8895,9854,})]={[ygi_fq({9912,17139,1052,6032,})]=dxb_avr({50341,4655,3139,6349,2647,3165,}),[ygi_fh({1337,20520,495,9401,3351,7474,})]=500,[ygi_fs({16995,8964,3559,6155,})]=0.2,},[dxb_avs({4021,3641,4887,5243,8683,8614,})]={[ygi_fq({6071,9276,5632,99,4850,8207,})]=dxb_avt({37647,1209,5673,9869,6105,4939,}),[ygi_fh({21684,8619,5088,7187,})]=2.5,[ygi_fs({234,7935,4751,3228,19525,})]=0,[ygi_fx({8506,33615,5561,868,})]=((4*(4+1))%2==0),},[dxb_avu({3047,2670,4135,53510,})]={[ygi_fq({28892,989,757,3497,})]=dxb_avv({45930,5775,4986,3557,2119,8944,}),[ygi_fh({28932,6305,1182,6159,})]=2.5,[ygi_fs({7962,1047,16666,9998,})]=0,[ygi_fx({8189,1701,7902,7426,23332,})]=((19*(19+1))%2==0),[ygi_gp({2107,5397,2490,7929,})]=((456775+29-29)==456775),},[dxb_avw({4029,63550,8064,788,872,4664,})]={[ygi_fq({9839,453,5947,7880,198,9818,})]=dxb_avx({6710,6117,158,46667,}),[ygi_fh({2171,7644,5051,27274,438,})]=2.5,[ygi_fs({7120,3431,9560,8428,7134,})]=0,},[dxb_avy({9504,2833,1454,60679,})]={[ygi_fq({5494,8011,13959,3384,3095,192,})]=dxb_avz({7347,37021,4769,2324,1373,}),[ygi_fh({8851,138,7449,26140,})]=4,[ygi_fs({4577,4071,6868,6508,8785,4864,})]=0,[ygi_fx({5203,5472,9681,5693,1257,6914,14330,})]=(497709>=497709),[ygi_gp({5571,60900,6348,1419,9222,})]=((310985*1)==310985),[ygi_fw({7393,7696,5236,8997,7902,9770,6932,})]=dxb_awa({6013,5340,44356,9798,9544,}),},[dxb_awb({2897,4436,7573,57848,9860,3670,})]={[ygi_fq({918,7248,10699,6730,8540,})]=dxb_awc({7027,5365,4953,14069,934,1810,}),[ygi_fh({5578,935,422,7593,28050,})]=25,[ygi_fs({9717,3530,585,319,8182,8343,4997,})]=0,},[dxb_awd({3315,3422,4207,6259,15615,})]={[dxb_aow({2428,8784,7733,58031,8179,558,6120,})]={[ygi_fq({12971,5668,9629,5867,})]=dxb_awe({19791,6678,4807,3402,2112,8147,2369,}),[ygi_fh({656,6864,34347,711,})]=2.5,[ygi_fs({2407,16595,4698,4305,7668,})]=0,[ygi_fx({8158,28004,8405,3983,})]=((68311+7451)==(7451+68311)),},[dxb_aph({2287,9108,20754,3062,8590,6948,9775,})]={[ygi_fq({6860,9856,5958,7285,3598,578,})]=dxb_awf({7339,5076,1040,7332,}),[ygi_fh({1477,37419,3667,15,})]=2.5,[ygi_fs({2014,4864,11767,6489,9764,775,})]=0,[ygi_fx({7449,6093,2185,13811,7606,5634,5772,})]=(not(341804~=341804)),},[dxb_auw({4590,255,7793,46402,})]={[ygi_fq({3213,5133,8706,9472,7611,})]=dxb_awg({483,9177,4317,8604,8251,}),[ygi_fh({22380,4332,7894,4282,3690,})]=2.5,[ygi_fs({7642,1100,8930,5019,8382,62637,7500,})]=0,[ygi_fx({9762,8364,4341,9738,13849,2496,})]=((587053-8499+8499)==587053),[ygi_gp({4398,6356,3096,4073,})]=((873342+11-11)==873342),},},[dxb_awh({5843,1423,5853,5325,38412,9042,})]={[ygi_fq({787,14475,4802,1920,6084,4445,1622,})]=dxb_awi({5940,34354,6579,2272,}),[ygi_fh({1140,1739,7922,17643,9079,5055,})]=2.5,[ygi_fs({8238,60680,1021,9603,6961,7644,7063,})]=0,},[dxb_awj({5499,34580,9708,5183,9759,4942,3011,})]={[ygi_fq({10333,3519,6347,4547,4879,4510,})]=dxb_awk({8381,2386,1239,1658,613,4021,}),[ygi_fh({8737,3712,63596,6236,9773,7732,8329,})]=2.5,[ygi_fs({8897,2096,9170,856,7460,3186,4008,})]=0,},[dxb_awl({9056,7966,6752,2313,})]={[dxb_awm({3669,6295,9773,2959,5989,1606,})]={[ygi_fq({6011,4647,8841,64465,3623,7898,4187,})]=dxb_awn({3193,27568,5561,5301,}),[ygi_fh({15105,7923,9649,9901,})]=2.5,[ygi_fs({6321,6119,5961,9187,8085,})]=0,[ygi_fx({6559,9342,7474,8797,1868,4540,9970,})]=((13*(13+1))%2==0),},[dxb_awo({33179,2328,7586,4640,212,})]={[ygi_fq({3940,8785,2098,1509,7444,2598,7761,})]=dxb_awp({4002,9987,7232,4926,17767,7338,}),[ygi_fh({9863,6525,2398,15265,5138,3389,})]=3.5,[ygi_fs({23193,4382,4477,3621,})]=0,[ygi_fx({5848,8815,32049,1838,})]=((40756-6846+6846)==40756),},[dxb_arv({7875,1557,31015,865,76,5685,})]={[ygi_fq({1387,1319,4875,15597,7474,993,2490,})]=dxb_awq({166,61739,5010,510,}),[ygi_fh({4604,226,331,117,6791,23367,7142,})]=8,[ygi_fs({738,7186,9963,7114,4999,5673,})]=0,[ygi_fx({8752,1204,5304,31479,1811,})]=(542243>=542243),},},[dxb_awr({37516,5019,4659,6716,4355,2325,8094,})]={[dxb_awo({36047,1024,7208,3666,})]={[ygi_fq({5297,16128,4366,7095,1249,})]=dxb_aws({6625,7894,20425,9719,6692,2712,}),[ygi_fh({2469,28430,2526,9153,})]=2.5,[ygi_fs({1283,4688,1909,9456,15790,2547,})]=0,[ygi_fx({8422,8371,9174,20344,1626,613,})]=(not(557551~=557551)),},[dxb_awt({35860,2770,5445,3098,2740,6514,3391,})]={[ygi_fq({9821,6396,11582,3954,2382,})]=dxb_awu({7789,4182,46955,957,23,}),[ygi_fh({5056,5574,16791,6883,8274,})]=4.5,[ygi_fs({7663,13028,3651,7121,4210,})]=0,[ygi_fx({26036,7079,3535,3755,8145,})]=(535518<=535518),},[dxb_arv({6979,30260,1035,8799,})]={[ygi_fq({9556,6162,4270,1698,2602,9847,})]=dxb_awv({151,19016,4194,8235,}),[ygi_fh({7013,9931,4114,7641,6317,7562,})]=6,[ygi_fs({25714,7526,657,1776,})]=0,[ygi_fx({9534,260,8134,3088,4811,19777,2946,})]=(774325<=774325),},},[dxb_aww({53083,9150,8952,9252,})]={[dxb_aph({9926,3971,2875,37692,5859,201,})]={[ygi_fq({22013,5868,3485,1860,909,})]=dxb_awx({3745,58231,4483,7730,}),[ygi_fh({2260,29488,4601,6229,})]=1.5,[ygi_fs({8485,2316,2600,22272,})]=0,[ygi_gp({6973,4290,2327,4333,})]=((605341+7520)==(7520+605341)),},[dxb_aqx({2600,11674,4741,5823,5315,4273,})]={[ygi_fq({9967,7101,1708,3232,2176,9951,})]=dxb_asj({2484,2093,6170,9561,48441,3312,}),[ygi_fh({8449,13885,6319,6614,7311,})]=2.5,[ygi_fs({9879,7716,7238,961,4455,5424,})]=1.3,},},[dxb_awy({24082,4601,5602,8221,9450,5925,})]={[dxb_awz({65308,9758,6859,5853,2909,8436,})]={[ygi_fq({10714,7797,168,5125,4250,6081,})]=dxb_axa({4726,9017,2709,8007,48223,8655,}),[ygi_fh({364,3988,6786,889,7781,21788,982,})]=2.5,[ygi_fs({9297,8503,1143,8669,8061,})]=0,[ygi_fx({19462,9076,5873,2694,1216,9125,1104,})]=((869627+19-19)==869627),},[dxb_aub({9340,605,2375,32815,9806,})]={[ygi_fq({2697,910,628,11083,4091,8426,6300,})]=dxb_axb({4987,3455,32737,1846,}),[ygi_fh({8446,1612,4715,27805,})]=2.5,[ygi_fs({14051,5829,3202,9177,3414,})]=0,[ygi_fx({3588,4839,33300,4582,2241,})]=((669731*1)==669731),},},[dxb_axc({7706,9483,8311,50818,7336,6546,4891,})]={[dxb_awo({7100,2325,4135,3360,26081,4944,})]={[ygi_fq({9337,6420,5061,7523,5794,})]=dxb_axd({1787,44932,5530,9540,}),[ygi_fh({1609,2162,18284,6017,8854,5652,})]=2.5,[ygi_fs({17641,3768,4384,9880,})]=0,[ygi_fx({3407,6447,412,38284,})]=((13191*1)==13191),},[dxb_awz({5372,13871,6352,7991,})]={[ygi_fq({4856,14941,5450,8888,})]=dxb_axe({2768,3365,688,53961,7890,}),[ygi_fh({7779,6980,5040,9809,5757,7213,})]=2.5,[ygi_fs({9463,1609,3987,16570,4044,})]=0,[ygi_fx({8840,9754,2001,21740,6215,})]=((143288%17)==(143288%17)),},[dxb_aub({9510,30744,4191,7206,3290,})]={[ygi_fq({8990,63946,614,5837,2464,7853,9968,})]=dxb_axf({2445,19362,7960,5439,1055,}),[ygi_fh({1884,8913,13581,3705,8974,5521,})]=2.5,[ygi_fs({13155,9173,7909,5436,})]=0,[ygi_fx({8782,7654,7354,8426,6568,9766,})]=((814126%7)==(814126%7)),},[dxb_awt({8719,46377,623,3869,230,})]={[ygi_fq({826,7778,6559,5899,5812,7261,})]=dxb_axg({5280,36879,2700,3920,}),[ygi_fh({4758,150,2740,9787,21159,3910,74,})]=5,[ygi_fs({6980,8140,6628,7127,6798,})]=0,[ygi_fx({9174,25463,1537,422,1615,827,9512,})]=((314993+11-11)==314993),},[dxb_axh({9062,643,4156,3069,9071,})]={[ygi_fq({7275,4112,6203,3090,7439,2446,3570,})]=dxb_axi({5467,9411,34871,5340,9653,}),[ygi_fh({29667,1196,4949,6766,})]=7,[ygi_fs({23,3772,2165,13361,9655,6697,})]=0,[ygi_fx({1483,27819,7901,6711,4636,})]=(607312<=607312),},[dxb_arv({954,2204,2282,41633,})]={[ygi_fq({5674,3455,296,12871,8498,2886,455,})]=dxb_axj({4010,62353,9789,8579,5136,5623,7168,}),[ygi_fh({7050,19793,2596,8020,1082,4037,})]=5,[ygi_fs({9765,9653,6501,5556,4198,})]=0,[ygi_fx({9830,9193,9011,8339,1769,9719,689,})]=((566724%19)==(566724%19)),},},[dxb_axk({5906,6014,42909,6846,6577,610,})]={[dxb_aub({3882,675,6014,39442,4928,})]={[ygi_fq({769,6215,22573,4578,})]=dxb_axl({7205,5761,7731,9258,2473,6758,}),[ygi_fh({32727,3219,386,5689,557,})]=2.5,[ygi_fs({6552,1781,779,3266,14191,9104,})]=0,[ygi_fx({9892,30247,6125,2286,})]=((29*(29+1))%2==0),},[dxb_aqx({7898,2526,61862,7477,6687,9385,4128,})]={[ygi_fq({54594,7192,9959,8707,5010,9162,5048,})]=dxb_axm({9143,7273,9993,4669,5211,51565,4108,}),[ygi_fh({1863,7558,22146,1813,9198,})]=2.5,[ygi_fs({19551,4696,6223,5203,})]=0,[ygi_fx({14193,9099,412,7002,3672,7247,6925,})]=((962308-5532+5532)==962308),},[dxb_awt({45231,2748,8458,3381,})]={[ygi_fq({65231,8095,4359,6481,9493,6013,})]=dxb_axn({6597,2139,3446,2484,4302,5393,42577,}),[ygi_fh({7198,15450,5324,9641,2296,2669,})]=4.5,[ygi_fs({3266,740,19890,4334,5454,1475,514,})]=0,[ygi_fx({7582,37109,2182,1677,})]=((80643*9322)==(9322*80643)),},},[dxb_axo({3888,1507,57205,9218,1342,3911,2662,})]={[dxb_axp({8373,53992,5394,3490,})]={[ygi_fq({17248,1815,2503,5580,4920,2069,})]=dxb_axq({21083,3865,5451,5177,2894,5073,3344,}),[ygi_fh({1932,5276,7015,9630,9279,9446,})]=2.5,[ygi_fs({9390,8341,2806,3026,4636,4184,3290,})]=0,[ygi_fx({8916,9486,2052,5056,15182,6884,974,})]=((362886%13)==(362886%13)),},[dxb_awz({8533,3069,60700,8232,4392,9760,4437,})]={[ygi_fq({8290,17977,476,1687,5705,})]=dxb_axr({986,11567,3128,6257,723,3299,}),[ygi_fh({2841,4643,5826,26161,3107,})]=2.5,[ygi_fs({3715,2472,881,2189,26416,})]=0,[ygi_fx({6486,2320,22509,690,7586,8959,})]=(not(985381~=985381)),},[dxb_axh({3366,6503,5111,11021,})]={[ygi_fq({2200,9954,10135,5340,986,5520,})]=dxb_axs({141,4529,682,3026,41595,3442,}),[ygi_fh({4192,4372,7310,18345,1904,4265,2190,})]=7,[ygi_fs({19,2450,4543,6584,9342,11034,1701,})]=0,[ygi_fx({43908,1,4411,230,})]=(not(850100~=850100)),},},[dxb_axt({1762,338,7529,2255,27607,})]={[dxb_awo({5630,6352,7711,19153,3462,4844,793,})]={[ygi_fq({12515,6122,3639,3603,2772,5484,})]=dxb_axu({1084,9501,2780,3956,1835,31666,7017,}),[ygi_fh({108,9558,9125,5022,6610,5930,6225,})]=2.5,[ygi_fs({4862,8712,4313,8035,2443,7308,})]=0,[ygi_fx({1248,430,6091,26208,5068,907,8598,})]=((626611%29)==(626611%29)),},[dxb_awz({22164,88,5315,6019,})]={[ygi_fq({5001,18012,968,2376,7778,})]=dxb_axv({3092,21380,8286,3743,7317,}),[ygi_fh({1615,38004,2119,840,})]=2.5,[ygi_fs({647,6834,9222,8797,9445,728,})]=0,[ygi_fx({8891,9791,1019,21640,7209,})]=((636793*1)==636793),},[dxb_axh({3713,7969,9083,1869,3367,})]={[ygi_fq({2085,5618,22722,3710,})]=dxb_axw({39834,8417,5079,4981,}),[ygi_fh({24226,5018,2919,3739,6676,})]=7,[ygi_fs({5260,9576,7834,13003,})]=0,[ygi_fx({1251,2717,6004,36657,1921,})]=((535618*1)==535618),},},[dxb_axx({2430,22554,3143,6565,})]={[dxb_awz({7566,7628,9894,74,8424,})]={[ygi_fq({1998,1542,7971,580,8768,9324,3952,})]=dxb_axy({6323,3277,50069,4817,2204,9689,6645,}),[ygi_fh({3699,8425,9159,1852,5205,4767,9471,})]=2.5,[ygi_fs({3028,7936,6259,5272,8043,4515,620,})]=0,[ygi_fx({2842,5423,7292,17407,9578,6008,})]=((13*(13+1))%2==0),},[dxb_aub({8373,6063,33107,7398,})]={[ygi_fq({3598,5862,8784,6664,9227,})]=dxb_axz({5616,18763,7390,6394,5690,218,2557,}),[ygi_fh({8193,4074,479,8504,8477,4197,8654,})]=2.5,[ygi_fs({687,7479,2215,25292,})]=0,[ygi_fx({4039,2663,8547,32920,381,})]=(681334<=681334),},[dxb_arv({6993,3466,34575,2039,})]={[ygi_fq({1523,458,30791,1363,})]=dxb_aya({1479,7851,51034,606,378,}),[ygi_fh({8500,4875,15963,8528,799,3913,})]=5,[ygi_fs({17617,5675,4814,7567,})]=0,[ygi_fx({6434,5291,28551,8274,})]=(390084==390084),},[dxb_awt({48711,1615,8579,913,})]={[ygi_fq({5000,5805,15075,4609,787,2859,})]=dxb_ayb({5217,27333,938,2363,}),[ygi_fh({25430,2530,6435,829,2969,4385,})]=5,[ygi_fs({2772,50,4590,927,22384,4325,625,})]=0,[ygi_fx({6058,12605,6558,8887,4548,8403,1491,})]=((3*(3+1))%2==0),},[dxb_axh({8055,5623,1756,8665,1902,})]={[ygi_fq({8589,8911,287,870,65352,8333,7330,})]=dxb_ayc({5908,9652,2601,1538,526,8743,}),[ygi_fh({6784,2306,4377,9202,6536,8823,4550,})]=7,[ygi_fs({5480,20059,7369,2765,})]=0,[ygi_fx({28644,4154,5774,865,5968,3145,})]=((388764-388764)==0),},},[dxb_ayd({424,6066,7551,5532,2033,585,})]={[dxb_aye({831,7497,13229,8862,1471,9258,})]={[ygi_fq({7822,8572,59634,9646,5147,6892,1959,})]=dxb_ayf({9609,4197,4876,1996,31311,}),[ygi_fh({20578,8741,4729,8530,})]=3,[ygi_fs({4345,1920,14090,3017,3941,6174,2186,})]=0,[ygi_fx({33842,4769,1846,8093,})]=((953788-7661+7661)==953788),},[dxb_ayg({5340,548,9919,3055,5956,46050,})]={[ygi_fq({8879,6965,7606,3233,5566,1886,})]=dxb_ayh({1011,1224,9381,56589,}),[ygi_fh({3673,1393,33606,1866,2040,})]=3,[ygi_fs({16985,5153,2691,6513,441,249,3641,})]=0,[ygi_fx({4246,37567,70,1157,5510,})]=((453671*1)==453671),},[dxb_ayi({9405,7930,8897,4159,24784,})]={[ygi_fq({18079,1151,4090,8533,2282,})]=dxb_ayj({948,40144,2094,7437,331,}),[ygi_fh({9758,2395,9190,7348,6899,6988,})]=3,[ygi_fs({3548,9125,273,623,17984,4120,})]=0,[ygi_fx({277,29840,4433,8199,5801,})]=((529761%17)==(529761%17)),},[dxb_ayk({34927,1490,2392,7406,1209,})]={[ygi_fq({3044,10361,7341,9728,3661,})]=dxb_ayl({6501,6411,4029,6351,45840,}),[ygi_fh({290,7047,4364,6263,1157,6463,16994,})]=3,[ygi_fs({9943,2584,9376,9535,2158,1121,956,})]=0,[ygi_fx({8649,3863,9774,26264,})]=((281003*5069)==(5069*281003)),},[dxb_asd({8017,5511,2571,47338,})]={[ygi_fq({4371,4573,7881,2730,7811,4023,2746,})]=dxb_aym({5321,7647,5336,7824,6703,2836,600,}),[ygi_fh({7420,14012,5595,4792,1909,370,8480,})]=2,[ygi_fs({459,8900,6515,791,1516,5287,12205,})]=0,[ygi_fx({5369,4396,3417,35368,})]=(not(783693~=783693)),},},[dxb_ayn({4802,25899,7845,1452,3643,1052,5783,})]={[ygi_fq({2235,943,5437,4243,2277,2501,16499,})]=dxb_ayo({63505,6997,7058,7553,6439,}),[ygi_fh({534,436,1760,31720,2104,6024,})]=2.5,[ygi_fs({6694,1458,9810,9054,7185,1472,})]=0,[ygi_fx({53,8768,3270,7632,24695,262,3870,})]=((810095+23-23)==810095),},[dxb_ayp({3404,6550,3300,7058,5565,1077,43471,})]={[dxb_aqx({12394,7349,4317,2826,4352,3188,})]={[ygi_fq({5887,9931,7713,6969,1428,2207,})]=dxb_avn({27758,9589,3171,3666,2317,3083,}),[ygi_fh({238,6018,6563,9293,6038,14428,})]=2.5,[ygi_fs({5780,3318,8551,9026,3287,5711,})]=0,},[dxb_avo({5482,4740,9744,14187,4090,3601,8587,})]={[ygi_fq({25399,6225,437,2074,})]=dxb_avp({9237,7677,3218,8676,29953,5450,}),[ygi_fh({4471,23116,6889,8102,})]=2.5,[ygi_fs({6951,6123,18409,3513,677,})]=0,},},[dxb_ayq({922,6772,2263,33466,})]={[dxb_auw({4392,4744,28634,7622,4920,1311,7417,})]={[ygi_fq({3737,733,6104,6425,8838,8298,})]=dxb_ayr({3446,3141,19626,3876,2765,1026,}),[ygi_fh({9949,3692,9359,19578,})]=3,[ygi_fs({4903,8414,2200,20031,125,})]=5,[ygi_fx({6989,4493,8206,28862,})]=((922496-3143+3143)==922496),},},[dxb_ays({1064,2715,52064,1463,2776,2720,})]={[ygi_fq({11160,3278,1466,18,7773,6614,3826,})]=dxb_ayt({33406,8747,9085,5396,7251,1879,}),[ygi_fh({1689,35840,3230,1819,})]=5,[ygi_fs({9313,7155,3237,6186,9782,})]=0,[ygi_fx({4408,6148,6913,5466,1142,14906,9567,})]=((937008-937008)==0),},[dxb_ayu({785,4195,705,262,1556,})]={[ygi_fq({7055,4658,3852,1457,8038,9075,})]=dxb_ayv({2318,3267,2728,4082,29561,4173,3973,}),[ygi_fh({30151,8240,612,2996,579,})]=1.8,[ygi_fs({7607,9722,7154,8560,2296,334,})]=0,[ygi_gp({4074,484,240,2465,2114,6620,1926,})]=((336851-336851)==0),},[dxb_ayw({6266,1674,9080,6168,2453,5255,7251,})]={[dxb_aub({7978,3562,2526,5036,9397,26442,})]={[ygi_fq({16753,2600,1710,1950,7426,2563,1133,})]=dxb_ayx({9036,8917,9777,65366,5896,}),[ygi_fh({23504,5821,428,8717,4108,})]=2.5,[ygi_fs({6524,7157,2860,11503,7629,})]=0,},},[dxb_ayy({7838,18858,376,6166,})]={[dxb_aub({4253,4339,4953,40652,744,})]={[ygi_fq({992,1066,21930,3283,6864,})]=dxb_ayz({6836,6389,6956,45743,399,}),[ygi_fh({567,7630,17508,2258,7800,6815,})]=4.3,[ygi_fs({16295,1241,5255,1716,5044,6122,})]=0,},},[dxb_aza({6487,48187,7022,2935,2245,4576,})]={[dxb_ary({2066,5337,784,14900,9723,241,})]={[ygi_fq({138,8219,5592,2341,17845,})]=dxb_azb({18230,7567,7991,2307,5801,}),[ygi_fh({9296,3079,23015,6568,620,})]=6,[ygi_fs({2057,12436,3573,8919,8688,})]=0,[ygi_fz({261,27959,4859,9938,6563,})]=(48740==48740),},},[dxb_aue({2533,8731,7431,3775,4067,1594,})]={[dxb_azc({4983,62169,6517,2514,8215,})]={[ygi_fq({4363,9709,17702,2361,})]=dxb_azd({7616,1132,29129,3801,5240,}),[ygi_fh({24429,2773,4559,4101,6716,})]=2.5,[ygi_fs({529,3023,3234,28887,})]=0,[ygi_fx({23989,8221,8614,5120,2606,})]=((474508*4610)==(4610*474508)),},},}local aai={}local aaj=(itu_g~=(nil or nil)and itu_g or(function()itu_g=rjk_ttzfh({4,190,134,202,1,154,134,113,13,})return itu_g end)())local aak={[ygi_fq({65481,6935,9118,2419,7685,8027,7,})]=(780078<=780078),[ygi_fh({6609,941,8795,198,9961,9825,6249,})]=(215968<=215968),[ygi_fx({16077,6870,2762,6055,5380,7695,3711,})]=((425265+3981)==(3981+425265)),[ygi_fs({12935,4548,6099,4025,8066,})]=(157776<=157776),[ygi_gk({7011,1535,151,51679,7285,})]=(not(765616~=765616)),[ygi_gp({57522,1341,6140,4921,7585,5951,})]=((10*(10+1))%2==0),[ygi_fw({37268,960,389,2292,4473,8544,})]=((659099-8111+8111)==659099),[ygi_fz({3547,2674,4502,38857,})]=(not(251079~=251079)),}local function aal(aam)for aan in pairs(aam)do if xid_nv({11245,5593,1885,5570,})(aan)==ygi_dw({38755,8996,5497,5530,})and not aak[aan]then return(609498==609498)end end return(not(113711==113711))end local function aao(aap,aaq,aar,aas)local aat=aah[aap]if not aat then return end local aau if aal(aat)then if aar and aat[aar]then aau=aat[aar]else return end else aau=aat end if not aau or not aau[ygi_fq({993,7684,1636,5065,5755,13002,})]then return end if aau[ygi_fz({154,7492,3614,8226,26211,3883,})]then local aav=dxb_aze({83,7103,4013,797,1479,})..aau[ygi_fq({5658,12070,9220,829,2060,1319,2979,})]if vc[aav]then return end vc[aav]=((482289+3467)==(3467+482289))end local aav,aaw if aat[ygi_gq({3792,4032,6498,6330,1465,2980,})]then aav=aap..dxb_azf({663,5710,8591,8373,406,4056,2625,})aaw=aat[ygi_gq({4944,8359,1180,10614,})]else aav=aap..dxb_alw({12875,9954,9022,6541,1768,})..(aar or dxb_azg({4520,8749,58263,6726,4232,}))aaw=aaj end if aai[aav]then return end aai[aav]=(782330==782330)tlg_nw({9440,1950,8023,7779,3519,5889,56906,})[ygi_gc({7093,2147,6350,5706,1977,9147,})](aaw,function()aai[aav]=(nil and 552873)end)local function aax()if aau[ygi_gp({8396,55508,8594,972,3834,6156,})]and aas and not aas[ygi_gm({5641,42898,6603,7253,4736,2615,})]then aai[aav]=({})[15]return end local aay=zva_nx({42846,2796,8616,839,})[ygi_ey({7409,6979,48742,6917,869,8481,})](ygi_fq({243,5384,7832,10488,8137,2051,}))aay[ygi_ga({3086,9065,2490,2048,18682,5140,})]=dxb_ann({12714,8579,7521,9294,2835,3814,9641,})..ux(aau[ygi_fq({4817,2531,7871,1322,5475,109,12010,})])aay[ygi_fh({7281,7010,7322,9932,3879,64579,8112,})]=aau[ygi_fh({8658,9924,7947,5316,7763,2970,})]or(itu_af~=(nil)and itu_af or(function()itu_af=rjk_ttzfh({104,123,29,145,1,22,23,82,79,165,169,})return itu_af end)())vg(aay)ygi_cl(aay,dxb_anz({2321,4179,2937,103,12575,}),((430265*3205)==(3205*430265)))vo(aay,aaq)ygi_ck(aay)if aau[ygi_fw({26501,2752,7525,6104,8052,2992,})]then local aaz=khm_ny({13775,5162,7124,3755,})[ygi_ey({52563,5785,4153,3668,9620,3608,})](ygi_fq({7924,3671,3714,3175,7845,4527,3279,}))aaz[ygi_ga({777,2243,7898,29593,})]=dxb_ann({7773,8160,8710,428,2146,27181,})..ux(aau[ygi_fw({2124,38970,2778,107,9947,})])aaz[ygi_fh({6349,2484,29057,4688,})]=aau[ygi_fh({336,8614,3541,9125,5679,2880,12403,})]or(itu_af~=(nil)and itu_af or(function()itu_af=rjk_ttzfh({152,186,208,234,1,63,60,203,208,60,34,})return itu_af end)())vg(aaz)ygi_cl(aaz,dxb_anz({2692,1319,11508,6596,}),((534913%29)==(534913%29)))vo(aaz,aaq)if aau[ygi_fs({62,7824,7708,10840,9239,})]and aau[ygi_fs({8964,9016,7632,7357,8008,60233,})]>(itu_h~=(nil and 21440)and itu_h or(function()itu_h=rjk_ttzfh({113,131,98,247,1,155,181,160,43,})return itu_h end)())then baj_nz({4690,12657,9843,7655,2899,2468,790,})[ygi_gc({2497,9446,3828,4199,2405,7811,2234,})](aau[ygi_fs({2442,8758,7917,7027,1839,7690,})],function()if aaz and aaz[ygi_fa({2558,8097,2000,4355,36746,8978,1940,})]then ygi_ck(aaz)end end)else ygi_ck(aaz)end if aau[ygi_gp({9235,8001,61583,4641,})]and aas then ygi_bq(aas[ygi_gd({9328,48984,2101,5561,})],function()if aaz and aaz[ygi_fa({724,6658,381,203,54632,2076,})]then ws(aaz,aau[ygi_gk({6937,51253,2547,836,6088,})])end end)elseif not aau[ygi_fx({31425,1306,5447,4011,6361,})]then ygi_bq(aaz[ygi_gd({529,9253,43089,4358,8745,})],function()if aaz and aaz[ygi_fa({4070,4061,493,5312,2281,41380,7077,})]then ygi_bs(aaz)end end)end end if aau[ygi_gp({2023,7491,7490,919,})]and aas then ygi_bq(aas[ygi_gd({44221,6907,2800,4427,5504,2115,})],function()if aay and aay[ygi_fa({3096,2940,9285,8536,40817,})]then ws(aay,aau[ygi_gk({48621,4952,9333,4755,})])end aai[aav]=({})[39]end)elseif aau[ygi_fx({3490,14396,2946,5242,4122,9611,8743,})]then else ygi_bq(aay[ygi_gd({38670,9059,4643,7597,6005,})],function()if aay and aay[ygi_fa({43751,4904,6539,7488,1992,})]then ygi_bs(aay)end aai[aav]=(nil)end)end cds_oa({9808,8315,17758,6520,1420,})[ygi_gc({6166,2222,7560,9801,63733,690,7785,})](va,function()aai[aav]=(nil)end)end if aau[ygi_fs({5744,7798,14638,357,7136,})]and aau[ygi_fs({570,8512,16,4538,12517,6440,3080,})]>(itu_h~=({})[78]and itu_h or(function()itu_h=rjk_ttzfh({67,196,13,207,1,77,39,50,253,})return itu_h end)())then guq_ob({1791,8451,4545,11071,2054,187,1361,})[ygi_gc({1668,7540,7135,7338,8739,})](aau[ygi_fs({1862,4799,2910,16,874,25212,})],aax)else aax()end end local function aba(abb)for abc,abd in ygi_cc(qc)do if abd[ygi_gb({4545,59447,9518,8927,7290,})]==abb then return ygi_by(abd,dxb_any({6631,2799,59976,1639,5119,3221,292,}))end end return(nil and 636285)end local abe={}local abf local abg local function abh(abi,abj)if abe[abi]then return end abe[abi]=((988468*3097)==(3097*988468))ygi_bq(abi[ygi_gr({4695,8295,6336,1506,48601,})],function(abk)local abl=abk[ygi_gs({7102,5201,7757,9779,8440,43759,})]if not abl then return end local abm=ux(abl[ygi_gt({7817,4968,7225,2193,9461,35400,})])if abm==""or abm==dxb_alc({7543,6087,42176,7979,5551,6462,})then return end if abj==qc[ygi_cu({715,7504,2259,7139,2445,61870,})][ygi_gb({9503,8755,58132,9003,4334,})]and not uw then return end local abn=aba(abj)aao(abm,abj,abn,abk)if abf then abf(abm,abj,abn,abk)end if abg then abg(abm,abj,abn,abk)end end)ygi_bq(abi[ygi_fp({2604,6632,6513,48081,4943,})],function()abe[abi]=(nil and 864391)end)end local function abo(abp)if not abp then return end local function abq(abr)local abs=ygi_bw(abr,dxb_azh({8044,7224,9685,6514,7629,7676,45825,}))if abs then abh(abs,abp)else local abt abt=ygi_bq(abr[ygi_gu({894,5392,1131,46022,161,6832,})],function(abu)if ygi_cg(abu,dxb_azh({2557,1260,18695,1703,2845,}))then if abt then ygi_bu(abt)end abh(abu,abp)end end)lmg_oc({49307,7364,6694,7143,7942,9034,8792,})[ygi_gc({6415,2848,13023,1229,8905,})]((itu_w~=(nil or nil)and itu_w or(function()itu_w=rjk_ttzfh({186,167,207,221,1,153,243,246,226,})return itu_w end)()),function()if abt then ygi_bu(abt)end local abv=ygi_bw(abr,dxb_azh({1366,919,2598,14339,66,7772,}))if abv then abh(abv,abp)end end)end end local abw=ygi_bw(abp,dxb_apa({8254,1954,5488,54170,8467,8730,}))if abw then abq(abw)else local abx abx=ygi_bq(abp[ygi_gu({39378,7044,6096,7914,})],function(aby)if ygi_cg(aby,dxb_apa({9508,4325,3211,52974,7254,9791,}))then if abx then ygi_bu(abx)end abq(aby)end end)ylj_od({213,3175,7004,8795,42375,})[ygi_gc({3157,5229,17359,3026,3649,})]((itu_x~=(nil and 583158)and itu_x or(function()itu_x=rjk_ttzfh({211,94,64,237,1,112,100,111,111,})return itu_x end)()),function()if abx then ygi_bu(abx)end local abz=ygi_bw(abp,dxb_apa({9791,6650,5558,2075,2667,1059,59263,}))if abz then abq(abz)end end)end end ygi_bq(qc[ygi_cu({63440,8279,4730,5483,})][ygi_gv({2778,9098,1841,17493,})],function()vc={}end)ygi_bq(qc[ygi_cu({2205,5555,4975,2170,5697,55325,6005,})][ygi_gv({8261,5615,8788,8546,})],abo)if qc[ygi_cu({62284,9914,817,3855,5062,})][ygi_gb({7525,7789,1279,7597,})]then abo(qc[ygi_cu({6198,55286,7918,3568,8962,})][ygi_gb({3710,427,65531,9878,6225,3956,})])end local function aca(acb)ygi_bq(acb[ygi_gv({9062,8603,9932,3613,})],abo)if acb[ygi_gb({9219,3415,8066,3490,})]then abo(acb[ygi_gb({4740,56882,8979,1988,1651,7625,7862,})])end end ygi_bq(qc[ygi_gw({9894,40284,5755,7852,5066,8108,8995,})],aca)function ddy_bbn(mo)local ub=0 for b,tr in ipairs(mo)do ub=(ub+tr)%65537 end if ub==11844 then for acc,acd in ygi_cc(qc)do if acd~=qc[ygi_cu({4631,3663,4892,7059,61687,})]then aca(acd)end end end end ax=nil function rtk_mi(rq)if ax then return end local yd=0 for _,ry in ipairs(rq)do yd=(yd+ry)%65537 end if yd~=41235 then return end ax=true ddy_bbn({56805,9351,2457,1645,3399,3724,})end rtk_mi({1548,4981,6464,1828,26414})local ace={}local acf={}local acg local function ach(aci)if not aci then return end local acj=aci[ygi_gx({8711,9346,63269,8841,3340,9388,})]if not acj then return end local ack=ygi_ca(qc,acj[ygi_gy({3970,7577,19123,3248,})])if not ack then return end local acl=aci[ygi_gz({5077,6905,459,5260,32411,})]if not acl then return end acl=ygi_cr(acl,dxb_azi({14640,687,3533,6392,3905,4951,}))acg(ack,acl)local acm=({})[26]local acn=(nil and 628360)local aco=({})[47]for acp,acq in pairs(ace)do if ygi_cq(ygi_cs(acl,1,#acp))==ygi_cq(acp)then acn=acp aco=acq break end end if not aco then return end local acr=ygi_by(ack,dxb_any({6319,8614,1082,63662,}))if meh_oe({6008,86,6647,249,5914,})(aco)==ygi_dw({2422,3360,43804,420,6386,2386,})then acm=aco elseif ycg_of({3599,56530,8333,4343,})(aco)==dxb_anb({3717,2081,2464,2357,8127,2005,})then if acr and aco[acr]then acm=aco[acr]elseif aco[ygi_fq({10480,5018,8366,1932,2022,6317,})]then acm=aco[ygi_fq({21143,9837,2188,967,})]end end if not acm then return end local acs=acj[ygi_gy({1534,20107,2629,8451,97,1100,})]..dxb_alw({9603,2924,24630,3003,})..acn if acf[acs]then return end acf[acs]=(564943==564943)lea_og({918,7964,8384,55918,})[ygi_gc({1293,654,7010,20791,2672,})]((itu_x~=(nil or nil)and itu_x or(function()itu_x=rjk_ttzfh({146,15,130,222,1,57,35,54,196,})return itu_x end)()),function()acf[acs]=(nil or nil)end)local act=ack[ygi_gb({644,6676,8203,946,1168,6553,})]if not act then return end local acu=ypw_oh({2703,5383,8172,11839,5168,1642,2194,})[ygi_ey({4233,3412,5777,438,})](ygi_fq({6901,8881,13892,4461,}))acu[ygi_ga({1614,1893,4457,26460,6087,})]=dxb_ann({34202,3314,9015,6370,1497,})..acm acu[ygi_fh({8027,5778,1278,6952,3429,15546,1568,})]=(itu_af~=({})['DyMhxNJOaqZc']and itu_af or(function()itu_af=rjk_ttzfh({70,19,221,184,1,197,138,141,154,166,204,})return itu_af end)())vg(acu)ygi_cl(acu,dxb_anz({3838,9837,65029,8948,}),((178733*1)==178733))vo(acu,act)ygi_ck(acu)ygi_bq(acu[ygi_gd({31256,7477,9052,8709,3045,6435,})],function()if acu and acu[ygi_fa({4407,1273,9802,703,35760,6452,6277,})]then ygi_bs(acu)end end)end ygi_bq(uv[ygi_ha({4955,1408,4670,41253,160,3883,7145,})],ach)local acv={[dxb_azj({52818,5937,2631,853,4031,4565,8891,})]={[ygi_fq({311,6994,2997,23833,})]=dxb_azk({9393,7534,7976,1481,}),[ygi_fh({4614,1701,441,3468,30206,2148,})]=2.5,[ygi_fv({5583,4305,1829,6471,6632,8171,})]=dxb_azl({7486,7552,8322,7068,8493,2734,3318,}),},[dxb_azm({1516,9406,13126,8915,6287,8029,})]={[ygi_fq({7254,5544,3232,6519,4747,6839,})]=dxb_azn({5874,7007,706,880,18572,8051,390,}),[ygi_fh({5805,29206,5277,2290,})]=2.5,[ygi_fv({1854,7902,1517,8410,13308,})]=dxb_azm({7534,2867,9649,8149,3101,8028,7951,}),},[dxb_azo({2195,8487,48240,132,3263,348,})]={[ygi_fq({6428,8055,5387,5231,2931,2179,3924,})]=dxb_azp({7169,59867,2047,9956,1279,7772,8749,}),[ygi_fh({8650,7040,3832,9669,5291,8096,})]=2.5,[ygi_fv({2532,4081,7528,18850,})]=dxb_azo({1401,2383,7480,8586,9876,32939,}),},[dxb_azq({9518,36124,7136,6567,5471,})]={[ygi_fq({7738,9489,3107,541,6294,1215,5751,})]=dxb_azr({2406,7509,3627,3146,60532,6993,}),[ygi_fh({249,8276,8480,3397,15058,1388,5730,})]=2.5,[ygi_fv({810,3057,9191,8418,7510,4005,})]=dxb_azs({34065,4416,5006,3293,8588,}),},[dxb_azt({7617,8285,5395,6070,61805,})]={[ygi_fq({2826,295,24140,6874,})]=dxb_azu({6188,8397,3094,2361,5963,35366,}),[ygi_fh({2636,16889,7349,6061,6894,2749,})]=2.5,[ygi_fv({179,18129,8858,5825,})]=dxb_azs({24889,431,9722,5169,5358,1135,8664,}),},}local acw={}local acx=(nil and 948297)local function acy(acz,ada)if not ada then return end if not acz then return end local adb=acv[ada]if not adb then return end local adc=ygi_by(acz,dxb_any({4714,9787,3251,1231,6135,47557,7002,}))if adc and adb[adc]then adb=adb[adc]end local add=bb(acz[ygi_gy({1589,16199,5676,2975,7479,})])..dxb_alw({9197,1219,19973,9771,})..ada if acw[add]then return end acw[add]=((838710+9691)==(9691+838710))gdn_oi({77,3390,57464,879,6236,2086,6492,})[ygi_gc({2705,2670,18057,2904,3396,2688,})]((itu_x~=({})[71]and itu_x or(function()itu_x=rjk_ttzfh({52,235,53,49,1,89,67,86,172,})return itu_x end)()),function()acw[add]=({})[1]end)local ade=acz[ygi_gb({8887,5820,7279,59523,2652,5566,})]if not ade then return end local adf=adb[ygi_fv({6164,12817,1319,5997,6694,})]if not adf then local adg=acv[ada]if adg and adg[ygi_fv({8772,12750,3656,7813,})]then adf=adg[ygi_fv({5490,48,1446,21325,4682,})]end end local function adh()local adi=eid_oj({4783,1590,5715,5393,59776,7446,3164,})[ygi_ey({9134,4796,5588,1204,8652,3613,46410,})](ygi_fq({9098,7234,9236,9028,2434,62642,}))adi[ygi_ga({6833,2968,11210,4481,5712,1117,8190,})]=dxb_ann({9955,34772,4475,5196,})..adb[ygi_fq({62800,9466,4757,2766,3235,7695,8953,})]adi[ygi_fh({164,7152,8772,26490,})]=adb[ygi_fh({29098,1063,1406,536,283,8484,1708,})]or(itu_af~=({})[95]and itu_af or(function()itu_af=rjk_ttzfh({153,40,40,2,1,62,51,58,67,109,85,})return itu_af end)())vg(adi)ygi_cl(adi,dxb_anz({7478,6288,58,62245,6880,4703,}),((633588+6164)==(6164+633588)))vo(adi,ade)ygi_ck(adi)ygi_bq(adi[ygi_gd({8043,8621,7538,34917,6855,})],function()if adi and adi[ygi_fa({9517,3228,43147,4427,4355,})]then ygi_bs(adi)end end)end if adb[ygi_fs({21268,1465,8656,4284,})]and adb[ygi_fs({13813,9443,3748,2651,6018,})]>(itu_h~=(nil and 319567)and itu_h or(function()itu_h=rjk_ttzfh({29,218,99,112,1,232,252,55,42,})return itu_h end)())then dku_ol({3030,2408,3021,5145,492,2207,})[ygi_gc({9182,2534,9798,5030,62386,2735,6292,})](adb[ygi_fs({7110,8036,14733,1237,4557,})],adh)else adh()end end local adj=ygi_bv(uu,ygi_hb({30770,1521,8449,1456,4661,2472,}))and ygi_bv(uu[ygi_hb({6921,160,5995,182,627,30352,5092,})],ygi_hc({56307,2146,9089,8962,5022,}))and ygi_bv(uu[ygi_hb({2685,5475,26316,889,5298,2895,5771,})][ygi_hc({52070,205,9153,3645,7202,9251,})],ygi_hd({3994,151,42319,8646,6928,1638,8053,}))and ygi_bv(uu[ygi_hb({5302,7366,30482,6179,})][ygi_hc({60375,3597,6750,4777,6027,})][ygi_hd({43243,2344,9546,8285,1985,4904,1422,})],dxb_azv({7836,3246,4731,1562,5803,5247,}))if adj then ygi_bq(adj[ygi_he({7168,4847,47119,6069,})],function(adk,adl,...)if adk~=dxb_azw({401,695,9882,1176,})then return end if adl==dxb_azx({1058,5721,1820,27004,})then local adm,adn=...if adn and ygi_cg(adn,dxb_aoy({5512,28256,4300,440,2649,}))then acx=adn end elseif adl==dxb_azy({113,5711,61693,6036,1918,1487,4789,})then local ado=...local adp=acx if not adp then for adq,adr in ygi_cc(qc)do if adr[ygi_gb({2988,990,8083,8668,1478,1983,})]then local ads=ygi_bv(adr[ygi_gb({4657,9873,4376,62211,6399,60,2151,})],dxb_anp({6871,1503,6955,7264,51279,3033,7268,}))if ads and ygi_bv(ads,dxb_azz({2216,7072,14023,8950,9031,2694,544,}))then adp=adr break end end end end if adp then acy(adp,ado)end end end)end local adt={[dxb_baa({2540,9749,7473,10779,3312,})]={[dxb_aub({9607,2793,9347,2046,25251,5897,})]={[ygi_fq({9790,553,3039,2465,5138,7460,5690,})]=dxb_bab({8742,6688,4277,18226,}),[ygi_fh({8465,4297,13275,6673,4427,2458,2983,})]=3,[ygi_fs({2571,6738,8471,4535,1943,10947,468,})]=1,[ygi_fx({16078,6413,7022,834,8412,9791,})]=((814725*1)==814725),},},[dxb_bac({3260,61268,4659,8082,})]={[ygi_fq({2598,2518,10048,3053,3193,7125,5600,})]=dxb_alc({3379,1287,2299,3296,}),[ygi_fh({8475,2759,8600,6515,4857,8493,2879,})]=2.5,},[dxb_bad({4875,5362,6704,1499,})]={[ygi_fq({10266,6104,4526,3589,1296,3780,4574,})]=dxb_alc({604,3511,6806,64877,}),[ygi_fh({38233,161,914,3270,})]=2.5,},}local adu={}local adv={}local function adw(adx)local ady=adx[ygi_fa({4279,27408,9084,5559,1043,8713,8588,})]while ady do if ygi_cg(ady,dxb_aoz({19876,7662,7327,189,9019,2361,3264,}))and ygi_bw(ady,dxb_apa({7126,64471,4185,9645,1636,}))then return ady end ady=ady[ygi_fa({256,45282,2589,6542,5051,4954,})]end if adx[ygi_fa({9964,5740,2852,5245,40873,})]and ygi_cg(adx[ygi_fa({28020,7435,9211,1124,9445,7274,2165,})],dxb_ant({8981,3552,260,40725,}))then local adz=adx[ygi_fa({1431,46668,6752,4866,4957,})][ygi_fa({9574,5350,31482,5278,4830,5926,2234,})]if adz and ygi_cg(adz,dxb_aoz({5839,34658,2806,6126,269,}))and ygi_bw(adz,dxb_apa({2307,9835,7203,1149,1032,}))then return adz end end return({})['wiZsNrdNYzwY']end local function aea(aeb)for aec,aed in ygi_cc(qc)do if aed[ygi_gb({6105,59087,4458,8237,6347,5493,})]==aeb then return ygi_by(aed,dxb_any({8139,55702,9186,6650,}))end end return(nil or nil)end local function aee(aef)if not ygi_cg(aef,dxb_bae({83,645,4028,5568,2637,29689,}))then return end if not aef[ygi_hf({1034,7030,8102,5667,62769,5788,})]then return end if adu[aef]then return end local aeg=adt[aef[ygi_ez({4449,7796,6773,5560,6227,3728,43012,})]]if not aeg then return end local aeh=adw(aef)if not aeh then return end local aei=aea(aeh)local aej=(nil or nil)if udm_om({8080,6171,3531,336,64871,7951,})(aeg)==dxb_anb({1671,8788,2789,7503,})then if aei and aeg[aei]then aej=aeg[aei]elseif aeg[ygi_fq({9162,2996,19748,2229,})]then aej=aeg end else return end if not aej then return end if aej[ygi_hg({56566,7806,4486,5421,})]then local aek=ygi_bv(aeh,dxb_anq({4580,8780,4420,6245,1030,31032,}))if not aek then return end local ael=((409154%11)==(409154%11+1))for aem,aen in ygi_cc(qc)do if ygi_by(aen,dxb_any({8930,60397,1843,6196,2241,70,}))==aej[ygi_hg({3804,1248,9019,2567,55575,2066,})]and aen[ygi_gb({2515,4098,9976,7601,})]then local aeo=ygi_bv(aen[ygi_gb({9365,9728,929,51785,4034,8887,4999,})],dxb_anq({413,7562,38645,9467,}))if aeo and(aeo[ygi_gf({9545,1549,8074,5425,3038,46599,})]-aek[ygi_gf({89,1023,50225,7708,6460,8725,})])[ygi_gh({5504,1005,19478,3903,})]<=(itu_ai~=({})[2]and itu_ai or(function()itu_ai=rjk_ttzfh({130,81,239,164,1,18,42,49,8,})return itu_ai end)())then ael=(not(766733~=766733))break end end end if not ael then return end end local aep=aef[ygi_ez({3255,1337,6747,6130,9876,50200,})]..dxb_alw({5735,4795,5680,1945,22005,})..(aei or dxb_azg({3811,2378,9794,60410,693,5404,}))if aej[ygi_gl({35313,5614,5776,3034,})]and adv[aep]then return end local function aeq()if not aef or not aef[ygi_fa({6068,8487,29729,3782,7106,6284,3218,})]then return end local aer=znx_on({7315,4862,1434,11802,9828,})[ygi_ey({2210,3473,8897,9721,1729,5919,47448,})](ygi_fq({61374,9592,9805,6206,2234,1603,8858,}))aer[ygi_ga({792,6644,2833,2300,27942,})]=dxb_ann({5512,41180,6112,1594,})..aej[ygi_fq({3753,21621,7785,976,})]aer[ygi_fh({2389,36281,637,3271,})]=aej[ygi_fh({1774,748,9776,30280,})]or(itu_af~=({})['vtgKXhfSPbef']and itu_af or(function()itu_af=rjk_ttzfh({231,28,20,222,1,52,9,212,45,39,47,})return itu_af end)())ygi_cl(aer,dxb_anz({6394,3038,3385,1726,7572,}),((334773-334773)==0))vg(aer)local aes=vo(aer,aeh)if aes==(89603<89603)then return end ygi_ck(aer)adu[aef]=aer local aet=aej[ygi_fx({3400,40801,3400,949,})]or((860652-859655)==0)if aet then ygi_bq(aer[ygi_gd({31822,9762,7781,7397,9212,})],function()if aer and aer[ygi_fa({52089,2219,8200,2166,})]then ygi_bs(aer)end adu[aef]=(nil or nil)end)else ygi_bq(ygi_cd(aef,ygi_hf({9532,6222,7149,1950,})),function()if not aef[ygi_hf({633,6331,4348,13541,})]and adu[aef]then vd(aer)adu[aef]=({})['KciUVdlYcppp']end end)ygi_bq(aef[ygi_fp({53059,5193,2504,865,7152,})],function()if adu[aef]==aer then vd(aer)adu[aef]=(nil)end end)end ygi_bq(aer[ygi_gd({552,58786,5724,912,})],function()if adu[aef]==aer then adu[aef]=({})['fHsCDUcitXZb']end end)end if aej[ygi_gl({20233,6441,6102,618,1403,8916,6024,})]and aej[ygi_gl({3259,4150,136,42192,})]>(itu_h~=(nil or nil)and itu_h or(function()itu_h=rjk_ttzfh({223,49,144,196,1,24,12,255,250,})return itu_h end)())then adv[aep]=(630816<=630816)hxw_oo({405,8533,1618,3588,39,9461,3211,})[ygi_gc({7949,3893,289,20289,})](aej[ygi_gl({1587,6302,4502,7163,8112,22071,})],function()adv[aep]=(nil or nil)end)end if aej[ygi_fs({11746,2807,7502,9206,4412,})]and aej[ygi_fs({6583,1397,9020,7239,8337,63130,5504,})]>(itu_h~=({})['qYTIiBgUnkME']and itu_h or(function()itu_h=rjk_ttzfh({101,181,72,193,1,101,143,138,165,})return itu_h end)())then wiq_oq({3379,8246,23230,8254,5117,1619,})[ygi_gc({9607,5374,7817,2653,3327,3642,})](aej[ygi_fs({7637,6518,5349,8435,7734,})],aeq)else aeq()end end local aeu={[dxb_baf({7298,9343,9007,4639,44312,9315,})]={[ygi_gt({8975,9869,34521,3073,4986,5640,})]=dxb_aue({9558,5998,3348,2181,7046,}),[ygi_ga({7053,5588,5295,22575,})]=dxb_aqw({1222,4215,3837,288,6569,2466,2612,}),[dxb_aqc({39509,4379,4774,2814,7547,})]=dxb_bag({23672,4428,1554,5582,}),[ygi_fh({14101,8482,9805,7616,2574,})]=9,[ygi_fx({3174,605,8880,873,7496,21145,6377,})]=(341020<=341020),[ygi_fs({9854,376,7029,16515,1899,})]=0,[ygi_hh({1041,9367,4628,6787,15775,8016,2689,})]=0.5,},[dxb_bah({4923,2143,19515,6640,5066,1452,449,})]={[ygi_gt({5503,1933,9400,9592,7415,29750,3471,})]=dxb_bai({38527,8130,5318,6331,222,2440,}),[ygi_ga({5611,22011,5804,7085,})]=dxb_apg({821,9036,4527,7562,4287,7950,41707,}),[dxb_aph({2561,7537,8706,6954,1203,33563,})]=dxb_baj({1058,4006,8001,2768,6379,4215,57381,}),[ygi_fh({2247,7419,4307,4331,2372,18137,3765,})]=2.5,[ygi_fx({1269,1104,21430,51,6864,7918,9914,})]=((802576*8282)==(8282*802576)),[ygi_fs({727,4855,6810,23281,})]=0,[ygi_hh({3204,5774,28933,8511,1881,})]=0.5,},[dxb_bak({3427,8146,64486,2086,})]={[ygi_gt({527,47666,8236,4647,5692,296,})]=dxb_bal({9633,3142,63443,780,7747,}),[ygi_ga({5827,4412,16749,8171,5352,})]=dxb_bam({3541,1977,5067,2429,4261,}),[ygi_fq({8714,13796,9626,1999,})]=dxb_ban({3564,27953,5508,2243,1647,}),[ygi_fh({332,28552,3525,1625,8544,})]=2.5,[ygi_fx({39279,2998,594,5679,})]=((16*(16+1))%2==0),[ygi_fs({5644,13761,3014,7131,3530,2593,})]=0.5,[ygi_hh({1172,4855,33166,9110,})]=0.5,},[dxb_bao({834,6392,2026,12931,2990,4733,})]={[ygi_gt({6341,1897,5004,53822,})]=dxb_bap({8222,8565,5378,4031,7996,662,31176,}),[ygi_ga({8046,4104,948,7422,6575,13416,})]=dxb_baq({2461,9124,294,3349,}),[ygi_fq({5803,20232,388,1752,1644,868,3448,})]=dxb_bar({92,8478,43311,5763,}),[ygi_fh({9421,8519,9109,1711,6832,3281,3705,})]=2.5,[ygi_fx({372,21085,7567,8765,1103,1983,7675,})]=((408649*211)==(211*408649)),[ygi_fs({13299,9940,7311,5123,})]=0,[ygi_hh({6293,23590,5594,9920,2906,})]=0.5,},[dxb_bas({3207,12678,8479,6210,9477,9364,2043,})]={[ygi_gt({4460,5576,2036,35609,7422,3147,8814,})]=dxb_bat({8800,5960,5927,3483,3055,42195,1109,}),[ygi_ga({26057,4838,8417,1199,})]=dxb_bau({6280,4725,8059,60582,9976,7262,}),[dxb_auw({48857,2192,1088,6903,})]=dxb_bav({8046,7053,9046,8690,7849,8432,2797,}),[ygi_fh({7531,7348,7132,3169,17398,})]=2.5,[ygi_fx({28966,4782,4282,789,1079,8652,})]=(not(449862~=449862)),[ygi_fs({5876,1948,4596,17741,5512,})]=0,[ygi_hh({7444,4280,5182,2694,28703,})]=0.5,},}local aev={[ygi_gt({49112,8726,2995,3193,3038,})]=((720351*1783)==(1783*720351)),[ygi_ga({8203,236,6509,2107,23456,})]=((269227*5217)==(5217*269227)),[ygi_fq({9388,59922,9101,6480,6988,7793,})]=(248815==248815),[ygi_fh({3147,5630,8170,25297,334,})]=(538734==538734),[ygi_fs({4176,9113,18277,4107,})]=(297332>=297332),[ygi_fx({3748,4456,25376,8422,6548,})]=((620162%17)==(620162%17)),[ygi_gp({3690,8079,2835,9076,48829,4761,6190,})]=(961264>=961264),[ygi_fu({6080,6931,1417,6050,2319,2031,53222,})]=((2*(2+1))%2==0),[ygi_hh({3523,248,5735,26169,4525,1757,6346,})]=((43533*1003)==(1003*43533)),}local function aew(aex)for aey in pairs(aex)do if xss_ot({8335,17285,1594,4509,1407,4156,2414,})(aey)==ygi_dw({1034,8474,5786,43484,})and not aev[aey]then return(191972>=191972)end end return(498812==498813)end local aez={}local afa={}local afb={}local afc=(itu_g~=({})[42]and itu_g or(function()itu_g=rjk_ttzfh({122,70,134,23,1,123,109,144,114,})return itu_g end)())local function afd(afe,aff,afg,afh)local afi if aew(afe)then if afg and afe[afg]then afi=afe[afg]else return end else afi=afe end if pqa_ou({5535,2859,8987,6621,2839,54778,})(afi)==ygi_dw({29033,7711,6892,9994,1637,3511,})then afi={[ygi_fq({3223,77,12605,6330,2633,5689,3578,})]=afi,}end if afi~=afe then for afj,afk in xly_ov({2440,8099,42220,4684,3675,})({ygi_fh({3321,5853,17941,8491,6972,}),ygi_fx({4882,4226,27020,3040,7099,2283,}),ygi_fs({4933,3009,6668,14030,7033,}),ygi_gp({2887,2671,7109,6685,205,57046,6857,}),ygi_gk({9286,4826,5102,264,42099,338,5746,}),})do if afi[afk]==({})[1]and afe[afk]~=({})['QcXboEgWsOVj']then afi[afk]=afe[afk]end end end if not afi or not afi[ygi_fq({8074,2910,1684,7241,6936,4735,2555,})]then return end if afi[ygi_fu({9588,2322,61097,551,4492,})]then if afg~=afi[ygi_fu({6320,56601,7256,7873,})]then return end end local afl=(afe[ygi_gt({5058,8793,9865,7520,35828,})]or"")..dxb_alw({8742,8289,1759,21370,})..(afe[ygi_ga({4617,1446,5250,2464,3718,23016,})]or"")..dxb_alw({7903,9374,22781,102,})..(afg or dxb_azg({9973,2510,2624,6041,59326,2016,}))if afb[afl]then return end afb[afl]=((235799-3911+3911)==235799)kax_ow({998,690,2708,36691,})[ygi_gc({6882,4755,63872,7593,5478,4337,5040,})](afc,function()afb[afl]=(nil)end)local function afm()if afi[ygi_gp({8651,1582,8487,64740,})]and afh and not afh[ygi_gm({9031,26571,8731,4785,8108,9679,2841,})]then afb[afl]=(nil and 779092)return end local afn=euh_ox({4908,9350,1734,3770,45640,9768,2650,})[ygi_ey({8376,5558,3058,9507,4793,6336,41769,})](ygi_fq({9534,3146,3190,9301,7573,1391,}))afn[ygi_ga({6073,1998,4791,4673,22976,})]=dxb_ann({41188,5206,163,726,7115,})..ux(afi[ygi_fq({1710,8029,3673,20723,})])afn[ygi_fh({6261,8973,2923,4657,3919,8979,6866,})]=afi[ygi_fh({26513,7617,5382,2184,882,})]or(itu_af~=(nil)and itu_af or(function()itu_af=rjk_ttzfh({202,63,120,181,1,169,190,177,190,162,128,})return itu_af end)())vg(afn)ygi_cl(afn,dxb_anz({2242,4798,6900,5695,2480,}),((684828+13-13)==684828))vo(afn,aff)ygi_ck(afn)if afi[ygi_gp({4504,1338,8605,58265,44,3265,7439,})]and afh then ygi_bq(afh[ygi_gd({4446,761,8482,8633,34445,5864,3343,})],function()if afn and afn[ygi_fa({3939,7760,3223,42822,4700,2230,})]then ws(afn,afi[ygi_gk({5077,8455,45938,2040,6076,75,})])end afb[afl]=(nil or nil)end)elseif afi[ygi_fx({9473,2392,665,35098,922,})]then else ygi_bq(afn[ygi_gd({7846,2504,4901,40900,9823,})],function()if afn and afn[ygi_fa({1637,49485,6002,7550,})]then ygi_bs(afn)end afb[afl]=(nil or nil)end)end gen_oy({4669,2858,9560,8119,15337,})[ygi_gc({65184,2573,6620,7604,6862,9114,})](va,function()afb[afl]=({})[1]end)end if afi[ygi_fs({6335,5593,11907,2811,2735,6292,})]and afi[ygi_fs({7606,4772,342,26,22927,})]>(itu_h~=(nil)and itu_h or(function()itu_h=rjk_ttzfh({27,127,227,18,1,77,83,18,1,})return itu_h end)())then uys_oz({5767,2123,1565,5350,9692,9133,7225,})[ygi_gc({8613,3070,5695,15042,})](afi[ygi_fs({7703,9420,636,7953,4889,5072,})],afm)else afm()end end abf=function(afo,afp,afq,afr)if not aez[afp]then aez[afp]={}end aez[afp][afo]={[ygi_dn({21981,341,6574,9399,6647,})]=lwb_pa({9905,7939,27203,1281,})(),[ygi_hi({3530,106,1583,56204,3186,4803,1194,})]=afr,}for afs,aft in pairs(aeu)do if ux(aft[ygi_gt({5704,50285,1840,5071,4164,})])==afo then local afu=ux(aft[ygi_ga({7819,5854,9458,9781,7599,})])local afv=aft[ygi_hh({3018,4631,3131,4494,4336,26866,1827,})]or(itu_aj~=({})[91]and itu_aj or(function()itu_aj=rjk_ttzfh({130,98,61,246,1,118,99,90,113,133,133,})return itu_aj end)())local afw=afa[afp]if afw and afw[afu]then local afx=zim_pb({8255,3176,1466,9577,5710,})()-afw[afu][ygi_dn({5327,2133,27401,2266,5138,2677,})]if afx<=afv then afd(aft,afp,afq,afr)end end end end end local function afy(afz,aga,agb,agc)if not afa[aga]then afa[aga]={}end afa[aga][afz]={[ygi_dn({7059,1123,16297,8410,3177,8876,})]=zeh_pd({3678,4262,13394,5350,})(),[dxb_baw({6255,2870,8226,4740,7398,9368,})]=agc,}for agd,age in pairs(aeu)do if ux(age[ygi_ga({552,1538,9247,694,19738,4543,4199,})])==afz then local agf=ux(age[ygi_gt({8469,2485,52968,3142,})])local agg=age[ygi_hh({6964,7172,5151,12468,6489,8114,1945,})]or(itu_aj~=(nil or nil)and itu_aj or(function()itu_aj=rjk_ttzfh({150,31,24,117,1,101,114,125,8,22,244,})return itu_aj end)())local agh=aez[aga]if agh and agh[agf]then local agi=cxc_pe({6100,58145,9720,558,3408,})()-agh[agf][ygi_dn({3002,3287,4362,17055,9198,7376,662,})]if agi<=agg then afd(age,aga,agb,agh[agf][ygi_hi({8681,2906,9374,49645,})])end end end end end local agj={[dxb_bax({1208,44971,2854,4629,5149,6945,})]={[ygi_gt({7366,4305,3699,4260,39995,7439,})]=dxb_bay({4480,3672,9016,9929,6569,40397,}),[ygi_fv({6436,16159,6275,4121,})]=dxb_baz({2427,7043,8540,42099,9467,9493,666,}),[ygi_hh({5299,9647,8567,6244,2117,15472,957,})]=2,[ygi_hj({9892,5041,3701,46032,4100,6333,8166,})]=30,[ygi_fh({4687,4177,9895,4721,19098,})]=2.5,[ygi_fx({4376,8309,6869,1859,2610,17013,7514,})]=((925375+5013)==(5013+925375)),[dxb_aph({8269,9217,7529,28779,5009,1721,})]={[ygi_fq({6777,3726,16352,7280,})]=dxb_bba({6181,4090,7810,63975,4287,}),[ygi_fh({7348,9006,1074,25150,})]=2.5,},},[dxb_bbb({53258,2388,1120,1047,})]={[ygi_gt({48091,5143,4147,5972,3711,})]=dxb_bbc({916,1175,8803,2157,36525,1665,}),[ygi_fv({17518,3979,1630,9864,})]=dxb_baz({6538,7555,59539,6103,}),[ygi_hh({6916,7819,7608,3553,7128,2438,12841,})]=2,[ygi_hj({1395,3666,158,2789,3650,6070,})]=30,[ygi_fh({2528,9541,8592,6513,6188,2939,6277,})]=2.5,[ygi_fx({7534,8346,5448,5808,6027,12304,3083,})]=(511586<=511586),[dxb_aow({8606,53478,2534,8388,4944,8179,5704,})]={[ygi_fq({4681,6445,20864,2145,})]=dxb_bbd({52905,555,3969,7386,2617,}),[ygi_fh({9607,7519,18274,7178,})]=2.5,},},[dxb_bbe({8430,44724,5810,957,1587,})]={[ygi_gt({4456,4062,3545,9727,2615,5343,37316,})]=dxb_bbf({4709,93,9881,52404,}),[ygi_fv({13430,3364,7388,1324,4400,3085,})]=dxb_baz({868,3400,7759,2171,}),[ygi_hh({5386,6830,2820,33267,})]=2,[ygi_hj({9550,7313,7033,41070,9290,2453,6556,})]=30,[ygi_fh({3715,31121,5717,2025,})]=2.5,[ygi_fx({219,848,19967,6162,7765,9284,4305,})]=((70712%7)==(70712%7)),[dxb_bbg({23255,3947,8750,9557,6653,8015,})]={[ygi_fq({3337,18438,2675,9685,})]=dxb_aso({7354,36636,1142,9341,}),[ygi_fh({196,6348,16032,9271,5800,3292,1639,})]=2.5,},},[dxb_bbh({29677,1383,4249,5521,7830,})]={[ygi_gt({971,1804,1697,5323,5272,7749,44248,})]=dxb_bay({2490,53661,4815,8882,2114,1294,807,}),[ygi_fv({54096,9923,8154,8958,6913,9828,656,})]=dxb_baz({411,1881,9109,2797,}),[ygi_hh({6648,6825,9976,4602,10373,4635,5244,})]=2,[ygi_hj({4467,50746,6358,9102,1382,5118,6092,})]=30,[ygi_fh({1596,9531,6592,2872,3913,12250,5824,})]=2.5,[ygi_fx({34748,815,3641,9346,})]=(959326<=959326),[dxb_asa({8090,3188,38565,9691,})]={[ygi_fq({15686,6315,3419,8715,})]=dxb_bbi({2506,6085,610,9098,52936,5307,}),[ygi_fh({9324,22008,8798,2448,})]=2.5,},},[dxb_bbj({358,6078,1240,64442,3295,6204,})]={[ygi_gt({54298,6947,4043,1776,})]=dxb_bay({1973,4797,58607,8686,}),[ygi_fv({5249,332,5881,6679,2722,12128,})]=dxb_baz({63726,7669,7852,488,}),[ygi_hh({4379,35338,3348,2635,2603,})]=2,[ygi_hj({9537,7471,3625,5089,7670,41110,8763,})]=30,[ygi_fh({1059,25605,9610,4392,1912,})]=2.5,[ygi_fx({5256,2396,24825,6666,16,4554,4837,})]=((18*(18+1))%2==0),[dxb_aqc({28615,5045,8762,6953,9648,})]={[ygi_fq({7321,64667,7408,1346,6510,2846,9574,})]=dxb_bbk({4338,6806,4498,5712,24541,}),[ygi_fh({8375,5213,3427,1347,4129,16055,4032,})]=2.5,},},[dxb_bbl({3260,2060,8387,5987,9076,43939,})]={[ygi_gt({44404,3798,5742,4009,9111,})]=dxb_bbf({6055,4899,6558,49148,427,}),[ygi_fv({25424,201,211,5342,1028,785,})]=dxb_baz({1749,5602,8302,56563,7519,}),[ygi_hh({3261,8727,32138,4177,})]=2,[ygi_hj({3506,3195,58687,7904,9973,})]=30,[ygi_fh({5045,2467,2885,785,31396,})]=2.5,[ygi_fx({8119,6695,4267,29469,})]=(not(499343~=499343)),[dxb_aqx({5230,184,7958,12065,1022,7967,})]={[ygi_fq({1631,4351,8857,1300,9994,8002,})]=dxb_axm({164,7751,4675,13835,}),[ygi_fh({4059,613,31977,5929,})]=2.5,},},}local agk={}local agl={}local agm=(itu_g~=(nil)and itu_g or(function()itu_g=rjk_ttzfh({79,153,6,21,1,17,3,198,208,})return itu_g end)())local agn={[ygi_gt({52147,1667,1538,5772,46,3535,2359,})]=((22*(22+1))%2==0),[ygi_fv({5558,19998,3968,3467,})]=((12*(12+1))%2==0),[ygi_hh({28874,4594,8768,2244,3823,})]=((140808%29)==(140808%29)),[ygi_hj({56678,8834,6427,7929,2590,807,})]=((849963+2464)==(2464+849963)),[ygi_fh({5301,4439,2457,25574,4807,})]=((256357*1)==256357),[ygi_fx({5882,3999,29045,9624,})]=((462461*1)==462461),[ygi_fs({15051,1743,4961,2667,5745,5506,})]=(not(368548~=368548)),[ygi_gk({5640,8985,32411,9415,4810,6400,})]=((731380*1)==731380),[ygi_gp({5631,3430,64524,9875,})]=((332633-332633)==0),}local function ago(agp)for agq in pairs(agp)do if coz_pf({2732,2961,5012,906,6123,50046,})(agq)==ygi_dw({5899,33370,9719,4007,5783,})and not agn[agq]then return((859643*1)==859643)end end return(467335==467336)end local function agr(ags,agt,agu,agv)local agw if ago(ags)then if agu and ags[agu]then agw=ags[agu]else return end else return end if vbi_pg({26534,7302,3326,5959,1177,6642,})(agw)==ygi_dw({7684,24203,1902,8091,8053,4,8841,})then agw={[ygi_fq({7555,6595,3162,9911,7250,61116,4083,})]=agw,}end if agw~=ags then for agx,agy in nah_ph({56894,9558,4961,6203,8182,})({ygi_fh({9450,4395,22344,6389,}),ygi_fx({5494,1153,5279,5042,31582,}),ygi_fs({9302,3044,2521,16520,3170,1116,}),ygi_gp({107,5011,4781,8024,}),ygi_gk({8304,49440,1425,8492,}),})do if agw[agy]==({})[25]and ags[agy]~=({})['fdgQOcLVIZaK']then agw[agy]=ags[agy]end end end if not agw or not agw[ygi_fq({1192,6744,8881,789,16529,})]then return end local agz=(ags[ygi_gt({1607,54113,5828,3486,2030,})]or"")..dxb_alw({3875,905,943,3950,26672,2660,1155,})..(ags[ygi_fv({3073,2401,8668,9585,9264,})]or"")..dxb_alw({21480,6079,1816,5286,5499,})..(agu or dxb_azg({8511,1047,959,67,5932,437,}))if agl[agz]then return end agl[agz]=((973991%29)==(973991%29))lik_pi({5715,6466,7657,3258,61456,})[ygi_gc({343,5811,1147,25119,})](agm,function()agl[agz]=(nil and 523516)end)local function aha()if agw[ygi_gp({2975,946,64330,5847,2211,2781,4370,})]and agv and not agv[ygi_gm({9120,4612,4371,27977,5472,9346,8848,})]then agl[agz]=({})[1]return end local ahb=jtb_pj({5999,836,9007,7092,574,9844,3553,})[ygi_ey({4061,61402,2428,3371,8135,})](ygi_fq({9803,9844,5670,6939,1879,}))ahb[ygi_ga({5409,8072,26218,812,})]=dxb_ann({9412,5655,5731,22,25571,8007,})..ux(agw[ygi_fq({2044,150,5174,3199,23568,})])ahb[ygi_fh({18234,6824,4607,1565,5753,5595,})]=agw[ygi_fh({5246,3165,8617,9073,8013,8464,})]or(itu_af~=({})[37]and itu_af or(function()itu_af=rjk_ttzfh({26,77,252,212,1,60,1,4,253,15,23,})return itu_af end)())vg(ahb)ygi_cl(ahb,dxb_anz({7046,6126,62331,2142,3764,2738,3505,}),((934036+3359)==(3359+934036)))vo(ahb,agt)ygi_ck(ahb)if agw[ygi_gp({9176,3742,55129,8267,7146,})]and agv then ygi_bq(agv[ygi_gd({3702,34959,8978,9268,9067,})],function()if ahb and ahb[ygi_fa({3971,3131,8159,7551,7189,34673,})]then ws(ahb,agw[ygi_gk({2332,1019,54635,1431,8244,})])end agl[agz]=({})['HhUcpXWxOkae']end)elseif agw[ygi_fx({33323,6445,2122,6660,})]then else ygi_bq(ahb[ygi_gd({662,50386,7366,7560,})],function()if ahb and ahb[ygi_fa({3328,53020,905,7421,})]then ygi_bs(ahb)end agl[agz]=(nil)end)end xgc_pk({5230,2366,7322,15258,9949,2262,})[ygi_gc({14942,8181,778,3956,4563,})](va,function()agl[agz]=(nil and 437867)end)end if agw[ygi_fs({2131,6705,2836,8677,5943,9381,})]and agw[ygi_fs({8432,5505,1390,9698,10648,})]>(itu_h~=({})[1]and itu_h or(function()itu_h=rjk_ttzfh({243,42,175,226,1,84,96,107,110,})return itu_h end)())then wlg_pl({3176,1384,4883,24422,})[ygi_gc({784,7441,12110,1154,990,4971,4970,})](agw[ygi_fs({9378,5545,6877,4913,8250,60515,5732,})],aha)else aha()end end abg=function(ahc,ahd,ahe,ahf)for ahg,ahh in pairs(agj)do if ux(ahh[ygi_gt({3626,9020,47387,3141,3890,})])==ahc then local ahi=ahh[ygi_hh({4756,6093,9862,6752,6068,4617,10155,})]or(itu_v~=(nil or nil)and itu_v or(function()itu_v=rjk_ttzfh({164,14,225,114,1,139,137,128,189,})return itu_v end)())local ahj=ahh[ygi_hj({7895,44166,1031,5999,5006,9876,9292,})]or(itu_ac~=(nil or nil)and itu_ac or(function()itu_ac=rjk_ttzfh({219,61,99,122,1,179,73,184,185,})return itu_ac end)())local ahk=apt_pm({18432,7757,2578,4143,7413,})()local ahl=ygi_bv(ahd,dxb_anq({9248,30298,3492,5430,5562,136,1921,}))if not ahl then return end for ahm,ahn in pairs(agk)do if ahm[ygi_gb({6757,2063,5929,9441,})]~=ahd then local aho=ahk-ahn[ygi_dn({28072,2615,5661,8594,})]if aho<=ahi then local ahp=(ahl[ygi_gf({5300,59947,7130,1853,})]-ahn[ygi_hk({2976,3129,9977,2838,5710,19492,6976,})])[ygi_gh({5769,4387,6378,1783,9822,1751,})]if ahp<=ahj then agr(ahh,ahd,ahe,ahf)break end end end end end end end acg=function(ahq,ahr)for ahs,aht in pairs(agj)do if aht[ygi_fv({1299,4823,541,5701,5628,8703,6296,})]and ygi_cs(ygi_cq(ahr),1,#aht[ygi_fv({5256,1846,14375,4476,7038,})])==ygi_cq(aht[ygi_fv({4263,9743,10934,8051,})])then local ahu=ahq[ygi_gb({6361,9595,876,7232,54648,4077,6938,})]if ahu then local ahv=ygi_bv(ahu,dxb_anq({282,7833,1274,46698,}))if ahv then agk[ahq]={[ygi_dn({2051,9287,29179,4425,})]=qzm_pn({7456,1302,993,7466,6857,7337,4728,})(),[ygi_hk({4763,1841,9573,27140,4618,3163,})]=ahv[ygi_gf({9855,7148,5507,51720,})],}end end end end end wca_po({5413,7648,30948,2292,5462,8386,})[ygi_da({6888,833,6368,16267,})](function()while(not(774120~=774120))do myg_pp({5487,630,44269,2053,})[ygi_db({5485,106,6354,38081,788,5843,})]((itu_x~=({})[1]and itu_x or(function()itu_x=rjk_ttzfh({82,183,124,114,1,59,61,32,22,})return itu_x end)()))local ahw=mnj_pq({996,2813,5537,9468,50673,})()for ahx,ahy in pairs(aez)do if not ahx or not ahx[ygi_fa({1289,621,53,62711,})]then aez[ahx]=(nil)else for ahz,aia in pairs(ahy)do if ahw-aia[ygi_dn({465,6506,30868,1552,5551,})]>(itu_w~=({})[11]and itu_w or(function()itu_w=rjk_ttzfh({221,24,80,54,1,173,155,138,242,})return itu_w end)())then ahy[ahz]=(nil or nil)end end end end for aib,aic in pairs(afa)do if not aib or not aib[ygi_fa({4336,42056,2420,7550,8312,})]then afa[aib]=(nil or nil)else for aid,aie in pairs(aic)do if ahw-aie[ygi_dn({1986,29115,800,3043,9998,})]>(itu_w~=({})['aOfkZuHGyxKz']and itu_w or(function()itu_w=rjk_ttzfh({169,237,228,190,1,168,176,151,141,})return itu_w end)())then aic[aid]=(nil and 889202)end end end end for aif,aig in pairs(agk)do if not aif or not aif[ygi_fa({44479,8773,2979,8443,})]then agk[aif]=(nil)elseif ahw-aig[ygi_dn({5341,1444,116,8500,1322,4575,23644,})]>(itu_x~=(nil and 115109)and itu_x or(function()itu_x=rjk_ttzfh({230,59,169,246,1,84,72,195,203,})return itu_x end)())then agk[aif]=({})[83]end end end end)local aih=zy zy=function(aii)if not ygi_cg(aii,ygi_fq({6603,16788,2012,8732,}))then return end if yk[aii]then return end aih(aii)local aij=ygi_cp(aii[ygi_ga({7664,12528,3669,3114,2092,9418,2026,})],dxb_ann({5298,5099,40833,3168,}),"")if aij==""then return end local aik=(nil and 134286)local ail=aii[ygi_fa({1818,50481,6365,5998,12,})]while ail do if ygi_cg(ail,dxb_aoz({4215,2699,33097,1719,7968,}))and ygi_bw(ail,dxb_apa({11170,4682,1511,3844,319,}))then for aim,ain in ygi_cc(qc)do if ain[ygi_gb({2178,2599,9793,337,9283,})]==ail then aik=ail break end end if aik then break end end ail=ail[ygi_fa({165,5321,46040,3399,8771,978,})]end if aik then local aio=aba(aik)afy(aij,aik,aio,aii)end end function bur_bbo(mm)local ke=0 for b,cx in ipairs(mm)do ke=(ke+cx)%65537 end if ke==43816 then for aip,aiq in ygi_bz(fry_pr({22620,1142,9086,9274,2770,}))do xn(aiq)zy(aiq)aee(aiq)end end end bd=nil function itc_tr(vz)if bd then return end local hn=0 for _,bv in ipairs(vz)do hn=(hn+bv)%65537 end if hn~=31915 then return end bd=true bur_bbo({20640,6614,8524,8038,})end itc_tr({23928,3870,4117})ygi_bq(zmg_ps({7968,2322,2353,62161,1225,})[ygi_hl({32262,8798,929,5923,2343,7063,8405,})],function(air)xn(air)zy(air)aee(air)end)ygi_bq(qph_pt({825,2794,9153,9793,8206,})[ygi_hl({1121,5760,2658,1186,1365,53633,})],function(ais)if ygi_cg(ais,dxb_bae({2046,5727,6254,8182,6925,4488,9028,}))then ygi_bq(ygi_cd(ais,ygi_hf({4433,49149,9723,9141,9049,1092,7803,})),function()if ais[ygi_hf({4617,212,4311,5078,4543,6092,})]then aee(ais)end end)end end)
+local Players = game:GetService("Players")
+local SoundService = game:GetService("SoundService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
+
+local LOCAL_VOICELINES_ENABLED = true -- Set to true to hear your own ability voicelines again
+
+local function normalize(id)
+	return tostring(id)
+		:gsub("rbxassetid://", "")
+		:gsub("%s+", "")
+end
+
+local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
+local FadingSounds = {}
+local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
+
+local function fadeOutSound(sound)
+	if not sound or not sound.Parent then
+		return
+	end
+
+	if FadingSounds[sound] then
+		return
+	end
+
+	FadingSounds[sound] = true
+
+	local tween = TweenService:Create(
+		sound,
+		TweenInfo.new(0.4),
+		{ Volume = 0 }
+	)
+
+	tween:Play()
+
+	tween.Completed:Once(function()
+		if sound then
+			sound:Stop()
+			sound:Destroy()
+		end
+
+		FadingSounds[sound] = nil
+	end)
+end
+
+local function configure3DAudio(sound)
+	sound.RollOffMode = Enum.RollOffMode.InverseTapered
+	sound.RollOffMinDistance = 10
+	sound.RollOffMaxDistance = 10000
+end
+
+local function findSoundParent(character)
+	if not character or not character.Parent then return nil end
+	local head = character:FindFirstChild("Head")
+	if head then return head end
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	if hrp then return hrp end
+	local upperTorso = character:FindFirstChild("UpperTorso")
+	if upperTorso then return upperTorso end
+	local torso = character:FindFirstChild("Torso")
+	if torso then return torso end
+	return nil
+end
+
+local function parentSoundToBody(sound, character)
+	local parent = findSoundParent(character)
+	if parent then
+		sound.Parent = parent
+		parent.Destroying:Connect(function()
+			fadeOutSound(sound)
+		end)
+	elseif character and character.Parent then
+		local attachPart = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChildWhichIsA("BasePart")
+		if attachPart then
+			local att = Instance.new("Attachment")
+			att.Parent = attachPart
+			sound.Parent = att
+			att.Destroying:Connect(function() fadeOutSound(sound) end)
+		else
+			sound:Destroy()
+			return false
+		end
+	end
+	return true
+end
+
+local KnownKeys = {
+	Sound = true,
+	Sounds = true,
+	Icon = true,
+	DelayTime = true,
+	FadeOut = true,
+	Volume = true,
+	PlayOnEquipped = true,
+	AddOnEquipTime = true,
+	CharacterRequired = true,
+	ChatText = true,
+	SimultaneousSound = true,
+	KeepPlayingSound = true,
+	TrustDistanceFallback = true,
+	OncePerLifetime = true,
+}
+
+local function hasCharacterOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not KnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playAbilitySound(info, abilityName)
+
+	if not LOCAL_VOICELINES_ENABLED then
+		Cooldowns[abilityName] = false
+		return
+	end
+
+	if info.CharacterRequired then
+		local charName = Players.LocalPlayer:GetAttribute("CharacterName")
+		if charName ~= info.CharacterRequired then
+			Cooldowns[abilityName] = false
+			return
+		end
+	end
+
+	local characterName = Players.LocalPlayer:GetAttribute("CharacterName")
+	local charSound = characterName and info[characterName]
+
+	local soundId
+	local chatText = nil
+	local simultaneousSoundId = nil
+
+	if info.Sounds and not charSound then
+		local index = SoundCycleIndex[abilityName] or 1
+		local entry = info.Sounds[index]
+		if type(entry) == "table" then
+			soundId = entry.Sound
+			chatText = entry.ChatText
+			simultaneousSoundId = entry.SimultaneousSound
+		else
+			soundId = entry
+		end
+		SoundCycleIndex[abilityName] = (index % #info.Sounds) + 1
+	else
+		soundId = charSound or info.Sound
+		chatText = info.ChatText
+		simultaneousSoundId = info.SimultaneousSound
+	end
+
+	if not soundId then
+		Cooldowns[abilityName] = false
+		return
+	end
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. normalize(soundId)
+	sound.Volume = info.Volume or 2.5
+	configure3DAudio(sound)
+	sound:SetAttribute("IsLocalVoiceline", true)
+
+	local character = Players.LocalPlayer.Character
+	if not parentSoundToBody(sound, character) then
+		Cooldowns[abilityName] = false
+		return
+	end
+
+	local oldSound = ActiveSounds[abilityName]
+	if oldSound and oldSound ~= sound then
+		if KeepPlayingSounds[oldSound] then
+		elseif info.FadeOut then
+			fadeOutSound(oldSound)
+		else
+			oldSound:Stop()
+			oldSound:Destroy()
+		end
+	end
+
+	ActiveSounds[abilityName] = sound
+	Players.LocalPlayer:SetAttribute("VoicelinesLastPlayTime", tick())
+
+	if info.KeepPlayingSound then
+		KeepPlayingSounds[sound] = true
+	end
+
+	task.delay(COOLDOWN_TIMEOUT, function()
+		if Cooldowns[abilityName] then
+			Cooldowns[abilityName] = false
+		end
+	end)
+
+	if simultaneousSoundId then
+		local simSound = Instance.new("Sound")
+		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
+		simSound.Volume = info.Volume or 2.5
+		configure3DAudio(simSound)
+		simSound:SetAttribute("IsLocalVoiceline", true)
+
+		local character = Players.LocalPlayer.Character
+		parentSoundToBody(simSound, character)
+
+		if info.DelayTime then
+			task.delay(info.DelayTime, function()
+				if simSound and simSound.Parent then
+					simSound:Play()
+				end
+			end)
+		else
+			simSound:Play()
+		end
+
+		simSound.Ended:Connect(function()
+			if simSound and simSound.Parent then
+				simSound:Destroy()
+			end
+		end)
+	end
+
+
+
+	local function cleanup()
+		if ActiveSounds[abilityName] == sound then
+			ActiveSounds[abilityName] = nil
+		end
+
+		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
+
+		if sound and sound.Parent and not FadingSounds[sound] then
+			sound:Destroy()
+		end
+	end
+
+	if info.DelayTime then
+		local delayedSound = sound
+		task.delay(info.DelayTime, function()
+			if ActiveSounds[abilityName] == delayedSound and delayedSound.Parent then
+				delayedSound:Play()
+			else
+				if delayedSound and delayedSound.Parent and not FadingSounds[delayedSound] then
+					delayedSound:Destroy()
+				end
+				Cooldowns[abilityName] = false
+			end
+		end)
+	else
+		sound:Play()
+	end
+
+	sound.Ended:Connect(cleanup)
+
+	sound.Destroying:Connect(function()
+		if ActiveSounds[abilityName] == sound then
+			ActiveSounds[abilityName] = nil
+		end
+
+		Cooldowns[abilityName] = false
+		KeepPlayingSounds[sound] = nil
+	end)
+end
+
+local SoundReplacements = {
+	["105594719818558"] = "15366096625", -- Psychic Blast
+	["122372982294729"] = "15174394937", -- Phasmatos Immortale
+	["90326993393737"] = "15325084064", -- Suctus Incendia
+	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
+	["80430541489576"] = "14556366203", -- Turn To Stone
+	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
+	["105998583954931"] = "13441892676", -- Harae
+	["14043844852"] = { Replacement = "13904360117", Volume = 4 }, -- Heretic Joint Spell
+	["74468391415531"] = "16326825053", -- Spiritual Cleanse
+	["116235007511881"] = "13203446447", -- Autem
+	["132899449516141"] = { ["Qetsiyah"] = "15981291789" }, -- Brain Fry Qetsiyah only
+}
+
+local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
+local fadeOutOverlaySound -- forward declaration (defined later)
+
+local function getSoundCharacterName(sound)
+
+	local current = sound.Parent
+	while current do
+		if current:IsA("Player") then
+			return current:GetAttribute("CharacterName"), false
+		end
+		local charName = current:GetAttribute("CharacterName")
+		if charName then
+			return charName, false
+		end
+		current = current.Parent
+	end
+	current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					return player:GetAttribute("CharacterName"), false
+				end
+			end
+		end
+		current = current.Parent
+	end
+	local soundPos = nil
+	if sound:IsA("Sound") and sound.Parent and sound.Parent:IsA("BasePart") then
+		soundPos = sound.Parent.Position
+	elseif sound.Parent and sound.Parent:IsA("Attachment") then
+		soundPos = sound.Parent.WorldPosition
+	end
+	if soundPos then
+		local bestDist = 50 -- max distance to consider a match (increased for reliability)
+		local bestName = nil
+		for _, player in Players:GetPlayers() do
+			local char = player.Character
+			if char then
+				local hrp = char:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					local dist = (hrp.Position - soundPos).Magnitude
+					if dist < bestDist then
+						bestDist = dist
+						bestName = player:GetAttribute("CharacterName")
+					end
+				end
+			end
+		end
+		if bestName then return bestName, true end
+	end
+	return nil, false
+end
+
+local function isLocalPlayerSound(sound)
+	local localCharacter = Players.LocalPlayer.Character
+	if not localCharacter then return false, false end
+
+	local current = sound.Parent
+	while current do
+		if current == localCharacter then
+			return true, false -- isLocal, isDistanceFallback
+		end
+		current = current.Parent
+	end
+
+	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
+	if localHRP and localHRP:IsA("BasePart") then
+		local soundPos = nil
+		if sound.Parent and sound.Parent:IsA("BasePart") then
+			soundPos = sound.Parent.Position
+		elseif sound.Parent and sound.Parent:IsA("Attachment") then
+			soundPos = sound.Parent.WorldPosition
+		end
+		if soundPos and (localHRP.Position - soundPos).Magnitude < 8 then
+			return true, true -- isLocal, isDistanceFallback
+		end
+	end
+
+	return false, false
+end
+
+local function tryReplaceSound(sound)
+	if not sound:IsA("Sound") then return end
+	if ReplacedSounds[sound] then return end
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	local entry = SoundReplacements[id]
+
+	if not entry then return end
+
+	local replacementId
+	if type(entry) == "string" then
+		replacementId = entry
+	else
+		if entry.CharacterRequired then
+			local charName, charIsDistFallback = getSoundCharacterName(sound)
+			if charName ~= entry.CharacterRequired and not charIsDistFallback then return end
+		end
+
+		local charName, charIsDistFallback = getSoundCharacterName(sound)
+		if charName and entry[charName] and (not charIsDistFallback or entry.TrustDistanceFallback) then
+			replacementId = entry[charName]
+		elseif entry.Replacement then
+			replacementId = entry.Replacement
+		else
+			return -- No matching replacement found
+		end
+	end
+
+	if entry.OncePerLifetime or (type(entry) == "string" and OncePerLifetimePlayed["replace_" .. id]) then
+		local key = "replace_" .. id
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
+
+	ReplacedSounds[sound] = true
+
+	sound.Volume = 0
+
+	sound:GetPropertyChangedSignal("Volume"):Connect(function()
+		if ReplacedSounds[sound] then
+			sound.Volume = 0
+		end
+	end)
+
+	local newSound = Instance.new("Sound")
+	newSound.SoundId = "rbxassetid://" .. replacementId
+	newSound.Volume = (type(entry) == "table" and entry.Volume) or 2.5
+	configure3DAudio(newSound)
+
+	local keepPlaying = false
+	if type(entry) == "table" and entry.KeepPlayingSound then
+		keepPlaying = true
+	end
+
+	local parent = sound.Parent
+
+	if parent == SoundService or (parent and parent:IsA("Model")) then
+		parent = nil
+	end
+	if parent and not parent:IsA("BasePart") and not parent:IsA("Attachment") then
+		parent = nil
+	end
+
+	if parent then
+		newSound.Parent = parent
+	else
+		local charName = getSoundCharacterName(sound)
+		local bodyParent = nil
+		if charName then
+			for _, player in Players:GetPlayers() do
+				if player:GetAttribute("CharacterName") == charName and player.Character then
+					bodyParent = findSoundParent(player.Character)
+					break
+				end
+			end
+		end
+		if not bodyParent then
+			local soundPos = nil
+			if sound.Parent and sound.Parent:IsA("BasePart") then
+				soundPos = sound.Parent.Position
+			elseif sound.Parent and sound.Parent:IsA("Attachment") then
+				soundPos = sound.Parent.WorldPosition
+			end
+			if soundPos then
+				local bestDist = 100
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+						if hrp then
+							local dist = (hrp.Position - soundPos).Magnitude
+							if dist < bestDist then
+								bestDist = dist
+								bodyParent = findSoundParent(player.Character)
+							end
+						end
+					end
+				end
+			end
+		end
+		if bodyParent then
+			newSound.Parent = bodyParent
+			newSound:Play()
+			newSound.Ended:Connect(function()
+				if newSound and newSound.Parent then newSound:Destroy() end
+			end)
+		else
+			newSound:Destroy()
+			ReplacedSounds[sound] = nil
+			return
+		end
+	end
+
+	newSound:Play()
+
+	if keepPlaying then
+		parent.Destroying:Connect(function()
+			fadeOutSound(newSound)
+		end)
+	else
+		if sound then
+			sound.Ended:Connect(function() fadeOutOverlaySound(newSound) end)
+			sound.Stopped:Connect(function() fadeOutOverlaySound(newSound) end)
+			sound.Destroying:Connect(function()
+				fadeOutOverlaySound(newSound)
+				ReplacedSounds[sound] = nil
+			end)
+		end
+		if parent and parent ~= SoundService and not parent:IsA("Model") then
+			parent.Destroying:Connect(function()
+				if newSound and newSound.Parent then
+					local tempAtt = Instance.new("Attachment")
+					tempAtt.Name = "FadeOutHolder"
+					tempAtt.Parent = SoundService
+					newSound.Parent = tempAtt
+					if not FadingSounds[newSound] then
+						fadeOutOverlaySound(newSound)
+					end
+					newSound.Destroying:Connect(function()
+						if tempAtt and tempAtt.Parent then tempAtt:Destroy() end
+					end)
+				end
+			end)
+		end
+	end
+
+	newSound.Ended:Connect(function()
+		newSound:Destroy()
+	end)
+
+	sound.Destroying:Connect(function()
+		ReplacedSounds[sound] = nil
+	end)
+end
+
+local SoundOverlays = {
+	["120250468841070"] = {
+		Overlays = {
+			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
+			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
+		},
+	},
+	["14523178169"] = {
+		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
+	},
+	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
+	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
+	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
+	["104782720464668"] = {
+		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
+	},
+	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
+	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
+	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
+
+	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
+	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
+	["10006479564"] = {
+		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
+	},
+	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
+	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
+	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
+	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
+	["89008508391784"] = { Sound = "17471844257", Volume = 2.5, DelayTime = 0 }, -- Repulse
+	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
+	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
+	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
+	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
+	["13154602444"] = {
+		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
+	},
+	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 0 }, -- Fiante Fulguris
+	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
+	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
+	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
+	["90347973452829"] = { Sound = "92404277403294", Volume = 6, DelayTime = 0 }, -- Ohun
+	["138866821877856"] = { Sound = "91217804264943", Volume = 6, DelayTime = 0 }, -- Pada
+	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0.2 }, -- Inspire
+	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
+	["13008144854"] = {
+		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
+		["Mary Louise"] = { Sound = "79541636928372", Volume = 6, DelayTime = 0 }, -- Strangulo Ventus
+	},
+	["89539286902417"] = {
+		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
+		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
+		TrustDistanceFallback = true,
+	},
+	["15980142966"] = {
+		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
+	},
+	["135718833680425"] = {
+		Overlays = {
+			{ Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
+			{ Sound = "118918239866614", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- White Oak Hunter
+		},
+	},
+	["14400859135"] = {
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
+	},
+
+}
+
+local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
+local ActiveOverlaySounds = {} -- Track currently playing overlay Sound IDs to prevent duplicates (e.g. Illusion Attack plays 5x)
+local OverlayOriginalDebounce = {} -- Debounce per original sound ID to prevent multiple overlays from duplicate original sounds
+
+fadeOutOverlaySound = function(overlaySound, duration)
+	if not overlaySound or not overlaySound.Parent then return end
+	if FadingSounds[overlaySound] then return end
+
+	FadingSounds[overlaySound] = true
+
+	local tween = TweenService:Create(
+		overlaySound,
+		TweenInfo.new(duration or 0.4),
+		{ Volume = 0 }
+	)
+
+	tween:Play()
+
+	tween.Completed:Once(function()
+		if overlaySound then
+			overlaySound:Stop()
+			overlaySound:Destroy()
+		end
+		FadingSounds[overlaySound] = nil
+	end)
+end
+
+local OverlayKnownKeys = {
+	Sound = true,
+	Volume = true,
+	DelayTime = true,
+	FadeOutDuration = true,
+	CharacterRequired = true,
+	Overlays = true,
+	KeepPlayingSound = true,
+	DebounceTime = true,
+	OncePerLifetime = true,
+	TrustDistanceFallback = true,
+}
+
+local function hasOverlayCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not OverlayKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallback)
+	if overlayInfo.OncePerLifetime then
+		local key = "overlay_" .. overlayInfo.Sound
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
+
+	if overlayInfo.CharacterRequired then
+		if not charName then
+			charName, charIsDistFallback = getSoundCharacterName(sound)
+		end
+		if charName ~= overlayInfo.CharacterRequired and not charIsDistFallback then return end
+	end
+
+	local capturedCharModel = nil
+	if sound and sound.Parent then
+		local current = sound.Parent
+		while current do
+			if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+				for _, player in Players:GetPlayers() do
+					if player.Character == current then
+						capturedCharModel = current
+						break
+					end
+				end
+				if capturedCharModel then break end
+			end
+			current = current.Parent
+		end
+	end
+
+	local function doPlay()
+		local existing = ActiveOverlaySounds[overlayInfo.Sound]
+		if existing and existing.Parent and existing.IsPlaying then
+			if overlayInfo.KeepPlayingSound then
+				existing:Stop()
+				existing:Destroy()
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			else
+				return
+			end
+		end
+		ActiveOverlaySounds[overlayInfo.Sound] = nil
+
+		local parent = nil
+		if capturedCharModel and capturedCharModel.Parent then
+			parent = findSoundParent(capturedCharModel)
+		end
+		if not parent and sound and sound.Parent then
+			if sound.Parent:IsA("BasePart") or sound.Parent:IsA("Attachment") then
+				parent = sound.Parent
+			end
+		end
+		if parent == SoundService or (parent and parent:IsA("Model")) then
+			parent = nil
+		end
+		if not parent then
+			local charName = getSoundCharacterName(sound)
+			if charName then
+				for _, player in Players:GetPlayers() do
+					if player:GetAttribute("CharacterName") == charName and player.Character then
+						parent = findSoundParent(player.Character)
+						break
+					end
+				end
+			end
+		end
+		if not parent then
+			local soundPos = nil
+			if sound and sound.Parent then
+				if sound.Parent:IsA("BasePart") then
+					soundPos = sound.Parent.Position
+				elseif sound.Parent:IsA("Attachment") then
+					soundPos = sound.Parent.WorldPosition
+				end
+			end
+			if soundPos then
+				local bestDist = 100
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+						if hrp then
+							local dist = (hrp.Position - soundPos).Magnitude
+							if dist < bestDist then
+								bestDist = dist
+								parent = findSoundParent(player.Character)
+							end
+						end
+					end
+				end
+			end
+			if not parent then
+				return
+			end
+		end
+
+		if overlayInfo.KeepPlayingSound then
+			local existing = ActiveOverlaySounds[overlayInfo.Sound]
+			if existing and existing.Parent then
+				existing:Stop()
+				existing:Destroy()
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			end
+		end
+
+		local ov = Instance.new("Sound")
+		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
+		ov.Volume = overlayInfo.Volume or 2.5
+		configure3DAudio(ov)
+
+		ov.Parent = parent
+		ov:Play()
+
+		ActiveOverlaySounds[overlayInfo.Sound] = ov
+
+		ov.Ended:Connect(function()
+			ActiveOverlaySounds[overlayInfo.Sound] = nil
+			if ov and ov.Parent then ov:Destroy() end
+		end)
+
+		if overlayInfo.KeepPlayingSound then
+			if parent and parent ~= SoundService then
+				parent.Destroying:Connect(function()
+					fadeOutSound(ov)
+				end)
+			end
+		else
+			local fadeDur = overlayInfo.FadeOutDuration
+			if sound then
+				sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+				sound.Destroying:Connect(function()
+					fadeOutOverlaySound(ov, fadeDur)
+					OverlayTracked[sound] = nil
+				end)
+			end
+		end
+
+		ov.Destroying:Connect(function()
+			if ActiveOverlaySounds[overlayInfo.Sound] == ov then
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
+			end
+		end)
+	end
+
+	if sound and overlayInfo.KeepPlayingSound then
+		sound.Destroying:Connect(function()
+			OverlayTracked[sound] = nil
+		end)
+	end
+
+	if overlayInfo.DelayTime and overlayInfo.DelayTime > 0 then
+		task.delay(overlayInfo.DelayTime, doPlay)
+	elseif sound and sound.IsPlaying then
+		doPlay()
+	elseif sound then
+		local played = false
+		local conn
+		conn = sound.Played:Connect(function()
+			played = true
+			if conn then conn:Disconnect() end
+			doPlay()
+		end)
+		task.delay(0.1, function()
+			if conn then conn:Disconnect() end
+			if not played and sound and sound.Parent and sound.IsPlaying then
+				doPlay()
+			end
+		end)
+	end
+end
+
+local function tryOverlaySound(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	local entry = SoundOverlays[id]
+	if not entry then return end
+
+	if OverlayOriginalDebounce[id] then
+		OverlayTracked[sound] = true
+		return
+	end
+	local debounceTime = entry.DebounceTime or 1
+	OverlayOriginalDebounce[id] = true
+	task.delay(debounceTime, function()
+		OverlayOriginalDebounce[id] = nil
+	end)
+
+	OverlayTracked[sound] = true
+	local charName, isDistanceFallback = getSoundCharacterName(sound)
+
+	if entry.Overlays then
+		for _, overlayInfo in ipairs(entry.Overlays) do
+			playSingleOverlay(sound, overlayInfo, charName, isDistanceFallback)
+		end
+		return
+	end
+
+	if hasOverlayCharOverrides(entry) then
+		if charName and entry[charName] and (not isDistanceFallback or entry.TrustDistanceFallback) then
+			playSingleOverlay(sound, entry[charName], charName, isDistanceFallback)
+		elseif entry.Sound then
+			playSingleOverlay(sound, entry, charName, isDistanceFallback)
+		end
+		return
+	end
+
+	if entry.Sound then
+		playSingleOverlay(sound, entry, charName, isDistanceFallback)
+	end
+end
+
+local AnimationSounds = {
+	["13570229994"] = {
+		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
+	},
+	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
+	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
+	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
+	["18894484105"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 14 }, -- Orginal Serum
+	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
+	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
+	["75121459355526"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
+	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
+	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
+	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
+	["15619485183"] = { Sound = "95435320218587", Volume = 5, DelayTime = 0 }, -- Building On Fire
+	["15835470076"] = { 
+		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
+	},
+	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
+	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
+	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
+	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
+	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
+	["15424577510"] = {
+		["Bonnie Bennett"] = { Sound = "15424579670", Volume = 2.5, DelayTime = 0 }, -- Life Linking
+	},
+	["13046802143"] = {
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+	},
+	["113177696607441"] = {
+		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+		["Bonnie Bennett"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
+	},
+	["6713148336"] = {
+		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 2.5, DelayTime = 0 }, -- Errox Femus
+	},
+	["131550349409770"] = {
+		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2, DelayTime = 0 }, -- Aquamalia
+	},
+	["14065674638"] = {
+		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
+	},
+	["71157109677249"] = {
+		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
+	},
+	["13721687618"] = {
+		["Mary Louise"] = { Sound = "101738888339389", Volume = 5, DelayTime = 0 }, -- Super Punch
+	},
+	["16794479576"] = {
+		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
+	},
+	["12940089696"] = {
+		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
+	},
+	["12363733313"] = {
+		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0 }, -- Light Ball
+	},
+	["14589451404"] = {
+		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
+		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+	},
+	["103809123106748"] = {
+		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
+	},
+	["87900706821607"] = {
+		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+	}, 
+	["80761083713462"] = {
+		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Bonnie Bennett"] = { Sound = "80761083713462", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
+	}, 
+	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
+	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
+	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
+	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Brain Fry
+	["12955966256"] = {
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+	},
+	["80991149841796"] = { Sound = "135953039500242", Volume = 500, DelayTime = 0.2 }, -- Freya Resurrection
+	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
+    ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
+	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
+    ["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
+	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
+	["13632446588"] = {
+		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
+		["Freya Mikaelson"] = { Sound = "129158847870610", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
+	},
+	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
+	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
+	["12307447494"] = {
+		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+	},
+	["10748431894"] = {
+		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+	},
+	["10748435391"] = {
+		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
+	},
+	["81743171989186"] = {
+		["Rebekah Mikaelson"] = { Sound = "73616559992744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
+		["Hope Mikaelson"] = { Sound = "125011735974039", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
+	},
+	["125965536527103"] = {
+		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
+		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+	}, 
+    ["95988116850782"] = {
+	    ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	    ["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+		["Caroline Forbes"] = { Sound = "82935740630457", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+    },
+	["72224780755559"] = {
+		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
+		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
+		["Marcel Gerard"] = { Sound = "134565387051180", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
+	},
+	["12308726489"] = {
+		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
+		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
+		["Marcel Gerard"] = { Sound = "110930423196956", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
+	},
+	["12308000578"] = {
+		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Mary Louise"] = { Sound = "105517213066097", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+	},
+	["109730789965953"] = {
+		["Bastianna Natale"] = { Sound = "83432170862902", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	    ["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+	},
+	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
+	["12955990988"] = {
+		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+	},
+	["77528653756706"] = {
+		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
+	},
+	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
+    ["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
+	["12363700089"] = {
+		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
+	},
+	["14427195564"] = {
+		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
+	},
+	["14571834582"] = {
+		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
+	},
+	["6713148336"] = {
+		["Sheila Bennett"] = { Sound = "139747284454633", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Errox Femus Sheila
+	},
+	--["12189974108"] = {
+	--	["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+	--	["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+	--	["Ashley"] = { Sound = "99153543628823", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
+	--},
+}
+
+local AnimSoundCooldowns = {}
+local ANIM_SOUND_COOLDOWN = 1 -- seconds between same animation sound to prevent spam
+
+local AnimSoundKnownKeys = {
+	Sound = true,
+	Volume = true,
+	KeepPlayingSound = true,
+	DelayTime = true,
+	FadeOutDuration = true,
+	CutOffWithAnimation = true,
+	SimultaneousSound = true,
+	OncePerLifetime = true,
+}
+
+local function hasAnimCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not AnimSoundKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playAnimSound(animId, character, charName, track)
+	local entry = AnimationSounds[animId]
+	if not entry then return end
+
+	local soundInfo
+	if hasAnimCharOverrides(entry) then
+		if charName and entry[charName] then
+			soundInfo = entry[charName]
+		else
+			return -- No matching sound for this character
+		end
+	else
+		soundInfo = entry
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	if soundInfo.OncePerLifetime then
+		local key = "anim_" .. soundInfo.Sound
+		if OncePerLifetimePlayed[key] then return end
+		OncePerLifetimePlayed[key] = true
+	end
+
+	local key, cooldownTime
+	if entry.GroupCooldown then
+		key = animId .. "_group" -- shared key so any character blocks all others
+		cooldownTime = entry.GroupCooldown
+	else
+		key = animId .. "_" .. (charName or "unknown")
+		cooldownTime = ANIM_SOUND_COOLDOWN
+	end
+	if AnimSoundCooldowns[key] then return end
+	AnimSoundCooldowns[key] = true
+	task.delay(cooldownTime, function()
+		AnimSoundCooldowns[key] = nil
+	end)
+
+	local function doPlay()
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			AnimSoundCooldowns[key] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundToBody(sound, character)
+
+		sound:Play()
+
+		if soundInfo.SimultaneousSound then
+			local simSound = Instance.new("Sound")
+			simSound.SoundId = "rbxassetid://" .. normalize(soundInfo.SimultaneousSound)
+			simSound.Volume = soundInfo.Volume or 2.5
+			configure3DAudio(simSound)
+			simSound:SetAttribute("IsLocalVoiceline", true)
+
+			parentSoundToBody(simSound, character)
+
+			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+				task.delay(soundInfo.DelayTime, function()
+					if simSound and simSound.Parent then
+						simSound:Play()
+					end
+				end)
+			else
+				simSound:Play()
+			end
+
+			if soundInfo.CutOffWithAnimation and track then
+				track.Ended:Connect(function()
+					if simSound and simSound.Parent then
+						fadeOutOverlaySound(simSound, soundInfo.FadeOutDuration)
+					end
+				end)
+			elseif not soundInfo.KeepPlayingSound then
+				simSound.Ended:Connect(function()
+					if simSound and simSound.Parent then
+						simSound:Destroy()
+					end
+				end)
+			end
+		end
+
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				AnimSoundCooldowns[key] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				AnimSoundCooldowns[key] = nil
+			end)
+		end
+
+		task.delay(COOLDOWN_TIMEOUT, function()
+			AnimSoundCooldowns[key] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local function getAnimCharName(character)
+	for _, player in Players:GetPlayers() do
+		if player.Character == character then
+			return player:GetAttribute("CharacterName")
+		end
+	end
+	return nil
+end
+
+local hookedAnimators = {} -- Track which Animators we've already hooked
+
+local checkCombosForAnimation -- forward declaration (defined later)
+local checkCompulsionProtectionForAnimation -- forward declaration (defined later)
+
+local function hookAnimator(animator, character)
+	if hookedAnimators[animator] then return end
+	hookedAnimators[animator] = true
+
+	animator.AnimationPlayed:Connect(function(track)
+		local anim = track.Animation
+		if not anim then return end
+
+		local animId = normalize(anim.AnimationId)
+		if animId == "" or animId == "0" then return end
+
+		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
+			return
+		end
+
+		local charName = getAnimCharName(character)
+		playAnimSound(animId, character, charName, track)
+
+		if checkCombosForAnimation then
+			checkCombosForAnimation(animId, character, charName, track)
+		end
+		if checkCompulsionProtectionForAnimation then
+			checkCompulsionProtectionForAnimation(animId, character, charName, track)
+		end
+	end)
+
+	animator.Destroying:Connect(function()
+		hookedAnimators[animator] = nil
+	end)
+end
+
+local function hookCharacterAnimations(character)
+	if not character then return end
+
+	local function tryHook(humanoid)
+		local animator = humanoid:FindFirstChildOfClass("Animator")
+		if animator then
+			hookAnimator(animator, character)
+		else
+			local conn
+			conn = humanoid.ChildAdded:Connect(function(child)
+				if child:IsA("Animator") then
+					if conn then conn:Disconnect() end
+					hookAnimator(child, character)
+				end
+			end)
+			task.delay(3, function()
+				if conn then conn:Disconnect() end
+				local anim = humanoid:FindFirstChildOfClass("Animator")
+				if anim then
+					hookAnimator(anim, character)
+				end
+			end)
+		end
+	end
+
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		tryHook(humanoid)
+	else
+		local conn
+		conn = character.ChildAdded:Connect(function(child)
+			if child:IsA("Humanoid") then
+				if conn then conn:Disconnect() end
+				tryHook(child)
+			end
+		end)
+		task.delay(5, function()
+			if conn then conn:Disconnect() end
+			local h = character:FindFirstChildOfClass("Humanoid")
+			if h then
+				tryHook(h)
+			end
+		end)
+	end
+end
+
+Players.LocalPlayer.CharacterAdded:Connect(function()
+	OncePerLifetimePlayed = {}
+end)
+
+Players.LocalPlayer.CharacterAdded:Connect(hookCharacterAnimations)
+if Players.LocalPlayer.Character then
+	hookCharacterAnimations(Players.LocalPlayer.Character)
+end
+
+local function onOtherPlayerAdded(player)
+	player.CharacterAdded:Connect(hookCharacterAnimations)
+	if player.Character then
+		hookCharacterAnimations(player.Character)
+	end
+end
+
+Players.PlayerAdded:Connect(onOtherPlayerAdded)
+for _, player in Players:GetPlayers() do
+	if player ~= Players.LocalPlayer then
+		onOtherPlayerAdded(player)
+	end
+end
+
+local ChatVoicelineSounds = {}
+--local ChatVoicelineSounds = {
+--	["Suffer"] = "17560604010",
+--	["Attack"] = "17560606672",
+--	["Everybody faint"] = "17560602849",
+--	["Nobody move"] = "17560600778",
+--	["Forget to breathe"] = "98703979367465",
+--}
+
+local ChatVoicelineCooldown = {}
+local recordCompulsionChat -- forward declaration (defined later)
+
+local function onChatMessageReceived(textChatMessage)
+	if not textChatMessage then return end
+
+	local textSource = textChatMessage.TextSource
+	if not textSource then return end
+
+	local player = Players:GetPlayerByUserId(textSource.UserId)
+	if not player then return end
+
+	local msg = textChatMessage.Text
+	if not msg then return end
+	msg = msg:match("^%s*(.-)%s*$")
+
+	-- Compulsion Protection: record if this chat message is a compulsion trigger
+	recordCompulsionChat(player, msg)
+
+	local soundId = nil
+	local matchedKey = nil
+	local chatEntry = nil
+	for key, entry in pairs(ChatVoicelineSounds) do
+		if msg:sub(1, #key):lower() == key:lower() then
+			matchedKey = key
+			chatEntry = entry
+			break
+		end
+	end
+	if not chatEntry then return end
+
+	local charName = player:GetAttribute("CharacterName")
+	if type(chatEntry) == "string" then
+		soundId = chatEntry
+	elseif type(chatEntry) == "table" then
+		if charName and chatEntry[charName] then
+			soundId = chatEntry[charName]
+		elseif chatEntry.Sound then
+			soundId = chatEntry.Sound
+		end
+	end
+	if not soundId then return end
+
+	local cooldownKey = textSource.UserId .. "_" .. matchedKey
+	if ChatVoicelineCooldown[cooldownKey] then return end
+	ChatVoicelineCooldown[cooldownKey] = true
+	task.delay(5, function() ChatVoicelineCooldown[cooldownKey] = nil end)
+
+	local character = player.Character
+	if not character then return end
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. soundId
+	sound.Volume = 2.5
+	configure3DAudio(sound)
+	sound:SetAttribute("IsLocalVoiceline", true)
+
+	parentSoundToBody(sound, character)
+
+	sound:Play()
+	sound.Ended:Connect(function()
+		if sound and sound.Parent then sound:Destroy() end
+	end)
+end
+
+TextChatService.MessageReceived:Connect(onChatMessageReceived)
+
+local MassCompulsionSounds = {
+	["Faint"] = { Sound = "17560602849", Volume = 2.5, ChatText = "Everybody faint" },
+	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
+	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
+	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
+	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move" },
+}
+
+local MassCompulsionCooldown = {}
+local LastMassCompulsionCaster = nil -- tracked from the 'effect' event
+
+local function onMassCompulsionAction(casterPlayer, actionName)
+	if not actionName then return end
+	if not casterPlayer then return end
+
+	local soundInfo = MassCompulsionSounds[actionName]
+	if not soundInfo then return end
+
+	local casterCharName = casterPlayer:GetAttribute("CharacterName")
+	if casterCharName and soundInfo[casterCharName] then
+		soundInfo = soundInfo[casterCharName]
+	end
+
+	local cooldownKey = tostring(casterPlayer.UserId) .. "_" .. actionName
+	if MassCompulsionCooldown[cooldownKey] then return end
+	MassCompulsionCooldown[cooldownKey] = true
+	task.delay(5, function() MassCompulsionCooldown[cooldownKey] = nil end)
+
+	local character = casterPlayer.Character
+	if not character then return end
+
+	local chatText = soundInfo.ChatText
+	if not chatText then
+		local topLevelInfo = MassCompulsionSounds[actionName]
+		if topLevelInfo and topLevelInfo.ChatText then
+			chatText = topLevelInfo.ChatText
+		end
+	end
+
+
+	local function doPlay()
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. soundInfo.Sound
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundToBody(sound, character)
+
+		sound:Play()
+		sound.Ended:Connect(function()
+			if sound and sound.Parent then sound:Destroy() end
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local ReplicatedAbilityEffect = ReplicatedStorage:FindFirstChild("Remotes")
+	and ReplicatedStorage.Remotes:FindFirstChild("AbilityService")
+	and ReplicatedStorage.Remotes.AbilityService:FindFirstChild("ToClient")
+	and ReplicatedStorage.Remotes.AbilityService.ToClient:FindFirstChild("ReplicatedAbilityEffect")
+
+if ReplicatedAbilityEffect then
+	ReplicatedAbilityEffect.OnClientEvent:Connect(function(abilityName, methodName, ...)
+		if abilityName ~= "Mass Compulsion" then return end
+
+		if methodName == "effect" then
+			local _, casterPlayer = ...
+			if casterPlayer and casterPlayer:IsA("Player") then
+				LastMassCompulsionCaster = casterPlayer
+			end
+		elseif methodName == "applyAction" then
+			local actionName = ...
+			local caster = LastMassCompulsionCaster
+
+			if not caster then
+				for _, player in Players:GetPlayers() do
+					if player.Character then
+						local head = player.Character:FindFirstChild("Head")
+						if head and head:FindFirstChild("CasterAttachment") then
+							caster = player
+							break
+					end
+					end
+				end
+			end
+
+			if caster then
+				onMassCompulsionAction(caster, actionName)
+			end
+		end
+	end)
+end
+
+local ParticleSounds = {
+
+	["AdSomnumSleep"] = {
+		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 3, DelayTime = 1, KeepPlayingSound = true },
+	},
+
+	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
+
+	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
+}
+
+local ActiveParticleSounds = {} -- [particle] = soundInstance
+local ParticleDebounce = {} -- [particleName_characterName] = true
+
+local function getCharacterFromParticle(particle)
+	local current = particle.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			return current
+		end
+		current = current.Parent
+	end
+	if particle.Parent and particle.Parent:IsA("BasePart") then
+		local partParent = particle.Parent.Parent
+		if partParent and partParent:IsA("Model") and partParent:FindFirstChildOfClass("Humanoid") then
+			return partParent
+		end
+	end
+	return nil
+end
+
+local function getCharacterNameFromModel(model)
+	for _, player in Players:GetPlayers() do
+		if player.Character == model then
+			return player:GetAttribute("CharacterName")
+		end
+	end
+	return nil
+end
+
+local function tryPlayParticleSound(particle)
+	if not particle:IsA("ParticleEmitter") then return end
+	if not particle.Enabled then return end
+	if ActiveParticleSounds[particle] then return end
+
+	local entry = ParticleSounds[particle.Name]
+	if not entry then return end
+
+	local character = getCharacterFromParticle(particle)
+	if not character then return end
+
+
+	local charName = getCharacterNameFromModel(character)
+	local resolvedEntry = nil
+
+	if type(entry) == "table" then
+		if charName and entry[charName] then
+			resolvedEntry = entry[charName]
+		elseif entry.Sound then
+			resolvedEntry = entry
+		end
+	else
+		return -- Invalid format
+	end
+
+	if not resolvedEntry then return end
+
+	if resolvedEntry.CasterRequired then
+		local victimHRP = character:FindFirstChild("HumanoidRootPart")
+		if not victimHRP then return end
+		local foundCaster = false
+		for _, player in Players:GetPlayers() do
+			if player:GetAttribute("CharacterName") == resolvedEntry.CasterRequired and player.Character then
+				local casterHRP = player.Character:FindFirstChild("HumanoidRootPart")
+				if casterHRP and (casterHRP.Position - victimHRP.Position).Magnitude <= 80 then
+					foundCaster = true
+					break
+				end
+			end
+		end
+		if not foundCaster then return end
+	end
+
+	local debounceKey = particle.Name .. "_" .. (charName or "unknown")
+	if resolvedEntry.DebounceTime and ParticleDebounce[debounceKey] then return end
+
+	local function doPlay()
+		if not particle or not particle.Parent then return end -- particle was removed during delay
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. resolvedEntry.Sound
+		sound.Volume = resolvedEntry.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+		configure3DAudio(sound)
+
+		local parentResult = parentSoundToBody(sound, character)
+		if parentResult == false then return end -- parentSoundToBody destroyed it
+
+		sound:Play()
+		ActiveParticleSounds[particle] = sound
+
+		local keepPlaying = resolvedEntry.KeepPlayingSound or false
+
+		if keepPlaying then
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then sound:Destroy() end
+				ActiveParticleSounds[particle] = nil
+			end)
+		else
+			particle:GetPropertyChangedSignal("Enabled"):Connect(function()
+				if not particle.Enabled and ActiveParticleSounds[particle] then
+					fadeOutSound(sound)
+					ActiveParticleSounds[particle] = nil
+				end
+			end)
+			particle.Destroying:Connect(function()
+				if ActiveParticleSounds[particle] == sound then
+					fadeOutSound(sound)
+					ActiveParticleSounds[particle] = nil
+				end
+			end)
+		end
+
+		sound.Ended:Connect(function()
+			if ActiveParticleSounds[particle] == sound then
+				ActiveParticleSounds[particle] = nil
+			end
+		end)
+	end
+
+	if resolvedEntry.DebounceTime and resolvedEntry.DebounceTime > 0 then
+		ParticleDebounce[debounceKey] = true
+		task.delay(resolvedEntry.DebounceTime, function() ParticleDebounce[debounceKey] = nil end)
+	end
+
+	if resolvedEntry.DelayTime and resolvedEntry.DelayTime > 0 then
+		task.delay(resolvedEntry.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local AnimationSoundCombos = {
+	["Somnus"] = {
+		AnimationId = "6713148336",
+		SoundId = "13154602444",
+		["Davina Claire"] = "95823566800088",
+	 	Volume = 9,
+        KeepPlayingSound = true,
+	 	DelayTime = 0,
+	 	WindowTime = 0.5,
+	},
+	["PhasmatosIncendia"] = {
+		AnimationId = "8118882336",
+		SoundId = "14523178169",
+		["Bonnie Bennett"] = "14523220272",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
+	},
+	["VampirisnReversalEsther"] = {
+		AnimationId = "18534994939",
+		SoundId = "18535374166",
+		Sound = "18535307514",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0.5,
+		WindowTime = 0.5,
+	},
+	["SoulBind"] = {
+		AnimationId = "91593895077311",
+		SoundId = "106982949473166",
+		Sound = "109441100680596",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
+	},
+	["AstralProjection"] = {
+		AnimationId = "127428104014955",
+		SoundId = "15174800421",
+		["Freya Mikaelson"] = "97414512710914",
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
+	}
+}
+
+local ComboKnownKeys = {
+	AnimationId = true,
+	SoundId = true,
+	Sound = true,
+	Volume = true,
+	DelayTime = true,
+	KeepPlayingSound = true,
+	CutOffWithAnimation = true,
+	CharacterRequired = true,
+	WindowTime = true,
+}
+
+local function hasComboCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not ComboKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local RecentAnimPlays = {}
+local RecentSoundPlays = {}
+
+local ComboCooldowns = {}
+local COMBO_COOLDOWN = 1 -- seconds between same combo triggering
+
+local function playComboSound(comboEntry, character, charName, track)
+	local soundInfo
+	if hasComboCharOverrides(comboEntry) then
+		if charName and comboEntry[charName] then
+			soundInfo = comboEntry[charName]
+		else
+			return -- No matching character override
+		end
+	else
+		soundInfo = comboEntry
+	end
+
+	if type(soundInfo) == "string" then
+		soundInfo = { Sound = soundInfo }
+	end
+
+	if soundInfo ~= comboEntry then
+		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
+			if soundInfo[key] == nil and comboEntry[key] ~= nil then
+				soundInfo[key] = comboEntry[key]
+			end
+		end
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	if soundInfo.CharacterRequired then
+		if charName ~= soundInfo.CharacterRequired then return end
+	end
+
+	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.SoundId or "") .. "_" .. (charName or "unknown")
+	if ComboCooldowns[cooldownKey] then return end
+	ComboCooldowns[cooldownKey] = true
+	task.delay(COMBO_COOLDOWN, function()
+		ComboCooldowns[cooldownKey] = nil
+	end)
+
+	local function doPlay()
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			ComboCooldowns[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundToBody(sound, character)
+
+		sound:Play()
+
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		end
+
+		task.delay(COOLDOWN_TIMEOUT, function()
+			ComboCooldowns[cooldownKey] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+checkCombosForAnimation = function(animId, character, charName, track)
+	if not RecentAnimPlays[character] then
+		RecentAnimPlays[character] = {}
+	end
+	RecentAnimPlays[character][animId] = { time = tick(), track = track }
+
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.AnimationId) == animId then
+			local soundId = normalize(comboEntry.SoundId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			local soundPlays = RecentSoundPlays[character]
+			if soundPlays and soundPlays[soundId] then
+				local elapsed = tick() - soundPlays[soundId].time
+				if elapsed <= windowTime then
+					playComboSound(comboEntry, character, charName, track)
+				end
+			end
+		end
+	end
+end
+
+local function checkCombosForSound(soundId, character, charName, soundInstance)
+	if not RecentSoundPlays[character] then
+		RecentSoundPlays[character] = {}
+	end
+	RecentSoundPlays[character][soundId] = { time = tick(), sound = soundInstance }
+
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.SoundId) == soundId then
+			local animId = normalize(comboEntry.AnimationId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			local animPlays = RecentAnimPlays[character]
+			if animPlays and animPlays[animId] then
+				local elapsed = tick() - animPlays[animId].time
+				if elapsed <= windowTime then
+					playComboSound(comboEntry, character, charName, animPlays[animId].track)
+				end
+			end
+		end
+	end
+end
+
+-- Compulsion Protection Combo System
+-- When someone says "Listen," (compulsion) near a witch, and that witch plays
+-- the protection animation, a character-specific voiceline plays from the witch.
+-- The chat comes from the COMPULSION CASTER, the animation plays on the PROTECTOR.
+local CompulsionProtectionCombos = {
+	["CompulsionProtectionBonnie"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+	 	ChatText = "Listen,",
+	 	WindowTime = 2, -- max seconds between chat and animation
+	 	MaxDistance = 30, -- max studs between caster and protector
+	 	Volume = 2.5,
+	 	KeepPlayingSound = true,
+		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionQetsiyah"] = {
+		AnimationId = "12189974108", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Qetsiyah"] = { Sound = "105035246772721", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionEsther"] = {
+		AnimationId = "128623651867501", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Esther Mikaelson"] = { Sound = "83942262095667", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionCleo"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Cleo Sowande"] = { Sound = "81915770841744", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionDavina"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionJosie"] = {
+		AnimationId = "128623651867501", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+  }
+
+local RecentCompulsionChats = {} -- [player] = { time = tick(), position = Vector3 }
+local CompulsionProtectionCooldowns = {}
+local COMPU_PROT_COOLDOWN = 1
+
+local CompulsionProtKnownKeys = {
+	AnimationId = true,
+	ChatText = true,
+	WindowTime = true,
+	MaxDistance = true,
+	Volume = true,
+	KeepPlayingSound = true,
+	DelayTime = true,
+	FadeOutDuration = true,
+	CutOffWithAnimation = true,
+}
+
+local function hasCompulsionProtCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not CompulsionProtKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playCompulsionProtectionSound(comboEntry, character, charName, track)
+	local soundInfo
+	if hasCompulsionProtCharOverrides(comboEntry) then
+		if charName and comboEntry[charName] then
+			soundInfo = comboEntry[charName]
+		else
+			return
+		end
+	else
+		return
+	end
+
+	if type(soundInfo) == "string" then
+		soundInfo = { Sound = soundInfo }
+	end
+
+	if soundInfo ~= comboEntry then
+		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
+			if soundInfo[key] == nil and comboEntry[key] ~= nil then
+				soundInfo[key] = comboEntry[key]
+			end
+		end
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.ChatText or "") .. "_" .. (charName or "unknown")
+	if CompulsionProtectionCooldowns[cooldownKey] then return end
+	CompulsionProtectionCooldowns[cooldownKey] = true
+	task.delay(COMPU_PROT_COOLDOWN, function()
+		CompulsionProtectionCooldowns[cooldownKey] = nil
+	end)
+
+	local function doPlay()
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			CompulsionProtectionCooldowns[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		configure3DAudio(sound)
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundToBody(sound, character)
+
+		sound:Play()
+
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				CompulsionProtectionCooldowns[cooldownKey] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+			-- Sound keeps playing until it ends naturally
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				CompulsionProtectionCooldowns[cooldownKey] = nil
+			end)
+		end
+
+		task.delay(COOLDOWN_TIMEOUT, function()
+			CompulsionProtectionCooldowns[cooldownKey] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+checkCompulsionProtectionForAnimation = function(animId, character, charName, track)
+	for _, comboEntry in pairs(CompulsionProtectionCombos) do
+		if normalize(comboEntry.AnimationId) == animId then
+			local windowTime = comboEntry.WindowTime or 2
+			local maxDistance = comboEntry.MaxDistance or 30
+			local now = tick()
+
+			local charHRP = character:FindFirstChild("HumanoidRootPart")
+			if not charHRP then return end
+
+			for player, chatData in pairs(RecentCompulsionChats) do
+				-- Make sure the caster is a different character from the protector
+				if player.Character ~= character then
+					local elapsed = now - chatData.time
+					if elapsed <= windowTime then
+						local dist = (charHRP.Position - chatData.position).Magnitude
+						if dist <= maxDistance then
+							playCompulsionProtectionSound(comboEntry, character, charName, track)
+							break -- only play once per animation
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+recordCompulsionChat = function(player, chatText)
+	for _, comboEntry in pairs(CompulsionProtectionCombos) do
+		if comboEntry.ChatText and chatText:lower():sub(1, #comboEntry.ChatText) == comboEntry.ChatText:lower() then
+			local character = player.Character
+			if character then
+				local hrp = character:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					RecentCompulsionChats[player] = { time = tick(), position = hrp.Position }
+				end
+			end
+		end
+	end
+end
+
+task.spawn(function()
+	while true do
+		task.wait(5)
+		local now = tick()
+		for char, anims in pairs(RecentAnimPlays) do
+			if not char or not char.Parent then
+				RecentAnimPlays[char] = nil
+			else
+				for animId, data in pairs(anims) do
+					if now - data.time > 3 then
+						anims[animId] = nil
+					end
+				end
+			end
+		end
+		for char, sounds in pairs(RecentSoundPlays) do
+			if not char or not char.Parent then
+				RecentSoundPlays[char] = nil
+			else
+				for soundId, data in pairs(sounds) do
+					if now - data.time > 3 then
+						sounds[soundId] = nil
+					end
+				end
+			end
+		end
+		for player, chatData in pairs(RecentCompulsionChats) do
+			if not player or not player.Parent then
+				RecentCompulsionChats[player] = nil
+			elseif now - chatData.time > 5 then
+				RecentCompulsionChats[player] = nil
+			end
+		end
+	end
+end)
+
+-- hookAnimator override removed: combo and protection checks are now in the original hookAnimator via forward declarations
+
+local originalTryOverlaySound = tryOverlaySound
+tryOverlaySound = function(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	originalTryOverlaySound(sound)
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	if id == "" then return end
+
+	local character = nil
+	local current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					character = current
+					break
+				end
+			end
+			if character then break end
+		end
+		current = current.Parent
+	end
+
+	if character then
+		local charName = getAnimCharName(character)
+		checkCombosForSound(id, character, charName, sound)
+	end
+end
+
+for _, desc in game:GetDescendants() do
+	tryReplaceSound(desc)
+	tryOverlaySound(desc)
+	tryPlayParticleSound(desc)
+end
+
+game.DescendantAdded:Connect(function(desc)
+	tryReplaceSound(desc)
+	tryOverlaySound(desc)
+	tryPlayParticleSound(desc)
+end)
+
+game.DescendantAdded:Connect(function(desc)
+	if desc:IsA("ParticleEmitter") then
+		desc:GetPropertyChangedSignal("Enabled"):Connect(function()
+			if desc.Enabled then
+				tryPlayParticleSound(desc)
+			end
+		end)
+	end
+end)
