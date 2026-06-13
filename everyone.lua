@@ -519,9 +519,6 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-	["14523178169"] = {
-		["Bonnie Bennett"] = { Sound = "91016794551142", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Incendia
-	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
@@ -1604,7 +1601,7 @@ local AnimationSoundCombos = {
 	},
 	["PhasmatosIncendia"] = {
 		AnimationId = "8118882336",
-		SoundId = "14523178169",
+		SoundId = "104782720464668",
 		["Bonnie Bennett"] = "14523220272",
 		Volume = 2.5,
 		KeepPlayingSound = true,
