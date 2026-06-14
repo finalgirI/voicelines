@@ -546,7 +546,7 @@ local SoundOverlays = {
 	["13154602444"] = {
 		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
 	},
-	["14123511526"] = { Sound = "90115515174277", Volume = 2.5, DelayTime = 0 }, -- Fiante Fulguris
+	["14123511526"] = { Sound = "90115515174277", Volume = 2, DelayTime = 0 }, -- Fiante Fulguris
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
@@ -576,7 +576,6 @@ local SoundOverlays = {
 	["14400859135"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
-
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -846,6 +845,14 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["107144570826196"] = {
+		["Bastianna Natale"] = { Sounds = {
+			{Sound = "96452201447795", ChatText = "To be reborn, you must sacrifise"},
+			{Sound = "79362032592167", ChatText = "Do you have faith in the harvest?"},
+			{Sound = "113939339508982", ChatText = "To be reborn, we must sacrifise"},
+			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
+		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
+	},
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
@@ -866,7 +873,7 @@ local AnimationSounds = {
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
 	["15424577510"] = {
-		["Bonnie Bennett"] = { Sound = "15424579670", Volume = 2.5, DelayTime = 0 }, -- Life Linking
+		["Bonnie Bennett"] = { Sound = "15424579670", Volume = 2.5, DelayTime = 0.8 }, -- Life Linking
 	},
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
@@ -876,9 +883,6 @@ local AnimationSounds = {
 		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
 		["Bonnie Bennett"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
-	},
-	["6713148336"] = {
-		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 2.5, DelayTime = 0 }, -- Errox Femus
 	},
 	["131550349409770"] = {
 		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2, DelayTime = 0 }, -- Aquamalia
@@ -913,7 +917,7 @@ local AnimationSounds = {
 	}, 
 	["80761083713462"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
-		["Bonnie Bennett"] = { Sound = "80761083713462", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
@@ -1010,9 +1014,6 @@ local AnimationSounds = {
 	["14571834582"] = {
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
-	["6713148336"] = {
-		["Sheila Bennett"] = { Sound = "139747284454633", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Errox Femus Sheila
-	},
 	--["12189974108"] = {
 	--	["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	--	["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
@@ -1021,16 +1022,19 @@ local AnimationSounds = {
 }
 
 local AnimSoundCooldowns = {}
+local AnimSoundCycleIndex = {}
 local ANIM_SOUND_COOLDOWN = 1 -- seconds between same animation sound to prevent spam
 
 local AnimSoundKnownKeys = {
 	Sound = true,
+	Sounds = true,
 	Volume = true,
 	KeepPlayingSound = true,
 	DelayTime = true,
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	SimultaneousSound = true,
+	ChatText = true,
 	OncePerLifetime = true,
 }
 
@@ -1058,10 +1062,31 @@ local function playAnimSound(animId, character, charName, track)
 		soundInfo = entry
 	end
 
-	if not soundInfo or not soundInfo.Sound then return end
+	if not soundInfo then return end
+
+	local soundId
+	local chatText = nil
+
+	if soundInfo.Sounds then
+		local cycleKey = animId .. "_" .. (charName or "unknown")
+		local index = AnimSoundCycleIndex[cycleKey] or 1
+		local sndEntry = soundInfo.Sounds[index]
+		if type(sndEntry) == "table" then
+			soundId = sndEntry.Sound
+			chatText = sndEntry.ChatText
+		else
+			soundId = sndEntry
+		end
+		AnimSoundCycleIndex[cycleKey] = (index % #soundInfo.Sounds) + 1
+	else
+		soundId = soundInfo.Sound
+		chatText = soundInfo.ChatText
+	end
+
+	if not soundId then return end
 
 	if soundInfo.OncePerLifetime then
-		local key = "anim_" .. soundInfo.Sound
+		local key = "anim_" .. soundId
 		if OncePerLifetimePlayed[key] then return end
 		OncePerLifetimePlayed[key] = true
 	end
@@ -1087,7 +1112,7 @@ local function playAnimSound(animId, character, charName, track)
 		end
 
 		local sound = Instance.new("Sound")
-		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.SoundId = "rbxassetid://" .. normalize(soundId)
 		sound.Volume = soundInfo.Volume or 2.5
 		configure3DAudio(sound)
 		sound:SetAttribute("IsLocalVoiceline", true)
@@ -1095,6 +1120,11 @@ local function playAnimSound(animId, character, charName, track)
 		parentSoundToBody(sound, character)
 
 		sound:Play()
+
+		-- Show chat bubble if ChatText is provided
+		if chatText and character and character.Parent then
+			game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
+		end
 
 		if soundInfo.SimultaneousSound then
 			local simSound = Instance.new("Sound")
@@ -1354,7 +1384,7 @@ local MassCompulsionSounds = {
 	["Suffer"] = { Sound = "17560604010", Volume = 2.5, ChatText = "Suffer" },
 	["Attack"] = { Sound = "17560606672", Volume = 2.5, ChatText = "Attack" },
 	["Freeze"] = { Sound = "17560600778", Volume = 2.5, ChatText = "Nobody move" },
-	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Nobody move" },
+	["Forget to breathe"] = { Sound = "98703979367465", Volume = 2.5, ChatText = "Forget to breathe" },
 }
 
 local MassCompulsionCooldown = {}
@@ -1375,7 +1405,7 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local cooldownKey = tostring(casterPlayer.UserId) .. "_" .. actionName
 	if MassCompulsionCooldown[cooldownKey] then return end
 	MassCompulsionCooldown[cooldownKey] = true
-	task.delay(5, function() MassCompulsionCooldown[cooldownKey] = nil end)
+	task.delay(1, function() MassCompulsionCooldown[cooldownKey] = nil end)
 
 	local character = casterPlayer.Character
 	if not character then return end
@@ -1598,6 +1628,15 @@ local AnimationSoundCombos = {
         KeepPlayingSound = true,
 	 	DelayTime = 0,
 	 	WindowTime = 0.5,
+	},
+	["ErroxFemus"] = {
+		AnimationId = "6713148336",
+		SoundId = "14606429535",
+		["Bonnie Bennett"] = "74008013885006",
+		Volume = 4.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
 	},
 	["PhasmatosIncendia"] = {
 		AnimationId = "8118882336",
