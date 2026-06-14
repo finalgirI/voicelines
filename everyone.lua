@@ -266,10 +266,10 @@ local SoundReplacements = {
 	["105594719818558"] = "15366096625", -- Psychic Blast
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Suctus Incendia
-	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
+	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
-	["105998583954931"] = { Replacement = "13441892676", Volume = 4 }, -- Harae
+	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
 	["74468391415531"] = "16326825053", -- Spiritual Cleanse
 	["116235007511881"] = "13203446447", -- Autem
