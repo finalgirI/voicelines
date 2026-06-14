@@ -853,6 +853,7 @@ local AnimationSounds = {
 			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
+	["13302728573"] = { Sound = "13203446447", Volume = 2.5, DelayTime = 0 }, -- Autem
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
