@@ -269,8 +269,8 @@ local SoundReplacements = {
 	["118411956384669"] = "15254480460", -- Phasmatos Ravaros
 	["80430541489576"] = "14556366203", -- Turn To Stone
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
-	["105998583954931"] = "13441892676", -- Harae
-	["14043844852"] = { Replacement = "13904360117", Volume = 4 }, -- Heretic Joint Spell
+	["105998583954931"] = { Replacement = "13441892676", Volume = 4 }, -- Harae
+	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
 	["74468391415531"] = "16326825053", -- Spiritual Cleanse
 	["116235007511881"] = "13203446447", -- Autem
 	["132899449516141"] = { ["Qetsiyah"] = "15981291789" }, -- Brain Fry Qetsiyah only
@@ -853,7 +853,7 @@ local AnimationSounds = {
 			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
-	["13302728573"] = { Sound = "13203446447", Volume = 2.5, DelayTime = 0 }, -- Autem
+	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0 }, -- Autem
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
@@ -864,7 +864,7 @@ local AnimationSounds = {
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
-	["15619485183"] = { Sound = "95435320218587", Volume = 5, DelayTime = 0 }, -- Building On Fire
+	["15619485183"] = { Sound = "95435320218587", Volume = 5.5, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
@@ -1304,14 +1304,9 @@ for _, player in Players:GetPlayers() do
 	end
 end
 
-local ChatVoicelineSounds = {}
---local ChatVoicelineSounds = {
---	["Suffer"] = "17560604010",
---	["Attack"] = "17560606672",
---	["Everybody faint"] = "17560602849",
---	["Nobody move"] = "17560600778",
---	["Forget to breathe"] = "98703979367465",
---}
+local ChatVoicelineSounds = {
+	["Forget to breathe"] = "98703979367465",
+}
 
 local ChatVoicelineCooldown = {}
 local recordCompulsionChat -- forward declaration (defined later)
@@ -1406,7 +1401,7 @@ local function onMassCompulsionAction(casterPlayer, actionName)
 	local cooldownKey = tostring(casterPlayer.UserId) .. "_" .. actionName
 	if MassCompulsionCooldown[cooldownKey] then return end
 	MassCompulsionCooldown[cooldownKey] = true
-	task.delay(1, function() MassCompulsionCooldown[cooldownKey] = nil end)
+	task.delay(15, function() MassCompulsionCooldown[cooldownKey] = nil end)
 
 	local character = casterPlayer.Character
 	if not character then return end
@@ -1643,7 +1638,7 @@ local AnimationSoundCombos = {
 		AnimationId = "8118882336",
 		SoundId = "104782720464668",
 		["Bonnie Bennett"] = "14523220272",
-		Volume = 2.5,
+		Volume = 3.5,
 		KeepPlayingSound = true,
 		DelayTime = 0,
 		WindowTime = 0.5,
@@ -1667,7 +1662,7 @@ local AnimationSoundCombos = {
 		WindowTime = 0.5,
 	},
 	["AstralProjection"] = {
-		AnimationId = "127428104014955",
+		AnimationId = "117199151496293",
 		SoundId = "15174800421",
 		["Freya Mikaelson"] = "97414512710914",
 		Volume = 2.5,
