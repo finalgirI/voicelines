@@ -873,8 +873,8 @@ local AnimationSounds = {
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
-	["15424577510"] = {
-		["Bonnie Bennett"] = { Sound = "15424579670", Volume = 2.5, DelayTime = 0.8 }, -- Life Linking
+	["15424579670"] = {
+		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.8 }, -- Life Linking
 	},
 	["13046802143"] = {
 		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
