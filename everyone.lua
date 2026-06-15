@@ -928,7 +928,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-	["80991149841796"] = { Sound = "135953039500242", Volume = 500, DelayTime = 0.2 }, -- Freya Resurrection
+	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
     ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
@@ -1037,6 +1037,7 @@ local AnimSoundKnownKeys = {
 	SimultaneousSound = true,
 	ChatText = true,
 	OncePerLifetime = true,
+	StackCount = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1121,6 +1122,23 @@ local function playAnimSound(animId, character, charName, track)
 		parentSoundToBody(sound, character)
 
 		sound:Play()
+
+		-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
+		local stackCount = soundInfo.StackCount or entry.StackCount or 1
+		if stackCount > 1 then
+			for i = 2, stackCount do
+				local stackSound = Instance.new("Sound")
+				stackSound.SoundId = "rbxassetid://" .. normalize(soundId)
+				stackSound.Volume = soundInfo.Volume or 2.5
+				configure3DAudio(stackSound)
+				stackSound:SetAttribute("IsLocalVoiceline", true)
+				parentSoundToBody(stackSound, character)
+				stackSound:Play()
+				stackSound.Ended:Connect(function()
+					if stackSound and stackSound.Parent then stackSound:Destroy() end
+				end)
+			end
+		end
 
 		-- Show chat bubble if ChatText is provided
 		if chatText and character and character.Parent then
