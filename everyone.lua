@@ -948,9 +948,9 @@ local AnimationSounds = {
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-    ["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
+	["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
-    ["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
+	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
 		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
@@ -980,16 +980,16 @@ local AnimationSounds = {
 	["125965536527103"] = {
 		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-	    ["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
-    ["95988116850782"] = {
-	    ["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-	    ["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+	["95988116850782"] = {
+		["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
+		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
 		["Caroline Forbes"] = { Sound = "82935740630457", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-    },
+	},
 	["72224780755559"] = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
@@ -1009,10 +1009,10 @@ local AnimationSounds = {
 	},
 	["109730789965953"] = {
 		["Bastianna Natale"] = { Sound = "83432170862902", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	    ["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	    ["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	    ["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	    ["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
+		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
 	},
 	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
 	["12955990988"] = {
@@ -1021,7 +1021,7 @@ local AnimationSounds = {
 	},
 
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
-    ["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
+	["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
 		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
 	},
@@ -1532,7 +1532,7 @@ if ReplicatedAbilityEffect then
 						if head and head:FindFirstChild("CasterAttachment") then
 							caster = player
 							break
-					end
+						end
 					end
 				end
 			end
@@ -1690,10 +1690,10 @@ local AnimationSoundCombos = {
 		AnimationId = "6713148336",
 		SoundId = "13154602444",
 		["Davina Claire"] = "95823566800088",
-	 	Volume = 9,
-        KeepPlayingSound = true,
-	 	DelayTime = 0,
-	 	WindowTime = 0.5,
+		Volume = 9,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
 	},
 	["ErroxFemus"] = {
 		AnimationId = "6713148336",
@@ -1893,11 +1893,11 @@ end
 local CompulsionProtectionCombos = {
 	["CompulsionProtectionBonnie"] = {
 		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
-	 	ChatText = "Listen,",
-	 	WindowTime = 2, -- max seconds between chat and animation
-	 	MaxDistance = 30, -- max studs between caster and protector
-	 	Volume = 2.5,
-	 	KeepPlayingSound = true,
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
 		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5 }, -- TODO: fill in sound ID
 	},
 	["CompulsionProtectionQetsiyah"] = {
@@ -1945,7 +1945,7 @@ local CompulsionProtectionCombos = {
 		KeepPlayingSound = true,
 		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5 }, -- TODO: fill in sound ID
 	},
-  }
+}
 
 local RecentCompulsionChats = {} -- [player] = { time = tick(), position = Vector3 }
 local CompulsionProtectionCooldowns = {}
