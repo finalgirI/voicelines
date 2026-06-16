@@ -519,12 +519,19 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
+	["120250468841070"] = {
+		Overlays = {
+			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
+			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
+		},
+	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["104782720464668"] = {
 		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
 	},
+	["18535374166"] = { Sound = "18535307514", Volume = 3, DelayTime = 0 }, -- Vamp Reversal 
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
@@ -572,9 +579,6 @@ local SoundOverlays = {
 			{ Sound = "139418993300939", Volume = 2.5, DelayTime = 0 }, -- White Oak Spell
 			{ Sound = "118918239866614", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- White Oak Hunter
 		},
-	},
-	["14400859135"] = {
-		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
 }
 
@@ -845,6 +849,20 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["77528653756706"] = {
+		["Qetsiyah"] = {
+			Overlays = {
+				{ Sound = "106974700127215", Volume = 5, DelayTime = 8, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
+				{ Sound = "123232609831917", Volume = 5, DelayTime = 16.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
+			},
+		},
+		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
+	},
+	["12171371908"] = {
+		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
+		["Josie Saltzman"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
+	},
+	["16759704212"] = { Sound = "121910418466989", Volume = 3, DelayTime = 0 }, -- Qetsiyah Resurrection
 	["107144570826196"] = {
 		["Bastianna Natale"] = { Sounds = {
 			{Sound = "96452201447795", ChatText = "To be reborn, you must sacrifise"},
@@ -873,7 +891,7 @@ local AnimationSounds = {
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
-	["15424579670"] = {
+	["15424576033"] = {
 		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.8 }, -- Life Linking
 	},
 	["13046802143"] = {
@@ -918,7 +936,7 @@ local AnimationSounds = {
 	}, 
 	["80761083713462"] = {
 		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
-		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 2.5, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 6, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
@@ -1001,9 +1019,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-	["77528653756706"] = {
-		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 5, KeepPlayingSound = true }, -- LocatorSpell
-	},
+
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
     ["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
@@ -1333,13 +1349,49 @@ local function onChatMessageReceived(textChatMessage)
 	if not textChatMessage then return end
 
 	local textSource = textChatMessage.TextSource
-	if not textSource then return end
+	local player = nil
+	local userId = nil
 
-	local player = Players:GetPlayerByUserId(textSource.UserId)
+	if textSource then
+		userId = textSource.UserId
+		player = Players:GetPlayerByUserId(userId)
+	end
+
+	-- Fallback: if TextSource is missing (can happen for other players' messages),
+	-- try to identify the player from the message prefix (e.g. "[PlayerName]: message")
+	if not player then
+		local msgText = textChatMessage.Text
+		if msgText then
+			local colonPos = msgText:find(":")
+			if colonPos and colonPos < 30 then
+				local possibleName = msgText:sub(1, colonPos - 1):match("^%s*(.-)%s*$")
+				-- Strip rich text / bracket wrappers like [PlayerName]
+				possibleName = possibleName:gsub("[%[%]]", "")
+				for _, p in Players:GetPlayers() do
+					if p.Name == possibleName or p.DisplayName == possibleName then
+						player = p
+						userId = p.UserId
+						break
+					end
+				end
+			end
+		end
+	end
+
 	if not player then return end
 
 	local msg = textChatMessage.Text
 	if not msg then return end
+
+	-- Strip player name prefix if present (e.g. "PlayerName: Forget to breathe" -> "Forget to breathe")
+	local colonPos = msg:find(":")
+	if colonPos and colonPos < 30 then
+		local prefix = msg:sub(1, colonPos - 1):match("^%s*(.-)%s*$")
+		-- Only strip if the prefix looks like a player name (no spaces, or wrapped in brackets)
+		if not prefix:find("%s") or prefix:match("^%[.*%]$") then
+			msg = msg:sub(colonPos + 1):match("^%s*(.-)%s*$")
+		end
+	end
 	msg = msg:match("^%s*(.-)%s*$")
 
 	-- Compulsion Protection: record if this chat message is a compulsion trigger
@@ -1369,7 +1421,7 @@ local function onChatMessageReceived(textChatMessage)
 	end
 	if not soundId then return end
 
-	local cooldownKey = textSource.UserId .. "_" .. matchedKey
+	local cooldownKey = tostring(userId or 0) .. "_" .. matchedKey
 	if ChatVoicelineCooldown[cooldownKey] then return end
 	ChatVoicelineCooldown[cooldownKey] = true
 	task.delay(5, function() ChatVoicelineCooldown[cooldownKey] = nil end)
@@ -1661,15 +1713,6 @@ local AnimationSoundCombos = {
 		DelayTime = 0,
 		WindowTime = 0.5,
 	},
-	["VampirisnReversalEsther"] = {
-		AnimationId = "18534994939",
-		SoundId = "18535374166",
-		Sound = "18535307514",
-		Volume = 2.5,
-		KeepPlayingSound = true,
-		DelayTime = 0.5,
-		WindowTime = 0.5,
-	},
 	["SoulBind"] = {
 		AnimationId = "91593895077311",
 		SoundId = "106982949473166",
@@ -1685,8 +1728,8 @@ local AnimationSoundCombos = {
 		["Freya Mikaelson"] = "97414512710914",
 		Volume = 2.5,
 		KeepPlayingSound = true,
-		DelayTime = 0,
-		WindowTime = 0.5,
+		DelayTime = 0.8,
+		WindowTime = 0.6,
 	}
 }
 
