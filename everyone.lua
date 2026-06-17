@@ -999,6 +999,7 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 		["Marcel Gerard"] = { Sound = "110930423196956", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
+		["Hope Mikaelson"] = { Sound = "83817817804873", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
