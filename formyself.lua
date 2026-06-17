@@ -868,7 +868,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 		["Josie Saltzman"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
-	["16759704212"] = { Sound = "121910418466989", Volume = 3, DelayTime = 0 }, -- Qetsiyah Resurrection
+	["16759704212"] = { Sound = "121910418466989", Volume = 3, DelayTime = 1 }, -- Qetsiyah Resurrection
 	["107144570826196"] = {
 		["Bastianna Natale"] = { Sounds = {
 			{Sound = "96452201447795", ChatText = "To be reborn, you must sacrifise"},
@@ -1007,7 +1007,7 @@ local AnimationSounds = {
 		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 		["Marcel Gerard"] = { Sound = "110930423196956", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
 		["Hope Mikaelson"] = { Sound = "83817817804873", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-		["Klaus Mikaelson"] = { Sound = "86539828788238", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
+		["Klaus Mikaelson"] = { Sound = "86539828788238", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
