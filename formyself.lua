@@ -15,9 +15,15 @@ end
 local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
 local FadingSounds = {}
 local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
+local Cooldowns = {}
+local ActiveSounds = {}
+local KeepPlayingSounds = {}
+local SoundCycleIndex = {}
 
 local function fadeOutSound(sound)
-	if not sound or not sound.Parent then
+	if not sound then return end
+	if not sound.Parent then
+		FadingSounds[sound] = nil
 		return
 	end
 
@@ -36,12 +42,11 @@ local function fadeOutSound(sound)
 	tween:Play()
 
 	tween.Completed:Once(function()
-		if sound then
+		FadingSounds[sound] = nil
+		if sound and sound.Parent then
 			sound:Stop()
 			sound:Destroy()
 		end
-
-		FadingSounds[sound] = nil
 	end)
 end
 
@@ -590,7 +595,11 @@ local ActiveOverlaySounds = {} -- Track currently playing overlay Sound IDs to p
 local OverlayOriginalDebounce = {} -- Debounce per original sound ID to prevent multiple overlays from duplicate original sounds
 
 fadeOutOverlaySound = function(overlaySound, duration)
-	if not overlaySound or not overlaySound.Parent then return end
+	if not overlaySound then return end
+	if not overlaySound.Parent then
+		FadingSounds[overlaySound] = nil
+		return
+	end
 	if FadingSounds[overlaySound] then return end
 
 	FadingSounds[overlaySound] = true
@@ -604,11 +613,11 @@ fadeOutOverlaySound = function(overlaySound, duration)
 	tween:Play()
 
 	tween.Completed:Once(function()
-		if overlaySound then
+		FadingSounds[overlaySound] = nil
+		if overlaySound and overlaySound.Parent then
 			overlaySound:Stop()
 			overlaySound:Destroy()
 		end
-		FadingSounds[overlaySound] = nil
 	end)
 end
 
@@ -667,16 +676,20 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 
 	local function doPlay()
 		local existing = ActiveOverlaySounds[overlayInfo.Sound]
-		if existing and existing.Parent and existing.IsPlaying then
-			if overlayInfo.KeepPlayingSound then
-				existing:Stop()
-				existing:Destroy()
-				ActiveOverlaySounds[overlayInfo.Sound] = nil
+		if existing then
+			if existing.Parent and existing.IsPlaying then
+				if overlayInfo.KeepPlayingSound then
+					existing:Stop()
+					existing:Destroy()
+					ActiveOverlaySounds[overlayInfo.Sound] = nil
+				else
+					return
+				end
 			else
-				return
+					-- Existing sound is destroyed or not playing, clean it up
+					ActiveOverlaySounds[overlayInfo.Sound] = nil
 			end
 		end
-		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
@@ -1328,6 +1341,44 @@ end
 
 Players.LocalPlayer.CharacterAdded:Connect(function()
 	OncePerLifetimePlayed = {}
+
+	-- Clean up stale references from the old character
+	for soundId, snd in pairs(ActiveOverlaySounds) do
+		if not snd or not snd.Parent then
+			ActiveOverlaySounds[soundId] = nil
+		end
+	end
+	for snd, _ in pairs(FadingSounds) do
+		if not snd or not snd.Parent then
+			FadingSounds[snd] = nil
+		end
+	end
+	for snd, _ in pairs(ReplacedSounds) do
+		if not snd or not snd.Parent then
+			ReplacedSounds[snd] = nil
+		end
+	end
+	for snd, _ in pairs(OverlayTracked) do
+		if not snd or not snd.Parent then
+			OverlayTracked[snd] = nil
+		end
+	end
+	for snd, _ in pairs(KeepPlayingSounds) do
+		if not snd or not snd.Parent then
+			KeepPlayingSounds[snd] = nil
+		end
+	end
+	for abilityName, snd in pairs(ActiveSounds) do
+		if not snd or not snd.Parent then
+			ActiveSounds[abilityName] = nil
+			Cooldowns[abilityName] = false
+		end
+	end
+	for particle, snd in pairs(ActiveParticleSounds) do
+		if not snd or not snd.Parent then
+			ActiveParticleSounds[particle] = nil
+		end
+	end
 end)
 
 Players.LocalPlayer.CharacterAdded:Connect(hookCharacterAnimations)
