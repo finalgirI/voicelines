@@ -339,7 +339,9 @@ end
 local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
 	if not localCharacter then return false, false end
+	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
 
+	-- Check 1: Sound is directly inside the local player's character hierarchy
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
@@ -348,16 +350,35 @@ local function isLocalPlayerSound(sound)
 		current = current.Parent
 	end
 
-	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
-	if localHRP and localHRP:IsA("BasePart") then
-		local soundPos = nil
-		if sound.Parent and sound.Parent:IsA("BasePart") then
-			soundPos = sound.Parent.Position
-		elseif sound.Parent and sound.Parent:IsA("Attachment") then
-			soundPos = sound.Parent.WorldPosition
-		end
-		if soundPos and (localHRP.Position - soundPos).Magnitude < 8 then
-			return true, true -- isLocal, isDistanceFallback
+	-- Check 2: Sound is on a part/attachment - use character name + distance
+	local soundPos = nil
+	if sound.Parent and sound.Parent:IsA("BasePart") then
+		soundPos = sound.Parent.Position
+	elseif sound.Parent and sound.Parent:IsA("Attachment") then
+		soundPos = sound.Parent.WorldPosition
+	end
+
+	if soundPos then
+		local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
+		if localHRP and localHRP:IsA("BasePart") then
+			local dist = (localHRP.Position - soundPos).Magnitude
+
+			-- If the sound's character name matches ours (determined from hierarchy, not distance),
+			-- it's definitely our sound even on a distant part
+			local soundCharName, soundCharIsDistFallback = getSoundCharacterName(sound)
+			if soundCharName == localCharName and not soundCharIsDistFallback then
+				return true, false -- Confident match, not a fallback
+			end
+
+			-- If character name matches but was also determined by distance, allow with fallback flag
+			if soundCharName == localCharName and dist < 50 then
+				return true, true
+			end
+
+			-- Pure distance fallback - only if very close (ability effect near us)
+			if dist < 15 then
+				return true, true
+			end
 		end
 	end
 
@@ -369,7 +390,13 @@ local function tryReplaceSound(sound)
 	if ReplacedSounds[sound] then return end
 
 	local isLocal, isDistFallback = isLocalPlayerSound(sound)
-	if not isLocal or isDistFallback then return end
+	if not isLocal then return end
+	if isDistFallback then
+		-- Distance fallback: only allow if the character name matches ours
+		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
+		local soundCharName = getSoundCharacterName(sound)
+		if soundCharName ~= localCharName then return end
+	end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
@@ -824,7 +851,13 @@ local function tryOverlaySound(sound)
 	if OverlayTracked[sound] then return end
 
 	local isLocal, isDistFallback = isLocalPlayerSound(sound)
-	if not isLocal or isDistFallback then return end
+	if not isLocal then return end
+	if isDistFallback then
+		-- Distance fallback: only allow if the character name matches ours
+		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
+		local soundCharName = getSoundCharacterName(sound)
+		if soundCharName ~= localCharName then return end
+	end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
