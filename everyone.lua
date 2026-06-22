@@ -1604,6 +1604,9 @@ local function tryPlayParticleSound(particle)
 	if ActiveParticleSounds[particle] then return end
 
 	local entry = ParticleSounds[particle.Name]
+	if not entry and particle.Parent then
+		entry = ParticleSounds[particle.Parent.Name]
+	end
 	if not entry then return end
 
 	local character = getCharacterFromParticle(particle)
