@@ -282,10 +282,11 @@ local SoundReplacements = {
 	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
-	["74468391415531"] = "16326825053", -- Spiritual Cleanse
+	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true }, -- Spiritual Cleanse
 	["116235007511881"] = "13203446447", -- Autem
 	["89008508391784"] = "17471844257", -- Hope's Repulse
-	["132899449516141"] = { ["Qetsiyah"] = "15981291789" }, -- Brain Fry Qetsiyah only
+	["101281556370554"] = "81639278311000", -- Ah Sha Lana
+	["132899449516141"] = { ["Qetsiyah"] = "15981291789", KeepPlayingSound = true }, -- Brain Fry Qetsiyah only
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -531,12 +532,6 @@ local SoundOverlays = {
 			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
 		},
 	},
-	["120250468841070"] = {
-		Overlays = {
-			{ Sound = "15601121759", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Expression Grimoire
-			{ Sound = "123232609831917", Volume = 2.5, DelayTime = 13, KeepPlayingSound = true }, -- I Have Every Magic
-		},
-	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
@@ -544,7 +539,6 @@ local SoundOverlays = {
 		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
 	},
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
-	["101281556370554"] = { Sound = "81639278311000", Volume = 2.5, DelayTime = 0 }, -- Ah Sha Lana
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
@@ -878,7 +872,7 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 		["Josie Saltzman"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
-	["16759704212"] = { Sound = "121910418466989", Volume = 3, DelayTime = 1 }, -- Qetsiyah Resurrection
+	["16549443461"] = { Sound = "121910418466989", Volume = 3, DelayTime = 1 }, -- Qetsiyah Resurrection
 	["107144570826196"] = {
 		["Bastianna Natale"] = { Sounds = {
 			{Sound = "96452201447795", ChatText = "To be reborn, you must sacrifise"},
@@ -888,7 +882,8 @@ local AnimationSounds = {
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
 	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0 }, -- Autem
-	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0 }, -- Illusion Attack
+	["16455033835"] = { Sound = "93083659221700", Volume = 2.6, DelayTime = 0 }, -- Vines
+	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
@@ -908,11 +903,8 @@ local AnimationSounds = {
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
-	["15424576033"] = {
-		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 0.8 }, -- Life Linking
-	},
 	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.5 }, -- Sandclock
 	},
 	["113177696607441"] = {
 		CasterSoundService = true,
@@ -1044,7 +1036,7 @@ local AnimationSounds = {
 	},
 
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
-	["138457929259080"] = { Sound = "99610680956880", Volume = 1.8, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
+	["138457929259080"] = { Sound = "99610680956880", Volume = 2.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
 		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
 	},
@@ -1053,12 +1045,6 @@ local AnimationSounds = {
 	},
 	["14571834582"] = {
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
-	},
-	["12189974108"] = {
-		CasterSoundService = true,
-		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
-		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Motus
 	},
 }
 
@@ -1571,6 +1557,10 @@ local ParticleSounds = {
 		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 3, DelayTime = 1, KeepPlayingSound = true },
 	},
 
+	["LinkBeam"] = {
+		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
+	},
+
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
 
 	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
@@ -1717,7 +1707,7 @@ local AnimationSoundCombos = {
 	},
 	["ErroxFemus"] = {
 		AnimationId = "6713148336",
-		SoundId = "14606429535",
+		SoundId = "10512733733",
 		["Bonnie Bennett"] = "74008013885006",
 		Volume = 4.5,
 		KeepPlayingSound = true,
@@ -1750,6 +1740,18 @@ local AnimationSoundCombos = {
 		KeepPlayingSound = true,
 		DelayTime = 0.2,
 		WindowTime = 0.6,
+	},
+	["Motus"] = {
+		AnimationId = "12189974108",
+		SoundId = "12190650809", -- TODO: fill in sound ID
+		CasterSoundService = true,
+		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
 	}
 }
 
