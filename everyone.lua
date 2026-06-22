@@ -535,9 +535,6 @@ local SoundOverlays = {
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
-	["104782720464668"] = {
-		["Qetsiyah"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Venom Blast
-	},
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 
@@ -882,8 +879,8 @@ local AnimationSounds = {
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
 	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0 }, -- Autem
-	["16455033835"] = { Sound = "93083659221700", Volume = 2.6, DelayTime = 0 }, -- Vines
-	["96525247573311"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Illusion Attack
+	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
+	["16455033835"] = { Sound = "93083659221700", Volume = 3.2, DelayTime = 0 }, -- Vines
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
 	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
