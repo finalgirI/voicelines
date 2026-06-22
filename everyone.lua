@@ -1558,6 +1558,12 @@ local ParticleSounds = {
 		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 	},
 
+	["MotusShockWave"] = {
+		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
+		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
+	},
+
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
 
 	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
@@ -1737,18 +1743,6 @@ local AnimationSoundCombos = {
 		KeepPlayingSound = true,
 		DelayTime = 0.2,
 		WindowTime = 0.6,
-	},
-	["Motus"] = {
-		AnimationId = "12189974108",
-		SoundId = "12190650809", -- TODO: fill in sound ID
-		CasterSoundService = true,
-		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true },
-		Volume = 2.5,
-		KeepPlayingSound = true,
-		DelayTime = 0,
-		WindowTime = 0.5,
 	}
 }
 
