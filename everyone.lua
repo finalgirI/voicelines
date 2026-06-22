@@ -857,11 +857,20 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["6713148336"] = {
+		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 3, DelayTime = 0 }, -- Errox Femus
+	},
+	["5465010904"] = {
+		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 2.5, DelayTime = 0 }, -- Blood Choke Bonnie
+	},
+	["128623651867501"] = {
+		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox
+	},
 	["109154468000797"] = {
 		["Qetsiyah"] = {
 			Overlays = {
-				{ Sound = "106974700127215", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
-				{ Sound = "123232609831917", Volume = 5, DelayTime = 8.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
+				{ Sound = "106974700127215", Volume = 5, DelayTime = 8, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
+				{ Sound = "123232609831917", Volume = 5, DelayTime = 16.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
 			},
 		},
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- LocatorSpell
@@ -1559,13 +1568,6 @@ local ParticleSounds = {
 		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 	},
 
-	["MotusShockWave"] = {
-		CasterSoundService = true,
-		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
-		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
-		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
-	},
-
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
 
 	["PoenaDolorisVictim"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
@@ -1713,18 +1715,9 @@ local AnimationSoundCombos = {
 		DelayTime = 0,
 		WindowTime = 0.5,
 	},
-	["ErroxFemus"] = {
-		AnimationId = "6713148336",
-		SoundId = "10512733733",
-		["Bonnie Bennett"] = "74008013885006",
-		Volume = 4.5,
-		KeepPlayingSound = true,
-		DelayTime = 0,
-		WindowTime = 0.5,
-	},
 	["PhasmatosIncendia"] = {
 		AnimationId = "8118882336",
-		SoundId = "10512733733",
+		SoundId = "104782720464668",
 		["Bonnie Bennett"] = "14523220272",
 		Volume = 3.5,
 		KeepPlayingSound = true,
