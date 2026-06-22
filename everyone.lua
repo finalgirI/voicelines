@@ -533,6 +533,7 @@ local SoundOverlays = {
 		},
 	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
+	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
@@ -1559,6 +1560,7 @@ local ParticleSounds = {
 	},
 
 	["MotusShockWave"] = {
+		CasterSoundService = true,
 		["Bonnie Bennett"] = { Sound = "114093297475680", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 		["Nora Hildegard"] = { Sound = "131259403209726", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
