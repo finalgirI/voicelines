@@ -540,6 +540,10 @@ local SoundOverlays = {
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
+	["11708882199"] = {
+		["Hope Mikaelson"] = { Sound = "76431177526410", Volume = 3, DelayTime = 0 }, -- Wolf Transformation
+	},
+	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
 	["112458851193845"] = { Sound = "16767898955", Volume = 2.5, DelayTime = 0 }, -- Destroy Purgatory
 	["10006479564"] = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
