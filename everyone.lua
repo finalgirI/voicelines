@@ -472,7 +472,6 @@ local function tryReplaceSound(sound)
 		end
 		if bodyParent then
 			newSound.Parent = bodyParent
-			newSound:Play()
 			newSound.Ended:Connect(function()
 				if newSound and newSound.Parent then newSound:Destroy() end
 			end)
@@ -805,7 +804,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			if conn then conn:Disconnect() end
 			doPlay()
 		end)
-		task.delay(0.1, function()
+		task.delay(2, function()
 			if conn then conn:Disconnect() end
 			if not played and sound and sound.Parent and sound.IsPlaying then
 				doPlay()
@@ -1155,7 +1154,11 @@ local function playAnimSound(animId, character, charName, track)
 		sound.Volume = soundInfo.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		if parentResult == false then
+			AnimSoundCooldowns[key] = nil
+			return
+		end
 
 		sound:Play()
 
@@ -2185,6 +2188,22 @@ game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
+
+	-- Fix: When sounds replicate from the server, DescendantAdded can fire
+	-- before SoundId is set. Wait for SoundId before retrying replacement/overlay.
+	if desc:IsA("Sound") and desc.SoundId == "" then
+		local conn
+		conn = desc:GetPropertyChangedSignal("SoundId"):Connect(function()
+			if conn then conn:Disconnect() end
+			if desc.SoundId ~= "" then
+				tryReplaceSound(desc)
+				tryOverlaySound(desc)
+			end
+		end)
+		task.delay(5, function()
+			if conn then conn:Disconnect() end
+		end)
+	end
 end)
 
 game.DescendantAdded:Connect(function(desc)
