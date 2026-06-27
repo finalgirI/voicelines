@@ -861,7 +861,7 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
 	["6713148336"] = {
-		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 3, DelayTime = 0 }, -- Errox Femus
+		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 6.5, DelayTime = 0 }, -- Errox Femus
 	},
 	["5465010904"] = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 2.5, DelayTime = 0 }, -- Blood Choke Bonnie
