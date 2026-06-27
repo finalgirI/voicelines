@@ -858,7 +858,7 @@ end
 
 local AnimationSounds = {
 	["13570229994"] = {
-		["Mary Louise"] = { Sound = "97634981569849", Volume = 3, DelayTime = 0 }, -- Vido
+		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
 	["15424577510"] = {
 		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
