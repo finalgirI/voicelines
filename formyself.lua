@@ -287,6 +287,7 @@ local SoundReplacements = {
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
+	["132899449516141"] = { Replacement = "13904360117", Volume = 0 }, -- Brain Fry Qetsiyah Replacement
 	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
@@ -583,7 +584,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
-	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0 }, -- Lightning Strike
+	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
@@ -1091,6 +1092,7 @@ local AnimationSounds = {
 	},
 	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
 	["12955990988"] = {
+		["Qetsiyah"] = { Sound = "15981291789", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Brain Fry
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
