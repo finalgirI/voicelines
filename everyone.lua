@@ -885,7 +885,7 @@ local AnimationSounds = {
 				{ Sound = "123232609831917", Volume = 5, DelayTime = 16.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
 			},
 		},
-		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- LocatorSpell
+		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSound = true }, -- LocatorSpell
 	},
 	["12171371908"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
