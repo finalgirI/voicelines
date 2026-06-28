@@ -287,7 +287,9 @@ local SoundReplacements = {
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
-	["132899449516141"] = { Replacement = "13904360117", Volume = 0 }, -- Brain Fry Qetsiyah Replacement
+	["132899449516141"] = {
+		["Qetsiyah"] = { Replacement = "13904360117", Volume = 0 }, -- Brain Fry Qetsiyah Replacement
+	},
 	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
