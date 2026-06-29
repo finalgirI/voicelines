@@ -879,12 +879,7 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox
 	},
 	["77528653756706"] = {
-		["Qetsiyah"] = {
-			Overlays = {
-				{ Sound = "106974700127215", Volume = 5, DelayTime = 8, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
-				{ Sound = "123232609831917", Volume = 5, DelayTime = 16.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
-			},
-		},
+		["Qetsiyah"] = { Sound = "93058631752190", Volume = 4, DelayTime = 3, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSound = true }, -- LocatorSpell
 	},
 	["12171371908"] = {
@@ -1068,7 +1063,101 @@ local AnimationSounds = {
 	["14571834582"] = {
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
+	-- Hope Mikaelson JapaneseSpellFX voiceline (fill in your animation ID and sound ID)
+	["78864031194100"] = {
+		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 2.5, DelayTime = 0 }, -- JapaneseSpellFX
+	},
 }
+
+-- Animation Particles System: spawn particle effects when specific animations play
+local AnimationParticles = {
+	-- Hope Mikaelson JapaneseSpellFX particle (fill in your animation ID)
+	["78864031194100"] = {
+		["Hope Mikaelson"] = {
+			ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
+			DelayTime = 4.8, -- delay in seconds before particle spawns
+			Duration = 7, -- how long the particle effect lasts before cleanup
+		},
+	},
+}
+
+local AnimParticleCooldowns = {}
+local ANIM_PARTICLE_COOLDOWN = 5
+
+local function playAnimParticle(animId, character, charName)
+	local entry = AnimationParticles[animId]
+	if not entry then return end
+
+	local particleInfo
+	if charName and entry[charName] then
+		particleInfo = entry[charName]
+	else
+		return -- No matching particle for this character
+	end
+	if not particleInfo then return end
+
+	local key = animId .. "_particle_" .. (charName or "unknown")
+	if AnimParticleCooldowns[key] then return end
+	AnimParticleCooldowns[key] = true
+	task.delay(ANIM_PARTICLE_COOLDOWN, function()
+		AnimParticleCooldowns[key] = nil
+	end)
+
+	local delayTime = particleInfo.DelayTime or 0
+	local duration = particleInfo.Duration or 7
+	local template = particleInfo.ParticleTemplate
+	if not template then return end
+
+	local function doSpawnParticle()
+		if not character or not character.Parent then
+			AnimParticleCooldowns[key] = nil
+			return
+		end
+
+		local hrp = character:FindFirstChild("HumanoidRootPart")
+		if not hrp then
+			AnimParticleCooldowns[key] = nil
+			return
+		end
+
+		local particleClone = template:Clone()
+		particleClone:PivotTo(hrp.CFrame)
+		particleClone.Parent = workspace:FindFirstChild("Debris") or workspace
+
+		-- Emit all ParticleEmitters that have EmitCount attribute
+		for _, desc in particleClone:GetDescendants() do
+			if desc:IsA("ParticleEmitter") then
+				local emitCount = desc:GetAttribute("EmitCount")
+				if emitCount then
+					local emitDelay = desc:GetAttribute("EmitDelay") or 0
+					if emitDelay > 0 then
+						task.delay(emitDelay, function()
+							if desc and desc.Parent then
+								desc:Emit(emitCount)
+							end
+						end)
+					else
+						desc:Emit(emitCount)
+					end
+				end
+			end
+		end
+
+		-- Clean up after duration
+		task.delay(duration, function()
+			if particleClone and particleClone.Parent then
+				particleClone:Destroy()
+			end
+			AnimParticleCooldowns[key] = nil
+		end)
+	end
+
+	if delayTime > 0 then
+		task.delay(delayTime, doSpawnParticle)
+	else
+		doSpawnParticle()
+	end
+end
 
 local AnimSoundCooldowns = {}
 local AnimSoundCycleIndex = {}
@@ -1289,6 +1378,8 @@ local function hookAnimator(animator, character)
 
 		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
+
+		playAnimParticle(animId, character, charName)
 
 		if checkCombosForAnimation then
 			checkCombosForAnimation(animId, character, charName, track)
