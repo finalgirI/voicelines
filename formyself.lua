@@ -1107,6 +1107,128 @@ local AnimationSounds = {
 	},
 }
 
+-- Hope Mikaelson Animation FX System: plays sound + spawns particle when Hope plays an animation
+local HopeAnimFX = {
+	-- Fill in your animation ID and sound ID below
+	["78864031194100"] = {
+		Sound = "89596447162600",
+		Volume = 5.5,
+		SoundDelayTime = 0.2, -- delay before sound plays
+		ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
+		ParticleDelayTime = 5, -- delay before particle spawns
+		ParticleDuration = 7, -- how long the particle effect lasts
+	},
+}
+
+local HopeAnimFXCooldowns = {}
+local HOPE_ANIM_FX_COOLDOWN = 5
+
+local function playHopeAnimFX(animId, character)
+	local fxInfo = HopeAnimFX[animId]
+	if not fxInfo then return end
+
+	local key = animId .. "_hopefx"
+	if HopeAnimFXCooldowns[key] then return end
+	HopeAnimFXCooldowns[key] = true
+	task.delay(HOPE_ANIM_FX_COOLDOWN, function()
+		HopeAnimFXCooldowns[key] = nil
+	end)
+
+	-- Play sound with delay
+	local soundDelay = fxInfo.SoundDelayTime or 0
+	local soundId = fxInfo.Sound
+	local volume = fxInfo.Volume or 2.5
+
+	if soundId and soundId ~= "" then
+		local function doPlaySound()
+			if not character or not character.Parent then return end
+
+			local sound = Instance.new("Sound")
+			sound.SoundId = "rbxassetid://" .. normalize(soundId)
+			sound.Volume = volume
+			sound:SetAttribute("IsLocalVoiceline", true)
+
+			local parentResult = parentSoundToBody(sound, character)
+			if parentResult == false then return end
+
+			sound:Play()
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then sound:Destroy() end
+			end)
+		end
+
+		if soundDelay > 0 then
+			task.delay(soundDelay, doPlaySound)
+		else
+			doPlaySound()
+		end
+	end
+
+	-- Spawn particle with delay
+	local particleDelay = fxInfo.ParticleDelayTime or 0
+	local duration = fxInfo.ParticleDuration or 7
+	local template = fxInfo.ParticleTemplate
+
+	if template then
+		local function doSpawnParticle()
+			if not character or not character.Parent then return end
+
+			local hrp = character:FindFirstChild("HumanoidRootPart")
+			if not hrp then return end
+
+			local particleClone = template:Clone()
+			particleClone:PivotTo(hrp.CFrame)
+			particleClone.Parent = workspace:FindFirstChild("Debris") or workspace
+
+			-- Emit all ParticleEmitters that have EmitCount attribute
+			for _, desc in particleClone:GetDescendants() do
+				if desc:IsA("ParticleEmitter") then
+					local emitCount = desc:GetAttribute("EmitCount")
+					if emitCount then
+						local emitDelay = desc:GetAttribute("EmitDelay") or 0
+						if emitDelay > 0 then
+							task.delay(emitDelay, function()
+								if desc and desc.Parent then
+									desc:Emit(emitCount)
+								end
+							end)
+						else
+							desc:Emit(emitCount)
+						end
+					end
+				end
+			end
+
+			-- Tween PointLight (same as JapaneseSpell ability)
+			for _, desc in particleClone:GetDescendants() do
+				if desc:IsA("PointLight") then
+					local tweenUp = TweenService:Create(desc, TweenInfo.new(1), { Range = 60, Brightness = 40 })
+					local tweenDown = TweenService:Create(desc, TweenInfo.new(1), { Range = 0, Brightness = 0 })
+					tweenUp:Play()
+					task.delay(1.5, function()
+						if desc and desc.Parent then
+							tweenDown:Play()
+						end
+					end)
+				end
+			end
+
+			-- Clean up after duration
+			task.delay(duration, function()
+				if particleClone and particleClone.Parent then
+					particleClone:Destroy()
+				end
+			end)
+		end
+
+		if particleDelay > 0 then
+			task.delay(particleDelay, doSpawnParticle)
+		else
+			doSpawnParticle()
+		end
+	end
+end
+
 local AnimSoundCooldowns = {}
 local AnimSoundCycleIndex = {}
 local ANIM_SOUND_COOLDOWN = 1 -- seconds between same animation sound to prevent spam
@@ -1136,7 +1258,9 @@ local function hasAnimCharOverrides(info)
 end
 
 local function playAnimSound(animId, character, charName, track)
-	if character ~= Players.LocalPlayer.Character then return end
+
+
+		playHopeAnimFX(animId, character)	if character ~= Players.LocalPlayer.Character then return end
 
 	local entry = AnimationSounds[animId]
 	if not entry then return end
