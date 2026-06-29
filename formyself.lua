@@ -13,6 +13,7 @@ local function normalize(id)
 end
 
 local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
+local SOUND_NOT_FADEOUT_THRESHOLD = 10 -- Sounds with SoundNotFadeOut=true skip fade if played >= this many seconds
 local FadingSounds = {}
 local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
 local Cooldowns = {}
@@ -28,6 +29,14 @@ local function fadeOutSound(sound)
 	end
 
 	if FadingSounds[sound] then
+		return
+	end
+
+	-- If this sound is marked SoundNotFadeOut and has played past the threshold,
+	-- skip the fade and stop immediately (sound played long enough to not fade)
+	if sound:GetAttribute("SoundNotFadeOut") and sound.TimePosition >= SOUND_NOT_FADEOUT_THRESHOLD then
+		sound:Stop()
+		sound:Destroy()
 		return
 	end
 
@@ -119,6 +128,7 @@ local KnownKeys = {
 	TrustDistanceFallback = true,
 	OncePerLifetime = true,
 	CasterSoundService = true,
+	SoundNotFadeOut = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -178,6 +188,7 @@ local function playAbilitySound(info, abilityName)
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
+	if info.SoundNotFadeOut then sound:SetAttribute("SoundNotFadeOut", true) end
 
 	local character = Players.LocalPlayer.Character
 	if not parentSoundForCaster(sound, character, info.CasterSoundService) then
@@ -214,6 +225,7 @@ local function playAbilitySound(info, abilityName)
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
 		simSound:SetAttribute("IsLocalVoiceline", true)
+		if info.SoundNotFadeOut then simSound:SetAttribute("SoundNotFadeOut", true) end
 
 		local character = Players.LocalPlayer.Character
 		parentSoundForCaster(simSound, character, info.CasterSoundService)
@@ -583,7 +595,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
-		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Brain Fry
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
@@ -636,6 +648,14 @@ fadeOutOverlaySound = function(overlaySound, duration)
 	end
 	if FadingSounds[overlaySound] then return end
 
+	-- If this sound is marked SoundNotFadeOut and has played past the threshold,
+	-- skip the fade and stop immediately (sound played long enough to not fade)
+	if overlaySound:GetAttribute("SoundNotFadeOut") and overlaySound.TimePosition >= SOUND_NOT_FADEOUT_THRESHOLD then
+		overlaySound:Stop()
+		overlaySound:Destroy()
+		return
+	end
+
 	FadingSounds[overlaySound] = true
 
 	local tween = TweenService:Create(
@@ -667,6 +687,7 @@ local OverlayKnownKeys = {
 	OncePerLifetime = true,
 	TrustDistanceFallback = true,
 	CasterSoundService = true,
+	SoundNotFadeOut = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -790,6 +811,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
 		ov.Volume = overlayInfo.Volume or 2.5
+		if overlayInfo.SoundNotFadeOut then ov:SetAttribute("SoundNotFadeOut", true) end
 
 		if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
 			ov.Parent = SoundService
@@ -1123,9 +1145,12 @@ local HopeAnimFX = {
 local HopeAnimFXCooldowns = {}
 local HOPE_ANIM_FX_COOLDOWN = 5
 
-local function playHopeAnimFX(animId, character)
+local function playHopeAnimFX(animId, character, charName)
 	local fxInfo = HopeAnimFX[animId]
 	if not fxInfo then return end
+
+	-- Only play for Hope Mikaelson
+	if charName ~= "Hope Mikaelson" then return end
 
 	local key = animId .. "_hopefx"
 	if HopeAnimFXCooldowns[key] then return end
@@ -1246,6 +1271,7 @@ local AnimSoundKnownKeys = {
 	OncePerLifetime = true,
 	StackCount = true,
 	CasterSoundService = true,
+	SoundNotFadeOut = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1260,7 +1286,8 @@ end
 local function playAnimSound(animId, character, charName, track)
 
 
-		playHopeAnimFX(animId, character)	if character ~= Players.LocalPlayer.Character then return end
+		playHopeAnimFX(animId, character, charName)
+		if character ~= Players.LocalPlayer.Character then return end
 
 	local entry = AnimationSounds[animId]
 	if not entry then return end
@@ -1971,6 +1998,7 @@ local ComboKnownKeys = {
 	CharacterRequired = true,
 	WindowTime = true,
 	CasterSoundService = true,
+	SoundNotFadeOut = true,
 }
 
 local function hasComboCharOverrides(info)
@@ -2191,6 +2219,7 @@ local CompulsionProtKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	CasterSoundService = true,
+	SoundNotFadeOut = true,
 }
 
 local function hasCompulsionProtCharOverrides(info)
