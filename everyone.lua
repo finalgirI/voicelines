@@ -548,7 +548,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
-		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Brain Fry
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
@@ -1065,7 +1065,7 @@ local AnimationSounds = {
 	},
 	-- Hope Mikaelson JapaneseSpellFX voiceline (fill in your animation ID and sound ID)
 	["78864031194100"] = {
-		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 5.5, DelayTime = 0 }, -- JapaneseSpellFX
+		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 5, DelayTime = 0.2 }, -- JapaneseSpellFX
 	},
 }
 
@@ -1075,7 +1075,7 @@ local AnimationParticles = {
 	["78864031194100"] = {
 		["Hope Mikaelson"] = {
 			ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
-			DelayTime = 4.8, -- delay in seconds before particle spawns
+			DelayTime = 5, -- delay in seconds before particle spawns
 			Duration = 7, -- how long the particle effect lasts before cleanup
 		},
 	},
