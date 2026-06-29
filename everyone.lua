@@ -1140,6 +1140,28 @@ local function playAnimParticle(animId, character, charName)
 						desc:Emit(emitCount)
 					end
 				end
+			elseif desc:IsA("PointLight") then
+				-- Tween PointLight Range and Brightness up, then back down
+				local rangeUp = TweenService:Create(desc, TweenInfo.new(1), {
+					Range = 60,
+				})
+				local rangeDown = TweenService:Create(desc, TweenInfo.new(1), {
+					Range = 0,
+				})
+				local brightnessUp = TweenService:Create(desc, TweenInfo.new(1), {
+					Brightness = 40,
+				})
+				local brightnessDown = TweenService:Create(desc, TweenInfo.new(1), {
+					Brightness = 0,
+				})
+				rangeUp:Play()
+				brightnessUp:Play()
+				task.delay(1.5, function()
+					if desc and desc.Parent then
+						rangeDown:Play()
+						brightnessDown:Play()
+					end
+				end)
 			end
 		end
 
