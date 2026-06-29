@@ -13,30 +13,15 @@ local function normalize(id)
 end
 
 local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
-local SOUND_NOT_FADEOUT_THRESHOLD = 10 -- Sounds with SoundNotFadeOut=true skip fade if played >= this many seconds
 local FadingSounds = {}
 local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
-local Cooldowns = {}
-local ActiveSounds = {}
-local KeepPlayingSounds = {}
-local SoundCycleIndex = {}
 
 local function fadeOutSound(sound)
-	if not sound then return end
-	if not sound.Parent then
-		FadingSounds[sound] = nil
+	if not sound or not sound.Parent then
 		return
 	end
 
 	if FadingSounds[sound] then
-		return
-	end
-
-	-- If this sound is marked SoundNotFadeOut and has played past the threshold,
-	-- skip the fade and stop immediately (sound played long enough to not fade)
-	if sound:GetAttribute("SoundNotFadeOut") and sound.TimePosition >= SOUND_NOT_FADEOUT_THRESHOLD then
-		sound:Stop()
-		sound:Destroy()
 		return
 	end
 
@@ -51,11 +36,12 @@ local function fadeOutSound(sound)
 	tween:Play()
 
 	tween.Completed:Once(function()
-		FadingSounds[sound] = nil
-		if sound and sound.Parent then
+		if sound then
 			sound:Stop()
 			sound:Destroy()
 		end
+
+		FadingSounds[sound] = nil
 	end)
 end
 
@@ -128,7 +114,6 @@ local KnownKeys = {
 	TrustDistanceFallback = true,
 	OncePerLifetime = true,
 	CasterSoundService = true,
-	SoundNotFadeOut = true,
 }
 
 local function hasCharacterOverrides(info)
@@ -188,7 +173,6 @@ local function playAbilitySound(info, abilityName)
 	sound.SoundId = "rbxassetid://" .. normalize(soundId)
 	sound.Volume = info.Volume or 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
-	if info.SoundNotFadeOut then sound:SetAttribute("SoundNotFadeOut", true) end
 
 	local character = Players.LocalPlayer.Character
 	if not parentSoundForCaster(sound, character, info.CasterSoundService) then
@@ -225,7 +209,6 @@ local function playAbilitySound(info, abilityName)
 		simSound.SoundId = "rbxassetid://" .. normalize(simultaneousSoundId)
 		simSound.Volume = info.Volume or 2.5
 		simSound:SetAttribute("IsLocalVoiceline", true)
-		if info.SoundNotFadeOut then simSound:SetAttribute("SoundNotFadeOut", true) end
 
 		local character = Players.LocalPlayer.Character
 		parentSoundForCaster(simSound, character, info.CasterSoundService)
@@ -295,14 +278,14 @@ local SoundReplacements = {
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Suctus Incendia
 	["80430541489576"] = "14556366203", -- Turn To Stone
-	["132884184474189"] = "15631194386", -- Phasmatos Tribum Nas Ex Veras
+	["132884184474189"] = { Sound = "15631194386", KeepPlayingSound = true }, -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
-	["14043844852"] = { Replacement = "13904360117", Volume = 4.5 }, -- Heretic Joint Spell
+	["14043844852"] = { Replacement = "13904360117", Volume = 5 }, -- Heretic Joint Spell 
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
 	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
+	["116235007511881"] = "13203446447", -- Autem
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
-	["116235007511881"] = "13203446447", -- Autem
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
 }
 
@@ -363,9 +346,7 @@ end
 local function isLocalPlayerSound(sound)
 	local localCharacter = Players.LocalPlayer.Character
 	if not localCharacter then return false, false end
-	local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
 
-	-- Check 1: Sound is directly inside the local player's character hierarchy
 	local current = sound.Parent
 	while current do
 		if current == localCharacter then
@@ -374,35 +355,16 @@ local function isLocalPlayerSound(sound)
 		current = current.Parent
 	end
 
-	-- Check 2: Sound is on a part/attachment - use character name + distance
-	local soundPos = nil
-	if sound.Parent and sound.Parent:IsA("BasePart") then
-		soundPos = sound.Parent.Position
-	elseif sound.Parent and sound.Parent:IsA("Attachment") then
-		soundPos = sound.Parent.WorldPosition
-	end
-
-	if soundPos then
-		local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
-		if localHRP and localHRP:IsA("BasePart") then
-			local dist = (localHRP.Position - soundPos).Magnitude
-
-			-- If the sound's character name matches ours (determined from hierarchy, not distance),
-			-- it's definitely our sound even on a distant part
-			local soundCharName, soundCharIsDistFallback = getSoundCharacterName(sound)
-			if soundCharName == localCharName and not soundCharIsDistFallback then
-				return true, false -- Confident match, not a fallback
-			end
-
-			-- If character name matches but was also determined by distance, allow with fallback flag
-			if soundCharName == localCharName and dist < 50 then
-				return true, true
-			end
-
-			-- Pure distance fallback - only if very close (ability effect near us)
-			if dist < 15 then
-				return true, true
-			end
+	local localHRP = localCharacter:FindFirstChild("HumanoidRootPart")
+	if localHRP and localHRP:IsA("BasePart") then
+		local soundPos = nil
+		if sound.Parent and sound.Parent:IsA("BasePart") then
+			soundPos = sound.Parent.Position
+		elseif sound.Parent and sound.Parent:IsA("Attachment") then
+			soundPos = sound.Parent.WorldPosition
+		end
+		if soundPos and (localHRP.Position - soundPos).Magnitude < 8 then
+			return true, true -- isLocal, isDistanceFallback
 		end
 	end
 
@@ -412,15 +374,6 @@ end
 local function tryReplaceSound(sound)
 	if not sound:IsA("Sound") then return end
 	if ReplacedSounds[sound] then return end
-
-	local isLocal, isDistFallback = isLocalPlayerSound(sound)
-	if not isLocal then return end
-	if isDistFallback then
-		-- Distance fallback: only allow if the character name matches ours
-		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName ~= localCharName then return end
-	end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundReplacements[id]
@@ -519,7 +472,6 @@ local function tryReplaceSound(sound)
 		end
 		if bodyParent then
 			newSound.Parent = bodyParent
-			newSound:Play()
 			newSound.Ended:Connect(function()
 				if newSound and newSound.Parent then newSound:Destroy() end
 			end)
@@ -580,17 +532,18 @@ local SoundOverlays = {
 		},
 	},
 	["111801255101409"] = { Sound = "74460096162653", Volume = 2.5, DelayTime = 0 }, -- Magic Shield
-	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
+	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
+
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["11708882199"] = {
 		["Hope Mikaelson"] = { Sound = "76431177526410", Volume = 3, DelayTime = 0 }, -- Wolf Transformation
 	},
+	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
 	["10006479564"] = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
@@ -641,20 +594,8 @@ local ActiveOverlaySounds = {} -- Track currently playing overlay Sound IDs to p
 local OverlayOriginalDebounce = {} -- Debounce per original sound ID to prevent multiple overlays from duplicate original sounds
 
 fadeOutOverlaySound = function(overlaySound, duration)
-	if not overlaySound then return end
-	if not overlaySound.Parent then
-		FadingSounds[overlaySound] = nil
-		return
-	end
+	if not overlaySound or not overlaySound.Parent then return end
 	if FadingSounds[overlaySound] then return end
-
-	-- If this sound is marked SoundNotFadeOut and has played past the threshold,
-	-- skip the fade and stop immediately (sound played long enough to not fade)
-	if overlaySound:GetAttribute("SoundNotFadeOut") and overlaySound.TimePosition >= SOUND_NOT_FADEOUT_THRESHOLD then
-		overlaySound:Stop()
-		overlaySound:Destroy()
-		return
-	end
 
 	FadingSounds[overlaySound] = true
 
@@ -667,11 +608,11 @@ fadeOutOverlaySound = function(overlaySound, duration)
 	tween:Play()
 
 	tween.Completed:Once(function()
-		FadingSounds[overlaySound] = nil
-		if overlaySound and overlaySound.Parent then
+		if overlaySound then
 			overlaySound:Stop()
 			overlaySound:Destroy()
 		end
+		FadingSounds[overlaySound] = nil
 	end)
 end
 
@@ -687,7 +628,6 @@ local OverlayKnownKeys = {
 	OncePerLifetime = true,
 	TrustDistanceFallback = true,
 	CasterSoundService = true,
-	SoundNotFadeOut = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -732,20 +672,16 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 
 	local function doPlay()
 		local existing = ActiveOverlaySounds[overlayInfo.Sound]
-		if existing then
-			if existing.Parent and existing.IsPlaying then
-				if overlayInfo.KeepPlayingSound then
-					existing:Stop()
-					existing:Destroy()
-					ActiveOverlaySounds[overlayInfo.Sound] = nil
-				else
-					return
-				end
+		if existing and existing.Parent and existing.IsPlaying then
+			if overlayInfo.KeepPlayingSound then
+				existing:Stop()
+				existing:Destroy()
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
 			else
-					-- Existing sound is destroyed or not playing, clean it up
-					ActiveOverlaySounds[overlayInfo.Sound] = nil
+				return
 			end
 		end
+		ActiveOverlaySounds[overlayInfo.Sound] = nil
 
 		local parent = nil
 		if capturedCharModel and capturedCharModel.Parent then
@@ -811,7 +747,6 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 		local ov = Instance.new("Sound")
 		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
 		ov.Volume = overlayInfo.Volume or 2.5
-		if overlayInfo.SoundNotFadeOut then ov:SetAttribute("SoundNotFadeOut", true) end
 
 		if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
 			ov.Parent = SoundService
@@ -819,6 +754,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			configure3DAudio(ov)
 			ov.Parent = parent
 		end
+
 		ov:Play()
 
 		ActiveOverlaySounds[overlayInfo.Sound] = ov
@@ -871,7 +807,7 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			if conn then conn:Disconnect() end
 			doPlay()
 		end)
-		task.delay(0.1, function()
+		task.delay(2, function()
 			if conn then conn:Disconnect() end
 			if not played and sound and sound.Parent and sound.IsPlaying then
 				doPlay()
@@ -883,15 +819,6 @@ end
 local function tryOverlaySound(sound)
 	if not sound:IsA("Sound") then return end
 	if OverlayTracked[sound] then return end
-
-	local isLocal, isDistFallback = isLocalPlayerSound(sound)
-	if not isLocal then return end
-	if isDistFallback then
-		-- Distance fallback: only allow if the character name matches ours
-		local localCharName = Players.LocalPlayer:GetAttribute("CharacterName")
-		local soundCharName = getSoundCharacterName(sound)
-		if soundCharName ~= localCharName then return end
-	end
 
 	local id = sound.SoundId:gsub("rbxassetid://", "")
 	local entry = SoundOverlays[id]
@@ -934,6 +861,12 @@ end
 local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
+	},
+	["15424577510"] = {
+		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
+	},
+	["15424573536"] = {
+		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
 	},
 	["6713148336"] = {
 		CasterSoundService = true,
@@ -984,7 +917,7 @@ local AnimationSounds = {
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
 	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.3 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.5 }, -- Sandclock
 	},
 	["113177696607441"] = {
 		CasterSoundService = true,
@@ -1004,7 +937,7 @@ local AnimationSounds = {
 	},
 	["13721687618"] = {
 		["Mary Louise"] = { Sound = "101738888339389", Volume = 5, DelayTime = 0 }, -- Super Punch
-		["Katherine Pierce"] = { Sound = "73563320499768", Volume = 2.5, DelayTime = 0 }, -- Super Punch
+		["Katherine Pierce"] = { Sound = "73563320499768", Volume = 5, DelayTime = 0 }, -- Super Punch
 	},
 	["16794479576"] = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
@@ -1021,6 +954,7 @@ local AnimationSounds = {
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+		["Evil Aunt"] = { Sound = "108794711275198", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 	},
 	["103809123106748"] = {
 		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
@@ -1058,12 +992,13 @@ local AnimationSounds = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Evil Aunt"] = { Sound = "108318456932633", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1080,6 +1015,7 @@ local AnimationSounds = {
 		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
 	["95988116850782"] = {
@@ -1103,10 +1039,9 @@ local AnimationSounds = {
 	},
 	["12308000578"] = {
 		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Hope Mikaelson"] = { Sound = "88024240964591", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Mary Louise"] = { Sound = "105517213066097", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 10, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Hayley Marshall-Kenner"] = { Sound = "86909761899865", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Katherine Pierce"] = { Sound = "85838626313851", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
@@ -1134,130 +1069,121 @@ local AnimationSounds = {
 	["14571834582"] = {
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
-}
-
--- Hope Mikaelson Animation FX System: plays sound + spawns particle when Hope plays an animation
-local HopeAnimFX = {
-	-- Fill in your animation ID and sound ID below
+	-- Hope Mikaelson JapaneseSpellFX voiceline (fill in your animation ID and sound ID)
 	["78864031194100"] = {
-		Sound = "89596447162600",
-		Volume = 5.5,
-		SoundDelayTime = 0.2, -- delay before sound plays
-		ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
-		ParticleDelayTime = 5, -- delay before particle spawns
-		ParticleDuration = 7, -- how long the particle effect lasts
+		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 5, DelayTime = 0.2 }, -- JapaneseSpellFX
 	},
 }
 
-local HopeAnimFXCooldowns = {}
-local HOPE_ANIM_FX_COOLDOWN = 5
+-- Animation Particles System: spawn particle effects when specific animations play
+local AnimationParticles = {
+	-- Hope Mikaelson JapaneseSpellFX particle (fill in your animation ID)
+	["78864031194100"] = {
+		["Hope Mikaelson"] = {
+			ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
+			DelayTime = 5, -- delay in seconds before particle spawns
+			Duration = 7, -- how long the particle effect lasts before cleanup
+		},
+	},
+}
 
-local function playHopeAnimFX(animId, character, charName)
-	local fxInfo = HopeAnimFX[animId]
-	if not fxInfo then return end
+local AnimParticleCooldowns = {}
+local ANIM_PARTICLE_COOLDOWN = 5
 
-	-- Only play for Hope Mikaelson
-	if charName ~= "Hope Mikaelson" then return end
+local function playAnimParticle(animId, character, charName)
+	local entry = AnimationParticles[animId]
+	if not entry then return end
 
-	local key = animId .. "_hopefx"
-	if HopeAnimFXCooldowns[key] then return end
-	HopeAnimFXCooldowns[key] = true
-	task.delay(HOPE_ANIM_FX_COOLDOWN, function()
-		HopeAnimFXCooldowns[key] = nil
+	local particleInfo
+	if charName and entry[charName] then
+		particleInfo = entry[charName]
+	else
+		return -- No matching particle for this character
+	end
+	if not particleInfo then return end
+
+	local key = animId .. "_particle_" .. (charName or "unknown")
+	if AnimParticleCooldowns[key] then return end
+	AnimParticleCooldowns[key] = true
+	task.delay(ANIM_PARTICLE_COOLDOWN, function()
+		AnimParticleCooldowns[key] = nil
 	end)
 
-	-- Play sound with delay
-	local soundDelay = fxInfo.SoundDelayTime or 0
-	local soundId = fxInfo.Sound
-	local volume = fxInfo.Volume or 2.5
+	local delayTime = particleInfo.DelayTime or 0
+	local duration = particleInfo.Duration or 7
+	local template = particleInfo.ParticleTemplate
+	if not template then return end
 
-	if soundId and soundId ~= "" then
-		local function doPlaySound()
-			if not character or not character.Parent then return end
-
-			local sound = Instance.new("Sound")
-			sound.SoundId = "rbxassetid://" .. normalize(soundId)
-			sound.Volume = volume
-			sound:SetAttribute("IsLocalVoiceline", true)
-
-			local parentResult = parentSoundToBody(sound, character)
-			if parentResult == false then return end
-
-			sound:Play()
-			sound.Ended:Connect(function()
-				if sound and sound.Parent then sound:Destroy() end
-			end)
+	local function doSpawnParticle()
+		if not character or not character.Parent then
+			AnimParticleCooldowns[key] = nil
+			return
 		end
 
-		if soundDelay > 0 then
-			task.delay(soundDelay, doPlaySound)
-		else
-			doPlaySound()
+		local hrp = character:FindFirstChild("HumanoidRootPart")
+		if not hrp then
+			AnimParticleCooldowns[key] = nil
+			return
 		end
-	end
 
-	-- Spawn particle with delay
-	local particleDelay = fxInfo.ParticleDelayTime or 0
-	local duration = fxInfo.ParticleDuration or 7
-	local template = fxInfo.ParticleTemplate
+		local particleClone = template:Clone()
+		particleClone:PivotTo(hrp.CFrame)
+		particleClone.Parent = workspace:FindFirstChild("Debris") or workspace
 
-	if template then
-		local function doSpawnParticle()
-			if not character or not character.Parent then return end
-
-			local hrp = character:FindFirstChild("HumanoidRootPart")
-			if not hrp then return end
-
-			local particleClone = template:Clone()
-			particleClone:PivotTo(hrp.CFrame)
-			particleClone.Parent = workspace:FindFirstChild("Debris") or workspace
-
-			-- Emit all ParticleEmitters that have EmitCount attribute
-			for _, desc in particleClone:GetDescendants() do
-				if desc:IsA("ParticleEmitter") then
-					local emitCount = desc:GetAttribute("EmitCount")
-					if emitCount then
-						local emitDelay = desc:GetAttribute("EmitDelay") or 0
-						if emitDelay > 0 then
-							task.delay(emitDelay, function()
-								if desc and desc.Parent then
-									desc:Emit(emitCount)
-								end
-							end)
-						else
-							desc:Emit(emitCount)
-						end
+		-- Emit all ParticleEmitters that have EmitCount attribute
+		for _, desc in particleClone:GetDescendants() do
+			if desc:IsA("ParticleEmitter") then
+				local emitCount = desc:GetAttribute("EmitCount")
+				if emitCount then
+					local emitDelay = desc:GetAttribute("EmitDelay") or 0
+					if emitDelay > 0 then
+						task.delay(emitDelay, function()
+							if desc and desc.Parent then
+								desc:Emit(emitCount)
+							end
+						end)
+					else
+						desc:Emit(emitCount)
 					end
 				end
+			elseif desc:IsA("PointLight") then
+				-- Tween PointLight Range and Brightness up, then back down
+				local rangeUp = TweenService:Create(desc, TweenInfo.new(1), {
+					Range = 60,
+				})
+				local rangeDown = TweenService:Create(desc, TweenInfo.new(1), {
+					Range = 0,
+				})
+				local brightnessUp = TweenService:Create(desc, TweenInfo.new(1), {
+					Brightness = 40,
+				})
+				local brightnessDown = TweenService:Create(desc, TweenInfo.new(1), {
+					Brightness = 0,
+				})
+				rangeUp:Play()
+				brightnessUp:Play()
+				task.delay(1.5, function()
+					if desc and desc.Parent then
+						rangeDown:Play()
+						brightnessDown:Play()
+					end
+				end)
 			end
-
-			-- Tween PointLight (same as JapaneseSpell ability)
-			for _, desc in particleClone:GetDescendants() do
-				if desc:IsA("PointLight") then
-					local tweenUp = TweenService:Create(desc, TweenInfo.new(1), { Range = 60, Brightness = 40 })
-					local tweenDown = TweenService:Create(desc, TweenInfo.new(1), { Range = 0, Brightness = 0 })
-					tweenUp:Play()
-					task.delay(1.5, function()
-						if desc and desc.Parent then
-							tweenDown:Play()
-						end
-					end)
-				end
-			end
-
-			-- Clean up after duration
-			task.delay(duration, function()
-				if particleClone and particleClone.Parent then
-					particleClone:Destroy()
-				end
-			end)
 		end
 
-		if particleDelay > 0 then
-			task.delay(particleDelay, doSpawnParticle)
-		else
-			doSpawnParticle()
-		end
+		-- Clean up after duration
+		task.delay(duration, function()
+			if particleClone and particleClone.Parent then
+				particleClone:Destroy()
+			end
+			AnimParticleCooldowns[key] = nil
+		end)
+	end
+
+	if delayTime > 0 then
+		task.delay(delayTime, doSpawnParticle)
+	else
+		doSpawnParticle()
 	end
 end
 
@@ -1278,7 +1204,6 @@ local AnimSoundKnownKeys = {
 	OncePerLifetime = true,
 	StackCount = true,
 	CasterSoundService = true,
-	SoundNotFadeOut = true,
 }
 
 local function hasAnimCharOverrides(info)
@@ -1291,11 +1216,6 @@ local function hasAnimCharOverrides(info)
 end
 
 local function playAnimSound(animId, character, charName, track)
-
-
-		playHopeAnimFX(animId, character, charName)
-		if character ~= Players.LocalPlayer.Character then return end
-
 	local entry = AnimationSounds[animId]
 	if not entry then return end
 
@@ -1364,7 +1284,11 @@ local function playAnimSound(animId, character, charName, track)
 		sound.Volume = soundInfo.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		if parentResult == false then
+			AnimSoundCooldowns[key] = nil
+			return
+		end
 
 		sound:Play()
 
@@ -1483,6 +1407,8 @@ local function hookAnimator(animator, character)
 		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
 
+		playAnimParticle(animId, character, charName)
+
 		if checkCombosForAnimation then
 			checkCombosForAnimation(animId, character, charName, track)
 		end
@@ -1544,44 +1470,6 @@ end
 
 Players.LocalPlayer.CharacterAdded:Connect(function()
 	OncePerLifetimePlayed = {}
-
-	-- Clean up stale references from the old character
-	for soundId, snd in pairs(ActiveOverlaySounds) do
-		if not snd or not snd.Parent then
-			ActiveOverlaySounds[soundId] = nil
-		end
-	end
-	for snd, _ in pairs(FadingSounds) do
-		if not snd or not snd.Parent then
-			FadingSounds[snd] = nil
-		end
-	end
-	for snd, _ in pairs(ReplacedSounds) do
-		if not snd or not snd.Parent then
-			ReplacedSounds[snd] = nil
-		end
-	end
-	for snd, _ in pairs(OverlayTracked) do
-		if not snd or not snd.Parent then
-			OverlayTracked[snd] = nil
-		end
-	end
-	for snd, _ in pairs(KeepPlayingSounds) do
-		if not snd or not snd.Parent then
-			KeepPlayingSounds[snd] = nil
-		end
-	end
-	for abilityName, snd in pairs(ActiveSounds) do
-		if not snd or not snd.Parent then
-			ActiveSounds[abilityName] = nil
-			Cooldowns[abilityName] = false
-		end
-	end
-	for particle, snd in pairs(ActiveParticleSounds) do
-		if not snd or not snd.Parent then
-			ActiveParticleSounds[particle] = nil
-		end
-	end
 end)
 
 Players.LocalPlayer.CharacterAdded:Connect(hookCharacterAnimations)
@@ -1644,7 +1532,6 @@ local function onChatMessageReceived(textChatMessage)
 	end
 
 	if not player then return end
-	if player ~= Players.LocalPlayer then return end
 
 	local msg = textChatMessage.Text
 	if not msg then return end
@@ -1725,7 +1612,6 @@ local LastMassCompulsionCaster = nil -- tracked from the 'effect' event
 local function onMassCompulsionAction(casterPlayer, actionName)
 	if not actionName then return end
 	if not casterPlayer then return end
-	if casterPlayer ~= Players.LocalPlayer then return end
 
 	local soundInfo = MassCompulsionSounds[actionName]
 	if not soundInfo then return end
@@ -1817,7 +1703,7 @@ local ParticleSounds = {
 	},
 
 	["LinkBeam"] = {
-		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 3, DelayTime = 7.5, KeepPlayingSound = true },
+		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 	},
 
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
@@ -1860,11 +1746,13 @@ local function tryPlayParticleSound(particle)
 	if ActiveParticleSounds[particle] then return end
 
 	local entry = ParticleSounds[particle.Name]
+	if not entry and particle.Parent then
+		entry = ParticleSounds[particle.Parent.Name]
+	end
 	if not entry then return end
 
 	local character = getCharacterFromParticle(particle)
 	if not character then return end
-	if character ~= Players.LocalPlayer.Character then return end
 
 
 	local charName = getCharacterNameFromModel(character)
@@ -1909,7 +1797,7 @@ local function tryPlayParticleSound(particle)
 		sound:SetAttribute("IsLocalVoiceline", true)
 
 		local parentResult = parentSoundForCaster(sound, character, resolvedEntry.CasterSoundService or entry.CasterSoundService)
-		if parentResult == false then return end -- parentSoundToBody destroyed it
+		if parentResult == false then return end
 
 		sound:Play()
 		ActiveParticleSounds[particle] = sound
@@ -2005,7 +1893,6 @@ local ComboKnownKeys = {
 	CharacterRequired = true,
 	WindowTime = true,
 	CasterSoundService = true,
-	SoundNotFadeOut = true,
 }
 
 local function hasComboCharOverrides(info)
@@ -2024,8 +1911,6 @@ local ComboCooldowns = {}
 local COMBO_COOLDOWN = 1 -- seconds between same combo triggering
 
 local function playComboSound(comboEntry, character, charName, track)
-	if character ~= Players.LocalPlayer.Character then return end
-
 	local soundInfo
 	if hasComboCharOverrides(comboEntry) then
 		if charName and comboEntry[charName] then
@@ -2226,7 +2111,6 @@ local CompulsionProtKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	CasterSoundService = true,
-	SoundNotFadeOut = true,
 }
 
 local function hasCompulsionProtCharOverrides(info)
@@ -2239,8 +2123,6 @@ local function hasCompulsionProtCharOverrides(info)
 end
 
 local function playCompulsionProtectionSound(comboEntry, character, charName, track)
-	if character ~= Players.LocalPlayer.Character then return end
-
 	local soundInfo
 	if hasCompulsionProtCharOverrides(comboEntry) then
 		if charName and comboEntry[charName] then
@@ -2438,6 +2320,22 @@ game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
+
+	-- Fix: When sounds replicate from the server, DescendantAdded can fire
+	-- before SoundId is set. Wait for SoundId before retrying replacement/overlay.
+	if desc:IsA("Sound") and desc.SoundId == "" then
+		local conn
+		conn = desc:GetPropertyChangedSignal("SoundId"):Connect(function()
+			if conn then conn:Disconnect() end
+			if desc.SoundId ~= "" then
+				tryReplaceSound(desc)
+				tryOverlaySound(desc)
+			end
+		end)
+		task.delay(5, function()
+			if conn then conn:Disconnect() end
+		end)
+	end
 end)
 
 game.DescendantAdded:Connect(function(desc)
