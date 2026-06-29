@@ -924,12 +924,7 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox
 	},
 	["77528653756706"] = {
-		["Qetsiyah"] = {
-			Overlays = {
-				{ Sound = "106974700127215", Volume = 5, DelayTime = 8, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
-				{ Sound = "123232609831917", Volume = 5, DelayTime = 16.2, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P2
-			},
-		},
+		["Qetsiyah"] = { Sound = "93058631752190", Volume = 4, DelayTime = 3, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
 		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSound = true }, -- LocatorSpell
 	},
 	["12171371908"] = {
