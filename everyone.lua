@@ -1065,7 +1065,7 @@ local AnimationSounds = {
 	},
 	-- Hope Mikaelson JapaneseSpellFX voiceline (fill in your animation ID and sound ID)
 	["78864031194100"] = {
-		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 2.5, DelayTime = 0 }, -- JapaneseSpellFX
+		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 5.5, DelayTime = 0 }, -- JapaneseSpellFX
 	},
 }
 
