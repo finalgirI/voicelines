@@ -871,6 +871,7 @@ local AnimationSounds = {
 	["6713148336"] = {
 		CasterSoundService = true,
 		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 7, DelayTime = 0 }, -- Errox Femus
+		["Evil Aunt"] = { Sound = "73447844825039", Volume = 7, DelayTime = 0 }, -- Errox Femus
 	},
 	["5465010904"] = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 2.5, DelayTime = 0 }, -- Blood Choke Bonnie
@@ -954,6 +955,7 @@ local AnimationSounds = {
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+		["Dark Josie"] = { Sound = "116796833130204", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Evil Aunt"] = { Sound = "108794711275198", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 	},
 	["103809123106748"] = {
