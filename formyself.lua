@@ -938,6 +938,7 @@ local AnimationSounds = {
 	["6713148336"] = {
 		CasterSoundService = true,
 		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 7, DelayTime = 0 }, -- Errox Femus
+		["Evil Aunt"] = { Sound = "73447844825039", Volume = 7, DelayTime = 0 }, -- Errox Femus
 	},
 	["5465010904"] = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 2.5, DelayTime = 0 }, -- Blood Choke Bonnie
@@ -1021,6 +1022,8 @@ local AnimationSounds = {
 	["14589451404"] = {
 		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
+		["Dark Josie"] = { Sound = "116796833130204", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
+		["Evil Aunt"] = { Sound = "108794711275198", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
 	},
 	["103809123106748"] = {
 		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
@@ -1064,6 +1067,7 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Evil Aunt"] = { Sound = "108318456932633", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1080,6 +1084,7 @@ local AnimationSounds = {
 		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
 	["95988116850782"] = {
