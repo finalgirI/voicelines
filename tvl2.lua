@@ -7,6 +7,13 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 -- SpeciesData require removed to prevent module loading errors
 
+--// Custom Wheel settings
+local customWheelEnabled = false
+local customWheelBgImage = ""
+local customWheelImageSize = "large" -- "large" or "small"
+local customWheelEnhancedClarity = false
+local customWheelCursorImage = "128332235381778"
+
 local TOGGLE_KEY = Enum.KeyCode.RightShift
 local ICON_IMAGE = "rbxassetid://107731607621543"
 local CUSTOM_FIRE_ICON = "rbxassetid://107731607621543"
@@ -49,7 +56,6 @@ local autoIctusEnabled = false
 local autoIctusDebounce = false
 local AUTO_ICTUS_RANGE = 50
 
-do
 local AUTO_ICTUS_ANIMS = {
 	["81743171989186"] = true,
 	["71157109677249"] = true,
@@ -71,7 +77,7 @@ local spectatingPlayer = nil
 local spectatingMode = nil -- "body" or "astral"
 local camlockEnabled = false
 local camlockTarget = nil -- the player being camlocked
-local camlockKeybind = Enum.KeyCode.E
+local camlockKeybind = nil
 local camlockListening = false -- waiting for new keybind input
 local antiAnnoyEnabled = false
 local antiAnnoyConnections = {}
@@ -125,6 +131,7 @@ local function getSpeciesInfo(character)
 	return key, Color3.fromRGB(230, 230, 240)
 end
 
+do
 local function normalizeAnimId(id)
 	local num = string.match(tostring(id), "%d+")
 	return num or id
@@ -742,13 +749,21 @@ local function setCamlockToggleVisual(state)
 	end
 end
 
+local camlockKeybindBtn -- forward declaration for use in toggle handler
+
 camlockToggle.MouseButton1Click:Connect(function()
 	camlockEnabled = not camlockEnabled
 	setCamlockToggleVisual(camlockEnabled)
-	if not camlockEnabled then
+	if camlockEnabled then
+		-- Auto-prompt for keybind selection when enabling
+		camlockListening = true
+		camlockKeybindBtn.Text = "..."
+		camlockKeybindBtn.TextColor3 = Color3.fromRGB(88, 72, 255)
+	else
 		camlockTarget = nil
 		camlockTargetLabel.Text = "Target: None"
 		camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 		-- Restore camera to local player
 		local character = LocalPlayer.Character
 		if character then
@@ -781,11 +796,11 @@ camlockKeybindLabel.TextXAlignment = Enum.TextXAlignment.Left
 camlockKeybindLabel.TextYAlignment = Enum.TextYAlignment.Center
 camlockKeybindLabel.Parent = camlockKeybindRow
 
-local camlockKeybindBtn = Instance.new("TextButton")
+camlockKeybindBtn = Instance.new("TextButton")
 camlockKeybindBtn.Size = UDim2.new(0, 90, 0, 24)
 camlockKeybindBtn.Position = UDim2.new(1, -104, 0.5, -12)
 camlockKeybindBtn.BackgroundColor3 = Color3.fromRGB(30, 32, 42)
-camlockKeybindBtn.Text = camlockKeybind.Name
+camlockKeybindBtn.Text = "None"
 camlockKeybindBtn.TextColor3 = Color3.fromRGB(200, 202, 215)
 camlockKeybindBtn.Font = Enum.Font.GothamBold
 camlockKeybindBtn.TextSize = 11
@@ -816,7 +831,7 @@ local camlockDesc = Instance.new("TextLabel")
 camlockDesc.Size = UDim2.new(1, -28, 0, 30)
 camlockDesc.Position = UDim2.new(0, 14, 0, 140)
 camlockDesc.BackgroundTransparency = 1
-camlockDesc.Text = "Locks your camera to the nearest player's torso. Enable the toggle, then press the keybind to lock/unlock on a target. Turning the toggle off clears any active lock."
+camlockDesc.Text = "Locks your camera to the nearest player's torso. When you enable the toggle, you'll be prompted to choose a keybind. Press that keybind near a target to lock/unlock. Turning the toggle off clears any active lock."
 camlockDesc.TextColor3 = Color3.fromRGB(120, 122, 138)
 camlockDesc.Font = Enum.Font.Gotham
 camlockDesc.TextSize = 11
@@ -1041,55 +1056,11 @@ aimAssistToggle.MouseButton1Click:Connect(function()
 	end
 end)
 
---// Camlock keybind input handler
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-	if gameProcessed then return end
-
-	-- Handle keybind rebinding
-	if camlockListening then
-		if input.KeyCode ~= Enum.KeyCode.Unknown then
-			camlockKeybind = input.KeyCode
-			camlockListening = false
-			camlockKeybindBtn.Text = camlockKeybind.Name
-			camlockKeybindBtn.TextColor3 = Color3.fromRGB(200, 202, 215)
-		end
-		return
-	end
-
-	-- Camlock keybind: toggle target lock (only works when enabled)
-	if input.KeyCode == camlockKeybind then
-		if not camlockEnabled then return end
-
-		if camlockTarget then
-			-- Unlock from current target
-			camlockTarget = nil
-			camlockTargetLabel.Text = "Target: None"
-			camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
-			-- Restore camera to local player
-			local character = LocalPlayer.Character
-			if character then
-				local humanoid = character:FindFirstChildOfClass("Humanoid")
-				if humanoid then
-					workspace.CurrentCamera.CameraSubject = humanoid
-				end
-			end
-		else
-			-- Find and lock nearest target
-			camlockTarget = getCamlockTarget()
-			if camlockTarget then
-				local targetName = getCharacterName(camlockTarget) .. " (@" .. camlockTarget.Name .. ")"
-				camlockTargetLabel.Text = "Target: " .. targetName
-				camlockTargetLabel.TextColor3 = Color3.fromRGB(88, 72, 255)
-			end
-		end
-	end
-end)
-
 --// Camlock logic - find closest player to mouse and lock camera to their torso
 local function getCamlockTarget()
-	local mousePos = UserInputService:GetMouseLocation()
 	local camera = workspace.CurrentCamera
 	if not camera then return nil end
+	local mousePos = camera.ViewportSize / 2
 
 	local closestPlayer = nil
 	local closestAngle = math.huge
@@ -1124,6 +1095,52 @@ local function getCamlockTarget()
 	return nil
 end
 
+--// Camlock keybind input handler
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	if gameProcessed then return end
+
+	-- Handle keybind rebinding
+	if camlockListening then
+		if input.KeyCode ~= Enum.KeyCode.Unknown then
+			camlockKeybind = input.KeyCode
+			camlockListening = false
+			camlockKeybindBtn.Text = camlockKeybind.Name
+			camlockKeybindBtn.TextColor3 = Color3.fromRGB(200, 202, 215)
+		end
+		return
+	end
+
+	-- Camlock keybind: toggle target lock (only works when enabled)
+	if camlockKeybind and input.KeyCode == camlockKeybind then
+		if not camlockEnabled then return end
+
+		if camlockTarget then
+			-- Unlock from current target
+			camlockTarget = nil
+			camlockTargetLabel.Text = "Target: None"
+			camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
+			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+			-- Restore camera to local player
+			local character = LocalPlayer.Character
+			if character then
+				local humanoid = character:FindFirstChildOfClass("Humanoid")
+				if humanoid then
+					workspace.CurrentCamera.CameraSubject = humanoid
+				end
+			end
+		else
+			-- Find and lock nearest target
+			camlockTarget = getCamlockTarget()
+			if camlockTarget then
+				local targetName = getCharacterName(camlockTarget) .. " (@" .. camlockTarget.Name .. ")"
+				camlockTargetLabel.Text = "Target: " .. targetName
+				camlockTargetLabel.TextColor3 = Color3.fromRGB(88, 72, 255)
+				UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+			end
+		end
+	end
+end)
+
 --// Camlock RenderStepped - hard lock camera to target torso
 RunService.RenderStepped:Connect(function()
 	if not camlockEnabled then return end
@@ -1131,21 +1148,23 @@ RunService.RenderStepped:Connect(function()
 	-- Only lock camera if a target was manually selected via keybind
 	if not camlockTarget then return end
 
-	-- Validate target still alive and exists
+	-- If player left the game, clear target
+	-- (use IsDescendantOf to be safe during transitions)
+	if not camlockTarget:IsDescendantOf(game) then
+		camlockTarget = nil
+		camlockTargetLabel.Text = "Target: None"
+		camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+		return
+	end
+
+	-- If character is nil (respawning), keep target and wait
 	local character = camlockTarget.Character
-	if not character then
-		camlockTarget = nil
-		camlockTargetLabel.Text = "Target: None"
-		camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
-		return
-	end
+	if not character then return end
+
+	-- If target is dead, keep target and wait for respawn
 	local humanoid = character:FindFirstChildOfClass("Humanoid")
-	if not humanoid or humanoid.Health <= 0 then
-		camlockTarget = nil
-		camlockTargetLabel.Text = "Target: None"
-		camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
-		return
-	end
+	if not humanoid or humanoid.Health <= 0 then return end
 
 	local torso = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
 	if torso and torso.Parent then
@@ -1602,6 +1621,15 @@ local function createESPForPlayerImpl(player, character, isRetry)
 		updateESPName(player)
 	end))
 
+	-- Delayed color refreshes to catch late-arriving SpecieType attribute after respawn
+	for _, delayTime in {0.5, 1, 2, 3, 5} do
+		task.delay(delayTime, function()
+			if espEnabled and espObjects[player] and espObjects[player].main then
+				updateESPName(player)
+			end
+		end)
+	end
+
 	-- Listen for astral projection state changes to update real body label
 	table.insert(mainData.connections, player:GetAttributeChangedSignal("AstralProjection"):Connect(function()
 		updateESPName(player)
@@ -1807,13 +1835,12 @@ end)
 
 --// Spectate system
 local function startSpectate(player, mode)
-	-- Disable camlock when spectating
-	if camlockEnabled then
-		camlockEnabled = false
+	-- Pause camlock target when spectating, but don't disable the toggle
+	if camlockTarget then
 		camlockTarget = nil
-		setCamlockToggleVisual(false)
 		camlockTargetLabel.Text = "Target: None"
 		camlockTargetLabel.TextColor3 = Color3.fromRGB(110, 112, 128)
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 	end
 	spectatingPlayer = player
 	spectatingMode = mode or "body"
@@ -2107,7 +2134,7 @@ local espDesc = Instance.new("TextLabel")
 espDesc.Size = UDim2.new(1, -28, 0, 40)
 espDesc.Position = UDim2.new(0, 14, 0, 76)
 espDesc.BackgroundTransparency = 1
-espDesc.Text = "Shows player names and species above characters. Names are colored by species. Click View below to spectate a player's location."
+espDesc.Text = "Click View below to spectate a player's location."
 espDesc.TextColor3 = Color3.fromRGB(120, 122, 138)
 espDesc.Font = Enum.Font.Gotham
 espDesc.TextSize = 11
@@ -2115,6 +2142,345 @@ espDesc.TextXAlignment = Enum.TextXAlignment.Left
 espDesc.TextYAlignment = Enum.TextYAlignment.Top
 espDesc.TextWrapped = true
 espDesc.Parent = espCategory
+
+--// Custom Wheel Category (Fun tab)
+local customWheelCategory = Instance.new("Frame")
+customWheelCategory.Size = UDim2.new(1, 0, 0, 280)
+customWheelCategory.BackgroundColor3 = Color3.fromRGB(18, 19, 26)
+customWheelCategory.BorderSizePixel = 0
+customWheelCategory.LayoutOrder = 7
+customWheelCategory.Parent = funScroll
+addCorner(customWheelCategory, 8)
+addStroke(customWheelCategory, Color3.fromRGB(30, 32, 42), 0.3)
+
+local customWheelHeader = Instance.new("TextLabel")
+customWheelHeader.Size = UDim2.new(1, 0, 0, 28)
+customWheelHeader.BackgroundTransparency = 1
+customWheelHeader.Text = "  Custom Wheel"
+customWheelHeader.TextColor3 = Color3.fromRGB(88, 72, 255)
+customWheelHeader.Font = Enum.Font.GothamBold
+customWheelHeader.TextSize = 14
+customWheelHeader.TextXAlignment = Enum.TextXAlignment.Left
+customWheelHeader.TextYAlignment = Enum.TextYAlignment.Center
+customWheelHeader.Parent = customWheelCategory
+
+-- Toggle row
+local customWheelToggleRow = Instance.new("Frame")
+customWheelToggleRow.Size = UDim2.new(1, -28, 0, 38)
+customWheelToggleRow.Position = UDim2.new(0, 14, 0, 32)
+customWheelToggleRow.BackgroundColor3 = Color3.fromRGB(22, 23, 32)
+customWheelToggleRow.BorderSizePixel = 0
+customWheelToggleRow.Parent = customWheelCategory
+addCorner(customWheelToggleRow, 8)
+
+local customWheelLabel = Instance.new("TextLabel")
+customWheelLabel.Size = UDim2.new(0, 100, 1, 0)
+customWheelLabel.Position = UDim2.new(0, 14, 0, 0)
+customWheelLabel.BackgroundTransparency = 1
+customWheelLabel.Text = "Enabled"
+customWheelLabel.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelLabel.Font = Enum.Font.GothamBold
+customWheelLabel.TextSize = 13
+customWheelLabel.TextXAlignment = Enum.TextXAlignment.Left
+customWheelLabel.TextYAlignment = Enum.TextYAlignment.Center
+customWheelLabel.Parent = customWheelToggleRow
+
+local customWheelToggle = Instance.new("TextButton")
+customWheelToggle.Size = UDim2.new(0, 48, 0, 24)
+customWheelToggle.Position = UDim2.new(1, -62, 0.5, -12)
+customWheelToggle.BackgroundColor3 = Color3.fromRGB(50, 52, 65)
+customWheelToggle.Text = ""
+customWheelToggle.AutoButtonColor = false
+customWheelToggle.Parent = customWheelToggleRow
+addCorner(customWheelToggle, 12)
+
+local customWheelKnob = Instance.new("Frame")
+customWheelKnob.Size = UDim2.new(0, 18, 0, 18)
+customWheelKnob.Position = UDim2.new(0, 3, 0, 3)
+customWheelKnob.BackgroundColor3 = Color3.fromRGB(230, 230, 240)
+customWheelKnob.BorderSizePixel = 0
+customWheelKnob.Parent = customWheelToggle
+addCorner(customWheelKnob, 9)
+
+local function setCustomWheelVisual(state)
+	if state then
+		TweenService:Create(customWheelToggle, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			BackgroundColor3 = Color3.fromRGB(88, 72, 255)
+		}):Play()
+		TweenService:Create(customWheelKnob, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Position = UDim2.new(1, -21, 0, 3)
+		}):Play()
+	else
+		TweenService:Create(customWheelToggle, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(50, 52, 65)
+		}):Play()
+		TweenService:Create(customWheelKnob, TweenInfo.new(0.15), {
+			Position = UDim2.new(0, 3, 0, 3)
+		}):Play()
+	end
+end
+
+-- Background image input row
+local customWheelBgRow = Instance.new("Frame")
+customWheelBgRow.Size = UDim2.new(1, -28, 0, 38)
+customWheelBgRow.Position = UDim2.new(0, 14, 0, 76)
+customWheelBgRow.BackgroundColor3 = Color3.fromRGB(22, 23, 32)
+customWheelBgRow.BorderSizePixel = 0
+customWheelBgRow.Parent = customWheelCategory
+addCorner(customWheelBgRow, 8)
+
+local customWheelBgLabel = Instance.new("TextLabel")
+customWheelBgLabel.Size = UDim2.new(0, 100, 1, 0)
+customWheelBgLabel.Position = UDim2.new(0, 14, 0, 0)
+customWheelBgLabel.BackgroundTransparency = 1
+customWheelBgLabel.Text = "BG Image ID"
+customWheelBgLabel.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelBgLabel.Font = Enum.Font.GothamBold
+customWheelBgLabel.TextSize = 13
+customWheelBgLabel.TextXAlignment = Enum.TextXAlignment.Left
+customWheelBgLabel.TextYAlignment = Enum.TextYAlignment.Center
+customWheelBgLabel.Parent = customWheelBgRow
+
+local customWheelBgInput = Instance.new("TextBox")
+customWheelBgInput.Size = UDim2.new(0, 120, 0, 24)
+customWheelBgInput.Position = UDim2.new(1, -134, 0.5, -12)
+customWheelBgInput.BackgroundColor3 = Color3.fromRGB(30, 32, 42)
+customWheelBgInput.Text = ""
+customWheelBgInput.PlaceholderText = "image id"
+customWheelBgInput.PlaceholderColor3 = Color3.fromRGB(80, 82, 100)
+customWheelBgInput.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelBgInput.Font = Enum.Font.GothamBold
+customWheelBgInput.TextSize = 11
+customWheelBgInput.AutoButtonColor = false
+customWheelBgInput.ClearTextOnFocus = false
+customWheelBgInput.Parent = customWheelBgRow
+addCorner(customWheelBgInput, 6)
+
+-- Image size toggle row
+local customWheelSizeRow = Instance.new("Frame")
+customWheelSizeRow.Size = UDim2.new(1, -28, 0, 38)
+customWheelSizeRow.Position = UDim2.new(0, 14, 0, 120)
+customWheelSizeRow.BackgroundColor3 = Color3.fromRGB(22, 23, 32)
+customWheelSizeRow.BorderSizePixel = 0
+customWheelSizeRow.Parent = customWheelCategory
+addCorner(customWheelSizeRow, 8)
+
+local customWheelSizeLabel = Instance.new("TextLabel")
+customWheelSizeLabel.Size = UDim2.new(0, 100, 1, 0)
+customWheelSizeLabel.Position = UDim2.new(0, 14, 0, 0)
+customWheelSizeLabel.BackgroundTransparency = 1
+customWheelSizeLabel.Text = "Image Size"
+customWheelSizeLabel.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelSizeLabel.Font = Enum.Font.GothamBold
+customWheelSizeLabel.TextSize = 13
+customWheelSizeLabel.TextXAlignment = Enum.TextXAlignment.Left
+customWheelSizeLabel.TextYAlignment = Enum.TextYAlignment.Center
+customWheelSizeLabel.Parent = customWheelSizeRow
+
+local customWheelSizeBtn = Instance.new("TextButton")
+customWheelSizeBtn.Size = UDim2.new(0, 90, 0, 24)
+customWheelSizeBtn.Position = UDim2.new(1, -104, 0.5, -12)
+customWheelSizeBtn.BackgroundColor3 = Color3.fromRGB(88, 72, 255)
+customWheelSizeBtn.Text = "LARGE"
+customWheelSizeBtn.TextColor3 = Color3.fromRGB(230, 230, 240)
+customWheelSizeBtn.Font = Enum.Font.GothamBold
+customWheelSizeBtn.TextSize = 11
+customWheelSizeBtn.AutoButtonColor = false
+customWheelSizeBtn.Parent = customWheelSizeRow
+addCorner(customWheelSizeBtn, 6)
+
+customWheelSizeBtn.MouseButton1Click:Connect(function()
+	if customWheelImageSize == "large" then
+		customWheelImageSize = "small"
+		customWheelSizeBtn.Text = "small"
+		customWheelSizeBtn.BackgroundColor3 = Color3.fromRGB(50, 52, 65)
+	else
+		customWheelImageSize = "large"
+		customWheelSizeBtn.Text = "LARGE"
+		customWheelSizeBtn.BackgroundColor3 = Color3.fromRGB(88, 72, 255)
+	end
+	if customWheelEnabled then
+		applyCustomWheel()
+	end
+end)
+
+-- Enhanced clarity toggle row
+local customWheelClarityRow = Instance.new("Frame")
+customWheelClarityRow.Size = UDim2.new(1, -28, 0, 38)
+customWheelClarityRow.Position = UDim2.new(0, 14, 0, 164)
+customWheelClarityRow.BackgroundColor3 = Color3.fromRGB(22, 23, 32)
+customWheelClarityRow.BorderSizePixel = 0
+customWheelClarityRow.Parent = customWheelCategory
+addCorner(customWheelClarityRow, 8)
+
+local customWheelClarityLabel = Instance.new("TextLabel")
+customWheelClarityLabel.Size = UDim2.new(0, 100, 1, 0)
+customWheelClarityLabel.Position = UDim2.new(0, 14, 0, 0)
+customWheelClarityLabel.BackgroundTransparency = 1
+customWheelClarityLabel.Text = "Clarity"
+customWheelClarityLabel.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelClarityLabel.Font = Enum.Font.GothamBold
+customWheelClarityLabel.TextSize = 13
+customWheelClarityLabel.TextXAlignment = Enum.TextXAlignment.Left
+customWheelClarityLabel.TextYAlignment = Enum.TextYAlignment.Center
+customWheelClarityLabel.Parent = customWheelClarityRow
+
+local customWheelClarityToggle = Instance.new("TextButton")
+customWheelClarityToggle.Size = UDim2.new(0, 48, 0, 24)
+customWheelClarityToggle.Position = UDim2.new(1, -62, 0.5, -12)
+customWheelClarityToggle.BackgroundColor3 = Color3.fromRGB(50, 52, 65)
+customWheelClarityToggle.Text = ""
+customWheelClarityToggle.AutoButtonColor = false
+customWheelClarityToggle.Parent = customWheelClarityRow
+addCorner(customWheelClarityToggle, 12)
+
+local customWheelClarityKnob = Instance.new("Frame")
+customWheelClarityKnob.Size = UDim2.new(0, 18, 0, 18)
+customWheelClarityKnob.Position = UDim2.new(0, 3, 0, 3)
+customWheelClarityKnob.BackgroundColor3 = Color3.fromRGB(230, 230, 240)
+customWheelClarityKnob.BorderSizePixel = 0
+customWheelClarityKnob.Parent = customWheelClarityToggle
+addCorner(customWheelClarityKnob, 9)
+
+local function setCustomWheelClarityVisual(state)
+	if state then
+		TweenService:Create(customWheelClarityToggle, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			BackgroundColor3 = Color3.fromRGB(88, 72, 255)
+		}):Play()
+		TweenService:Create(customWheelClarityKnob, TweenInfo.new(0.18, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Position = UDim2.new(1, -21, 0, 3)
+		}):Play()
+	else
+		TweenService:Create(customWheelClarityToggle, TweenInfo.new(0.15), {
+			BackgroundColor3 = Color3.fromRGB(50, 52, 65)
+		}):Play()
+		TweenService:Create(customWheelClarityKnob, TweenInfo.new(0.15), {
+			Position = UDim2.new(0, 3, 0, 3)
+		}):Play()
+	end
+end
+
+customWheelClarityToggle.MouseButton1Click:Connect(function()
+	customWheelEnhancedClarity = not customWheelEnhancedClarity
+	setCustomWheelClarityVisual(customWheelEnhancedClarity)
+	if customWheelEnabled then
+		applyCustomWheel()
+	end
+end)
+
+-- Cursor image input row (mobile)
+local customWheelCursorRow = Instance.new("Frame")
+customWheelCursorRow.Size = UDim2.new(1, -28, 0, 38)
+customWheelCursorRow.Position = UDim2.new(0, 14, 0, 208)
+customWheelCursorRow.BackgroundColor3 = Color3.fromRGB(22, 23, 32)
+customWheelCursorRow.BorderSizePixel = 0
+customWheelCursorRow.Parent = customWheelCategory
+addCorner(customWheelCursorRow, 8)
+
+local customWheelCursorLabel = Instance.new("TextLabel")
+customWheelCursorLabel.Size = UDim2.new(0, 100, 1, 0)
+customWheelCursorLabel.Position = UDim2.new(0, 14, 0, 0)
+customWheelCursorLabel.BackgroundTransparency = 1
+customWheelCursorLabel.Text = "Cursor ID"
+customWheelCursorLabel.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelCursorLabel.Font = Enum.Font.GothamBold
+customWheelCursorLabel.TextSize = 13
+customWheelCursorLabel.TextXAlignment = Enum.TextXAlignment.Left
+customWheelCursorLabel.TextYAlignment = Enum.TextYAlignment.Center
+customWheelCursorLabel.Parent = customWheelCursorRow
+
+local customWheelCursorInput = Instance.new("TextBox")
+customWheelCursorInput.Size = UDim2.new(0, 120, 0, 24)
+customWheelCursorInput.Position = UDim2.new(1, -134, 0.5, -12)
+customWheelCursorInput.BackgroundColor3 = Color3.fromRGB(30, 32, 42)
+customWheelCursorInput.Text = "128332235381778"
+customWheelCursorInput.PlaceholderText = "cursor id"
+customWheelCursorInput.PlaceholderColor3 = Color3.fromRGB(80, 82, 100)
+customWheelCursorInput.TextColor3 = Color3.fromRGB(200, 202, 215)
+customWheelCursorInput.Font = Enum.Font.GothamBold
+customWheelCursorInput.TextSize = 11
+customWheelCursorInput.AutoButtonColor = false
+customWheelCursorInput.ClearTextOnFocus = false
+customWheelCursorInput.Parent = customWheelCursorRow
+addCorner(customWheelCursorInput, 6)
+
+-- Description
+local customWheelDesc = Instance.new("TextLabel")
+customWheelDesc.Size = UDim2.new(1, -28, 0, 30)
+customWheelDesc.Position = UDim2.new(0, 14, 0, 250)
+customWheelDesc.BackgroundTransparency = 1
+customWheelDesc.Text = "Client-sided wheel decoration. Enter a decal image ID for the background. Example IDs: 18716460725, 17878312749, 17452785286"
+customWheelDesc.TextColor3 = Color3.fromRGB(120, 122, 138)
+customWheelDesc.Font = Enum.Font.Gotham
+customWheelDesc.TextSize = 11
+customWheelDesc.TextXAlignment = Enum.TextXAlignment.Left
+customWheelDesc.TextYAlignment = Enum.TextYAlignment.Top
+customWheelDesc.TextWrapped = true
+customWheelDesc.Parent = customWheelCategory
+
+--// Custom Wheel logic
+local function applyCustomWheel()
+	local success, AbilityInventoryNew = pcall(function()
+		return require(LocalPlayer.PlayerScripts.ModuleScripts.AbilityInventoryNew)
+	end)
+	if not success or not AbilityInventoryNew then return end
+
+	local deco = AbilityInventoryNew.getDecorations()
+	if not deco then return end
+
+	-- Read current input values
+	local bgText = customWheelBgInput.Text and string.gsub(customWheelBgInput.Text, "%s+", "") or ""
+	local cursorText = customWheelCursorInput.Text and string.gsub(customWheelCursorInput.Text, "%s+", "") or "128332235381778"
+
+	if customWheelEnabled then
+		deco.canDecorate = true
+		deco.backgroundImage = bgText
+		deco.imageSize = customWheelImageSize
+		deco.enhancedClarity = customWheelEnhancedClarity
+		deco.cursorImage = cursorText ~= "" and cursorText or "128332235381778"
+
+		-- Fire the bindable to trigger Fusion UI updates
+		local bindables = ReplicatedStorage:FindFirstChild("Bindables")
+		local fusionStates = bindables and bindables:FindFirstChild("FusionStates")
+		local enabledEvent = fusionStates and fusionStates:FindFirstChild("EnabledAbilityWheelDecoration")
+		if enabledEvent then
+			enabledEvent:Fire(deco)
+		end
+	else
+		deco.canDecorate = false
+		deco.backgroundImage = ""
+		deco.imageSize = "large"
+		deco.enhancedClarity = false
+		deco.cursorImage = "128332235381778"
+
+		local bindables = ReplicatedStorage:FindFirstChild("Bindables")
+		local fusionStates = bindables and bindables:FindFirstChild("FusionStates")
+		local enabledEvent = fusionStates and fusionStates:FindFirstChild("EnabledAbilityWheelDecoration")
+		if enabledEvent then
+			enabledEvent:Fire(deco)
+		end
+	end
+end
+
+customWheelToggle.MouseButton1Click:Connect(function()
+	customWheelEnabled = not customWheelEnabled
+	setCustomWheelVisual(customWheelEnabled)
+	applyCustomWheel()
+end)
+
+-- Apply on text submit for bg image
+customWheelBgInput.FocusLost:Connect(function(enterPressed)
+	if enterPressed and customWheelEnabled then
+		applyCustomWheel()
+	end
+end)
+
+-- Apply on text submit for cursor image
+customWheelCursorInput.FocusLost:Connect(function(enterPressed)
+	if enterPressed and customWheelEnabled then
+		applyCustomWheel()
+	end
+end)
 
 --// ESP Player List Category (View / Unview)
 local espListCategory = Instance.new("Frame")
@@ -2168,7 +2534,6 @@ local function createPlayerRow(player)
 	playerNameLabel.Size = UDim2.new(1, -70, 1, 0)
 	playerNameLabel.Position = UDim2.new(0, 10, 0, 0)
 	playerNameLabel.BackgroundTransparency = 1
-	playerNameLabel.Text = getCharacterName(player) .. " (@" .. player.Name .. ")"
 	local _, rowSpeciesColor = getSpeciesInfo(player.Character)
 	playerNameLabel.TextColor3 = rowSpeciesColor or Color3.fromRGB(200, 202, 215)
 	playerNameLabel.Font = Enum.Font.GothamSemibold
@@ -2176,6 +2541,16 @@ local function createPlayerRow(player)
 	playerNameLabel.TextXAlignment = Enum.TextXAlignment.Left
 	playerNameLabel.TextYAlignment = Enum.TextYAlignment.Center
 	playerNameLabel.Parent = row
+
+	-- Lobby status indicator
+	local function updateRowName()
+		if not espPlayerRows[player] or not espPlayerRows[player].playerNameLabel then return end
+		local baseName = getCharacterName(player) .. " (@" .. player.Name .. ")"
+		local inLobby = player:GetAttribute("InCharacterSelection") == true
+		espPlayerRows[player].playerNameLabel.Text = inLobby and (baseName .. " (IN LOBBY)") or baseName
+	end
+	-- Set initial name before espPlayerRows is populated so updateRowName works
+	playerNameLabel.Text = getCharacterName(player) .. " (@" .. player.Name .. ")"
 
 	local viewBodyBtn = Instance.new("TextButton")
 	viewBodyBtn.Size = UDim2.new(0, 56, 0, 22)
@@ -2209,6 +2584,7 @@ local function createPlayerRow(player)
 		playerNameLabel = playerNameLabel,
 		viewingMode = nil, -- nil, "astral", "body"
 	}
+	updateRowName()
 
 	local function clearAllViewing()
 		for _, otherRow in pairs(espPlayerRows) do
@@ -2234,7 +2610,7 @@ local function createPlayerRow(player)
 			viewBtn.Text = "Stop"
 			viewBtn.BackgroundColor3 = Color3.fromRGB(220, 50, 50)
 		elseif rowData.viewingMode == "body" then
-			viewBtn.Text = isAstral and "Astral" or "View"
+			viewBtn.Text = isAstral and "Astral" or "Unview"
 			viewBtn.BackgroundColor3 = Color3.fromRGB(88, 72, 255)
 		else
 			viewBtn.Text = isAstral and "Astral" or "View"
@@ -2282,11 +2658,45 @@ local function createPlayerRow(player)
 
 	player:GetAttributeChangedSignal("CharacterName"):Connect(function()
 		if espPlayerRows[player] and espPlayerRows[player].playerNameLabel then
-			espPlayerRows[player].playerNameLabel.Text = getCharacterName(player) .. " (@" .. player.Name .. ")"
+			updateRowName()
 			local _, sc = getSpeciesInfo(player.Character)
 			espPlayerRows[player].playerNameLabel.TextColor3 = sc or Color3.fromRGB(200, 202, 215)
 		end
 	end)
+
+	player:GetAttributeChangedSignal("InCharacterSelection"):Connect(updateRowName)
+
+	-- Refresh row species color (used after respawns when SpecieType may arrive late)
+	local function refreshRowColor()
+		if espPlayerRows[player] and espPlayerRows[player].playerNameLabel then
+			local _, sc = getSpeciesInfo(player.Character)
+			espPlayerRows[player].playerNameLabel.TextColor3 = sc or Color3.fromRGB(200, 202, 215)
+		end
+	end
+
+	-- Listen for species changes on current character
+	local speciesConn = nil
+	local function hookSpeciesListener()
+		if speciesConn then speciesConn:Disconnect() speciesConn = nil end
+		if player.Character then
+			speciesConn = player.Character:GetAttributeChangedSignal("SpecieType"):Connect(refreshRowColor)
+		end
+	end
+	hookSpeciesListener()
+
+	-- Re-hook species listener on respawn and refresh color after delays
+	player.CharacterAdded:Connect(function()
+		refreshRowColor()
+		hookSpeciesListener()
+		for _, delayTime in {0.5, 1, 2, 3, 5} do
+			task.delay(delayTime, refreshRowColor)
+		end
+	end)
+
+	-- Delayed initial color refreshes
+	for _, delayTime in {0.5, 1, 2, 3, 5} do
+		task.delay(delayTime, refreshRowColor)
+	end
 
 	-- Initialize astral state if player is already projecting
 	if player:GetAttribute("AstralProjection") then
@@ -2305,17 +2715,22 @@ updatePlayerRowAstralState = function(player)
 		rowData.playerNameLabel.Size = UDim2.new(1, -136, 1, 0)
 		if not rowData.viewingMode then
 			rowData.viewBtn.Text = "Astral"
+		elseif rowData.viewingMode == "body" then
+			rowData.viewBtn.Text = "Astral"
 		end
 	else
 		rowData.viewBodyBtn.Visible = false
 		rowData.playerNameLabel.Size = UDim2.new(1, -70, 1, 0)
 		if not rowData.viewingMode then
 			rowData.viewBtn.Text = "View"
+		elseif rowData.viewingMode == "body" then
+			rowData.viewBtn.Text = "Unview"
 		end
 		-- If spectating astral form and player exits astral, fall back to body
 		if rowData.viewingMode == "astral" then
 			rowData.viewingMode = "body"
 			startSpectate(player, "body")
+			rowData.viewBtn.Text = "Unview"
 		end
 	end
 end
@@ -2988,6 +3403,7 @@ setEspToggleVisual(false)
 setAntiAnnoyVisual(false)
 setAntiStunVisual(false)
 setAimAssistVisual(false)
+setCustomWheelVisual(false)
 updatePreview()
 
 --// Execution toast notification (pops up from main GUI)
