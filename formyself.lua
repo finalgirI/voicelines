@@ -1063,6 +1063,7 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+        ["Kol Mikaelson"] = { Sound = "124240839477995", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
@@ -1087,6 +1088,7 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+        ["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
 	["95988116850782"] = {
 		["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
@@ -1099,6 +1101,7 @@ local AnimationSounds = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Marcel Gerard"] = { Sound = "134565387051180", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
+        ["Kol Mikaelson"] = { Sound = "71654166290298", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 	},
 	["12308726489"] = {
 		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
@@ -1113,7 +1116,7 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "105517213066097", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Hayley Marshall-Kenner"] = { Sound = "86909761899865", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Kol Mikaelson"] = { Sound = "110395664340261", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Katherine Pierce"] = { Sound = "85838626313851", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
 	["109730789965953"] = {
