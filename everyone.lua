@@ -287,8 +287,8 @@ local SoundReplacements = {
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
-	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 } -- Davina Scream
-	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 } - Davina Scream
+	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
+	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
