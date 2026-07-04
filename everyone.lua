@@ -287,6 +287,8 @@ local SoundReplacements = {
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
+	["89336109503369"] = "119698429726986", -- Davina Scream
+	["93999439393140"] = "119698429726986", -- Davina Scream
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -862,6 +864,11 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0 }, -- Pendant Channel
+	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
+	["87439615254048"] = {
+		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0 }, -- Soul Bind Victim
+	},
 	["15424577510"] = {
 		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
 	},
@@ -877,7 +884,12 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 2.5, DelayTime = 0 }, -- Blood Choke Bonnie
 	},
 	["128623651867501"] = {
-		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox
+		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox 
+		["Davina Claire"] = { Sound = "97756935155216", Volume = 3, DelayTime = 0 }, -- Ossox 
+	},
+	["6900156131"] = {
+		["Freya Mikaelson"] = { Sound = "132326586800909", Volume = 2.5, DelayTime = 0 }, -- Ictus 
+		["Davina Claire"] = { Sound = "112513072656668", Volume = 2.5, DelayTime = 0 }, -- Ictus 
 	},
 	["77528653756706"] = {
 		["Qetsiyah"] = { Sound = "93058631752190", Volume = 4, DelayTime = 3, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
@@ -979,7 +991,7 @@ local AnimationSounds = {
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["93301034042480"] = { Sound = "132015776882851", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
+	["93301034042480"] = { Sound = "115263349021201", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
@@ -1021,7 +1033,7 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
 	["95988116850782"] = {
 		["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
@@ -1049,7 +1061,7 @@ local AnimationSounds = {
 		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 10, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 		["Katherine Pierce"] = { Sound = "85838626313851", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Kol Mikaelson"] = { Sound = "110395664340261", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke
+		["Kol Mikaelson"] = { Sound = "110395664340261", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
 	},
 	["109730789965953"] = {
 		["Bastianna Natale"] = { Sound = "83432170862902", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
@@ -1064,6 +1076,11 @@ local AnimationSounds = {
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 
+	["136458996935352"] = { SimultaneousSounds = {
+		{ Sound = "83098462384996", DelayTime = 0 },
+		{ Sound = "133734124696027", DelayTime = 9.2 },
+		{ Sound = "127866083366553", DelayTime = 18.2 },
+	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["138457929259080"] = { Sound = "99610680956880", Volume = 2.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
 	["12363700089"] = {
@@ -1206,6 +1223,7 @@ local AnimSoundKnownKeys = {
 	FadeOutDuration = true,
 	CutOffWithAnimation = true,
 	SimultaneousSound = true,
+	SimultaneousSounds = true,
 	ChatText = true,
 	OncePerLifetime = true,
 	StackCount = true,
@@ -1319,22 +1337,38 @@ local function playAnimSound(animId, character, charName, track)
 			game:GetService("Chat"):Chat(character, chatText, Enum.ChatColor.White)
 		end
 
-		if soundInfo.SimultaneousSound then
+		-- Helper to play a single simultaneous sound
+		-- simEntry can be a string (sound ID) or a table: { Sound = "id", DelayTime = 0, Volume = nil }
+		local function playSimSound(simEntry, fallbackDelay)
+			-- Resolve entry to fields
+			local simSoundId, simDelay, simVolume
+			if type(simEntry) == "table" then
+				simSoundId = simEntry.Sound
+				simDelay = simEntry.DelayTime
+				simVolume = simEntry.Volume
+			else
+				simSoundId = simEntry
+				simDelay = fallbackDelay
+			end
+
+			if not simSoundId or simSoundId == "0" or simSoundId == 0 then return end
 			local simSound = Instance.new("Sound")
-			simSound.SoundId = "rbxassetid://" .. normalize(soundInfo.SimultaneousSound)
-			simSound.Volume = soundInfo.Volume or 2.5
+			simSound.SoundId = "rbxassetid://" .. normalize(simSoundId)
+			simSound.Volume = simVolume or soundInfo.Volume or 2.5
 			simSound:SetAttribute("IsLocalVoiceline", true)
 
 			parentSoundForCaster(simSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
 
-			if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
-				task.delay(soundInfo.DelayTime, function()
-					if simSound and simSound.Parent then
-						simSound:Play()
-					end
-				end)
+			local function startSimSound()
+				if simSound and simSound.Parent then
+					simSound:Play()
+				end
+			end
+
+			if simDelay and simDelay > 0 then
+				task.delay(simDelay, startSimSound)
 			else
-				simSound:Play()
+				startSimSound()
 			end
 
 			if soundInfo.CutOffWithAnimation and track then
@@ -1350,6 +1384,16 @@ local function playAnimSound(animId, character, charName, track)
 					end
 				end)
 			end
+		end
+
+		-- Play multiple simultaneous sounds (SimultaneousSounds array)
+		-- Each entry can be a plain string ID or a table: { Sound = "id", DelayTime = 0, Volume = 3 }
+		if soundInfo.SimultaneousSounds and type(soundInfo.SimultaneousSounds) == "table" then
+			for _, simEntry in ipairs(soundInfo.SimultaneousSounds) do
+				playSimSound(simEntry, nil)
+			end
+		elseif soundInfo.SimultaneousSound then
+			playSimSound(soundInfo.SimultaneousSound, soundInfo.DelayTime)
 		end
 
 		if soundInfo.CutOffWithAnimation and track then
