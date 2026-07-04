@@ -287,8 +287,8 @@ local SoundReplacements = {
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
-	["89336109503369"] = "119698429726986", -- Davina Scream
-	["93999439393140"] = "119698429726986", -- Davina Scream
+	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 } -- Davina Scream
+	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 } - Davina Scream
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -864,10 +864,11 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
-	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0 }, -- Pendant Channel
+	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
+	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0.8 }, -- PendantChannel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["87439615254048"] = {
-		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0 }, -- Soul Bind Victim
+		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true, }, -- Soul Bind Victim
 	},
 	["15424577510"] = {
 		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
@@ -887,17 +888,12 @@ local AnimationSounds = {
 		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox 
 		["Davina Claire"] = { Sound = "97756935155216", Volume = 3, DelayTime = 0 }, -- Ossox 
 	},
-	["6900156131"] = {
-		["Freya Mikaelson"] = { Sound = "132326586800909", Volume = 2.5, DelayTime = 0 }, -- Ictus 
-		["Davina Claire"] = { Sound = "112513072656668", Volume = 2.5, DelayTime = 0 }, -- Ictus 
-	},
 	["77528653756706"] = {
 		["Qetsiyah"] = { Sound = "93058631752190", Volume = 4, DelayTime = 3, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
-		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSound = true }, -- LocatorSpell
+		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSoud = true }, -- LocatorSpell
 	},
 	["12171371908"] = {
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
-		["Josie Saltzman"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
 	},
 	["16549443461"] = { Sound = "121910418466989", Volume = 3, DelayTime = 1 }, -- Qetsiyah Resurrection
 	["107144570826196"] = {
@@ -991,7 +987,7 @@ local AnimationSounds = {
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["93301034042480"] = { Sound = "115263349021201", Volume = 5, DelayTime = 0, KeepPlayingSound = true, StackCount = 3  }, -- Aneurysm
+	["93301034042480"] = { Sound = "115263349021201", Volume = 5, DelayTime = 0, KeepPlayingSound = true, StackCount = 6 }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
@@ -1075,7 +1071,6 @@ local AnimationSounds = {
 		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
-
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
 		{ Sound = "133734124696027", DelayTime = 9.2 },
@@ -1275,10 +1270,10 @@ local function playAnimSound(animId, character, charName, track)
 		chatText = soundInfo.ChatText
 	end
 
-	if not soundId then return end
+	if not soundId and not soundInfo.SimultaneousSounds and not soundInfo.SimultaneousSound then return end
 
 	if soundInfo.OncePerLifetime then
-		local key = "anim_" .. soundId
+		local key = "anim_" .. (soundId or animId)
 		if OncePerLifetimePlayed[key] then return end
 		OncePerLifetimePlayed[key] = true
 	end
@@ -1303,6 +1298,7 @@ local function playAnimSound(animId, character, charName, track)
 			return
 		end
 
+		if soundId then
 		local sound = Instance.new("Sound")
 		sound.SoundId = "rbxassetid://" .. normalize(soundId)
 		sound.Volume = soundInfo.Volume or 2.5
@@ -1330,6 +1326,7 @@ local function playAnimSound(animId, character, charName, track)
 					if stackSound and stackSound.Parent then stackSound:Destroy() end
 				end)
 			end
+		end
 		end
 
 		-- Show chat bubble if ChatText is provided
@@ -1396,6 +1393,7 @@ local function playAnimSound(animId, character, charName, track)
 			playSimSound(soundInfo.SimultaneousSound, soundInfo.DelayTime)
 		end
 
+		if soundId then
 		if soundInfo.CutOffWithAnimation and track then
 			track.Ended:Connect(function()
 				if sound and sound.Parent then
@@ -1411,6 +1409,7 @@ local function playAnimSound(animId, character, charName, track)
 				end
 				AnimSoundCooldowns[key] = nil
 			end)
+		end
 		end
 
 		task.delay(COOLDOWN_TIMEOUT, function()
