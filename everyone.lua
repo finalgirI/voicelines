@@ -987,7 +987,7 @@ local AnimationSounds = {
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
-	["93301034042480"] = { Sound = "115263349021201", Volume = 5, DelayTime = 0, KeepPlayingSound = true, StackCount = 6 }, -- Aneurysm
+	["93301034042480"] = { Sound = "115263349021201", Volume = 4, DelayTime = 0, KeepPlayingSound = true, StackCount = 4 }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
