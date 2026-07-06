@@ -2471,32 +2471,55 @@ end
 
 local function handleSpawnDeathVoicelines(character, player)
 	local charName = player:GetAttribute("CharacterName")
-	if not charName then return end
 
-	playSpawnVoiceline(character, charName, player)
+	-- CharacterName may not be set yet when CharacterAdded fires.
+	-- Wait for it with a short timeout so spawn/death voicelines actually work.
+	if not charName then
+		local attrConn
+		attrConn = player:GetAttributeChangedSignal("CharacterName"):Connect(function()
+			charName = player:GetAttribute("CharacterName")
+			if charName and attrConn then
+				attrConn:Disconnect()
+				attrConn = nil
+				playSpawnVoiceline(character, charName, player)
+			end
+		end)
+		task.delay(5, function()
+			if attrConn then
+				attrConn:Disconnect()
+				attrConn = nil
+			end
+		end)
+	else
+		playSpawnVoiceline(character, charName, player)
+	end
+
+	local function hookDeath(humanoid)
+		humanoid.Died:Connect(function()
+			-- Re-read charName at death time in case it was set late
+			local deathCharName = player:GetAttribute("CharacterName")
+			if deathCharName then
+				playDeathVoiceline(character, deathCharName, player)
+			end
+		end)
+	end
 
 	local humanoid = character:FindFirstChildOfClass("Humanoid")
 	if humanoid then
-		humanoid.Died:Connect(function()
-			playDeathVoiceline(character, charName, player)
-		end)
+		hookDeath(humanoid)
 	else
 		local conn
 		conn = character.ChildAdded:Connect(function(child)
 			if child:IsA("Humanoid") then
 				if conn then conn:Disconnect() end
-				child.Died:Connect(function()
-					playDeathVoiceline(character, charName, player)
-				end)
+				hookDeath(child)
 			end
 		end)
 		task.delay(5, function()
 			if conn then conn:Disconnect() end
 			local h = character:FindFirstChildOfClass("Humanoid")
 			if h then
-				h.Died:Connect(function()
-					playDeathVoiceline(character, charName, player)
-				end)
+				hookDeath(h)
 			end
 		end)
 	end
