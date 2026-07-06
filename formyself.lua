@@ -1013,6 +1013,7 @@ local AnimationSounds = {
 	["13721687618"] = {
 		["Mary Louise"] = { Sound = "101738888339389", Volume = 5, DelayTime = 0 }, -- Super Punch
 		["Katherine Pierce"] = { Sound = "73563320499768", Volume = 5, DelayTime = 0 }, -- Super Punch
+		["Jeremy Gilbert"] = { Sound = "100418575792220", Volume = 5, DelayTime = 0 }, -- Super Punch
 	},
 	["16794479576"] = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
@@ -1155,6 +1156,7 @@ local AnimationSounds = {
 	["14571834582"] = {
 		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
 	},
+	["83319971583727"] = { Sound = "104461609852753", Volume = 6, DelayTime = 0 }, -- Combat Combo
 }
 
 -- Hope Mikaelson Animation FX System: plays sound + spawns particle when Hope plays an animation
@@ -1381,13 +1383,18 @@ local function playAnimSound(animId, character, charName, track)
 			return
 		end
 
+		local sound = nil
 		if soundId then
-		local sound = Instance.new("Sound")
+		sound = Instance.new("Sound")
 		sound.SoundId = "rbxassetid://" .. normalize(soundId)
 		sound.Volume = soundInfo.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+		if parentResult == false then
+			AnimSoundCooldowns[key] = nil
+			return
+		end
 
 		sound:Play()
 
