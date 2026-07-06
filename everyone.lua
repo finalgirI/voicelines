@@ -2396,6 +2396,7 @@ local function playSpawnVoiceline(character, charName, player)
 		sound.Volume = entry.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
+		-- Use CasterSoundService so the caster hears 2D, everyone else hears 3D
 		local parentResult = parentSoundForCaster(sound, character, entry.CasterSoundService)
 		if parentResult == false then
 			SpawnDeathCooldown[cooldownKey] = nil
@@ -2434,20 +2435,83 @@ local function playDeathVoiceline(character, charName, player)
 	SpawnDeathCooldown[cooldownKey] = true
 
 	local function doPlay()
-		if not character or not character.Parent then
-			SpawnDeathCooldown[cooldownKey] = nil
-			return
-		end
+		-- If CasterSoundService and this is the local player's character, play as 2D
+		-- through SoundService (no relocation needed since SoundService doesn't destroy).
+		-- For everyone else, use 3D audio on the body with death-position relocation.
+		local useCasterSS = entry.CasterSoundService and character == Players.LocalPlayer.Character
 
 		local sound = Instance.new("Sound")
 		sound.SoundId = "rbxassetid://" .. normalize(entry.Sound)
 		sound.Volume = entry.Volume or 2.5
 		sound:SetAttribute("IsLocalVoiceline", true)
 
-		local parentResult = parentSoundForCaster(sound, character, entry.CasterSoundService)
-		if parentResult == false then
-			SpawnDeathCooldown[cooldownKey] = nil
-			return
+		if useCasterSS then
+			-- Caster hears death voiceline as 2D audio
+			sound.Parent = SoundService
+		else
+			-- Everyone else hears 3D audio with death-position relocation
+			configure3DAudio(sound)
+
+			local bodyParent = findSoundParent(character)
+			if bodyParent then
+				-- Capture the death position before anything gets destroyed
+				local deathCFrame = bodyParent.CFrame
+
+				sound.Parent = bodyParent
+
+				-- When the body part is destroyed during respawn, relocate the sound
+				-- to a temporary invisible anchored Part at the death position
+				bodyParent.Destroying:Connect(function()
+					if sound and sound.IsPlaying then
+						local tempPart = Instance.new("Part")
+						tempPart.Name = "DeathVoicelineHolder"
+						tempPart.Size = Vector3.new(0.1, 0.1, 0.1)
+						tempPart.Transparency = 1
+						tempPart.CanCollide = false
+						tempPart.Anchored = true
+						tempPart.CFrame = deathCFrame
+						tempPart.Parent = workspace
+						sound.Parent = tempPart
+
+						sound.Ended:Connect(function()
+							if tempPart and tempPart.Parent then tempPart:Destroy() end
+						end)
+
+						-- Safety cleanup in case Ended never fires
+						task.delay(30, function()
+							if tempPart and tempPart.Parent then tempPart:Destroy() end
+						end)
+					end
+				end)
+			else
+				-- Fallback: create a temp part at the character's last known position
+				local hrp = character:FindFirstChild("HumanoidRootPart")
+				local anyPart = character:FindFirstChildWhichIsA("BasePart")
+				local pos = (hrp and hrp.CFrame) or (anyPart and anyPart.CFrame)
+
+				if pos then
+					local tempPart = Instance.new("Part")
+					tempPart.Name = "DeathVoicelineHolder"
+					tempPart.Size = Vector3.new(0.1, 0.1, 0.1)
+					tempPart.Transparency = 1
+					tempPart.CanCollide = false
+					tempPart.Anchored = true
+					tempPart.CFrame = pos
+					tempPart.Parent = workspace
+					sound.Parent = tempPart
+
+					sound.Ended:Connect(function()
+						if tempPart and tempPart.Parent then tempPart:Destroy() end
+					end)
+
+					task.delay(30, function()
+						if tempPart and tempPart.Parent then tempPart:Destroy() end
+					end)
+			else
+				-- Absolute fallback: SoundService (shouldn't normally happen)
+					sound.Parent = SoundService
+				end
+			end
 		end
 
 		sound:Play()
@@ -2467,6 +2531,11 @@ local function playDeathVoiceline(character, charName, player)
 	else
 		doPlay()
 	end
+
+	-- Safety timeout to reset cooldown in case sound is destroyed before Ended fires
+	task.delay(15, function()
+		SpawnDeathCooldown[cooldownKey] = nil
+	end)
 end
 
 local function handleSpawnDeathVoicelines(character, player)
