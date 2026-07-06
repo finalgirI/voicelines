@@ -550,7 +550,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
-		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
@@ -864,6 +864,9 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["136674508140592"] = {
+		["Davina Claire"] = { Sound = "128896108488504", Volume = 8, DelayTime = 0 }, -- Vido
+	},
 	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
 	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0.8 }, -- PendantChannel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
@@ -1074,8 +1077,8 @@ local AnimationSounds = {
 	},
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
-		{ Sound = "133734124696027", DelayTime = 9.2 },
-		{ Sound = "127866083366553", DelayTime = 18.2 },
+		{ Sound = "100674672391025", DelayTime = 9.2 },
+		{ Sound = "135050903436351", DelayTime = 19 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["138457929259080"] = { Sound = "99610680956880", Volume = 2.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
@@ -2359,6 +2362,168 @@ tryOverlaySound = function(sound)
 	if character then
 		local charName = getAnimCharName(character)
 		checkCombosForSound(id, character, charName, sound)
+	end
+end
+
+-- Spawn & Death Voicelines
+local SpawnVoicelines = {
+	["Bonnie Bennett"] = { Sound = "119269972189562", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Bonnie Spawn
+}
+
+local DeathVoicelines = {
+	["Bonnie Bennett"] = { Sound = "128677013682522", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Bonnie Death
+}
+
+local SpawnDeathCooldown = {}
+
+local function playSpawnVoiceline(character, charName, player)
+	if not charName then return end
+	local entry = SpawnVoicelines[charName]
+	if not entry then return end
+
+	local cooldownKey = "spawn_" .. charName .. "_" .. tostring(player.UserId)
+	if SpawnDeathCooldown[cooldownKey] then return end
+	SpawnDeathCooldown[cooldownKey] = true
+
+	local function doPlay()
+		if not character or not character.Parent then
+			SpawnDeathCooldown[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(entry.Sound)
+		sound.Volume = entry.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		local parentResult = parentSoundForCaster(sound, character, entry.CasterSoundService)
+		if parentResult == false then
+			SpawnDeathCooldown[cooldownKey] = nil
+			return
+		end
+
+		sound:Play()
+
+		if entry.ChatText and character and character.Parent then
+			game:GetService("Chat"):Chat(character, entry.ChatText, Enum.ChatColor.White)
+		end
+
+		sound.Ended:Connect(function()
+			if sound and sound.Parent then sound:Destroy() end
+		end)
+	end
+
+	if entry.DelayTime and entry.DelayTime > 0 then
+		task.delay(entry.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+
+	task.delay(15, function()
+		SpawnDeathCooldown[cooldownKey] = nil
+	end)
+end
+
+local function playDeathVoiceline(character, charName, player)
+	if not charName then return end
+	local entry = DeathVoicelines[charName]
+	if not entry then return end
+
+	local cooldownKey = "death_" .. charName .. "_" .. tostring(player.UserId)
+	if SpawnDeathCooldown[cooldownKey] then return end
+	SpawnDeathCooldown[cooldownKey] = true
+
+	local function doPlay()
+		if not character or not character.Parent then
+			SpawnDeathCooldown[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(entry.Sound)
+		sound.Volume = entry.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		local parentResult = parentSoundForCaster(sound, character, entry.CasterSoundService)
+		if parentResult == false then
+			SpawnDeathCooldown[cooldownKey] = nil
+			return
+		end
+
+		sound:Play()
+
+		if entry.ChatText and character and character.Parent then
+			game:GetService("Chat"):Chat(character, entry.ChatText, Enum.ChatColor.White)
+		end
+
+		sound.Ended:Connect(function()
+			if sound and sound.Parent then sound:Destroy() end
+			SpawnDeathCooldown[cooldownKey] = nil
+		end)
+	end
+
+	if entry.DelayTime and entry.DelayTime > 0 then
+		task.delay(entry.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local function handleSpawnDeathVoicelines(character, player)
+	local charName = player:GetAttribute("CharacterName")
+	if not charName then return end
+
+	playSpawnVoiceline(character, charName, player)
+
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		humanoid.Died:Connect(function()
+			playDeathVoiceline(character, charName, player)
+		end)
+	else
+		local conn
+		conn = character.ChildAdded:Connect(function(child)
+			if child:IsA("Humanoid") then
+				if conn then conn:Disconnect() end
+				child.Died:Connect(function()
+					playDeathVoiceline(character, charName, player)
+				end)
+			end
+		end)
+		task.delay(5, function()
+			if conn then conn:Disconnect() end
+			local h = character:FindFirstChildOfClass("Humanoid")
+			if h then
+				h.Died:Connect(function()
+					playDeathVoiceline(character, charName, player)
+				end)
+			end
+		end)
+	end
+end
+
+-- Hook spawn/death voicelines for local player
+Players.LocalPlayer.CharacterAdded:Connect(function(character)
+	handleSpawnDeathVoicelines(character, Players.LocalPlayer)
+end)
+if Players.LocalPlayer.Character then
+	handleSpawnDeathVoicelines(Players.LocalPlayer.Character, Players.LocalPlayer)
+end
+
+-- Hook spawn/death voicelines for other players
+local function onOtherPlayerAddedSpawnDeath(player)
+	player.CharacterAdded:Connect(function(character)
+		handleSpawnDeathVoicelines(character, player)
+	end)
+	if player.Character then
+		handleSpawnDeathVoicelines(player.Character, player)
+	end
+end
+
+Players.PlayerAdded:Connect(onOtherPlayerAddedSpawnDeath)
+for _, player in Players:GetPlayers() do
+	if player ~= Players.LocalPlayer then
+		onOtherPlayerAddedSpawnDeath(player)
 	end
 end
 
