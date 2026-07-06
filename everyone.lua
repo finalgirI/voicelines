@@ -865,13 +865,13 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
 	["136674508140592"] = {
-		["Davina Claire"] = { Sound = "128896108488504", Volume = 8, DelayTime = 0 }, -- Vido
+		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 8, CasterSoundService = true }, -- Ancestor Attack Scream
 	},
 	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
 	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0.8 }, -- PendantChannel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["87439615254048"] = {
-		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true, }, -- Soul Bind Victim
+		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Soul Bind Victim
 	},
 	["15424577510"] = {
 		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
