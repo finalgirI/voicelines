@@ -866,7 +866,7 @@ local AnimationSounds = {
 	},
 	["15822288612"] = {
 		["Bonnie Bennett"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Phasmatos Tribum Nas Ex Veras
-	}
+	},
 	["12955928048"] = {
 		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
 	},
