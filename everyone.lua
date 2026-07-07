@@ -14,6 +14,11 @@ local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck befor
 local FadingSounds = {}
 local OncePerLifetimePlayed = {} -- Tracks sounds that should only play once per character life
 
+local Cooldowns = {}
+local ActiveSounds = {}
+local KeepPlayingSounds = {}
+local SoundCycleIndex = {}
+
 local function fadeOutSound(sound)
 	if not sound or not sound.Parent then
 		return
@@ -1456,17 +1461,14 @@ local function hookAnimator(animator, character)
 		local animId = normalize(anim.AnimationId)
 		if animId == "" or animId == "0" then return end
 
-			return
-		end
-
 		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
-
 		playAnimParticle(animId, character, charName)
 
 		if checkCombosForAnimation then
 			checkCombosForAnimation(animId, character, charName, track)
 		end
+
 		if checkCompulsionProtectionForAnimation then
 			checkCompulsionProtectionForAnimation(animId, character, charName, track)
 		end
