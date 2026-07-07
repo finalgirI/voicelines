@@ -278,7 +278,7 @@ local SoundReplacements = {
 	["122372982294729"] = "15174394937", -- Phasmatos Immortale
 	["90326993393737"] = "15325084064", -- Suctus Incendia
 	["80430541489576"] = "14556366203", -- Turn To Stone
-	["132884184474189"] = { Sound = "15631194386", KeepPlayingSound = true }, -- Phasmatos Tribum Nas Ex Veras
+	["132884184474189"] = { Sound = "15631194386", Volume = 0 }, -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 5 }, -- Heretic Joint Spell 
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
@@ -864,6 +864,9 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["15822288612"] = {
+		["Bonnie Bennett"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Phasmatos Tribum Nas Ex Veras
+	}
 	["12955928048"] = {
 		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
 	},
