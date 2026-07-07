@@ -597,7 +597,7 @@ local SoundOverlays = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
-		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Brain Fry
+		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
@@ -937,6 +937,15 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
+	["12955928048"] = {
+		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
+	},
+	["12955951202"] = {
+		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
+	},
+	["136674508140592"] = {
+		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9 }, -- Ancestor Attack Scream
+	},
 	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
 	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0 }, -- Pendant Channel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
@@ -984,7 +993,7 @@ local AnimationSounds = {
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15619485183"] = { Sound = "95435320218587", Volume = 5.5, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
-		["Bonnie Bennett"] = { Sound = "104749000603361", Volume = 4, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
+		["Bonnie Bennett"] = { Sound = "92416622688125", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
@@ -1141,8 +1150,8 @@ local AnimationSounds = {
 
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
-		{ Sound = "133734124696027", DelayTime = 9.2 },
-		{ Sound = "127866083366553", DelayTime = 18.2 },
+		{ Sound = "100674672391025", DelayTime = 9.2 },
+		{ Sound = "135050903436351", DelayTime = 19 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
 
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
@@ -1181,6 +1190,9 @@ local function playHopeAnimFX(animId, character, charName)
 
 	-- Only play for Hope Mikaelson
 	if charName ~= "Hope Mikaelson" then return end
+
+	-- Only play for the local player's character (don't play sounds for other players)
+	if character ~= Players.LocalPlayer.Character then return end
 
 	local key = animId .. "_hopefx"
 	if HopeAnimFXCooldowns[key] then return end
