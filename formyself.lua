@@ -1081,16 +1081,22 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
         ["Kol Mikaelson"] = { Sound = "124240839477995", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Nora Hildegard"] = { Sound = "112196405626620", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
 		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Evil Aunt"] = { Sound = "108318456932633", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+        ["Nora Hildegard"] = { Sound = "129372700682148", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
+	},
+	["10748431894"] = {
+		["Davina Claire"] = { Sound = "104238121958425", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Jeremy Gilbert"] = { Sound = "135116700738491", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["81743171989186"] = {
 		["Rebekah Mikaelson"] = { Sound = "73616559992744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
