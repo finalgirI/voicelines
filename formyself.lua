@@ -1047,12 +1047,12 @@ local AnimationSounds = {
 		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
 	},
 	["87900706821607"] = {
-		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 7, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["80761083713462"] = {
-		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 7, DelayTime = 0 }, -- Menedek Qual Surenta
 		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 6, DelayTime = 0 }, -- Menedek Qual Surenta
-	},  
+	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
