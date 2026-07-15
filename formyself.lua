@@ -585,6 +585,7 @@ local SoundOverlays = {
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
+	["17491698272"] = { Sound = "112975005042731", Volume = 4.3, DelayTime = 0 }, -- Astral Traverse
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
@@ -1046,12 +1047,12 @@ local AnimationSounds = {
 		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
 	},
 	["87900706821607"] = {
-		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["80761083713462"] = {
-		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
 		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 6, DelayTime = 0 }, -- Menedek Qual Surenta
-	}, 
+	},  
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
