@@ -534,6 +534,7 @@ local SoundOverlays = {
 	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
+	["17491698272"] = { Sound = "112975005042731", Volume = 4.3, DelayTime = 0 }, -- Astral Traverse
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 
@@ -979,10 +980,10 @@ local AnimationSounds = {
 		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
 	},
 	["87900706821607"] = {
-		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["80761083713462"] = {
-		["Freya Mikaelson"] = { Sound = "117507162492846", Volume = 2, DelayTime = 0 }, -- Menedek Qual Surenta
+		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 4.6, DelayTime = 0 }, -- Menedek Qual Surenta
 		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 6, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
@@ -1311,34 +1312,34 @@ local function playAnimSound(animId, character, charName, track)
 
 		local sound = nil
 		if soundId then
-		sound = Instance.new("Sound")
-		sound.SoundId = "rbxassetid://" .. normalize(soundId)
-		sound.Volume = soundInfo.Volume or 2.5
-		sound:SetAttribute("IsLocalVoiceline", true)
+			sound = Instance.new("Sound")
+			sound.SoundId = "rbxassetid://" .. normalize(soundId)
+			sound.Volume = soundInfo.Volume or 2.5
+			sound:SetAttribute("IsLocalVoiceline", true)
 
-		local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
-		if parentResult == false then
-			AnimSoundCooldowns[key] = nil
-			return
-		end
-
-		sound:Play()
-
-		-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
-		local stackCount = soundInfo.StackCount or entry.StackCount or 1
-		if stackCount > 1 then
-			for i = 2, stackCount do
-				local stackSound = Instance.new("Sound")
-				stackSound.SoundId = "rbxassetid://" .. normalize(soundId)
-				stackSound.Volume = soundInfo.Volume or 2.5
-				stackSound:SetAttribute("IsLocalVoiceline", true)
-				parentSoundForCaster(stackSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
-				stackSound:Play()
-				stackSound.Ended:Connect(function()
-					if stackSound and stackSound.Parent then stackSound:Destroy() end
-				end)
+			local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+			if parentResult == false then
+				AnimSoundCooldowns[key] = nil
+				return
 			end
-		end
+
+			sound:Play()
+
+			-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
+			local stackCount = soundInfo.StackCount or entry.StackCount or 1
+			if stackCount > 1 then
+				for i = 2, stackCount do
+					local stackSound = Instance.new("Sound")
+					stackSound.SoundId = "rbxassetid://" .. normalize(soundId)
+					stackSound.Volume = soundInfo.Volume or 2.5
+					stackSound:SetAttribute("IsLocalVoiceline", true)
+					parentSoundForCaster(stackSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+					stackSound:Play()
+					stackSound.Ended:Connect(function()
+						if stackSound and stackSound.Parent then stackSound:Destroy() end
+					end)
+				end
+			end
 		end
 
 		-- Show chat bubble if ChatText is provided
@@ -1406,22 +1407,22 @@ local function playAnimSound(animId, character, charName, track)
 		end
 
 		if soundId then
-		if soundInfo.CutOffWithAnimation and track then
-			track.Ended:Connect(function()
-				if sound and sound.Parent then
-					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
-				end
-				AnimSoundCooldowns[key] = nil
-			end)
-		elseif soundInfo.KeepPlayingSound then
-		else
-			sound.Ended:Connect(function()
-				if sound and sound.Parent then
-					sound:Destroy()
-				end
-				AnimSoundCooldowns[key] = nil
-			end)
-		end
+			if soundInfo.CutOffWithAnimation and track then
+				track.Ended:Connect(function()
+					if sound and sound.Parent then
+						fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+					end
+					AnimSoundCooldowns[key] = nil
+				end)
+			elseif soundInfo.KeepPlayingSound then
+			else
+				sound.Ended:Connect(function()
+					if sound and sound.Parent then
+						sound:Destroy()
+					end
+					AnimSoundCooldowns[key] = nil
+				end)
+			end
 		end
 
 		task.delay(COOLDOWN_TIMEOUT, function()
