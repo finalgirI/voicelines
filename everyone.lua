@@ -912,7 +912,7 @@ local AnimationSounds = {
 			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
-	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0 }, -- Autem
+	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0, CasterSoundService = true }, -- Autem
 	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
 	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
