@@ -281,12 +281,12 @@ local SoundReplacements = {
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
 	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
 	["116235007511881"] = "13203446447", -- Autem
+	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
 	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
-	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -551,7 +551,7 @@ local SoundOverlays = {
 		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
 	},
 	["103830069988568"] = { Sound = "79984922909048", Volume = 2.5, DelayTime = 0 }, -- NecksnapLift
-	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true }, -- Lightning Strike
+	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true, KeepPlayingSound = true }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
@@ -912,7 +912,7 @@ local AnimationSounds = {
 			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
-	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0, CasterSoundService = true }, -- Autem
+	["13302728573"] = { Sound = "13203446447", Volume = 5.5, DelayTime = 0, CasterSoundService = true }, -- Autem
 	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
 	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
@@ -1088,8 +1088,8 @@ local AnimationSounds = {
 	},
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
-		{ Sound = "100674672391025", DelayTime = 9.2 },
-		{ Sound = "135050903436351", DelayTime = 19 },
+		{ Sound = "100674672391025", DelayTime = 9.2, Volume = 6.2  ,
+		{ Sound = "135050903436351", DelayTime = 19, Volume = 6.2 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["138457929259080"] = { Sound = "99610680956880", Volume = 2.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
