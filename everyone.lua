@@ -1088,7 +1088,7 @@ local AnimationSounds = {
 	},
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
-		{ Sound = "100674672391025", DelayTime = 9.2, Volume = 6.2  ,
+		{ Sound = "100674672391025", DelayTime = 9.2, Volume = 6.2 },
 		{ Sound = "135050903436351", DelayTime = 19, Volume = 6.2 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
 	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
