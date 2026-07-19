@@ -862,7 +862,7 @@ local AnimationSounds = {
 	["13570229994"] = {
 		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
 	},
-	["15822288612"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Phasmatos Tribum Nas Ex Veras
+	["15822288612"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Phasmatos Tribum Nas Ex Veras
 	["12955928048"] = {
 		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
 	},
