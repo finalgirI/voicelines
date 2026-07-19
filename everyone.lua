@@ -286,6 +286,7 @@ local SoundReplacements = {
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
 	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
+	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -543,7 +544,6 @@ local SoundOverlays = {
 	["11708882199"] = {
 		["Hope Mikaelson"] = { Sound = "76431177526410", Volume = 3, DelayTime = 0 }, -- Wolf Transformation
 	},
-	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
 	["10006479564"] = {
 		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
