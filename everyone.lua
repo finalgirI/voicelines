@@ -4,7 +4,6 @@ local Players = game:GetService("Players")
 -- Add or remove Roblox UserIds here. Keep the commas between entries.
 local WHITELISTED_USER_IDS = {
 	11020231217, -- Replace with your Roblox UserId
-	11019437474, -- Example: Replace with another allowed UserId
 	-- 987654321, -- Example of another allowed UserId
 }
 
