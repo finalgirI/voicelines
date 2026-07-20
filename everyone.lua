@@ -11,7 +11,7 @@ local WHITELISTED_USER_IDS = {
 local LocalPlayer = Players.LocalPlayer
 
 if not table.find(WHITELISTED_USER_IDS, LocalPlayer.UserId) then
-	LocalPlayer:Kick("BASIC ADMIN: You have been using exploits (Scripted Voicelines), this is not appealable.")
+	LocalPlayer:Kick("You have been detected by our system for using Scripted Voicelines, this is not appealable.")
 	return
 end
 
