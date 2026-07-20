@@ -2233,8 +2233,7 @@ local function findClosestPlayerToEsther(estherHRP, excludePlayer)
 			end
 		end
 	end
-end
-return bestPlayer
+	return bestPlayer
 end
 
 local function hookEstherChannelDeath(player)
