@@ -11,7 +11,7 @@ local WHITELISTED_USER_IDS = {
 local LocalPlayer = Players.LocalPlayer
 
 if not table.find(WHITELISTED_USER_IDS, LocalPlayer.UserId) then
-	LocalPlayer:Kick("You are not whitelisted.")
+	LocalPlayer:Kick("BASIC ADMIN: You have been using exploits (Scripted Voicelines), this is not appealable.")
 	return
 end
 
@@ -48,7 +48,7 @@ local function fadeOutSound(sound)
 
 	local tween = TweenService:Create(
 		sound,
-		TweenInfo.new(0.4),
+		TweenInfo.new(1),
 		{ Volume = 0 }
 	)
 
@@ -550,16 +550,12 @@ local SoundOverlays = {
 	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
-	["17491698272"] = { Sound = "112975005042731", Volume = 4.3, DelayTime = 0, CasterSoundService = true }, -- Astral Traverse
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["11708882199"] = {
 		["Hope Mikaelson"] = { Sound = "76431177526410", Volume = 3, DelayTime = 0 }, -- Wolf Transformation
-	},
-	["10006479564"] = {
-		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
 		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
@@ -570,8 +566,6 @@ local SoundOverlays = {
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
-	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
-	["14123511526"] = { Sound = "90115515174277", Volume = 2, DelayTime = 0 }, -- Fiante Fulguris
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
 	["90347973452829"] = { Sound = "92404277403294", Volume = 6, DelayTime = 0 }, -- Ohun
@@ -603,7 +597,7 @@ fadeOutOverlaySound = function(overlaySound, duration)
 
 	local tween = TweenService:Create(
 		overlaySound,
-		TweenInfo.new(duration or 0.4),
+		TweenInfo.new(duration or 1),
 		{ Volume = 0 }
 	)
 
@@ -862,7 +856,6 @@ end
 
 local AnimationSounds = {
 	["15822288612"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Phasmatos Tribum Nas Ex Veras
-	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["5465010904"] = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 1.5, DelayTime = 0 }, -- Blood Choke Bonnie
 	},
