@@ -278,15 +278,14 @@ local SoundReplacements = {
 	["132884184474189"] = { Sound = "15631194386", Volume = 0 }, -- Phasmatos Tribum Nas Ex Veras
 	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
 	["14043844852"] = { Replacement = "13904360117", Volume = 5 }, -- Heretic Joint Spell 
+	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
 	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
 	["116235007511881"] = "13203446447", -- Autem
-	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
-	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
-	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
+
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -537,14 +536,10 @@ local SoundOverlays = {
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
-
 	["82029037414223"] = { Sound = "128304384560357", Volume = 2.5, DelayTime = 0 }, -- Telek Submission 
 	["77367953274523"] = { Sound = "73829700677752", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blood Boil
 	["11708882199"] = {
 		["Hope Mikaelson"] = { Sound = "76431177526410", Volume = 3, DelayTime = 0 }, -- Wolf Transformation
-	},
-	["10006479564"] = {
-		["Davina Claire"] = { Sound = "112486710306576", Volume = 2, DelayTime = 0.2 }, -- Hand Of Glory
 	},
 	["132899449516141"] = {
 		["Qetsiyah"] = { Sound = "15981291789", Volume = 2, DelayTime = 0 }, -- Brain Fry
@@ -553,32 +548,18 @@ local SoundOverlays = {
 	["107029347506027"] = { Sound = "123620176154825", Volume = 2.5, DelayTime = 0, CasterSoundService = true, KeepPlayingSound = true }, -- Lightning Strike
 	["82939375129525"] = { Sound = "82826752361269", Volume = 1.5, DelayTime = 0 }, -- Davina Magic Regen
 	["97485998367353"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare
-	["12934765027"] = { Sound = "72404882318303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ventus
 	["13780865276"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true }, -- Telek Head Rip
 	["82322000387474"] = { Sound = "129460073622144", Volume = 2.5, DelayTime = 4 }, -- Pentagram
-	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
-	["13154602444"] = {
-		["Dark Josie"] = { Sound = "77485734102576", Volume = 2.5, DelayTime = 0 }, -- Outfit change
-	},
-	["14123511526"] = { Sound = "90115515174277", Volume = 2, DelayTime = 0 }, -- Fiante Fulguris
 	["116348909990770"] = { Sound = "78053223963040", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ascendo
 	["115788596173476"] = { Sound = "101957577374614", Volume = 0.8 , DelayTime = 0, KeepPlayingSound = true }, -- I said hey
-	["85094625219939"] = { Sound = "122887446534653", Volume = 2.5, DelayTime = 0 }, -- Muse Teleport
 	["90347973452829"] = { Sound = "92404277403294", Volume = 6, DelayTime = 0 }, -- Ohun
 	["138866821877856"] = { Sound = "91217804264943", Volume = 6, DelayTime = 0 }, -- Pada
 	["86985539781391"] = { Sound = "131047658678353", Volume = 2.5, DelayTime = 0.2 }, -- Inspire
 	["133109898520847"] = { Sound = "74072970288534", Volume = 2.5, DelayTime = 0.2 }, -- Mud Golem 
-	["13008144854"] = {
-		["Nora Hildegard"] = { Sound = "118508173111903", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
-		["Valerie Tulle"] = { Sound = "88573986552740", Volume = 2.5, DelayTime = 0 }, -- Strangulo Ventus
-	},
 	["89539286902417"] = {
 		["Lizzie Saltzman"] = { Sound = "132802121953563", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Stellabunde
 		["Cleo Sowande"] = { Sound = "90131739908048", Volume = 2.5, DelayTime = 0 }, -- Mass Silence
 		TrustDistanceFallback = true,
-	},
-	["15980142966"] = {
-		["Agnes"] = { Sound = "97437123423899", Volume = 1.5, DelayTime = 0 }, -- Agnes Needle of Sorrows
 	},
 	["135718833680425"] = {
 		Overlays = {
@@ -858,141 +839,38 @@ local function tryOverlaySound(sound)
 end
 
 local AnimationSounds = {
-	["13570229994"] = {
-		["Mary Louise"] = { Sound = "88600853616027", Volume = 3, DelayTime = 0 }, -- Vido
-	},
 	["15822288612"] = { Sound = "15631194386", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Phasmatos Tribum Nas Ex Veras
-	["12955928048"] = {
-		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
-	},
-	["12955951202"] = {
-		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
-	},
-	["136674508140592"] = {
-		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9 }, -- Ancestor Attack Scream
-	},
-	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
-	["123913821353212"] = { Sound = "111597661425875", Volume = 2, DelayTime = 0.8 }, -- PendantChannel
-	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
-	["87439615254048"] = {
-		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Soul Bind Victim
-	},
-	["15424577510"] = {
-		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
-	},
-	["15424573536"] = {
-		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
-	},
-	["6713148336"] = {
-		CasterSoundService = true,
-		["Bonnie Bennett"] = { Sound = "74008013885006", Volume = 7, DelayTime = 0 }, -- Errox Femus
-		["Evil Aunt"] = { Sound = "73447844825039", Volume = 7, DelayTime = 0 }, -- Errox Femus
-	},
 	["5465010904"] = {
 		["Bonnie Bennett"] = { Sound = "89008760309144", Volume = 1.5, DelayTime = 0 }, -- Blood Choke Bonnie
 	},
-	["128623651867501"] = {
-		["Freya Mikaelson"] = { Sound = "108401043112433", Volume = 4, DelayTime = 0 }, -- Ossox 
-		["Davina Claire"] = { Sound = "97756935155216", Volume = 3, DelayTime = 0 }, -- Ossox 
-	},
-	["77528653756706"] = {
-		["Qetsiyah"] = { Sound = "93058631752190", Volume = 4, DelayTime = 3, KeepPlayingSound = true }, -- Map Tracking Qetsiyah P1
-		["Freya Mikaelson"] = { Sound = "107779666764444", Volume = 3, DelayTime = 3, KeepPlayingSoud = true }, -- LocatorSpell
-	},
-	["12171371908"] = {
-		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Dark Magic Blast
-	},
-	["16549443461"] = { Sound = "121910418466989", Volume = 3, DelayTime = 1 }, -- Qetsiyah Resurrection
-	["107144570826196"] = {
-		["Bastianna Natale"] = { Sounds = {
-			{Sound = "96452201447795", ChatText = "To be reborn, you must sacrifise"},
-			{Sound = "79362032592167", ChatText = "Do you have faith in the harvest?"},
-			{Sound = "113939339508982", ChatText = "To be reborn, we must sacrifise"},
-			{Sound = "71834991545131", ChatText = "To be reborn, we must have faith!"},
-		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
-	},
 	["13302728573"] = { Sound = "13203446447", Volume = 5.5, DelayTime = 0, CasterSoundService = true }, -- Autem
-	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
-	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
-	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
-	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
-	["18535689569"] = { Sound = "74050761219524", Volume = 2.5, DelayTime = 0 }, -- Blood Steal 
+	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains 
 	["18894484105"] = { Sound = "91204949642033", Volume = 2.5, DelayTime = 14 }, -- Orginal Serum
 	["119520470649737"] = { Sound = "128387089253440", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
-	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
 	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
-	["15619485183"] = { Sound = "95435320218587", Volume = 5.5, DelayTime = 0 }, -- Building On Fire
-	["15835470076"] = { 
-		["Bonnie Bennett"] = { Sound = "92416622688125", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
-	},
-	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
 	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
-	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.5 }, -- Sandclock
-	},
-	["113177696607441"] = {
-		CasterSoundService = true,
-		["Valerie Tulle"] = { Sound = "134446708409005", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
-		["Lizzie Saltzman"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
-		["Hope Mikaelson"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
-		["Bonnie Bennett"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Incendia
-	},
-	["131550349409770"] = {
-		["Hope Mikaelson"] = { Sound = "127841579933142", Volume = 2, DelayTime = 0 }, -- Aquamalia
-	},
 	["14065674638"] = {
 		["Hope Mikaelson"] = { Sound = "131807122245438", Volume = 2.5, DelayTime = 0 }, -- Lecutio
 	},
-	["71157109677249"] = {
-		["Hope Mikaelson"] = { Sound = "117071643793823", Volume = 2.5, DelayTime = 0 }, -- Super Kick
-	},
-	["13721687618"] = {
-		["Mary Louise"] = { Sound = "101738888339389", Volume = 5, DelayTime = 0 }, -- Super Punch
-		["Katherine Pierce"] = { Sound = "73563320499768", Volume = 5, DelayTime = 0 }, -- Super Punch
-		["Jeremy Gilbert"] = { Sound = "100418575792220", Volume = 5, DelayTime = 0 }, -- Super Punch
-	},
-	["16794479576"] = {
-		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
-	},
-	["12940089696"] = {
-		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
-	},
 	["15052194152"] = {
 		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 5 }, -- Astral Projection
-	},
-	["12363733313"] = {
-		["Hope Mikaelson"] = { Sound = "100313110940795", Volume = 2.5, DelayTime = 0 }, -- Light Ball
-	},
-	["14589451404"] = {
-		["Hope Mikaelson"] = { Sound = "131198089743550", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
-		["Freya Mikaelson"] = { Sound = "94633917213364", Volume = 2.5, DelayTime = 0 }, -- Ad Somnum
-		["Dark Josie"] = { Sound = "116796833130204", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
-		["Evil Aunt"] = { Sound = "108794711275198", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Ad Somnum
-	},
-	["103809123106748"] = {
-		["Any1"] = { Sound = "87795617159364", Volume = 2.5, DelayTime = 0 }, -- Immobilus
 	},
 	["87900706821607"] = {
 		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 7, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["80761083713462"] = {
 		["Freya Mikaelson"] = { Sound = "115118822387188", Volume = 7, DelayTime = 0 }, -- Menedek Qual Surenta
-		["Bonnie Bennett"] = { Sound = "135858003613789", Volume = 6, DelayTime = 0 }, -- Menedek Qual Surenta
 	}, 
 	["126225947243763"] = { Sound = "110211317792165", Volume = 1.9, DelayTime = 0 }, -- Pendant Trap
 	["93680619177939"] = { Sound = "113820074623121", Volume = 2.5, DelayTime = 17, KeepPlayingSound = true }, -- Ancestor Attack End
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Freya's Brain Fry
-	["12955966256"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
-		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
-	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
 	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
 	["93301034042480"] = { Sound = "115263349021201", Volume = 4, DelayTime = 0, KeepPlayingSound = true, StackCount = 4 }, -- Aneurysm
@@ -1000,124 +878,33 @@ local AnimationSounds = {
 	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
 	["71385376638963"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	["13632446588"] = {
-		["Qetsiyah"] = { Sound = "132701227107666", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- DelfanEotenCor
-		["Bonnie Bennett"] = { Sound = "93410039917419", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
 		["Freya Mikaelson"] = { Sound = "140007498335944", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
-		["Evil Aunt"] = { Sound = "77910667605781", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true }, -- DelfanEotenCor
 	},
-	["137419559387884"] = { Sound = "123217650248442", Volume = 2.5, DelayTime = 0 }, -- Telek Explosion
-	["119991086161247"] = { Sound = "95590928220540", Volume = 2.5, DelayTime = 0 }, -- Sunbeam
 	["12307447494"] = {
 		["Katherine Pierce"] = { Sound = "14841026112", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 1.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Kol Mikaelson"] = { Sound = "124240839477995", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-		["Nora Hildegard"] = { Sound = "112196405626620", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-	},
-	["10748431894"] = {
-		["Aurora De Martel"] = { Sound = "91514318555989", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Evil Aunt"] = { Sound = "108318456932633", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Nora Hildegard"] = { Sound = "129372700682148", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
-	},
-	["10748431894"] = {
-		["Davina Claire"] = { Sound = "104238121958425", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-		["Jeremy Gilbert"] = { Sound = "135116700738491", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-	},
-	["81743171989186"] = {
-		["Rebekah Mikaelson"] = { Sound = "73616559992744", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
-		["Hope Mikaelson"] = { Sound = "125011735974039", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Super Slap
-	},
-	["125965536527103"] = {
-		["Aurora De Martel"] = { Sound = "111039547177303", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Rebekah Mikaelson"] = { Sound = "95161950033776", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Hope Mikaelson"] = { Sound = "112336295176021", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Caroline Forbes"] = { Sound = "96995867234659", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Marcel Gerard"] = { Sound = "125972157691262", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break 
-		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-		["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-	}, 
-	["95988116850782"] = {
-		["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-		["Caroline Forbes"] = { Sound = "82935740630457", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-		["Katherine Pierce"] = { Sound = "114247092240046", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-		["Evil Aunt"] = { Sound = "91517539980329", Volume = 2.2, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
-	},
-	["72224780755559"] = {
-		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
-		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
-		["Marcel Gerard"] = { Sound = "134565387051180", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
-		["Kol Mikaelson"] = { Sound = "71654166290298", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
-	},
-	["12308726489"] = {
-		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-		["Rebekah Mikaelson"] = { Sound = "89688396603399", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-		["Marcel Gerard"] = { Sound = "110930423196956", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip 
-		["Klaus Mikaelson"] = { Sound = "86539828788238", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-		["Katherine Pierce"] = { Sound = "125407139224941", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
-	},
-	["12308000578"] = {
-		["Rebekah Mikaelson"] = { Sound = "135260624293276", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Mary Louise"] = { Sound = "105517213066097", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Caroline Forbes"] = { Sound = "134442581136768", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Marcel Gerard"] = { Sound = "80192436290512", Volume = 10, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Katherine Pierce"] = { Sound = "85838626313851", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-		["Kol Mikaelson"] = { Sound = "110395664340261", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke
-	},
-	["109730789965953"] = {
-		["Bastianna Natale"] = { Sound = "83432170862902", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Josephine LaRue"] = { Sound = "79538024543328", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Genevieve"] = { Sound = "80082176187338", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Papa Tunde"] = { Sound = "74362949998012", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-		["Agnes"] = { Sound = "121671824051694", Volume = 2, DelayTime = 0, KeepPlayingSound = true }, -- Ancestral Pain
-	},
-	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
-	["12955990988"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
-		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	["136458996935352"] = { SimultaneousSounds = {
 		{ Sound = "83098462384996", DelayTime = 0 },
 		{ Sound = "100674672391025", DelayTime = 9.2, Volume = 6.2 },
 		{ Sound = "135050903436351", DelayTime = 19, Volume = 6.2 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- 4 sounds all with delays. Replace 0s with actual sound IDs. Can also set per-sound Volume.
-	["99248832146292"] = { Sound = "114599395160541", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Insanity Hex
 	["138457929259080"] = { Sound = "99610680956880", Volume = 2.2, DelayTime = 0, CutOffWithAnimation = true }, -- Glace Solidatur
-	["12363700089"] = {
-		["Hope Mikaelson"] = { Sound = "85082904537308", Volume = 2.5, DelayTime = 0 }, -- Sol
-	},
-	["14427195564"] = {
-		["Hope Mikaelson"] = { Sound = "131906914556971", Volume = 4.3, DelayTime = 0 }, -- Red Oak protection
-	},
-	["14571834582"] = {
-		["Lizzie Saltzman"] = { Sound = "80948803279616", Volume = 6, DelayTime = 0, OncePerLifetime = true }, -- BloodBags
-	},
-	["83319971583727"] = { Sound = "104461609852753", Volume = 6, DelayTime = 0 }, -- Combat Combo
-	-- Hope Mikaelson JapaneseSpellFX voiceline (fill in your animation ID and sound ID)
-	["78864031194100"] = {
-		["Hope Mikaelson"] = { Sound = "89596447162600", Volume = 5, DelayTime = 0.2 }, -- JapaneseSpellFX
-	},
 }
 
 -- Animation Particles System: spawn particle effects when specific animations play
 local AnimationParticles = {
 	-- Hope Mikaelson JapaneseSpellFX particle (fill in your animation ID)
-	["78864031194100"] = {
-		["Hope Mikaelson"] = {
-			ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
-			DelayTime = 5, -- delay in seconds before particle spawns
-			Duration = 7, -- how long the particle effect lasts before cleanup
-		},
-	},
+	--["78864031194100"] = {
+	--	["Hope Mikaelson"] = {
+	--		ParticleTemplate = ReplicatedStorage.Assets.Particles.JapaneseSpellFX,
+	--		DelayTime = 5, -- delay in seconds before particle spawns
+	--		Duration = 7, -- how long the particle effect lasts before cleanup
+	--	},
+	--},
 }
 
 local AnimParticleCooldowns = {}
@@ -1453,6 +1240,7 @@ local hookedAnimators = {} -- Track which Animators we've already hooked
 
 local checkCombosForAnimation -- forward declaration (defined later)
 local checkCompulsionProtectionForAnimation -- forward declaration (defined later)
+local tryDetectEstherChannelAnimation -- forward declaration (defined later)
 
 local function hookAnimator(animator, character)
 	if hookedAnimators[animator] then return end
@@ -1466,6 +1254,9 @@ local function hookAnimator(animator, character)
 		if animId == "" or animId == "0" then return end
 
 		local charName = getAnimCharName(character)
+		if tryDetectEstherChannelAnimation then
+			tryDetectEstherChannelAnimation(animId, character, charName, track)
+		end
 		playAnimSound(animId, character, charName, track)
 		playAnimParticle(animId, character, charName)
 
@@ -1761,10 +1552,6 @@ local ParticleSounds = {
 
 	["AdSomnumSleep"] = {
 		["Hope Mikaelson"] = { Sound = "113991042230113", Volume = 3, DelayTime = 1, KeepPlayingSound = true },
-	},
-
-	["LinkBeam"] = {
-		["Bonnie Bennett"] = { Sound = "102024711113477", Volume = 2.5, DelayTime = 7.5, KeepPlayingSound = true },
 	},
 
 	["ImmobilusSpiral"] = { Sound = "0", Volume = 2.5 }, -- placeholder ID, replace with actual sound
@@ -2373,18 +2160,18 @@ end
 
 -- ============================================================
 -- Esther Channel Death Voiceline System
--- When Esther Mikaelson is channeling (sounds 15424574694/15424578539
--- playing near her) for more than 3 seconds and either she or her
--- channel partner dies, play sound 138445942157113 from Esther.
+-- When Esther Mikaelson plays animation 15424574694/15424578539 for
+-- more than the minimum duration and either she or her nearby channel
+-- partner dies, play sound 138445942157113 from Esther.
 -- ============================================================
 
-local EstherChannelSoundIds = {
+local EstherChannelAnimationIds = {
 	["15424574694"] = true,
 	["15424578539"] = true,
 }
 
 local ESTHER_DEATH_SOUND_ID = "138445942157113"
-local ESTHER_CHANNEL_MIN_DURATION = 3
+local ESTHER_CHANNEL_MIN_DURATION = 2
 local ESTHER_NEARBY_DIST = 5
 
 local estherChannel = {
@@ -2393,7 +2180,7 @@ local estherChannel = {
 	estherPlayer = nil,
 	partnerPlayer = nil,
 	deathSoundPlayed = false,
-	activeSounds = {},
+	activeTracks = {},
 }
 
 local function findEstherPlayer()
@@ -2446,7 +2233,8 @@ local function findClosestPlayerToEsther(estherHRP, excludePlayer)
 			end
 		end
 	end
-	return bestPlayer
+end
+return bestPlayer
 end
 
 local function hookEstherChannelDeath(player)
@@ -2463,39 +2251,19 @@ local function hookEstherChannelDeath(player)
 	end)
 end
 
-local function tryDetectEstherChanneling(sound)
-	if not sound:IsA("Sound") then return end
+tryDetectEstherChannelAnimation = function(animId, character, charName, track)
 	if estherChannel.active and estherChannel.deathSoundPlayed then return end
-
-	local id = sound.SoundId:gsub("rbxassetid://", "")
-	if id == "" or not EstherChannelSoundIds[id] then return end
+	if not EstherChannelAnimationIds[animId] then return end
+	if charName ~= "Esther Mikaelson" then return end
 
 	local estherPlayer = findEstherPlayer()
-	if not estherPlayer or not estherPlayer.Character then return end
+	if not estherPlayer or estherPlayer.Character ~= character then return end
 
 	local estherChar = estherPlayer.Character
 	local estherHRP = estherChar:FindFirstChild("HumanoidRootPart")
 	if not estherHRP then return end
 
-	local soundPos = nil
-	if sound.Parent and sound.Parent:IsA("BasePart") then
-		soundPos = sound.Parent.Position
-	elseif sound.Parent and sound.Parent:IsA("Attachment") then
-		soundPos = sound.Parent.WorldPosition
-	end
-
-	local soundCharName = getSoundCharacterName(sound)
-
-	local isNearEsther = false
-	if soundPos then
-		isNearEsther = (estherHRP.Position - soundPos).Magnitude <= ESTHER_NEARBY_DIST
-	elseif soundCharName == "Esther Mikaelson" then
-		isNearEsther = true
-	end
-
-	if not isNearEsther then return end
-
-	estherChannel.activeSounds[sound] = true
+	estherChannel.activeTracks[track] = true
 
 	if not estherChannel.active then
 		estherChannel.active = true
@@ -2510,11 +2278,11 @@ local function tryDetectEstherChanneling(sound)
 		end
 	end
 
-	local function onSoundEnd()
-		estherChannel.activeSounds[sound] = nil
+	local function onAnimationEnd()
+		estherChannel.activeTracks[track] = nil
 		local anyActive = false
-		for s in pairs(estherChannel.activeSounds) do
-			if s and s.Parent and s.IsPlaying then
+		for activeTrack in pairs(estherChannel.activeTracks) do
+			if activeTrack and activeTrack.IsPlaying then
 				anyActive = true
 				break
 			end
@@ -2522,8 +2290,8 @@ local function tryDetectEstherChanneling(sound)
 		if not anyActive then
 			task.delay(2, function()
 				local stillActive = false
-				for s in pairs(estherChannel.activeSounds) do
-					if s and s.Parent and s.IsPlaying then
+				for activeTrack in pairs(estherChannel.activeTracks) do
+					if activeTrack and activeTrack.IsPlaying then
 						stillActive = true
 						break
 					end
@@ -2532,30 +2300,25 @@ local function tryDetectEstherChanneling(sound)
 					estherChannel.active = false
 					estherChannel.estherPlayer = nil
 					estherChannel.partnerPlayer = nil
-					estherChannel.activeSounds = {}
+					estherChannel.activeTracks = {}
 				end
 			end)
 		end
 	end
 
-	sound.Ended:Connect(onSoundEnd)
-	sound.Destroying:Connect(function()
-		estherChannel.activeSounds[sound] = nil
-	end)
+	track.Ended:Connect(onAnimationEnd)
 end
 
 for _, desc in game:GetDescendants() do
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
-	tryDetectEstherChanneling(desc)
 end
 
 game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
-	tryDetectEstherChanneling(desc)
 
 	-- Fix: When sounds replicate from the server, DescendantAdded can fire
 	-- before SoundId is set. Wait for SoundId before retrying replacement/overlay.
@@ -2566,7 +2329,6 @@ game.DescendantAdded:Connect(function(desc)
 			if desc.SoundId ~= "" then
 				tryReplaceSound(desc)
 				tryOverlaySound(desc)
-				tryDetectEstherChanneling(desc)
 			end
 		end)
 		task.delay(5, function()
