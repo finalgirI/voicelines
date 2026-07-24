@@ -585,7 +585,6 @@ local SoundOverlays = {
 	["105558064418066"] = { Sound = "100950296033969", Volume = 2.5, DelayTime = 0 }, -- Firstborn Devastation
 	["18193005989"] = { Sound = "98703979367465", Volume = 2.6, DelayTime = 0 }, -- Forget to breathe
 	["16208954441"] = { Sound = "95468563095334", Volume = 2.5, DelayTime = 0 }, -- Ignis Tempestas
-	["17491698272"] = { Sound = "112975005042731", Volume = 4.3, DelayTime = 0 }, -- Astral Traverse
 	["16449297928"] = { Sound = "16838696298", Volume = 2.5, DelayTime = 0 }, -- Turn To Stone Qetsiyah
 	["16327076834"] = { Sound = "78867379826047", Volume = 2.5, DelayTime = 0 }, -- Channel Talisman
 	["118411956384669"] = { Sound = "119759415429426", Volume = 2.5, DelayTime = 0 }, -- Phasmatos Ravaros
@@ -745,8 +744,8 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 					return
 				end
 			else
-					-- Existing sound is destroyed or not playing, clean it up
-					ActiveOverlaySounds[overlayInfo.Sound] = nil
+				-- Existing sound is destroyed or not playing, clean it up
+				ActiveOverlaySounds[overlayInfo.Sound] = nil
 			end
 		end
 
@@ -948,7 +947,6 @@ local AnimationSounds = {
 		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9 }, -- Ancestor Attack Scream
 	},
 	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
-	["123913821353212"] = { Sound = "111597661425875", Volume = 3, DelayTime = 0 }, -- Pendant Channel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["6713148336"] = {
 		CasterSoundService = true,
@@ -980,6 +978,7 @@ local AnimationSounds = {
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
 	["13302728573"] = { Sound = "13203446447", Volume = 7.3, DelayTime = 0, CasterSoundService = true }, -- Autem
+	["80991149841796"] = { Sound = "86808397411377", Volume = 4.5, DelayTime = 12, CasterSoundService = true }, -- Freya Res End
 	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
 	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
@@ -1080,7 +1079,7 @@ local AnimationSounds = {
 		["Aurora De Martel"] = { Sound = "97908940377337", Volume = 3.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Mary Louise"] = { Sound = "72478658775676", Volume = 8, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Klaus Mikaelson"] = { Sound = "74404353258021", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
-        ["Kol Mikaelson"] = { Sound = "124240839477995", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
+		["Kol Mikaelson"] = { Sound = "124240839477995", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 		["Nora Hildegard"] = { Sound = "112196405626620", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Spine Break
 	},
 	["10748431894"] = {
@@ -1088,7 +1087,7 @@ local AnimationSounds = {
 		["Caroline Forbes"] = { Sound = "106117879767037", Volume = 4.5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Mary Louise"] = { Sound = "79352381719423", Volume = 6, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Evil Aunt"] = { Sound = "108318456932633", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
-        ["Nora Hildegard"] = { Sound = "129372700682148", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
+		["Nora Hildegard"] = { Sound = "129372700682148", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
 	["10748435391"] = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
@@ -1111,7 +1110,7 @@ local AnimationSounds = {
 		["Mary Louise"] = { Sound = "134606267442356", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Evil Aunt"] = { Sound = "121348762212361", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 		["Katherine Pierce"] = { Sound = "71628205005639", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
-        ["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
+		["Kol Mikaelson"] = { Sound = "91265442581773", Volume = 5, DelayTime = 0, KeepPlayingSound = true }, -- Arm Break
 	}, 
 	["95988116850782"] = {
 		["Hope Mikaelson"] = { Sound = "114218115884187", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heel Stomp
@@ -1124,7 +1123,7 @@ local AnimationSounds = {
 		["Klaus Mikaelson"] = { Sound = "110962212419680", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Rebekah Mikaelson"] = { Sound = "103359391224128", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 		["Marcel Gerard"] = { Sound = "134565387051180", Volume = 7, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out 
-        ["Kol Mikaelson"] = { Sound = "71654166290298", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
+		["Kol Mikaelson"] = { Sound = "71654166290298", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Choke Out
 	},
 	["12308726489"] = {
 		["Aurora De Martel"] = { Sound = "71870170081183", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Heart Rip
@@ -1336,8 +1335,8 @@ end
 local function playAnimSound(animId, character, charName, track)
 
 
-		playHopeAnimFX(animId, character, charName)
-		if character ~= Players.LocalPlayer.Character then return end
+	playHopeAnimFX(animId, character, charName)
+	if character ~= Players.LocalPlayer.Character then return end
 
 	local entry = AnimationSounds[animId]
 	if not entry then return end
@@ -1404,34 +1403,34 @@ local function playAnimSound(animId, character, charName, track)
 
 		local sound = nil
 		if soundId then
-		sound = Instance.new("Sound")
-		sound.SoundId = "rbxassetid://" .. normalize(soundId)
-		sound.Volume = soundInfo.Volume or 2.5
-		sound:SetAttribute("IsLocalVoiceline", true)
+			sound = Instance.new("Sound")
+			sound.SoundId = "rbxassetid://" .. normalize(soundId)
+			sound.Volume = soundInfo.Volume or 2.5
+			sound:SetAttribute("IsLocalVoiceline", true)
 
-		local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
-		if parentResult == false then
-			AnimSoundCooldowns[key] = nil
-			return
-		end
-
-		sound:Play()
-
-		-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
-		local stackCount = soundInfo.StackCount or entry.StackCount or 1
-		if stackCount > 1 then
-			for i = 2, stackCount do
-				local stackSound = Instance.new("Sound")
-				stackSound.SoundId = "rbxassetid://" .. normalize(soundId)
-				stackSound.Volume = soundInfo.Volume or 2.5
-				stackSound:SetAttribute("IsLocalVoiceline", true)
-				parentSoundForCaster(stackSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
-				stackSound:Play()
-				stackSound.Ended:Connect(function()
-					if stackSound and stackSound.Parent then stackSound:Destroy() end
-				end)
+			local parentResult = parentSoundForCaster(sound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+			if parentResult == false then
+				AnimSoundCooldowns[key] = nil
+				return
 			end
-		end
+
+			sound:Play()
+
+			-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
+			local stackCount = soundInfo.StackCount or entry.StackCount or 1
+			if stackCount > 1 then
+				for i = 2, stackCount do
+					local stackSound = Instance.new("Sound")
+					stackSound.SoundId = "rbxassetid://" .. normalize(soundId)
+					stackSound.Volume = soundInfo.Volume or 2.5
+					stackSound:SetAttribute("IsLocalVoiceline", true)
+					parentSoundForCaster(stackSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+					stackSound:Play()
+					stackSound.Ended:Connect(function()
+						if stackSound and stackSound.Parent then stackSound:Destroy() end
+					end)
+				end
+			end
 		end
 
 		-- Show chat bubble if ChatText is provided
@@ -1499,22 +1498,22 @@ local function playAnimSound(animId, character, charName, track)
 		end
 
 		if soundId then
-		if soundInfo.CutOffWithAnimation and track then
-			track.Ended:Connect(function()
-				if sound and sound.Parent then
-					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
-				end
-				AnimSoundCooldowns[key] = nil
-			end)
-		elseif soundInfo.KeepPlayingSound then
-		else
-			sound.Ended:Connect(function()
-				if sound and sound.Parent then
-					sound:Destroy()
-				end
-				AnimSoundCooldowns[key] = nil
-			end)
-		end
+			if soundInfo.CutOffWithAnimation and track then
+				track.Ended:Connect(function()
+					if sound and sound.Parent then
+						fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+					end
+					AnimSoundCooldowns[key] = nil
+				end)
+			elseif soundInfo.KeepPlayingSound then
+			else
+				sound.Ended:Connect(function()
+					if sound and sound.Parent then
+						sound:Destroy()
+					end
+					AnimSoundCooldowns[key] = nil
+				end)
+			end
 		end
 
 		task.delay(COOLDOWN_TIMEOUT, function()
@@ -1542,6 +1541,7 @@ local hookedAnimators = {} -- Track which Animators we've already hooked
 
 local checkCombosForAnimation -- forward declaration (defined later)
 local checkCompulsionProtectionForAnimation -- forward declaration (defined later)
+local tryDetectEstherChannelAnimation -- forward declaration (defined later)
 
 local function hookAnimator(animator, character)
 	if hookedAnimators[animator] then return end
@@ -1554,11 +1554,15 @@ local function hookAnimator(animator, character)
 		local animId = normalize(anim.AnimationId)
 		if animId == "" or animId == "0" then return end
 
+		local charName = getAnimCharName(character)
+		if tryDetectEstherChannelAnimation then
+			tryDetectEstherChannelAnimation(animId, character, charName, track)
+		end
+
 		if character == Players.LocalPlayer.Character and not LOCAL_VOICELINES_ENABLED then
 			return
 		end
 
-		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
 
 		if checkCombosForAnimation then
@@ -2506,6 +2510,205 @@ tryOverlaySound = function(sound)
 	end
 end
 
+-- ============================================================
+-- Esther Channel Death Voiceline System
+-- When Esther Mikaelson plays animation 15424574694/15424578539 for
+-- more than 3 seconds and either she or her nearby channel partner
+-- dies, play sound 138445942157113 from Esther.
+-- ============================================================
+
+local EstherChannelAnimationIds = {
+	["15424574694"] = true,
+	["15424578539"] = true,
+}
+
+local ESTHER_DEATH_SOUND_ID = "138445942157113"
+local ESTHER_CHANNEL_MIN_DURATION = 3
+local ESTHER_NEARBY_DIST = 15
+
+local estherChannel = {
+	active = false,
+	startTime = 0,
+	estherPlayer = nil,
+	partnerPlayer = nil,
+	deathSoundPlayed = false,
+	activeTracks = {},
+}
+
+local function findEstherPlayer()
+	for _, player in Players:GetPlayers() do
+		if player:GetAttribute("CharacterName") == "Esther Mikaelson" then
+			return player
+		end
+	end
+	return nil
+end
+
+local function playEstherDeathVoiceline()
+	if estherChannel.deathSoundPlayed then return end
+
+	estherChannel.deathSoundPlayed = true
+
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://" .. ESTHER_DEATH_SOUND_ID
+	sound.Volume = 2.5
+	sound:SetAttribute("IsLocalVoiceline", true)
+	configure3DAudio(sound)
+
+	-- Get Esther's death position from her character before it's cleaned up
+	local deathPosition = nil
+	local character = estherChannel.estherPlayer and estherChannel.estherPlayer.Character
+	if character then
+		local hrp = character:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			deathPosition = hrp.Position
+		else
+			local head = character:FindFirstChild("Head")
+			if head then
+				deathPosition = head.Position
+			else
+				local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+				if torso then
+					deathPosition = torso.Position
+				end
+			end
+		end
+	end
+
+	-- Find the closest non-character part to the death position
+	local closestPart = nil
+	if deathPosition then
+		local bestDist = math.huge
+		local overlapParams = Instance.new("OverlapParams")
+		overlapParams.MaxParts = 200
+		local nearbyParts = workspace:GetPartBoundsInRadius(deathPosition, 200, overlapParams)
+		for _, part in nearbyParts do
+			-- Skip parts that belong to a character (have a Humanoid ancestor)
+			local isCharacter = false
+			local ancestor = part.Parent
+			while ancestor do
+				if ancestor:IsA("Model") and ancestor:FindFirstChildOfClass("Humanoid") then
+					isCharacter = true
+					break
+				end
+				ancestor = ancestor.Parent
+			end
+			if not isCharacter then
+				local dist = (part.Position - deathPosition).Magnitude
+				if dist < bestDist then
+					bestDist = dist
+					closestPart = part
+				end
+			end
+		end
+	end
+
+	if closestPart then
+		sound.Parent = closestPart
+	else
+		sound.Parent = SoundService
+	end
+
+	sound:Play()
+	sound.Ended:Connect(function()
+		if sound and sound.Parent then sound:Destroy() end
+	end)
+end
+
+local function findClosestPlayerToEsther(estherHRP, excludePlayer)
+	local bestDist = ESTHER_NEARBY_DIST
+	local bestPlayer = nil
+
+	for _, player in Players:GetPlayers() do
+		if player ~= excludePlayer and player.Character then
+			local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+
+			if hrp then
+				local dist = (estherHRP.Position - hrp.Position).Magnitude
+
+				if dist < bestDist then
+					bestDist = dist
+					bestPlayer = player
+				end
+			end
+		end
+	end
+
+	return bestPlayer
+end
+
+local function hookEstherChannelDeath(player)
+	if not player or not player.Character then return end
+	local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+	if not humanoid then return end
+
+	humanoid.Died:Connect(function()
+		if estherChannel.active and not estherChannel.deathSoundPlayed then
+			if (tick() - estherChannel.startTime) >= ESTHER_CHANNEL_MIN_DURATION then
+				playEstherDeathVoiceline()
+			end
+		end
+	end)
+end
+
+tryDetectEstherChannelAnimation = function(animId, character, charName, track)
+	if estherChannel.active and estherChannel.deathSoundPlayed then return end
+	if not EstherChannelAnimationIds[animId] then return end
+	if charName ~= "Esther Mikaelson" then return end
+
+	local estherPlayer = findEstherPlayer()
+	if not estherPlayer or estherPlayer.Character ~= character then return end
+
+	local estherChar = estherPlayer.Character
+	local estherHRP = estherChar:FindFirstChild("HumanoidRootPart")
+	if not estherHRP then return end
+
+	estherChannel.activeTracks[track] = true
+
+	if not estherChannel.active then
+		estherChannel.active = true
+		estherChannel.startTime = tick()
+		estherChannel.estherPlayer = estherPlayer
+		estherChannel.deathSoundPlayed = false
+		estherChannel.partnerPlayer = findClosestPlayerToEsther(estherHRP, estherPlayer)
+
+		hookEstherChannelDeath(estherPlayer)
+		if estherChannel.partnerPlayer then
+			hookEstherChannelDeath(estherChannel.partnerPlayer)
+		end
+	end
+
+	local function onAnimationEnd()
+		estherChannel.activeTracks[track] = nil
+		local anyActive = false
+		for activeTrack in pairs(estherChannel.activeTracks) do
+			if activeTrack and activeTrack.IsPlaying then
+				anyActive = true
+				break
+			end
+		end
+		if not anyActive then
+			task.delay(2, function()
+				local stillActive = false
+				for activeTrack in pairs(estherChannel.activeTracks) do
+					if activeTrack and activeTrack.IsPlaying then
+						stillActive = true
+						break
+					end
+				end
+				if not stillActive then
+					estherChannel.active = false
+					estherChannel.estherPlayer = nil
+					estherChannel.partnerPlayer = nil
+					estherChannel.activeTracks = {}
+				end
+			end)
+		end
+	end
+
+	track.Ended:Connect(onAnimationEnd)
+end
+
 for _, desc in game:GetDescendants() do
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
@@ -2516,6 +2719,22 @@ game.DescendantAdded:Connect(function(desc)
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 	tryPlayParticleSound(desc)
+
+	-- Fix: When sounds replicate from the server, DescendantAdded can fire
+	-- before SoundId is set. Wait for SoundId before retrying replacement/overlay.
+	if desc:IsA("Sound") and desc.SoundId == "" then
+		local conn
+		conn = desc:GetPropertyChangedSignal("SoundId"):Connect(function()
+			if conn then conn:Disconnect() end
+			if desc.SoundId ~= "" then
+				tryReplaceSound(desc)
+				tryOverlaySound(desc)
+			end
+		end)
+		task.delay(5, function()
+			if conn then conn:Disconnect() end
+		end)
+	end
 end)
 
 game.DescendantAdded:Connect(function(desc)
