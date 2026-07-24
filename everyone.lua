@@ -285,6 +285,8 @@ local SoundReplacements = {
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
+	["Qetsiyah"] = "16118919066", -- Qetsiyah
+	["Bonnie Bennett"] = "15237076338", -- Bonnie Bennett
 	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 }
@@ -924,13 +926,11 @@ local AnimationSounds = {
 	["82703548119759"] = { Sound = "97911663035904", Volume = 2, DelayTime = 0 }, -- Blood Choke 
 	["98624816078661"] = { Sound = "94965672679001", Volume = 2.5, DelayTime = 0 }, -- Telek Attack
 	["72314048009672"] = { Sound = "89550767660084", Volume = 3.5, DelayTime = 0 }, -- Violin
-	["15809657465"] = { Sound = "15237076338", Volume = 2.5, DelayTime = 4, CutOffWithAnimation = true }, -- Aleoras Subsitos
 	["15619485183"] = { Sound = "95435320218587", Volume = 5.5, DelayTime = 0 }, -- Building On Fire
 	["15835470076"] = { 
 		["Bonnie Bennett"] = { Sound = "92416622688125", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Channel Ancestors
 	},
 	["15834801673"] = { Sound = "117198514953604", Volume = 2.5, DelayTime = 0 }, -- Psychic Restraint
-	["16409600440"] = { Sound = "16118919066", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Avita Exari
 	["16404267626"] = { Sound = "16479305722", Volume = 2.5, DelayTime = 15, KeepPlayingSound = true }, -- Cure Creation
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
