@@ -914,6 +914,7 @@ local AnimationSounds = {
 	["80991149841796"] = { Sound = "86808397411377", Volume = 4.5, DelayTime = 12, CasterSoundService = true }, -- Freya Res End
 	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
+	["114658560645086"] = { Sound = "88189755078068", Volume = 2.5, DelayTime = 0 }, -- Illusion Attack
 	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
 	["18967414922"] = { Sound = "83942262095667", Volume = 2.5, DelayTime = 0 }, -- Chains
 	["133379296605385"] = { Sound = "94787275001396", Volume = 2.5, DelayTime = 0 }, -- Magic Steal
