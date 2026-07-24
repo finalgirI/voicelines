@@ -285,8 +285,10 @@ local SoundReplacements = {
 	["89008508391784"] = "17471844257", -- Hope's Repulse
 	["101281556370554"] = "81639278311000", -- Ah Sha Lana
 	["112458851193845"] = "16767898955", -- Destroy Purgatory
-	["Qetsiyah"] = "16118919066", -- Qetsiyah
-	["Bonnie Bennett"] = "15237076338", -- Bonnie Bennett
+	["98210016679472"] = {
+		["Qetsiyah"] = "16118919066",
+		["Bonnie Bennett"] = "15237076338",
+	},
 	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 }
