@@ -869,10 +869,9 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "128610183103480", Volume = 2.5, DelayTime = 0 }, -- Bonnie Scream
 	},
 	["136674508140592"] = {
-		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9 }, -- Ancestor Attack Scream
+		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9, CasterSoundService = true }, -- Ancestor Attack Scream
 	},
 	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
-	["123913821353212"] = { Sound = "111597661425875", Volume = 2, DelayTime = 0.8 }, -- PendantChannel
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["87439615254048"] = {
 		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Soul Bind Victim
@@ -912,6 +911,7 @@ local AnimationSounds = {
 		}, Volume = 4.5, DelayTime = 0 }, -- Harvest Dagger
 	},
 	["13302728573"] = { Sound = "13203446447", Volume = 5.5, DelayTime = 0, CasterSoundService = true }, -- Autem
+	["80991149841796"] = { Sound = "86808397411377", Volume = 4.5, DelayTime = 12, CasterSoundService = true }, -- Freya Res End
 	["18967184807"] = { Sound = "115762663906404", Volume = 2.8, DelayTime = 0 }, -- Wolf Bind
 	["16587640939"] = { Sound = "16775370366", Volume = 2.5, DelayTime = 0 }, -- Venom Blast
 	["16455033835"] = { Sound = "93083659221700", Volume = 4.6, DelayTime = 0 }, -- Vines
@@ -1026,7 +1026,7 @@ local AnimationSounds = {
 		["Bonnie Bennett"] = { Sound = "136482218783790", Volume = 1.5, DelayTime = 0, CutOffWithAnimation = true }, -- Throat Rip Protection
 		["Dark Josie"] = { Sound = "86892327341853", Volume = 2.5, DelayTime = 1.3 }, -- Throat Rip Protection
 	},
-	["10748431894"] = {
+	["10748194788"] = {
 		["Davina Claire"] = { Sound = "104238121958425", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 		["Jeremy Gilbert"] = { Sound = "135116700738491", Volume = 3, DelayTime = 0, KeepPlayingSound = true }, -- Throat Rip
 	},
@@ -2412,20 +2412,65 @@ end
 
 local function playEstherDeathVoiceline()
 	if estherChannel.deathSoundPlayed then return end
-	if not estherChannel.estherPlayer or not estherChannel.estherPlayer.Character then return end
 
 	estherChannel.deathSoundPlayed = true
 
-	local character = estherChannel.estherPlayer.Character
 	local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://" .. ESTHER_DEATH_SOUND_ID
 	sound.Volume = 2.5
 	sound:SetAttribute("IsLocalVoiceline", true)
 	configure3DAudio(sound)
 
-	local parent = findSoundParent(character)
-	if parent then
-		sound.Parent = parent
+	-- Get Esther's death position from her character before it's cleaned up
+	local deathPosition = nil
+	local character = estherChannel.estherPlayer and estherChannel.estherPlayer.Character
+	if character then
+		local hrp = character:FindFirstChild("HumanoidRootPart")
+		if hrp then
+			deathPosition = hrp.Position
+		else
+			local head = character:FindFirstChild("Head")
+			if head then
+				deathPosition = head.Position
+			else
+				local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+				if torso then
+					deathPosition = torso.Position
+				end
+			end
+		end
+	end
+
+	-- Find the closest non-character part to the death position
+	local closestPart = nil
+	if deathPosition then
+		local bestDist = math.huge
+		local overlapParams = Instance.new("OverlapParams")
+		overlapParams.MaxParts = 200
+		local nearbyParts = workspace:GetPartBoundsInRadius(deathPosition, 200, overlapParams)
+		for _, part in nearbyParts do
+			-- Skip parts that belong to a character (have a Humanoid ancestor)
+			local isCharacter = false
+			local ancestor = part.Parent
+			while ancestor do
+				if ancestor:IsA("Model") and ancestor:FindFirstChildOfClass("Humanoid") then
+					isCharacter = true
+					break
+				end
+				ancestor = ancestor.Parent
+			end
+			if not isCharacter then
+				local dist = (part.Position - deathPosition).Magnitude
+				if dist < bestDist then
+					bestDist = dist
+					closestPart = part
+				end
+			end
+		end
+	end
+
+	if closestPart then
+		sound.Parent = closestPart
 	else
 		sound.Parent = SoundService
 	end
