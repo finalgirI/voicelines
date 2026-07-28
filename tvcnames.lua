@@ -19,7 +19,7 @@ local NameReplacements = {
 
 	-- Vampires
 	["Vampire Blondie"] = "Caroline Forbes",
-	["Psycho Doppelganger"] = "Katherine Pierce",
+	["Psycho Doppelg\195\164nger"] = "Katherine Pierce",
 	["The Good Brother"] = "Stefan Salvatore",
 	["The Bad Brother"] = "Damon Salvatore",
 	["The Experiment"] = "Lorenzo 'Enzo' St. John",
@@ -34,7 +34,7 @@ local NameReplacements = {
 	["Wolf Queen"] = "Hayley Marshall-Kenner",
 
 	-- Mortals / Humans
-	["The Doppelganger"] = "Elena Gilbert",
+	["The Doppelg\195\164nger"] = "Elena Gilbert",
 
 	-- Species
 	["Oldblood"] = "Original",
