@@ -635,7 +635,7 @@ local AnimationSounds = {
 	["9941864692"] = { Sound = "90115515174277", Volume = 2, DelayTime = 0 }, -- Fiante Fulguris
 	["126435728163733"] = { Sound = "125049316050755", Volume = 2.5, DelayTime = 0 }, -- Ignalusa
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2.5, DelayTime = 0 }, -- Resistus Meladi
-	["101255716611899"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
+	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	-- Hope Mikaelson Voicelines:
 	["71469143872702"] = {
 		["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
