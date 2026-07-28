@@ -5,7 +5,7 @@ local Players = game:GetService("Players")
 -- ============================================
 local NameReplacements = {
 	-- Witches
-	["The Firstborn  Witch"] = "Freya Mikaelson",
+	["The Firstborn Witch"] = "Freya Mikaelson",
 	["Gemini Witch"] = "Olivia Parker",
 	["Orphan Witch"] = "Alyssa Chang",
 	["Psychic-Witch"] = "Bonnie Bennett",
