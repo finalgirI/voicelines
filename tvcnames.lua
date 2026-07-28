@@ -5,14 +5,14 @@ local Players = game:GetService("Players")
 -- ============================================
 local NameReplacements = {
 	-- Witches
-	["The Firstborn  Witch"] = "Freya Mikaelson",
+	["The Firstborn Witch"] = "Freya Mikaelson",
 	["Gemini Witch"] = "Olivia Parker",
 	["Orphan Witch"] = "Alyssa Chang",
 	["Psychic-Witch"] = "Bonnie Bennett",
 	["The Fury"] = "Cleo Sowande",
 	["Witch King"] = "Vincent Griffith",
 	["Wonder Twin"] = "Josie Saltzman",
-	["Dark Siphoner"] = "Dark Josie",
+	["The Dark Twin"] = "Dark Josie",
 	["Crazy Twin"] = "Lizzie Saltzman",
 	["Psychotic Siphoner"] = "Malachi 'Kai' Parker",
     ["The Almighty"] = "Hope Mikaelson",
