@@ -885,9 +885,13 @@ local function playAnimSound(animId, character, charName, track)
 end
 
 local function getAnimCharName(character)
+	if character then
+		local name = character:GetAttribute("CharacterName")
+		if name then return name end
+	end
 	for _, player in Players:GetPlayers() do
 		if player.Character == character then
-			return player:GetAttribute("CharacterName")
+			return character:GetAttribute("CharacterName")
 		end
 	end
 	return nil
