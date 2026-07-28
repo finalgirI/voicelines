@@ -6,9 +6,9 @@ local Players = game:GetService("Players")
 local NameReplacements = {
 	-- Witches
 	["The Firstborn Witch"] = "Freya Mikaelson",
-	["Gemini Witch"] = "Olivia Parker",
+	["The Gemini Witch"] = "Olivia Parker",
 	["Orphan Witch"] = "Alyssa Chang",
-	["Psychic-Witch"] = "Bonnie Bennett",
+	["Psychic - Witch"] = "Bonnie Bennett",
 	["The Fury"] = "Cleo Sowande",
 	["Witch King"] = "Vincent Griffith",
 	["Wonder Twin"] = "Josie Saltzman",
@@ -46,7 +46,7 @@ local NameReplacements = {
 -- Exact-only replacements: only replace when the ENTIRE text matches the key.
 -- Use this for short/common words that would corrupt descriptions if replaced as substrings.
 local ExactOnlyReplacements = {
-	["TESTINGGGGGG"] = "Glace Solidatur",
+	["Psychic-Witch"] = "Bonnie Bennett",
 }
 
 -- Pre-sort generic replacements: skip identity mappings, sort by key length (longest first)
