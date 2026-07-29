@@ -1031,7 +1031,7 @@ local AnimationSounds = {
 		["Hope Mikaelson"] = { Sound = "99427264222969", Volume = 5, DelayTime = 0 }, -- Force Cure Hope
 	},
 	["12940089696"] = {
-		["Hope Mikaelson"] = { Sound = "104137817730493", Volume = 6, DelayTime = 0 }, -- Vitris
+		["Hope Mikaelson"] = { Sound = "129937487508844", Volume = 4, DelayTime = 0 }, -- Vitris
 	},
 	["15052194152"] = {
 		["Freya Mikaelson"] = { Sound = "97414512710914", Volume = 2.5, DelayTime = 5 }, -- Astral Projection
@@ -1064,7 +1064,7 @@ local AnimationSounds = {
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
-	["76942479045558"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
+	["76942479045558"] = { Sound = "89137940149599", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Sigil
 	["93301034042480"] = { Sound = "115263349021201", Volume = 4, DelayTime = 0, KeepPlayingSound = true, StackCount = 4 }, -- Aneurysm
 	["77225088768312"] = { Sound = "138819760805849", Volume = 2.5, DelayTime = 0 }, -- Cardiac Arrest
 	["136980766359708"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "94259360187031" }, -- Original Reversal (both play together)
