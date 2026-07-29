@@ -629,7 +629,7 @@ local AnimationSounds = {
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
 	["129292930175405"] = { Sound = "128129073465076", Volume = 2, DelayTime = 0 }, -- Petrification
 	["118804989222729"] = { Sound = "86003332339956", Volume = 2.5, DelayTime = 0.3 }, -- Resurrection
-	["130471440959620"] = { Sound = "85824220736554", Volume = 2.5, DelayTime = 0 }, -- Enraged Combo
+	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
@@ -637,22 +637,22 @@ local AnimationSounds = {
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2.5, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	-- Hope Mikaelson Voicelines:
-	["71469143872702"] = {
-		["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
-	},
+	-- ["71469143872702"] = {
+	---["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
+	-- },
 	["14930919924"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare 
 	["14608474948"] = { Sound = "129937487508844", Volume = 2.5, DelayTime = 2.3 }, -- Vitris
 	["15081444800"] = { Sound = "72404882318303", Volume = 2, DelayTime = 0 }, -- Ventus
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = { SimultaneousSounds = {
-		{ Sound = "73928896867445", DelayTime = 0, Volume = 8 },
+		{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 2 },
 		{ Sound = "140630563136815", DelayTime = 0 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	-- Freya Mikaelson Voicelines:
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0 }, -- Astral Projection
 	["107970491623455"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0 }, -- Delfan Start
 	["71928771227244"] = { Sound = "133819929759791", Volume = 2, DelayTime = 9 }, -- Delfan End
-	["117868722364419"] = { Sound = "106151236422771", Volume = 2.5, DelayTime = 0 }, -- Sigil
+	["117868722364419"] = { Sound = "89137940149599", Volume = 2, DelayTime = 0 }, -- Sigil
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
 	["102269919531608"] = { Sound = "75051140424637", Volume = 7, DelayTime = 0 }, -- Davina Summoned by Freya
@@ -671,13 +671,13 @@ local AnimationSounds = {
 	-- Vincent Griffith Voicelines:
 	["131307324807651"] = { SimultaneousSounds = {
 		{ Sound = "106687843187704", DelayTime = 0 },
-		{ Sound = "73332613180468", DelayTime = 9 },
+		{ Sound = "73332613180468", DelayTime = 5 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
 	-- Witch Abiltiies Voicelines:
 	["71469143872702"] = {
-		["Psychic-Witch"] = { Sound = "74863711273747", Volume = 2.5, DelayTime = 0 }, -- Incendia
-	    ["The Almighty"] = { Sound = "88254920355046", Volume = 2.5, DelayTime = 0 }, -- Incendia
-       	["Crazy Twin"] = { Sound = "98540976660149", Volume = 2.5, DelayTime = 0 }, -- Incendia
+		["Psychic-Witch"] = { Sound = "74863711273747", Volume = 1.7, DelayTime = 0 }, -- Incendia
+		["The Almighty"] = { Sound = "88254920355046", Volume = 1.7, DelayTime = 0 }, -- Incendia
+		["Crazy Twin"] = { Sound = "98540976660149", Volume = 1.7, DelayTime = 0 }, -- Incendia
     },
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
