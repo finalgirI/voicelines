@@ -1060,7 +1060,7 @@ local AnimationSounds = {
 	["82237064082144"] = { Sound = "105913987460965", Volume = 2.5, DelayTime = 0 }, -- Starling Burst
 	["76457128360909"] = { Sound = "137442198052809", Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Freya's Brain Fry
 	["12955966256"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Dark Josie"] = { Sound = "135696700886546", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 	["80991149841796"] = { Sound = "135953039500242", Volume = 10, DelayTime = 0.2, StackCount = 10 }, -- Freya Resurrection (stacked for extreme loudness)
@@ -1153,7 +1153,7 @@ local AnimationSounds = {
 	},
 	["133624249365350"] = { Sound = "135570080925664", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Blade
 	["12955990988"] = {
-		["Dark Josie"] = { Sound = "139164497000480", Volume = 2.5, DelayTime = 0 }, -- Head siphon
+		["Dark Josie"] = { Sound = "135696700886546", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 		["Malcolm"] = { Sound = "100864025080028", Volume = 2.5, DelayTime = 0 }, -- Head siphon
 	},
 
