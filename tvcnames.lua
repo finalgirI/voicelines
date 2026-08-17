@@ -13,6 +13,7 @@ local NameReplacements = {
 	["The Fury"] = "Cleo Sowande",
 	["Witch King"] = "Vincent Griffith",
 	["Wonder Twin"] = "Josie Saltzman",
+	["The Dark Twin"] = "Dark Josie",
 	["Dark Siphoner"] = "Dark Josie",
 	["Crazy Twin"] = "Lizzie Saltzman",
 	["Psychotic Siphoner"] = "Malachi 'Kai' Parker",
