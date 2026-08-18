@@ -17,6 +17,7 @@ local NameReplacements = {
 	["Dark Siphoner"] = "Dark Josie",
 	["Crazy Twin"] = "Lizzie Saltzman",
 	["Psychotic Siphoner"] = "Malachi 'Kai' Parker",
+	["Sociopathic Siphoner"] = "Malachi 'Kai' Parker",
     ["The Almighty"] = "Hope Mikaelson",
 
 	-- Vampires
