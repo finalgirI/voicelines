@@ -330,13 +330,7 @@ local SoundOverlays = {
 	["15254260885"] = {
 	   ["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
     },
-	["15237665151"] = { Sound = "87969470088924", Volume = 2.5, DelayTime = 0.2 }, -- Stopping Spell
-	-- Witch Abiltiies Voicelines:
-	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "74863711273747", Volume = 1.7, DelayTime = 0 }, -- Incendia
-		["The Almighty"] = { Sound = "88254920355046", Volume = 1.7, DelayTime = 0 }, -- Incendia
-		["Crazy Twin"] = { Sound = "98540976660149", Volume = 1.7, DelayTime = 0 }, -- Incendia
-	},
+	["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -643,19 +637,22 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 6 },
-			{ Sound = "140630563136815", DelayTime = 0 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 10 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 3 },
 		}, Volume = 2.5, DelayTime = 0 },
 	}, -- Hope's Repulse
 	-- Freya Mikaelson Voicelines:
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0 }, -- Astral Projection
-	["107970491623455"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0 }, -- Delfan Start
-	["71928771227244"] = { Sound = "133819929759791", Volume = 2, DelayTime = 9 }, -- Delfan End
+	["107970491623455"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
+	["71928771227244"] = { Sound = "133819929759791", Volume = 2, DelayTime = 9, CutOffWithAnimation = true }, -- Delfan End
 	["117868722364419"] = { Sound = "89137940149599", Volume = 2, DelayTime = 0 }, -- Sigil
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
 	["102269919531608"] = { Sound = "75051140424637", Volume = 7, DelayTime = 0 }, -- Davina Summoned by Freya
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
+	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
+	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
+	["85444212414085"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "115581020820485" }, -- Original Reversal (both play together)
 	["95661493993334"] = { SimultaneousSounds = {
 		{ Sound = "111630588301632", DelayTime = 0 },
 		{ Sound = "136529550796252", DelayTime = 0 },
