@@ -326,21 +326,17 @@ end
 -- ============================================================
 
 local SoundOverlays = {
-	-- Simple: ["originalSoundId"] = { Sound = "overlaySoundId", Volume = 2.5, DelayTime = 0 },
-	-- With multiple overlays: ["originalSoundId"] = { Overlays = { ... } },
-	-- Per character: ["originalSoundId"] = { ["CharacterName"] = { Sound = "overlaySoundId", Volume = 2.5 } },
-	-- Example:
-	-- ["123456789"] = { Sound = "987654321", Volume = 2.5, DelayTime = 0 },
-	-- ["123456789"] = {
-	--     Overlays = {
-	--         { Sound = "987654321", Volume = 2.5, DelayTime = 0 },
-	--         { Sound = "111111111", Volume = 2.5, DelayTime = 5, KeepPlayingSound = true },
-	--     },
-	-- },
-	-- ["123456789"] = {
-	--     ["Character Name"] = { Sound = "987654321", Volume = 2.5, DelayTime = 0 },
-	--     TrustDistanceFallback = true,
-	-- },
+	-- Hope Mikaelson Voicelines:
+	["15254260885"] = {
+	   ["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
+    },
+	["15237665151"] = { Sound = "87969470088924", Volume = 2.5, DelayTime = 0.2 }, -- Stopping Spell
+	-- Witch Abiltiies Voicelines:
+	["14518634071"] = {
+		["Psychic-Witch"] = { Sound = "74863711273747", Volume = 1.7, DelayTime = 0 }, -- Incendia
+		["The Almighty"] = { Sound = "88254920355046", Volume = 1.7, DelayTime = 0 }, -- Incendia
+		["Crazy Twin"] = { Sound = "98540976660149", Volume = 1.7, DelayTime = 0 }, -- Incendia
+	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -636,6 +632,7 @@ local AnimationSounds = {
 	["126435728163733"] = { Sound = "125049316050755", Volume = 2.5, DelayTime = 0 }, -- Ignalusa
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2.5, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
+	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
 	-- Hope Mikaelson Voicelines:
 	-- ["71469143872702"] = {
 	---["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
@@ -646,7 +643,7 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 4 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 6 },
 			{ Sound = "140630563136815", DelayTime = 0 },
 		}, Volume = 2.5, DelayTime = 0 },
 	}, -- Hope's Repulse
@@ -675,12 +672,6 @@ local AnimationSounds = {
 		{ Sound = "106687843187704", DelayTime = 0 },
 		{ Sound = "73332613180468", DelayTime = 5 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
-	-- Witch Abiltiies Voicelines:
-	["71469143872702"] = {
-		["Psychic-Witch"] = { Sound = "74863711273747", Volume = 1.7, DelayTime = 0 }, -- Incendia
-		["The Almighty"] = { Sound = "88254920355046", Volume = 1.7, DelayTime = 0 }, -- Incendia
-		["Crazy Twin"] = { Sound = "98540976660149", Volume = 1.7, DelayTime = 0 }, -- Incendia
-    },
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
