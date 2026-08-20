@@ -331,6 +331,7 @@ local SoundOverlays = {
 	   ["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
     },
 	["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
+	["103765023639798"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -614,12 +615,13 @@ local AnimationSounds = {
 	["73624875116274"] = { Sound = "114365880784490", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["104295734346426"] = { Sound = "124351638860466", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
-	["93352379786638"] = { Sound = "103925376123716", Volume = 2.5, DelayTime = 0 }, -- Fire Trail
+	["93352379786638"] = { Sound = "93142367750982", Volume = 2.5, DelayTime = 0 }, -- Fire Trail
 	["97786686878401"] = { Sound = "127540876994519", Volume = 2.5, DelayTime = 3.1 }, -- Locator Spell 
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
 	["129292930175405"] = { Sound = "128129073465076", Volume = 2, DelayTime = 0 }, -- Petrification
 	["118804989222729"] = { Sound = "86003332339956", Volume = 2.5, DelayTime = 0.3 }, -- Resurrection
 	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
+	["90980258389989"] = { Sound = "83135931611364", Volume = 2.5, DelayTime = 5 }, -- Enraged Combo
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
@@ -637,8 +639,8 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 8, StackCount = 10 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 3 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 3 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 4 },
 		}, Volume = 2.5, DelayTime = 0 },
 	}, -- Hope's Repulse
 	-- Freya Mikaelson Voicelines:
@@ -652,7 +654,11 @@ local AnimationSounds = {
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
-	["85444212414085"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, CutOffWithAnimation = true, SimultaneousSound = "115581020820485" }, -- Original Reversal (both play together)
+	["98448216504564"] = { Sound = "125000907792622", Volume = 3, DelayTime = 0 }, -- Brain Melt (Far Range)
+	["85444212414085"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "115581020820485", DelayTime = 0 },
+		{ Sound = "112555794145085", DelayTime = 15 },
+	} }, -- Original Reversal (all three play together)
 	["95661493993334"] = { SimultaneousSounds = {
 		{ Sound = "111630588301632", DelayTime = 0 },
 		{ Sound = "136529550796252", DelayTime = 0 },
@@ -847,6 +853,44 @@ local function playAnimSound(animId, character, charName, track)
 				task.delay(simDelay, startSimSound)
 			else
 				startSimSound()
+			end
+
+			-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
+			local stackCount = (type(simEntry) == "table" and simEntry.StackCount) or 1
+			if stackCount > 1 then
+				for i = 2, stackCount do
+					local stackSound = Instance.new("Sound")
+					stackSound.SoundId = "rbxassetid://" .. normalize(simSoundId)
+					stackSound.Volume = simVolume or soundInfo.Volume or 2.5
+					stackSound:SetAttribute("IsLocalVoiceline", true)
+					parentSoundForCaster(stackSound, character, soundInfo.CasterSoundService or entry.CasterSoundService)
+
+					local function startStackSound()
+						if stackSound and stackSound.Parent then
+							stackSound:Play()
+						end
+					end
+
+					if simDelay and simDelay > 0 then
+						task.delay(simDelay, startStackSound)
+					else
+						startStackSound()
+					end
+
+					if soundInfo.CutOffWithAnimation and track then
+						track.Ended:Connect(function()
+							if stackSound and stackSound.Parent then
+								fadeOutOverlaySound(stackSound, soundInfo.FadeOutDuration)
+							end
+						end)
+					else
+						stackSound.Ended:Connect(function()
+							if stackSound and stackSound.Parent then
+								stackSound:Destroy()
+							end
+						end)
+					end
+				end
 			end
 
 			if soundInfo.CutOffWithAnimation and track then
