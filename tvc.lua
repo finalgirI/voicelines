@@ -639,7 +639,7 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 3 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 7 },
 			{ Sound = "140630563136815", DelayTime = 0, Volume = 4 },
 		}, Volume = 2.5, DelayTime = 0 },
 	}, -- Hope's Repulse
