@@ -618,7 +618,7 @@ local AnimationSounds = {
 	["80427699313810"] = { Sound = "92032872036108", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["73624875116274"] = { Sound = "114365880784490", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["104295734346426"] = { Sound = "124351638860466", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
-		{ Sound = "87772546771617", DelayTime = 0.3, Volume = 2.5 }, -- TODO: fill in sound ID and delay
+		{ Sound = "87772546771617", DelayTime = 0.5, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
@@ -628,7 +628,7 @@ local AnimationSounds = {
 	["118804989222729"] = { Sound = "86003332339956", Volume = 2.5, DelayTime = 0.3 }, -- Resurrection
 	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
 	["90980258389989"] = { Sound = "83135931611364", Volume = 2.5, DelayTime = 5 }, -- Enraged Combo
-	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0 }, -- Psychic Blast
+	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
