@@ -337,7 +337,10 @@ local SoundOverlays = {
 	-- ["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	-- Witch Abiltiies Voicelines:
 	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2.5, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
 	},
 }
 
@@ -728,7 +731,7 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 4 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 2 },
 			{ Sound = "140630563136815", DelayTime = 0, Volume = 6 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
