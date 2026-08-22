@@ -713,12 +713,12 @@ local AnimationSounds = {
 	["81766391141675"] = { Sound = "92261254633713", Volume = 2.1, DelayTime = 7.4 }, -- Incantation after contacting Emily 
 	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
 	["121445238427652"] = {
-		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
-		["Psychic-Witch-HundredSpirits"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
-		["Psychic-Expression-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
-		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2.2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Witch-HundredSpirits"] = { Sound = "124711584528671", Volume = 2.2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Expression-Witch"] = { Sound = "124711584528671", Volume = 2.2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "124711584528671", Volume = 2.2, DelayTime = 0 }, -- Barrier Spell
 	},
-	["79178970449204"] = { Sound = "137483430640044", Volume = 1.9, DelayTime = 3.3 }, -- Rage Mode start
+	["79178970449204"] = { Sound = "137483430640044", Volume = 1.6, DelayTime = 3.5 }, -- Rage Mode start
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
@@ -727,7 +727,7 @@ local AnimationSounds = {
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
 	["96184651878906"] = { Sound = "113987498545129", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
-		{ Sound = "137913527086296", DelayTime = 0.2, Volume = 2 },
+		{ Sound = "137913527086296", DelayTime = 0, Volume = 3.8 },
 	} }, -- Autem
 	-- Hope Mikaelson Voicelines:
 	-- ["71469143872702"] = {
@@ -739,7 +739,7 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 4 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 7 },
 			{ Sound = "140630563136815", DelayTime = 0, Volume = 6 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
@@ -755,14 +755,14 @@ local AnimationSounds = {
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
-	["98020982912130"] = { Sound = "89639338294496", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
-		{ Sound = "106691313379398", DelayTime = 0, Volume = 2 },
-		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.5 },
+	["98020982912130"] = { Sound = "89639338294496", Volume = 3.6, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "106691313379398", DelayTime = 0, Volume = 3.6 },
+		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.2 },
 	} }, -- Ancestral Hijack
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
 	["98448216504564"] = { Sound = "125000907792622", Volume = 3, DelayTime = 0 }, -- Brain Melt (Far Range)
-	["85444212414085"] = { Sound = "129676323948552", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+	["85444212414085"] = { Sound = "129676323948552", Volume = , DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "115581020820485", DelayTime = 0, Volume = 2 },
 		{ Sound = "112555794145085", DelayTime = 15, Volume = 1.5 },
 	} }, -- Original Reversal (all three play together)
