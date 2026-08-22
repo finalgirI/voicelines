@@ -714,6 +714,9 @@ local AnimationSounds = {
 	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
 	["121445238427652"] = {
 		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Witch-HundredSpirits"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Expression-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
 	},
 	["79178970449204"] = { Sound = "137483430640044", Volume = 1.9, DelayTime = 3.3 }, -- Rage Mode start
 	-- Dark Josie Voicelines:
@@ -723,6 +726,9 @@ local AnimationSounds = {
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
+	["96184651878906"] = { Sound = "113987498545129", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "137913527086296", DelayTime = 0.2, Volume = 2 },
+	} }, -- Autem
 	-- Hope Mikaelson Voicelines:
 	-- ["71469143872702"] = {
 	---["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
@@ -742,13 +748,18 @@ local AnimationSounds = {
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
 		{ Sound = "102648181914291", DelayTime = 4 },
 	} }, -- Astral Projection
-	["107970491623455"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
-	["71928771227244"] = { Sound = "133819929759791", Volume = 2, DelayTime = 9, CutOffWithAnimation = true }, -- Delfan End
+	["71235179156196"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
+	["71928771227244"] = { Sound = "125415751867268", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Loop
+	["99046910970478"] = { Sound = "134739394157385", Volume = 2, DelayTime = 0 }, -- Delfan End
 	["117868722364419"] = { Sound = "89137940149599", Volume = 1.8, DelayTime = 0 }, -- Sigil
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
-	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
+	["98020982912130"] = { Sound = "89639338294496", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "106691313379398", DelayTime = 0, Volume = 2 },
+		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.5 },
+	} }, -- Ancestral Hijack
+	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, De  layTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
 	["98448216504564"] = { Sound = "125000907792622", Volume = 3, DelayTime = 0 }, -- Brain Melt (Far Range)
 	["85444212414085"] = { Sound = "129676323948552", Volume = 2.8, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
