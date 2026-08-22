@@ -739,8 +739,8 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 7 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 6 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 8 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 4 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
 	-- Freya Mikaelson Voicelines:
