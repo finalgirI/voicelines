@@ -726,7 +726,7 @@ local AnimationSounds = {
 	["14930919924"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare 
 	["14608474948"] = { Sound = "129937487508844", Volume = 1.9, DelayTime = 2.3 }, -- Vitris
 	["15081444800"] = { Sound = "72404882318303", Volume = 2, DelayTime = 0 }, -- Ventus
-	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
+	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
 			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 2 },
