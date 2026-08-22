@@ -1449,7 +1449,7 @@ end
 -- ============================================================
 
 local NpcSpawnSounds = {
-	["Witch NPC"] = { Sound = "75051140424637", Volume = 5, DelayTime = 0 }, -- Davina Summoned by Freya
+	["Witch NPC"] = { Sound = "75051140424637", Volume = 4, DelayTime = 0 }, -- Davina Summoned by Freya
 }
 
 local playedNpcSpawnSounds = {} -- Track which NPC instances we've already played sounds for
