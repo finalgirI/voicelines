@@ -106,7 +106,10 @@ local SoundReplacements = {
 	-- Per character: ["originalSoundId"] = { ["CharacterName"] = "replacementSoundId", ["AnotherCharacter"] = "otherSoundId" },
 	-- Example:
 	["108205653141348"] = "106295827353405",
-	["107819644605690"] = { Replacement = "101030536434449", Volume = 2, CharacterRequired = "The Almighty" }, -- Hope humanity turned off
+	["107819644605690"] = {
+		["The Almighty"] = "101030536434449",
+		Volume = 2,
+	}, -- Hope humanity turned off
 	-- ["123456789"] = { Replacement = "987654321", Volume = 3.5 },
 	-- ["123456789"] = {
 	--     ["Character Name"] = "987654321",
