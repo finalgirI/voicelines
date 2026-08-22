@@ -774,8 +774,6 @@ local AnimationSounds = {
 	-- Stomp Voicelines:
 	["134388403697828"] = {
 		["The Almighty"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
-	},
-	["134388403697828"] = {
 		["Dark Siphoner"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
 	},
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
