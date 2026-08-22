@@ -770,6 +770,9 @@ local AnimationSounds = {
 	-- Death Voicelines
 	["120852912003486"] = {
 		["Psychic-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
+		["Psychic-Witch-HundredSpirits"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
+		["Psychic-Expression-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
 	},
 	-- Stomp Voicelines:
 	["134388403697828"] = {
