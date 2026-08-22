@@ -740,8 +740,8 @@ local AnimationSounds = {
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
 			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 8 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 2 },
-		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 2, },
+		}, DelayTime = 0 }, -- Hope's Repulse
 	},
 	-- Freya Mikaelson Voicelines:
 	["97940902404327"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
