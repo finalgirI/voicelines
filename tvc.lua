@@ -337,10 +337,10 @@ local SoundOverlays = {
 	-- ["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	-- Witch Abiltiies Voicelines:
 	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
 	},
 }
 
@@ -702,7 +702,7 @@ local AnimationSounds = {
 		{ Sound = "87772546771617", DelayTime = 0.6, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
-	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0.3 }, -- Throat Rip Counter
+	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0.5 }, -- Throat Rip Counter
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
 	["97786686878401"] = { Sound = "127540876994519", Volume = 2.5, DelayTime = 3.1 }, -- Locator Spell 
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
