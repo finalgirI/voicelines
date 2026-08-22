@@ -746,7 +746,7 @@ local AnimationSounds = {
 	-- Freya Mikaelson Voicelines:
 	["97940902404327"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
-		{ Sound = "102648181914291", DelayTime = 4 },
+		{ Sound = "102648181914291", DelayTime = 4.2 },
 	} }, -- Astral Projection
 	["71235179156196"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
 	["71928771227244"] = { Sound = "125415751867268", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Loop
