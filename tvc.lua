@@ -759,12 +759,12 @@ local AnimationSounds = {
 		{ Sound = "106691313379398", DelayTime = 0, Volume = 2 },
 		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.5 },
 	} }, -- Ancestral Hijack
-	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, De  layTime = 0 }, -- Advanced Pain Infliction
+	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
 	["98448216504564"] = { Sound = "125000907792622", Volume = 3, DelayTime = 0 }, -- Brain Melt (Far Range)
-	["85444212414085"] = { Sound = "129676323948552", Volume = 2.8, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
-		{ Sound = "115581020820485", DelayTime = 0, Volume = 2.8 },
-		{ Sound = "112555794145085", DelayTime = 15, Volume = 1.8 },
+	["85444212414085"] = { Sound = "129676323948552", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "115581020820485", DelayTime = 0, Volume = 2 },
+		{ Sound = "112555794145085", DelayTime = 15, Volume = 1.5 },
 	} }, -- Original Reversal (all three play together)
 	["95661493993334"] = { SimultaneousSounds = {
 		{ Sound = "111630588301632", DelayTime = 0, Volume = 1.5 },
