@@ -696,7 +696,7 @@ local AnimationSounds = {
 	["80427699313810"] = { Sound = "92032872036108", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["73624875116274"] = { Sound = "114365880784490", Volume = 2.5, DelayTime = 0 }, -- Bone Break Combo
 	["104295734346426"] = { Sound = "124351638860466", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
-		{ Sound = "87772546771617", DelayTime = 0.5, Volume = 2.5 }, -- TODO: fill in sound ID and delay
+		{ Sound = "87772546771617", DelayTime = 0.6, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
@@ -710,7 +710,7 @@ local AnimationSounds = {
 	["121445238427652"] = {
 		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
 	},
-	["79178970449204"] = { Sound = "137483430640044", Volume = 2.1, DelayTime = 3.4 }, -- Rage Mode start
+	["79178970449204"] = { Sound = "137483430640044", Volume = 1.9, DelayTime = 3.3 }, -- Rage Mode start
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
@@ -772,8 +772,12 @@ local AnimationSounds = {
 		["Psychic-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
 	},
 	-- Stomp Voicelines:
-	["134388403697828"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
-	["134388403697828"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
+	["134388403697828"] = {
+		["The Almighty"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
+	},
+	["134388403697828"] = {
+		["Dark Siphoner"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
+	},
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
@@ -1428,7 +1432,7 @@ end
 -- ============================================================
 
 local NpcSpawnSounds = {
-	["Witch NPC"] = { Sound = "75051140424637", Volume = 7, DelayTime = 0 }, -- Davina Summoned by Freya
+	["Witch NPC"] = { Sound = "75051140424637", Volume = 5, DelayTime = 0 }, -- Davina Summoned by Freya
 }
 
 local playedNpcSpawnSounds = {} -- Track which NPC instances we've already played sounds for
