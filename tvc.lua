@@ -328,14 +328,14 @@ end
 local SoundOverlays = {
 	-- Hope Mikaelson Voicelines:
 	["15254260885"] = {
-	   ["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
-    },
+		["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
+	},
 	["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	["103765023639798"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
-	["106064466118488"] = { SimultaneousSounds = {
-		{ Sound = "73928896867445", DelayTime = 0, Volume = 5, StackCount = 2 },
-		{ Sound = "140630563136815", DelayTime = 0, Volume = 5 },
-	}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
+	-- Witch Abiltiies Voicelines:
+	["14518634071"] = {
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2, DelayTime = 0 }, -- Incendia
+	},
 }
 
 local OverlayTracked = {} -- Track sounds we've already overlaid to avoid duplicates
@@ -377,6 +377,8 @@ local OverlayKnownKeys = {
 	OncePerLifetime = true,
 	TrustDistanceFallback = true,
 	CasterSoundService = true,
+	SimultaneousSounds = true,
+	StackCount = true,
 }
 
 local function hasOverlayCharOverrides(info)
@@ -493,49 +495,122 @@ local function playSingleOverlay(sound, overlayInfo, charName, charIsDistFallbac
 			end
 		end
 
-		local ov = Instance.new("Sound")
-		ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
-		ov.Volume = overlayInfo.Volume or 2.5
+		-- Main overlay sound (only if Sound is provided)
+		local ov = nil
+		if overlayInfo.Sound then
+			ov = Instance.new("Sound")
+			ov.SoundId = "rbxassetid://" .. overlayInfo.Sound
+			ov.Volume = overlayInfo.Volume or 2.5
 
-		if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
-			ov.Parent = SoundService
-		else
-			configure3DAudio(ov)
-			ov.Parent = parent
-		end
-
-		ov:Play()
-
-		ActiveOverlaySounds[overlayInfo.Sound] = ov
-
-		ov.Ended:Connect(function()
-			ActiveOverlaySounds[overlayInfo.Sound] = nil
-			if ov and ov.Parent then ov:Destroy() end
-		end)
-
-		if overlayInfo.KeepPlayingSound then
-			if parent and parent ~= SoundService then
-				parent.Destroying:Connect(function()
-					fadeOutSound(ov)
-				end)
+			if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
+				ov.Parent = SoundService
+			else
+				configure3DAudio(ov)
+				ov.Parent = parent
 			end
-		else
-			local fadeDur = overlayInfo.FadeOutDuration
-			if sound then
-				sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
-				sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
-				sound.Destroying:Connect(function()
-					fadeOutOverlaySound(ov, fadeDur)
-					OverlayTracked[sound] = nil
-				end)
-			end
-		end
 
-		ov.Destroying:Connect(function()
-			if ActiveOverlaySounds[overlayInfo.Sound] == ov then
+			ov:Play()
+
+			ActiveOverlaySounds[overlayInfo.Sound] = ov
+
+			ov.Ended:Connect(function()
 				ActiveOverlaySounds[overlayInfo.Sound] = nil
+				if ov and ov.Parent then ov:Destroy() end
+			end)
+
+			if overlayInfo.KeepPlayingSound then
+				if parent and parent ~= SoundService then
+					parent.Destroying:Connect(function()
+						fadeOutSound(ov)
+					end)
+				end
+			else
+				local fadeDur = overlayInfo.FadeOutDuration
+				if sound then
+					sound.Ended:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+					sound.Stopped:Connect(function() fadeOutOverlaySound(ov, fadeDur) end)
+					sound.Destroying:Connect(function()
+						fadeOutOverlaySound(ov, fadeDur)
+						OverlayTracked[sound] = nil
+					end)
+				end
 			end
-		end)
+
+			ov.Destroying:Connect(function()
+				if ActiveOverlaySounds[overlayInfo.Sound] == ov then
+					ActiveOverlaySounds[overlayInfo.Sound] = nil
+				end
+			end)
+		end
+
+		-- Play simultaneous sounds (SimultaneousSounds array)
+		if overlayInfo.SimultaneousSounds and type(overlayInfo.SimultaneousSounds) == "table" then
+			for _, simEntry in ipairs(overlayInfo.SimultaneousSounds) do
+				local simSoundId, simDelay, simVolume, simStackCount
+				if type(simEntry) == "table" then
+					simSoundId = simEntry.Sound
+					simDelay = simEntry.DelayTime
+					simVolume = simEntry.Volume
+					simStackCount = simEntry.StackCount
+				else
+					simSoundId = simEntry
+					simDelay = overlayInfo.DelayTime
+					simVolume = overlayInfo.Volume
+				end
+
+				if simSoundId and simSoundId ~= "0" and simSoundId ~= 0 then
+					local function playSim()
+						local simSound = Instance.new("Sound")
+						simSound.SoundId = "rbxassetid://" .. normalize(simSoundId)
+						simSound.Volume = simVolume or overlayInfo.Volume or 2.5
+
+						if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
+							simSound.Parent = SoundService
+						else
+							configure3DAudio(simSound)
+							simSound.Parent = parent
+						end
+
+						simSound:Play()
+
+						-- Stack extra copies for extreme loudness (since Volume is clamped 0-10)
+						local stackCount = simStackCount or 1
+						if stackCount > 1 then
+							for i = 2, stackCount do
+								local stackSound = Instance.new("Sound")
+								stackSound.SoundId = "rbxassetid://" .. normalize(simSoundId)
+								stackSound.Volume = simVolume or overlayInfo.Volume or 2.5
+								if overlayInfo.CasterSoundService and capturedCharModel and capturedCharModel == Players.LocalPlayer.Character then
+									stackSound.Parent = SoundService
+								else
+									configure3DAudio(stackSound)
+									stackSound.Parent = parent
+								end
+								stackSound:Play()
+								stackSound.Ended:Connect(function()
+									if stackSound and stackSound.Parent then stackSound:Destroy() end
+								end)
+							end
+						end
+
+						simSound.Ended:Connect(function()
+							if simSound and simSound.Parent then simSound:Destroy() end
+						end)
+
+						if not overlayInfo.KeepPlayingSound and sound then
+							sound.Ended:Connect(function() fadeOutOverlaySound(simSound, overlayInfo.FadeOutDuration) end)
+							sound.Stopped:Connect(function() fadeOutOverlaySound(simSound, overlayInfo.FadeOutDuration) end)
+						end
+					end
+
+					if simDelay and simDelay > 0 then
+						task.delay(simDelay, playSim)
+					else
+						playSim()
+					end
+				end
+			end
+		end
 	end
 
 	if sound and overlayInfo.KeepPlayingSound then
@@ -627,8 +702,9 @@ local AnimationSounds = {
 	["129292930175405"] = { Sound = "128129073465076", Volume = 1.8, DelayTime = 0 }, -- Petrification
 	["118804989222729"] = { Sound = "86003332339956", Volume = 2.5, DelayTime = 0.3 }, -- Resurrection
 	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
-	["90980258389989"] = { Sound = "83135931611364", Volume = 2.5, DelayTime = 5 }, -- Enraged Combo
+	["90980258389989"] = { Sound = "83135931611364", Volume = 1.9, DelayTime = 5 }, -- Psychic Bond
 	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
+	["79178970449204"] = { Sound = "137483430640044", Volume = 2.1, DelayTime = 3.4 }, -- Rage Mode start
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
@@ -644,6 +720,12 @@ local AnimationSounds = {
 	["14608474948"] = { Sound = "129937487508844", Volume = 2.5, DelayTime = 2.3 }, -- Vitris
 	["15081444800"] = { Sound = "72404882318303", Volume = 2, DelayTime = 0 }, -- Ventus
 	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
+	["14221130422"] = {
+		["The Almighty"] = { SimultaneousSounds = {
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 5, StackCount = 2 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 5 },
+		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
+	},
 	-- Freya Mikaelson Voicelines:
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
 		{ Sound = "102648181914291", DelayTime = 3.9 },
@@ -658,9 +740,9 @@ local AnimationSounds = {
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
 	["98448216504564"] = { Sound = "125000907792622", Volume = 3, DelayTime = 0 }, -- Brain Melt (Far Range)
-	["85444212414085"] = { Sound = "129676323948552", Volume = 4, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
-		{ Sound = "115581020820485", DelayTime = 0 },
-		{ Sound = "112555794145085", DelayTime = 15 },
+	["85444212414085"] = { Sound = "129676323948552", Volume = 2.8, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "115581020820485", DelayTime = 0, Volume = 2.8 },
+		{ Sound = "112555794145085", DelayTime = 15, Volume = 1.8 },
 	} }, -- Original Reversal (all three play together)
 	["95661493993334"] = { SimultaneousSounds = {
 		{ Sound = "111630588301632", DelayTime = 0, Volume = 1.5 },
@@ -672,15 +754,18 @@ local AnimationSounds = {
 	-- Lizzie Saltzman Voicelines:
 	["76457218213945"] = { Sound = "94711938117202", Volume = 25, DelayTime = 0 }, -- Dissulta
 	-- Cleo Sowande Voicelines:
-	["138932629124547"] = { Sound = "1034606148097120", Volume = 2.5, DelayTime = 0 }, -- Ohun Pada
+	["74751237006227"] = { Sound = "92404277403294", Volume = 2.5, DelayTime = 0 }, -- Ohun
+	["72961444125693"] = { Sound = "91217804264943", Volume = 2.5, DelayTime = 0 }, -- Pada
 	-- Vincent Griffith Voicelines:
 	["131307324807651"] = { SimultaneousSounds = {
 		{ Sound = "106687843187704", DelayTime = 0 },
 		{ Sound = "73332613180468", DelayTime = 5 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
-	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
-	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
-	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
+	-- Death Voicelines
+	["120852912003486"] = { Sound = "128677013682522", Volume = 2.5, DelayTime = 0.2 }, -- Bonnie Death Voiceline
+	-- Stomp Voicelines:
+	["134388403697828"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
+	["134388403697828"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
