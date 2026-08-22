@@ -337,10 +337,10 @@ local SoundOverlays = {
 	-- ["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	-- Witch Abiltiies Voicelines:
 	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 1.9, DelayTime = 0 }, -- Incendia'd
 	},
 }
 
