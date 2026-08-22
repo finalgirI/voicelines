@@ -735,7 +735,6 @@ local AnimationSounds = {
 	["117868722364419"] = { Sound = "89137940149599", Volume = 2, DelayTime = 0 }, -- Sigil
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
-	["102269919531608"] = { Sound = "75051140424637", Volume = 7, DelayTime = 0 }, -- Davina Summoned by Freya
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
@@ -1172,3 +1171,69 @@ game.DescendantAdded:Connect(function(desc)
 		end)
 	end
 end)
+
+-- ============================================================
+-- NPC SPAWN SOUNDS
+-- Play a sound when a specific NPC model spawns in the map
+-- ============================================================
+
+local NpcSpawnSounds = {
+	["Witch NPC"] = { Sound = "75051140424637", Volume = 7, DelayTime = 0 }, -- Davina Summoned by Freya
+}
+
+local playedNpcSpawnSounds = {} -- Track which NPC instances we've already played sounds for
+
+local function playNpcSpawnSound(npcModel)
+	if not npcModel or not npcModel.Parent then return end
+	if playedNpcSpawnSounds[npcModel] then return end
+	playedNpcSpawnSounds[npcModel] = true
+
+	local entry = NpcSpawnSounds[npcModel.Name]
+	if not entry then return end
+
+	local function doPlay()
+		if not npcModel or not npcModel.Parent then return end
+
+		local parent = findSoundParent(npcModel)
+		if not parent then
+			parent = npcModel:FindFirstChild("HumanoidRootPart") or npcModel:FindFirstChildWhichIsA("BasePart")
+		end
+		if not parent then return end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(entry.Sound)
+		sound.Volume = entry.Volume or 2.5
+		configure3DAudio(sound)
+		sound.Parent = parent
+		sound:Play()
+
+		sound.Ended:Connect(function()
+			if sound and sound.Parent then sound:Destroy() end
+		end)
+
+		npcModel.Destroying:Connect(function()
+			playedNpcSpawnSounds[npcModel] = nil
+			if sound and sound.Parent then
+				fadeOutSound(sound)
+			end
+		end)
+	end
+
+	if entry.DelayTime and entry.DelayTime > 0 then
+		task.delay(entry.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+local function checkNpcSpawn(descendant)
+	if descendant:IsA("Model") and NpcSpawnSounds[descendant.Name] then
+		playNpcSpawnSound(descendant)
+	end
+end
+
+for _, desc in workspace:GetDescendants() do
+	checkNpcSpawn(desc)
+end
+
+workspace.DescendantAdded:Connect(checkNpcSpawn)
