@@ -726,7 +726,7 @@ local AnimationSounds = {
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
-	["96184651878906"] = { Sound = "113987498545129", Volume = 2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
+	["96184651878906"] = { Sound = "113987498545129", Volume = 3.8, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "137913527086296", DelayTime = 0, Volume = 3.8 },
 	} }, -- Autem
 	-- Hope Mikaelson Voicelines:
