@@ -702,6 +702,7 @@ local AnimationSounds = {
 		{ Sound = "87772546771617", DelayTime = 0.6, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
+	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0 }, -- Throat Rip Counter
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
 	["97786686878401"] = { Sound = "127540876994519", Volume = 2.5, DelayTime = 3.1 }, -- Locator Spell 
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
@@ -709,6 +710,7 @@ local AnimationSounds = {
 	["118804989222729"] = { Sound = "86003332339956", Volume = 2.5, DelayTime = 0.3 }, -- Resurrection
 	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
 	["90980258389989"] = { Sound = "83135931611364", Volume = 1.9, DelayTime = 5 }, -- Psychic Bond
+	["81766391141675"] = { Sound = "92261254633713", Volume = 2.1, DelayTime = 7.4 }, -- Incantation after contacting Emily 
 	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
 	["121445238427652"] = {
 		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
@@ -731,7 +733,7 @@ local AnimationSounds = {
 	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 2 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 4 },
 			{ Sound = "140630563136815", DelayTime = 0, Volume = 6 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
