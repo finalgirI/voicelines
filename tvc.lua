@@ -757,7 +757,7 @@ local AnimationSounds = {
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
 	["98020982912130"] = { Sound = "89639338294496", Volume = 3.2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "106691313379398", DelayTime = 0, Volume = 3.2 },
-		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.2 },
+		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1 },
 	} }, -- Ancestral Hijack
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
