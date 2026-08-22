@@ -106,6 +106,7 @@ local SoundReplacements = {
 	-- Per character: ["originalSoundId"] = { ["CharacterName"] = "replacementSoundId", ["AnotherCharacter"] = "otherSoundId" },
 	-- Example:
 	["108205653141348"] = "106295827353405",
+	["107819644605690"] = { Replacement = "101030536434449", Volume = 2, CharacterRequired = "The Almighty" }, -- Hope humanity turned off
 	-- ["123456789"] = { Replacement = "987654321", Volume = 3.5 },
 	-- ["123456789"] = {
 	--     ["Character Name"] = "987654321",
@@ -704,6 +705,9 @@ local AnimationSounds = {
 	["130471440959620"] = { Sound = "85824220736554", Volume = 2, DelayTime = 0 }, -- Enraged Combo
 	["90980258389989"] = { Sound = "83135931611364", Volume = 1.9, DelayTime = 5 }, -- Psychic Bond
 	["110210471124945"] = { Sound = "107707284471446", Volume = 2.2, DelayTime = 0.2 }, -- Psychic Blast
+	["121445238427652"] = {
+		["Psychic-Witch"] = { Sound = "124711584528671", Volume = 2, DelayTime = 0 }, -- Barrier Spell
+	},
 	["79178970449204"] = { Sound = "137483430640044", Volume = 2.1, DelayTime = 3.4 }, -- Rage Mode start
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
@@ -765,7 +769,6 @@ local AnimationSounds = {
 	-- Stomp Voicelines:
 	["134388403697828"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
 	["134388403697828"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
-	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
