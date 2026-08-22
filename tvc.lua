@@ -2,11 +2,16 @@ local Players = game:GetService("Players")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CoreGui = game:GetService("CoreGui")
 
 local function normalize(id)
 	return tostring(id)
 		:gsub("rbxassetid://", "")
 		:gsub("%s+", "")
+end
+
+local function shouldIgnoreDescendant(instance)
+	return instance and instance:IsDescendantOf(CoreGui)
 end
 
 local COOLDOWN_TIMEOUT = 30 -- Safety: max seconds a cooldown can be stuck before auto-resetting
@@ -285,9 +290,11 @@ local function tryReplaceSound(sound)
 	newSound:Play()
 
 	if keepPlaying then
-		parent.Destroying:Connect(function()
-			fadeOutSound(newSound)
-		end)
+		if parent then
+			parent.Destroying:Connect(function()
+				fadeOutSound(newSound)
+			end)
+		end
 	else
 		if sound then
 			sound.Ended:Connect(function() fadeOutOverlaySound(newSound) end)
@@ -1382,11 +1389,17 @@ end)
 -- ============================================================
 
 for _, desc in game:GetDescendants() do
-	tryReplaceSound(desc)
+	if not shouldIgnoreDescendant(desc) then
+		tryReplaceSound(desc)
 	tryOverlaySound(desc)
+	end
 end
 
 game.DescendantAdded:Connect(function(desc)
+	if shouldIgnoreDescendant(desc) then
+		return
+	end
+
 	tryReplaceSound(desc)
 	tryOverlaySound(desc)
 
