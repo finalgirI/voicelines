@@ -334,11 +334,10 @@ local SoundOverlays = {
 	["15254260885"] = {
 		["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
 	},
-	["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
-	["103765023639798"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
+	-- ["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	-- Witch Abiltiies Voicelines:
 	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2, DelayTime = 0 }, -- Incendia
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2, DelayTime = 0 }, -- Incendia'd
 	},
 }
 
@@ -715,8 +714,8 @@ local AnimationSounds = {
 	-- Dark Josie Voicelines:
 	["15939296269"] = { Sound = "128384006543303", Volume = 2.5, DelayTime = 0 }, -- Memory Purge
 	["9941864692"] = { Sound = "90115515174277", Volume = 1.5, DelayTime = 0 }, -- Fiante Fulguris
-	["126435728163733"] = { Sound = "125049316050755", Volume = 2.5, DelayTime = 0 }, -- Ignalusa
-	["110353551012574"] = { Sound = "106472065593828", Volume = 2.5, DelayTime = 0 }, -- Resistus Meladi
+	["126435728163733"] = { Sound = "125049316050755", Volume = 2, DelayTime = 0 }, -- Ignalusa
+	["110353551012574"] = { Sound = "106472065593828", Volume = 2, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
 	-- Hope Mikaelson Voicelines:
@@ -724,22 +723,23 @@ local AnimationSounds = {
 	---["The Almighty"] = { Sound = "77919326748641", Volume = 2.5, DelayTime = 0.2 }, -- Lecutio
 	-- },
 	["14930919924"] = { Sound = "104028506433231", Volume = 1.4, DelayTime = 0 }, -- Bruciare 
-	["14608474948"] = { Sound = "129937487508844", Volume = 2.5, DelayTime = 2.3 }, -- Vitris
+	["14608474948"] = { Sound = "129937487508844", Volume = 1.9, DelayTime = 2.3 }, -- Vitris
 	["15081444800"] = { Sound = "72404882318303", Volume = 2, DelayTime = 0 }, -- Ventus
-	["78282468450513"] = { Sound = "129988097306628", Volume = 2.5, DelayTime = 5.1 }, -- Head Decapitation
+	["78282468450513"] = { Sound = "80220227468095", Volume = 2, DelayTime = 5.1 }, -- Head Decapitation
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
-			{ Sound = "73928896867445", DelayTime = 0, Volume = 5, StackCount = 2 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 5 },
+			{ Sound = "73928896867445", DelayTime = 0, Volume = 10, StackCount = 2 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 6 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
 	-- Freya Mikaelson Voicelines:
+	["97940902404327"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
-		{ Sound = "102648181914291", DelayTime = 3.9 },
+		{ Sound = "102648181914291", DelayTime = 4 },
 	} }, -- Astral Projection
 	["107970491623455"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
 	["71928771227244"] = { Sound = "133819929759791", Volume = 2, DelayTime = 9, CutOffWithAnimation = true }, -- Delfan End
-	["117868722364419"] = { Sound = "89137940149599", Volume = 2, DelayTime = 0 }, -- Sigil
+	["117868722364419"] = { Sound = "89137940149599", Volume = 1.8, DelayTime = 0 }, -- Sigil
 	["71380116918113"] = { Sound = "76305636990854", Volume = 2.5, DelayTime = 0.3 }, -- Menedek Qual Surentaa (Area Snap)
 	["121798883557428"] = { Sound = "108401043112433", Volume = 3, DelayTime = 0 }, -- Neck Snap (Enough)
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
@@ -768,7 +768,9 @@ local AnimationSounds = {
 		{ Sound = "73332613180468", DelayTime = 5 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
 	-- Death Voicelines
-	["120852912003486"] = { Sound = "128677013682522", Volume = 2.5, DelayTime = 0.2 }, -- Bonnie Death Voiceline
+	["120852912003486"] = {
+		["Psychic-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
+	},
 	-- Stomp Voicelines:
 	["134388403697828"] = { Sound = "87248564786741", Volume = 2, DelayTime = 0 }, -- Hope Stomp
 	["134388403697828"] = { Sound = "124488865501193", Volume = 1.8, DelayTime = 0 }, -- Josie Stomp
@@ -1055,6 +1057,8 @@ local function getAnimCharName(character)
 	return nil
 end
 
+local checkCombosForAnimation -- forward declaration (defined later)
+
 local hookedAnimators = {} -- Track which Animators we've already hooked
 
 local function hookAnimator(animator, character)
@@ -1070,6 +1074,10 @@ local function hookAnimator(animator, character)
 
 		local charName = getAnimCharName(character)
 		playAnimSound(animId, character, charName, track)
+
+		if checkCombosForAnimation then
+			checkCombosForAnimation(animId, character, charName, track)
+		end
 	end)
 
 	animator.Destroying:Connect(function()
@@ -1147,6 +1155,206 @@ for _, player in Players:GetPlayers() do
 end
 
 -- ============================================================
+-- SOUND COMBOS
+-- Detect when a specific animation and sound play close together
+-- in time, then play a combo sound
+-- ============================================================
+
+local AnimationSoundCombos = {
+	["StoppingSpell"] = {
+		AnimationId = "14509237380",
+		SoundId = "15237665151",
+		["The Almighty"] = "87969470088924",
+		Volume = 3.5,
+		KeepPlayingSound = true,
+		DelayTime = 0,
+		WindowTime = 0.5,
+	}
+}
+
+local ComboKnownKeys = {
+	AnimationId = true,
+	SoundId = true,
+	Sound = true,
+	Volume = true,
+	DelayTime = true,
+	KeepPlayingSound = true,
+	CutOffWithAnimation = true,
+	CharacterRequired = true,
+	WindowTime = true,
+	CasterSoundService = true,
+}
+
+local function hasComboCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not ComboKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local RecentAnimPlays = {}
+local RecentSoundPlays = {}
+
+local ComboCooldowns = {}
+local COMBO_COOLDOWN = 1 -- seconds between same combo triggering
+
+local function playComboSound(comboEntry, character, charName, track)
+	local soundInfo
+	if hasComboCharOverrides(comboEntry) then
+		if charName and comboEntry[charName] then
+			soundInfo = comboEntry[charName]
+		else
+			return -- No matching character override
+		end
+	else
+		soundInfo = comboEntry
+	end
+
+	if type(soundInfo) == "string" then
+		soundInfo = { Sound = soundInfo }
+	end
+
+	if soundInfo ~= comboEntry then
+		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
+			if soundInfo[key] == nil and comboEntry[key] ~= nil then
+				soundInfo[key] = comboEntry[key]
+			end
+		end
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	if soundInfo.CharacterRequired then
+		if charName ~= soundInfo.CharacterRequired then return end
+	end
+
+	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.SoundId or "") .. "_" .. (charName or "unknown")
+	if ComboCooldowns[cooldownKey] then return end
+	ComboCooldowns[cooldownKey] = true
+	task.delay(COMBO_COOLDOWN, function()
+		ComboCooldowns[cooldownKey] = nil
+	end)
+
+	local function doPlay()
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			ComboCooldowns[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundForCaster(sound, character, soundInfo.CasterSoundService or comboEntry.CasterSoundService)
+
+		sound:Play()
+
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				ComboCooldowns[cooldownKey] = nil
+			end)
+		end
+
+		task.delay(COOLDOWN_TIMEOUT, function()
+			ComboCooldowns[cooldownKey] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+checkCombosForAnimation = function(animId, character, charName, track)
+	if not RecentAnimPlays[character] then
+		RecentAnimPlays[character] = {}
+	end
+	RecentAnimPlays[character][animId] = { time = tick(), track = track }
+
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.AnimationId) == animId then
+			local soundId = normalize(comboEntry.SoundId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			local soundPlays = RecentSoundPlays[character]
+			if soundPlays and soundPlays[soundId] then
+				local elapsed = tick() - soundPlays[soundId].time
+				if elapsed <= windowTime then
+					playComboSound(comboEntry, character, charName, track)
+				end
+			end
+		end
+	end
+end
+
+local function checkCombosForSound(soundId, character, charName, soundInstance)
+	if not RecentSoundPlays[character] then
+		RecentSoundPlays[character] = {}
+	end
+	RecentSoundPlays[character][soundId] = { time = tick(), sound = soundInstance }
+
+	for _, comboEntry in pairs(AnimationSoundCombos) do
+		if normalize(comboEntry.SoundId) == soundId then
+			local animId = normalize(comboEntry.AnimationId)
+			local windowTime = comboEntry.WindowTime or 0.5
+
+			local animPlays = RecentAnimPlays[character]
+			if animPlays and animPlays[animId] then
+				local elapsed = tick() - animPlays[animId].time
+				if elapsed <= windowTime then
+					playComboSound(comboEntry, character, charName, animPlays[animId].track)
+				end
+			end
+		end
+	end
+end
+
+task.spawn(function()
+	while true do
+		task.wait(5)
+		local now = tick()
+		for char, anims in pairs(RecentAnimPlays) do
+			if not char or not char.Parent then
+				RecentAnimPlays[char] = nil
+			else
+				for animId, data in pairs(anims) do
+					if now - data.time > 3 then
+						anims[animId] = nil
+					end
+				end
+			end
+		end
+		for char, sounds in pairs(RecentSoundPlays) do
+			if not char or not char.Parent then
+				RecentSoundPlays[char] = nil
+			else
+				for soundId, data in pairs(sounds) do
+					if now - data.time > 3 then
+						sounds[soundId] = nil
+					end
+				end
+			end
+		end
+	end
+end)
+
+-- ============================================================
 -- BOOTSTRAP
 -- Hook every existing sound + every future sound for
 -- replacement/overlay handling
@@ -1177,6 +1385,42 @@ game.DescendantAdded:Connect(function(desc)
 		end)
 	end
 end)
+
+-- ============================================================
+-- SOUND COMBO OVERLAY HOOK
+-- Override tryOverlaySound to also check for sound combos
+-- ============================================================
+
+local originalTryOverlaySound = tryOverlaySound
+tryOverlaySound = function(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	originalTryOverlaySound(sound)
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	if id == "" then return end
+
+	local character = nil
+	local current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					character = current
+					break
+				end
+			end
+			if character then break end
+		end
+		current = current.Parent
+	end
+
+	if character then
+		local charName = getAnimCharName(character)
+		checkCombosForSound(id, character, charName, sound)
+	end
+end
 
 -- ============================================================
 -- NPC SPAWN SOUNDS
