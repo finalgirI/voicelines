@@ -880,6 +880,10 @@ local AnimationSounds = {
 	["87439615254048"] = {
 		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Soul Bind Victim
 	},
+	["93680619177939"] = { Sound = "89639338294496", Volume = 3.2, DelayTime = 0, CasterSoundService = true  KeepPlayingSound = true, SimultaneousSounds = {
+		{ Sound = "106691313379398", DelayTime = 0, Volume = 3.2 },
+		{ Sound = "89795225032425", DelayTime = 3.1, Volume = 3.2 },
+	} }, -- Ancestor Attack
 	["15424577510"] = {
 		["Evil Aunt"] = { Sound = "97634981569849", Volume = 5, DelayTime = 0 }, -- Dahlia Linking
 	},
@@ -937,7 +941,7 @@ local AnimationSounds = {
 	["15823927339"] = { Sound = "127725225837213", Volume = 2.5 }, -- Vados
 	["17770724861"] = { Sound = "135485148941488", Volume = 2.5, DelayTime = 0, KeepPlayingSound = true }, -- Wound Infliction
 	["13046802143"] = {
-		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.5 }, -- Sandclock
+		["Josie Saltzman"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 4.2 }, -- Sandclock
 	},
 	["113177696607441"] = {
 		CasterSoundService = true,
