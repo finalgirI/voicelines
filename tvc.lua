@@ -337,10 +337,10 @@ local SoundOverlays = {
 	-- ["15237665151"] = { Sound = "87969470088924", Volume = 3.5, DelayTime = 0 }, -- Stopping Spell
 	-- Witch Abiltiies Voicelines:
 	["14518634071"] = {
-		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
-		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 2.1, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-HundredSpirits"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Expression-Witch"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
+		["Psychic-Witch-Hundred-Spirit-Expression"] = { Sound = "118679634918055", Volume = 1.6, DelayTime = 0 }, -- Incendia'd
 	},
 }
 
@@ -702,7 +702,7 @@ local AnimationSounds = {
 		{ Sound = "87772546771617", DelayTime = 0.6, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
-	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0.5 }, -- Throat Rip Counter
+	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0 }, -- Throat Rip Counter
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
 	["97786686878401"] = { Sound = "127540876994519", Volume = 2.5, DelayTime = 3.1 }, -- Locator Spell 
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
@@ -726,6 +726,7 @@ local AnimationSounds = {
 	["110353551012574"] = { Sound = "106472065593828", Volume = 2, DelayTime = 0 }, -- Resistus Meladi
 	["101255716611899"] = { Sound = "89077023905632", Volume = 2.5, DelayTime = 0 }, -- Mass Fire
 	["75036250327303"] = { Sound = "104679432448093", Volume = 2.5, DelayTime = 0 }, -- Heart Crush
+	["118615570624038"] = { Sound = "74786986821079", Volume = 2.5, DelayTime = 6.2 }, -- Sandclock Break
 	["96184651878906"] = { Sound = "113987498545129", Volume = 3.8, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "137913527086296", DelayTime = 0, Volume = 3.8 },
 	} }, -- Autem
@@ -740,13 +741,13 @@ local AnimationSounds = {
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
 			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 8 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 2, },
-		}, DelayTime = 0 }, -- Hope's Repulse
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 4 },
+		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
 	-- Freya Mikaelson Voicelines:
 	["97940902404327"] = { Sound = "139978653240699", Volume = 2.5, DelayTime = 0 }, -- Illusionary Stun
 	["74423482356879"] = { Sound = "96559138398231", Volume = 2.5, DelayTime = 0, SimultaneousSounds = {
-		{ Sound = "102648181914291", DelayTime = 4.2 },
+		{ Sound = "102648181914291", DelayTime = 4 },
 	} }, -- Astral Projection
 	["71235179156196"] = { Sound = "117773239376878", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Start
 	["71928771227244"] = { Sound = "125415751867268", Volume = 2, DelayTime = 0, CutOffWithAnimation = true }, -- Delfan Loop
@@ -757,7 +758,7 @@ local AnimationSounds = {
 	["114133688342040"] = { Sound = "132530506633345", Volume = 2.5, DelayTime = 0 }, -- Summon Davina
 	["98020982912130"] = { Sound = "89639338294496", Volume = 3.2, DelayTime = 0, KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "106691313379398", DelayTime = 0, Volume = 3.2 },
-		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1 },
+		{ Sound = "113820074623121", DelayTime = 9.6, Volume = 1.2 },
 	} }, -- Ancestral Hijack
 	["121343995300360"] = { Sound = "121470032291906", Volume = 2.5, DelayTime = 0 }, -- Advanced Pain Infliction
 	["116216933265867"] = { Sound = "105913987460965", Volume = 5, DelayTime = 0 }, -- Brain Melt
