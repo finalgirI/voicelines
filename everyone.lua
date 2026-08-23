@@ -289,8 +289,6 @@ local SoundReplacements = {
 		["Qetsiyah"] = "16118919066",
 		["Bonnie Bennett"] = "15237076338",
 	},
-	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
-	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -875,12 +873,11 @@ local AnimationSounds = {
 	["136674508140592"] = {
 		["Davina Claire"] = { Sound = "128896108488504", Volume = 2.9, DelayTime = 9, CasterSoundService = true }, -- Ancestor Attack Scream
 	},
-	["107918269640855"] = { Sound = "119698429726986", Volume = 7, DelayTime = 0 }, -- Davina Scream
 	["121584360226234"] = { Sound = "82737964172909", Volume = 3, DelayTime = 0 }, -- Freya Healing
 	["87439615254048"] = {
 		["Finn Mikaelson"] = { Sound = "126476313061544", Volume = 3, DelayTime = 0, KeepPlayingSound = true, CasterSoundService = true }, -- Soul Bind Victim
 	},
-	["93680619177939"] = { Sound = "89639338294496", Volume = 3.2, DelayTime = 0, CasterSoundService = true  KeepPlayingSound = true, SimultaneousSounds = {
+	["93680619177939"] = { Sound = "89639338294496", Volume = 3.2, DelayTime = 0, CasterSoundService = true,  KeepPlayingSound = true, SimultaneousSounds = {
 		{ Sound = "106691313379398", DelayTime = 0, Volume = 3.2 },
 		{ Sound = "89795225032425", DelayTime = 3.1, Volume = 3.2 },
 	} }, -- Ancestor Attack
