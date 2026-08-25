@@ -789,7 +789,7 @@ local AnimationSounds = {
 	["95661493993334"] = { SimultaneousSounds = {
 		{ Sound = "111630588301632", DelayTime = 0, Volume = 1.5 },
 		{ Sound = "136529550796252", DelayTime = 0, Volume = 1.5 },
-		{ Sound = "102938095768537", DelayTime = 4.5, Volume = 1.5 },
+		{ Sound = "102938095768537", DelayTime = 4.3, Volume = 1.5 },
 	}, Volume = 2.5, DelayTime = 0, CutOffWithAnimation = true }, -- Anchor Spell
 	["92641535427787"] = { Sound = "130866724589573", Volume = 2, DelayTime = 0 }, -- Pendant Trap
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
