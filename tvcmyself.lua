@@ -806,7 +806,7 @@ local AnimationSounds = {
 	-- Kai Parker Voicelines:
 	["139174479204701"] = { Sound = "124907336842429", Volume = 2, DelayTime = 0 }, -- Acid
 	["135018799605357"] = { Sound = "90265203430756", Volume = 2.2, DelayTime = 0 }, -- Mass Pain
-	["117477903781996"] = { Sound = "72551850081110", Volume = 2.2, DelayTime = 0 }, -- Pull 
+	["117477903781996"] = { Sound = "72551850081110", Volume = 3.1, DelayTime = 0 }, -- Pull 
 	-- Death Voicelines:
 	["120852912003486"] = {
 		["Psychic-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
