@@ -721,7 +721,7 @@ local AnimationSounds = {
 		{ Sound = "87772546771617", DelayTime = 0.6, Volume = 2.5 }, -- TODO: fill in sound ID and delay
 	} }, -- Bone Break Combo
 	["101308466912854"] = { Sound = "137607417360952", Volume = 2, DelayTime = 0 }, -- Vados
-	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0 }, -- Throat Rip Counter
+	["140372654256422"] = { Sound = "89008760309144", Volume = 1.3, DelayTime = 0.4 }, -- Throat Rip Counter
 	["93352379786638"] = { Sound = "93142367750982", Volume = 1.9, DelayTime = 0 }, -- Fire Trail
 	["97786686878401"] = { Sound = "127540876994519", Volume = 2.5, DelayTime = 3.1 }, -- Locator Spell 
 	["72721507985289"] = { Sound = "86468772377379", Volume = 2.5, DelayTime = 1 }, -- Expression Activate
@@ -760,7 +760,7 @@ local AnimationSounds = {
 	["14221130422"] = {
 		["The Almighty"] = { SimultaneousSounds = {
 			{ Sound = "73928896867445", DelayTime = 0, Volume = 9, StackCount = 8 },
-			{ Sound = "140630563136815", DelayTime = 0, Volume = 3 },
+			{ Sound = "140630563136815", DelayTime = 0, Volume = 4 },
 		}, Volume = 2.5, DelayTime = 0 }, -- Hope's Repulse
 	},
 	-- Freya Mikaelson Voicelines:
@@ -803,7 +803,11 @@ local AnimationSounds = {
 		{ Sound = "106687843187704", DelayTime = 0 },
 		{ Sound = "73332613180468", DelayTime = 5 },
 	}, Volume = 2.5, DelayTime = 0 }, -- Ancestral Pain
-	-- Death Voicelines
+	-- Kai Parker Voicelines:
+	["139174479204701"] = { Sound = "124907336842429", Volume = 2, DelayTime = 0 }, -- Acid
+	["135018799605357"] = { Sound = "90265203430756", Volume = 2.2, DelayTime = 0 }, -- Mass Pain
+	["117477903781996"] = { Sound = "72551850081110", Volume = 2.2, DelayTime = 0 }, -- Pull 
+	-- Death Voicelines:
 	["120852912003486"] = {
 		["Psychic-Witch"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
 		["Psychic-Witch-HundredSpirits"] = { Sound = "128677013682522", Volume = 1.6, DelayTime = 0 }, -- Bonnie Death Voiceline
