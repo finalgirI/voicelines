@@ -787,7 +787,7 @@ end
 
 local AnimationSounds = {
     -- Hela :
-	["136662088207091"] = { Sound = "72521215968101", Volume = 2, DelayTime = 0 }, -- Death Slam
+	["136662088207091"] = { Sound = "72521215968101", Volume = 2.6, DelayTime = 0 }, -- Death Slam
 	["81155002011983"] = { Sound = "124282411553422", Volume = 2, DelayTime = 0 }, -- Death Kick
 	-- End Game Wanda :
 	["101104776635476"] = { Sound = "130323628747591", Volume = 2.5, DelayTime = 0 }, -- Rock Throw 
