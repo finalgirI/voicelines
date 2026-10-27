@@ -272,25 +272,6 @@ end
 
 local SoundReplacements = {
 	["105594719818558"] = "15366096625", -- Psychic Blast
-	["122372982294729"] = "15174394937", -- Phasmatos Immortale
-	["90326993393737"] = "15325084064", -- Suctus Incendia
-	["80430541489576"] = "14556366203", -- Turn To Stone
-	["132884184474189"] = { Sound = "15631194386", Volume = 0 }, -- Phasmatos Tribum Nas Ex Veras
-	["105998583954931"] = { Replacement = "13441892676", Volume = 3.5 }, -- Harae
-	["14043844852"] = { Replacement = "13904360117", Volume = 5 }, -- Heretic Joint Spell 
-	["120250468841070"] = { Replacement = "13904360117", Volume = 0 }, -- Expression Replacement
-	["74468391415531"] = { Replacement = "16326825053", KeepPlayingSound = true, CasterSoundService = true }, -- Spiritual Cleanse
-	["116235007511881"] = "13203446447", -- Autem
-	["118411956384669"] = { Replacement = "15254480460", Volume = 4.5 }, -- Phasmatos Ravaros
-	["89008508391784"] = "17471844257", -- Hope's Repulse
-	["101281556370554"] = "81639278311000", -- Ah Sha Lana
-	["112458851193845"] = "16767898955", -- Destroy Purgatory
-	["98210016679472"] = {
-		["Qetsiyah"] = "16118919066",
-		["Bonnie Bennett"] = "15237076338",
-	},
-	["89336109503369"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
-	["93999439393140"] = { Replacement = "119698429726986", Volume = 0 }, -- Davina Scream
 }
 
 local ReplacedSounds = {} -- Track sounds we've already replaced to avoid duplicates
@@ -806,15 +787,15 @@ end
 
 local AnimationSounds = {
     -- Hela :
-	["136662088207091"] = { Sound = "72521215968101", Volume = 3, DelayTime = 0 }, -- Death Slam
-	["81155002011983"] = { Sound = "124282411553422", Volume = 2.9, DelayTime = 9 }, -- Death Kick
+	["136662088207091"] = { Sound = "72521215968101", Volume = 2, DelayTime = 0 }, -- Death Slam
+	["81155002011983"] = { Sound = "124282411553422", Volume = 2, DelayTime = 0 }, -- Death Kick
 	-- End Game Wanda :
 	["101104776635476"] = { Sound = "130323628747591", Volume = 2.5, DelayTime = 0 }, -- Rock Throw 
 	["0"] = { Sound = "0", Volume = 2.5, DelayTime = 0 }, -- 
 	-- Agatha :
-	["72620361203256"] = { Sound = "124702443947182", Volume = 2.5, DelayTime = 0.4, CutOffWithAnimation = true }, -- Dark Beam
-	["77906005042157"] = { Sound = "124702443947182", Volume = 2.5, DelayTime = 0.4, CutOffWithAnimation = true }, -- Dark Beam (Wicked Witch)
-	["129043508280520"] = { Sound = "104980819245060", Volume = 2.5, DelayTime = 0 }, -- Shield
+	["72620361203256"] = { Sound = "124702443947182", Volume = 2, DelayTime = 0.4, CutOffWithAnimation = true }, -- Dark Beam
+	["77906005042157"] = { Sound = "124702443947182", Volume = 2, DelayTime = 0.4, CutOffWithAnimation = true }, -- Dark Beam (Wicked Witch)
+	["129043508280520"] = { Sound = "104980819245060", Volume = 2, DelayTime = 0 }, -- Shield
 }
 
 local AnimParticleCooldowns = {}
