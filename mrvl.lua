@@ -1672,3 +1672,279 @@ local function checkCombosForSound(soundId, character, charName, soundInstance)
 		end
 	end
 end
+
+-- Compulsion Protection Combo System
+-- When someone says "Listen," (compulsion) near a witch, and that witch plays
+-- the protection animation, a character-specific voiceline plays from the witch.
+-- The chat comes from the COMPULSION CASTER, the animation plays on the PROTECTOR.
+local CompulsionProtectionCombos = {
+	["CompulsionProtectionBonnie"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Bonnie Bennett"] = { Sound = "89027389474979", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionQetsiyah"] = {
+		AnimationId = "12189974108", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Qetsiyah"] = { Sound = "105035246772721", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionEsther"] = {
+		AnimationId = "128623651867501", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Esther Mikaelson"] = { Sound = "83942262095667", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionCleo"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Cleo Sowande"] = { Sound = "81915770841744", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionDavina"] = {
+		AnimationId = "6900156131", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Davina Claire"] = { Sound = "109348032177998", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+	["CompulsionProtectionJosie"] = {
+		AnimationId = "128623651867501", -- TODO: fill in the protection animation ID
+		ChatText = "Listen,",
+		WindowTime = 2, -- max seconds between chat and animation
+		MaxDistance = 30, -- max studs between caster and protector
+		Volume = 2.5,
+		KeepPlayingSound = true,
+		["Dark Josie"] = { Sound = "91130808414020", Volume = 2.5 }, -- TODO: fill in sound ID
+	},
+}
+
+local RecentCompulsionChats = {} -- [player] = { time = tick(), position = Vector3 }
+local CompulsionProtectionCooldowns = {}
+local COMPU_PROT_COOLDOWN = 1
+
+local CompulsionProtKnownKeys = {
+	AnimationId = true,
+	ChatText = true,
+	WindowTime = true,
+	MaxDistance = true,
+	Volume = true,
+	KeepPlayingSound = true,
+	DelayTime = true,
+	FadeOutDuration = true,
+	CutOffWithAnimation = true,
+	CasterSoundService = true,
+}
+
+local function hasCompulsionProtCharOverrides(info)
+	for key in pairs(info) do
+		if type(key) == "string" and not CompulsionProtKnownKeys[key] then
+			return true
+		end
+	end
+	return false
+end
+
+local function playCompulsionProtectionSound(comboEntry, character, charName, track)
+	local soundInfo
+	if hasCompulsionProtCharOverrides(comboEntry) then
+		if charName and comboEntry[charName] then
+			soundInfo = comboEntry[charName]
+		else
+			return
+		end
+	else
+		return
+	end
+
+	if type(soundInfo) == "string" then
+		soundInfo = { Sound = soundInfo }
+	end
+
+	if soundInfo ~= comboEntry then
+		for _, key in ipairs({"Volume", "KeepPlayingSound", "DelayTime", "CutOffWithAnimation", "FadeOutDuration"}) do
+			if soundInfo[key] == nil and comboEntry[key] ~= nil then
+				soundInfo[key] = comboEntry[key]
+			end
+		end
+	end
+
+	if not soundInfo or not soundInfo.Sound then return end
+
+	local cooldownKey = (comboEntry.AnimationId or "") .. "_" .. (comboEntry.ChatText or "") .. "_" .. (charName or "unknown")
+	if CompulsionProtectionCooldowns[cooldownKey] then return end
+	CompulsionProtectionCooldowns[cooldownKey] = true
+	task.delay(COMPU_PROT_COOLDOWN, function()
+		CompulsionProtectionCooldowns[cooldownKey] = nil
+	end)
+
+	local function doPlay()
+		if soundInfo.CutOffWithAnimation and track and not track.IsPlaying then
+			CompulsionProtectionCooldowns[cooldownKey] = nil
+			return
+		end
+
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://" .. normalize(soundInfo.Sound)
+		sound.Volume = soundInfo.Volume or 2.5
+		sound:SetAttribute("IsLocalVoiceline", true)
+
+		parentSoundForCaster(sound, character, soundInfo.CasterSoundService or comboEntry.CasterSoundService)
+
+		sound:Play()
+
+		if soundInfo.CutOffWithAnimation and track then
+			track.Ended:Connect(function()
+				if sound and sound.Parent then
+					fadeOutOverlaySound(sound, soundInfo.FadeOutDuration)
+				end
+				CompulsionProtectionCooldowns[cooldownKey] = nil
+			end)
+		elseif soundInfo.KeepPlayingSound then
+			-- Sound keeps playing until it ends naturally
+		else
+			sound.Ended:Connect(function()
+				if sound and sound.Parent then
+					sound:Destroy()
+				end
+				CompulsionProtectionCooldowns[cooldownKey] = nil
+			end)
+		end
+
+		task.delay(COOLDOWN_TIMEOUT, function()
+			CompulsionProtectionCooldowns[cooldownKey] = nil
+		end)
+	end
+
+	if soundInfo.DelayTime and soundInfo.DelayTime > 0 then
+		task.delay(soundInfo.DelayTime, doPlay)
+	else
+		doPlay()
+	end
+end
+
+checkCompulsionProtectionForAnimation = function(animId, character, charName, track)
+	for _, comboEntry in pairs(CompulsionProtectionCombos) do
+		if normalize(comboEntry.AnimationId) == animId then
+			local windowTime = comboEntry.WindowTime or 2
+			local maxDistance = comboEntry.MaxDistance or 30
+			local now = tick()
+
+			local charHRP = character:FindFirstChild("HumanoidRootPart")
+			if not charHRP then return end
+
+			for player, chatData in pairs(RecentCompulsionChats) do
+				-- Make sure the caster is a different character from the protector
+				if player.Character ~= character then
+					local elapsed = now - chatData.time
+					if elapsed <= windowTime then
+						local dist = (charHRP.Position - chatData.position).Magnitude
+						if dist <= maxDistance then
+							playCompulsionProtectionSound(comboEntry, character, charName, track)
+							break -- only play once per animation
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+recordCompulsionChat = function(player, chatText)
+	for _, comboEntry in pairs(CompulsionProtectionCombos) do
+		if comboEntry.ChatText and chatText:lower():sub(1, #comboEntry.ChatText) == comboEntry.ChatText:lower() then
+			local character = player.Character
+			if character then
+				local hrp = character:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					RecentCompulsionChats[player] = { time = tick(), position = hrp.Position }
+				end
+			end
+		end
+	end
+end
+
+task.spawn(function()
+	while true do
+		task.wait(5)
+		local now = tick()
+		for char, anims in pairs(RecentAnimPlays) do
+			if not char or not char.Parent then
+				RecentAnimPlays[char] = nil
+			else
+				for animId, data in pairs(anims) do
+					if now - data.time > 3 then
+						anims[animId] = nil
+					end
+				end
+			end
+		end
+		for char, sounds in pairs(RecentSoundPlays) do
+			if not char or not char.Parent then
+				RecentSoundPlays[char] = nil
+			else
+				for soundId, data in pairs(sounds) do
+					if now - data.time > 3 then
+						sounds[soundId] = nil
+					end
+				end
+			end
+		end
+		for player, chatData in pairs(RecentCompulsionChats) do
+			if not player or not player.Parent then
+				RecentCompulsionChats[player] = nil
+			elseif now - chatData.time > 5 then
+				RecentCompulsionChats[player] = nil
+			end
+		end
+	end
+end)
+
+-- hookAnimator override removed: combo and protection checks are now in the original hookAnimator via forward declarations
+
+local originalTryOverlaySound = tryOverlaySound
+tryOverlaySound = function(sound)
+	if not sound:IsA("Sound") then return end
+	if OverlayTracked[sound] then return end
+
+	originalTryOverlaySound(sound)
+
+	local id = sound.SoundId:gsub("rbxassetid://", "")
+	if id == "" then return end
+
+	local character = nil
+	local current = sound.Parent
+	while current do
+		if current:IsA("Model") and current:FindFirstChildOfClass("Humanoid") then
+			for _, player in Players:GetPlayers() do
+				if player.Character == current then
+					character = current
+					break
+				end
+			end
+			if character then break end
+		end
+		current = current.Parent
+	end
+
+	if character then
+		local charName = getAnimCharName(character)
+		checkCombosForSound(id, character, charName, sound)
+	end
+end
+
